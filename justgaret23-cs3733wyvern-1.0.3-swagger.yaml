@@ -1,0 +1,368 @@
+swagger: '2.0'
+info:
+  description: "Wyvern Choice API"
+  version: 1.0.3
+  title: "Wyvern Choice API"
+ # host: "24hdpfa774.execute-api.us-east-1.amazonaws.com"
+schemes:
+- "https"
+paths:
+  #delete stale choices
+  #produce a list of choices
+  #doesn't belong in any path though???
+  #don't use curly brackets unless you know page will be reloaded/url will change
+  /webpage:
+  ##Also generate a link here?
+    post:
+      operationId: "createChoice"
+      description: "Creates a choice. Admin only"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "200 response"
+        400:
+          description: "400 response"
+      x-amazon-apigateway-integration:
+        type: "aws"
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        passthroughBehavior: "when_no_match"
+        httpMethod: "POST"
+        contentHandling: "CONVERT_TO_TEXT"
+  /webpage/{choice}:
+    get:
+      operationId: "getListofChoices"
+      description: "Get a list of all choices within the current ID."
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/ListofChoices"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+        400:
+          description: "400 response"
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        passthroughBehavior: "when_no_match"
+        httpMethod: "POST"
+        contentHandling: "CONVERT_TO_TEXT"
+        type: "aws"
+    post:
+      operationId: "deleteChoice"
+      description: "Delete a specific choice within the current ID space."
+      responses:
+        200:
+          description: "200 response"
+        400:
+          description: "400 response"
+  
+  /webpage/choice:
+    ##create choice
+    ##create alternative
+    post:
+      operationId: "createAlternative"
+      description: "Create a new alternative within the choice."
+      responses:
+          200:
+            description: "200 response"
+            schema:
+              $ref: "#/definitions/Alternative"
+            headers:
+              Access-Control-Allow-Origin:
+                type: "string"
+          400:
+            description: "400 response"
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        passthroughBehavior: "when_no_match"
+        httpMethod: "POST"
+        contentHandling: "CONVERT_TO_TEXT"
+        type: "aws"
+    
+  /webpage/choice{choice}:
+   #alternatives
+    get:
+      operationId: "getListOfAlternatives"
+      description: "Get the list of alternatives currently in the choice."
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "200 response"
+          schema:
+              $ref: "#/definitions/ListofAlternatives"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+        400:
+          description: "400 response"
+      x-amazon-apigateway-integration:
+        uri: "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:883421610071:function:listConstants/invocations"
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        passthroughBehavior: "when_no_match"
+        httpMethod: "POST"
+        contentHandling: "CONVERT_TO_TEXT"
+        type: "aws"
+          
+    post:
+      operationId: "deleteAlternative"
+      description: "Delete a specific alternative within the choice."
+      responses:
+          200:
+            description: "200 response"
+          400:
+            description: "400 response"
+    ##user login (add user, database)
+  /webpage/choice/login:
+    post:
+      operationId: "userLogin"
+      description: "User logs in. If this is their first time logging in, their name and optional password is added to the database."
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "LoginRequest"
+        required: true
+        schema:
+          $ref: "#/definitions/LoginRequest"
+      responses:
+        200:
+          description: "200 response"
+        400: 
+          description: "400 response"
+    #name of choice
+  /webpage/choice/info{choice}:
+    get:
+      operationId: "getChoiceinfo"
+      description: "Returns the name of the choice and the name of the admin who posted it."
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "200 response"
+        400:
+          description: "400 response"
+  
+  /webpage/choice/alternative/approval/{Upvote}:
+    #related to upvoting
+    get:
+      operationId: "getUpvotes"
+      description: "Get the total amount of upvotes for a given alternative"
+      responses:
+        200:
+          description: "200 response"
+        400:
+          description: "400 response"
+          
+    post:
+      operationId: "changeUpvoteStatus"
+      description: "Register or remove an upvote request a user sends."
+      responses:
+        200:
+          description: "200 response"
+        400:
+          description: "400 response"
+      
+  /webpage/choice/alternative/disapproval/{Downvote}:
+    #related to downvoting
+    get:
+      operationId: "getDownvotes"
+      description: "Get the total amount of downvotes for a given alternative"
+      responses:
+        200:
+          description: "200 response"
+        400:
+          description: "400 response"
+          
+    post:
+      operationId: "changeDownvoteStatus"
+      description: "Register or remove a downvote request a user sends."
+      responses:
+        200:
+          description: "200 response"
+        400:
+          description: "400 response"
+          
+  /webpage/choice/alternative:
+    #Related to getting the list of feedback and creating feedback
+    get:
+      operationId: "getFeedbackList"
+      description: "Gets a list of all the feedback sent from various users."
+      responses:
+        200:
+          description: "200 response"
+          schema:
+              $ref: "#/definitions/ListofFeedback"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+        400:
+          description: "400 response"
+    post:
+      operationId: "createFeedback"
+      description: "Create a new piece of feedback that an individual desires to send."
+      responses:
+        200:
+          description: "200 response"
+          schema:
+              $ref: "#/definitions/Feedback"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+        400:
+          description: "400 response"
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        passthroughBehavior: "when_no_match"
+        httpMethod: "POST"
+        contentHandling: "CONVERT_TO_TEXT"
+        type: "aws"
+    
+  /webpage/choice/alternative/{finalChoice}:
+    #Related to the final choice
+    get:
+      operationId: "getIsFinalChoice"
+      description: "If the final alternative has been decided, pick it from the list of alternatives"
+      responses:
+        200:
+          description: "200 response"
+        400:
+          description: "400 response"
+
+    post:
+      operationId: "makeFinalChoice"
+      description: "Allows for a user to mark an alternative as the final decision."
+      responses:
+        200:
+          description: "200 response"
+        400:
+          description: "400 response"
+    
+  /webpage/choice/alternative/info:
+    #Get alternative name (maybe remodel?)
+    get:
+      operationId: "getAlternativeName"
+      description: "Gets the name of the alternative."
+      responses:
+        200:
+          description: "200 response"
+        400:
+          description: "400 response"
+
+
+  /webpage/choice/alternative/feedback:
+    #Get the information within a feedback
+    get:
+      operationId: "getFeedback"
+      description: "Get the user name, message, and timestamp of any given feedback"
+      responses:
+        200:
+          description: "200 response"
+        400:
+          description: "400 response"
+definitions:
+  ListofChoices:
+    type: array
+    items:
+      $ref: "#/definitions/Choice"
+    
+  Choice:
+    type: "object"
+    required:
+    - "name"
+    - "isFinalized"
+    - ListofAlternatives
+    properties:
+      name:
+        type: "string"
+      isFinalized:
+        type: "boolean"
+      ListOfAlternatives:
+        type: "object"
+    
+  ListofAlternatives:
+    type: array
+    items:
+      $ref: "#/definitions/Alternative"
+  Alternative:
+    type: "object"
+    required: 
+    - "name"
+    - "Approvals"
+    - "Disapprovals"
+    - "FinalizeChoice"
+    - ListofFeedback
+    properties:
+      name:
+        type: "string"
+      Approvals:
+        type: "integer"
+      Disapprovals:
+        type: "integer"
+      FinalizeChoiceButton:
+        type: "boolean"
+      ListofFeedback:
+        type: "object"
+  ListofFeedback:
+    type: array
+    items:
+      $ref: "#/definitions/Feedback"
+  Feedback:
+    type: "object"
+    required:
+    - "user"
+    - "text"
+    - "timestamp"
+    properties:
+      user: 
+        type: "string"
+      text: 
+        type: "string"
+      timestamp: 
+        type: "number"
+  LoginRequest:
+    type: "object"
+    required: 
+    - "username"
+    properties:
+      username:
+        type: "string"
+      password:
+        type: "string"
+  
+  #consider converting ListOfs into arrays
+  #What do we need to add?
+  #Feedback
+  #
+  
+# Added by API Auto Mocking Plugin
+host: virtserver.swaggerhub.com
+basePath: /justgaret23/cs3733wyvern/1.0.1
