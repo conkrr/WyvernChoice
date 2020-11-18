@@ -142,21 +142,21 @@ paths:
               type: "string"
         400:
           description: "400 response"
-  /webpage/choice/login:
+  /webpage/choice/register:
     #Done?
     post:
-      operationId: "userLogin"
-      description: "User logs in. If this is their first time logging in, their name and optional password is added to the database."
+      operationId: "userRegister"
+      description: "User Registers. If this is their first time logging in, their name and optional password is added to the database."
       consumes:
       - "application/json"
       produces:
       - "application/json"
       parameters:
       - in: "body"
-        name: "LoginRequest"
+        name: "RegisterRequest"
         required: true
         schema:
-          $ref: "#/definitions/LoginRequest"
+          $ref: "#/definitions/RegisterRequest"
       responses:
         200:
           description: "200 response"
