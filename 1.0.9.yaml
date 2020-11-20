@@ -69,7 +69,7 @@ paths:
         200:
           description: "200 response"
           schema:
-            $ref: "#/definitions/GetChoiceResponse"
+            $ref: "#/definitions/UpdateResponse"
         400:
           description: "400 response"
   /choice:
@@ -84,7 +84,7 @@ paths:
         200:
           description: "200 response"
           schema:
-            $ref: "#/definitions/CreateChoiceResponse"
+            $ref: "#/definitions/UpdateResponse"
         400:
           description: "400 response"
       x-amazon-apigateway-integration:
@@ -509,20 +509,7 @@ definitions:
         type: "integer"
         
  
-        
-  CreateChoiceResponse:
-    type: "object"
-    required:
-    - "choice"
-    - "statusCode"
-    - "error"
-    properties:
-      choice:
-        type: "object"
-      statusCode:
-        type: "integer"
-      error:
-        type: "string"
+     
      
   UpdateResponse:
     type: "object"
@@ -566,19 +553,7 @@ definitions:
       error:
         type: "string"
         
-  GetChoiceResponse:
-    type: "object"
-    required:
-    - "choiceID"
-    - "statusCode"
-    - "error"
-    properties:
-      choiceID:
-        type: "integer"
-      statusCode:
-        type: "integer"
-      error:
-        type: "string"
+ 
         
   GetAlternativeResponse:
     type: "object"
