@@ -193,7 +193,7 @@ paths:
         200:
           description: "200 response"
           schema:
-            $ref: "#/definitions/AddApprovalResponse"
+            $ref: "#/definitions/UpdateResponse"
           headers:
             Access-Control-Allow-Origin:
               type: "string"
@@ -215,7 +215,7 @@ paths:
         200:
           description: "200 response"
           schema:
-            $ref: "#/definitions/RemoveApprovalResponse"
+            $ref: "#/definitions/UpdateResponse"
           headers:
             Access-Control-Allow-Origin:
               type: "string"
@@ -238,7 +238,7 @@ paths:
         200:
           description: "200 response"
           schema:
-            $ref: "#/definitions/AddDisapprovalResponse"
+            $ref: "#/definitions/UpdateResponse"
           headers:
             Access-Control-Allow-Origin:
               type: "string"
@@ -256,7 +256,7 @@ paths:
         name: "ChangeDisapprovalRequest"
         required: true
         schema:
-          $ref: "#/definitions/RemoveDisapprovalRequest"
+          $ref: "#/definitions/UpdateResponse"
       responses:
         200:
           description: "200 response"
@@ -508,73 +508,7 @@ definitions:
       alternativeID:
         type: "integer"
         
-  AddApprovalResponse:
-    type: "object"
-    required:
-    - "approvingUser"
-    - "alternativeID"
-    - "statusCode"
-    - "error"
-    properties:
-      approvingUser:
-        type: "string"
-      alternativeID:
-        type: "integer"
-      statusCode:
-        type: "integer"
-      error:
-        type: "string"
-  
-  RemoveApprovalResponse:
-    type: "object"
-    required:
-    - "approvingUser"
-    - "alternativeID"
-    - "statusCode"
-    - "error"
-    properties:
-      approvingUser:
-        type: "string"
-      alternativeID:
-        type: "integer"
-      statusCode:
-        type: "integer"
-      error:
-        type: "string"
-
-  AddDisapprovalResponse:
-    type: "object"
-    required:
-    - "disapprovingUser"
-    - "alternativeID"
-    - "statusCode"
-    - "error"
-    properties:
-      disapprovingUser:
-        type: "string"
-      alternativeID:
-        type: "integer"
-      statusCode:
-        type: "integer"
-      error:
-        type: "string"
-        
-  RemoveDisapprovalResponse:
-    type: "object"
-    required:
-    - "disapprovingUser"
-    - "alternativeID"
-    - "statusCode"
-    - "error"
-    properties:
-      disapprovingUser:
-        type: "string"
-      alternativeID:
-        type: "integer"
-      statusCode:
-        type: "integer"
-      error:
-        type: "string"
+ 
         
   CreateChoiceResponse:
     type: "object"
@@ -585,6 +519,20 @@ definitions:
     properties:
       choice:
         type: "object"
+      statusCode:
+        type: "integer"
+      error:
+        type: "string"
+     
+  UpdateResponse:
+    type: "object"
+    required:
+    - "choice"
+    - "statusCode"
+    - "error"
+    properties:
+      choice:
+        type: $/ref/Choice
       statusCode:
         type: "integer"
       error:
