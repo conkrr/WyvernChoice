@@ -1,0 +1,26 @@
+/*On Reset*/
+* {
+
+    margin: 0;
+    padding: 0;
+}
+
+/*Body display type*/
+#MainPage{
+    display: flex;
+    flex-direction: row;
+}
+
+#UserInfo{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+#Login{
+    height: 10rem;
+}
+
+#Choice{
+   width: 50%;
+}

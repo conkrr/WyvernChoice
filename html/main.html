@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <script type='text/javascript' src='../js/api.js'></script>
+
+        <link rel="stylesheet" type="text/css" href="main.css">
+
+        <script type="text/javascript">
+        function initialize(){
+
+        //get all choices
+        
+        }
+        </script>
+    </head>
+    <body onload="initialize()">
+        <main id="MainPage">
+            <nav id="UserInfo">
+                <nav id="Login">
+                    <h2>User Login</h2>
+                    <form name="Register" method="post" name="registerUser">
+                        <div>
+                            <h3>Username:</h3>
+                            <input name="username" value=""><br>
+                        </div>
+                        
+                        <h3>Password (optional):</h3>
+                        <input name="password" value="" />
+                        <input type="button" value="Submit"  onClick="JavaScript:handleAddClick(this)">
+                      </form>
+                </nav>
+                <nav id="List of Users">
+                    <h2>List of Users</h2>
+                    <div id="userList"></div>
+                </nav>
+            </nav>
+            <nav id="Choice">
+                <h2>Choice</h2>
+            </nav>
+        </main>
+    </body>
+</html>
