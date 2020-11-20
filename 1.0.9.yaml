@@ -110,7 +110,7 @@ paths:
         name: "alternativeID"
         required: true
         schema:
-          $ref: "#/definitions/FinalChoiceRequest"
+          $ref: "#/definitions/UpdateResponse"
       responses:
         200:
           description: "200 response"
@@ -275,7 +275,7 @@ paths:
         200:
           description: "200 response"
           schema:
-              $ref: "#/definitions/CreateFeedbackResponse"
+              $ref: "#/definitions/UpdateResponse"
           headers:
             Access-Control-Allow-Origin:
               type: "string"
@@ -422,23 +422,7 @@ definitions:
         type: "integer"
       isFinalized:
         type: "boolean"
-  FinalChoiceResponse:
-    type: "object"
-    required:
-    - "choiceID"
-    - "alternativeID"
-    - "statusCode"
-    - "error"
-    properties:
-      choiceID:
-        type: "integer"
-      alternativeID:
-        type: "integer"
-      statusCode:
-        type: "integer"
-      error:
-        type: "string"
-        
+
   RegisterRequest:
     type: "object"
     required: 
@@ -451,6 +435,8 @@ definitions:
         type: "string"
       choiceID:
         type: integer
+        
+        
   RegisterUserResponse:
     type: "object"
     required:
@@ -538,23 +524,7 @@ definitions:
         type: "integer"
       error:
         type: "string"
-  
-  CreateFeedbackResponse:
-    type: "object"
-    required:
-    - "feedback"
-    - "statusCode"
-    - "error"
-    properties:
-      feedback:
-        type: "object"
-      statusCode:
-        type: "integer"
-      error:
-        type: "string"
-        
- 
-        
+         
   GetAlternativeResponse:
     type: "object"
     required:
