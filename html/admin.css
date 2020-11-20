@@ -1,0 +1,39 @@
+/*On Reset*/
+* {
+
+    margin: 0;
+    padding: 0;
+}
+
+/*Body display type*/
+#MainPage{
+    display: flex;
+    flex-direction: row;
+}
+
+#TopNav{
+    text-align: center;
+    width: 100%;
+    background-color: #969696;
+    height: 3rem;
+}
+
+#ChoiceList{
+    width: 50%;
+}
+
+#DeleteChoices{
+    width: 50%;
+
+}
+
+#DaySelect{
+    display: flex;
+    flex-direction: row;
+
+}
+
+#HourSelect{
+    display: flex;
+    flex-direction: row;
+}

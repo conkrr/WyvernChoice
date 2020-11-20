@@ -1,0 +1,560 @@
+swagger: '2.0'
+info:
+  description: "Wyvern Choice API"
+  version: 1.1.0
+  title: "Wyvern Choice API"
+ # host: "24hdpfa774.execute-api.us-east-1.amazonaws.com"
+schemes:
+- "https"
+paths:
+  /admin:
+    get:
+      operationId: "getListofChoices"
+      description: "Get a list of all choices within the current ID."
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/GetListOfChoicesResponse"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+        400:
+          description: "400 response"
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        passthroughBehavior: "when_no_match"
+        httpMethod: "POST"
+        contentHandling: "CONVERT_TO_TEXT"
+        type: "aws"
+  /admin/{deleteDate}:
+    post:
+      operationId: "deleteChoices"
+      description: "Delete all choices that are older than a given date."
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "deleteDate"
+        required: true
+        type: "number"
+      responses:
+        200:
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/DeleteChoicesResponse"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+  /choice/{choiceID}:
+    get:
+      operationId: "getSpecificChoice"
+      description: "Get a specific choice using an ID."
+      produces:
+      - "application/json"
+      parameters:
+      - name: "choiceID"
+        in: "path"
+        required: true
+        type: "integer"
+      responses:
+        200:
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/UpdateResponse"
+        400:
+          description: "400 response"
+  /choice:
+    post:
+      operationId: "createChoice"
+      description: "Creates a choice."
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/UpdateResponse"
+        400:
+          description: "400 response"
+      x-amazon-apigateway-integration:
+        type: "aws"
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        passthroughBehavior: "when_no_match"
+        httpMethod: "POST"
+        contentHandling: "CONVERT_TO_TEXT"
+  /finalChoice:
+    post:
+      operationId: "finalizeChoice"
+      description: "Allows for a user to mark an alternative as the final decision."
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "alternativeID"
+        required: true
+        schema:
+          $ref: "#/definitions/FinalChoiceRequest"
+      responses:
+        200:
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/UpdateResponse"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+        400:
+          description: "400 response"
+  /register:
+    #Done?
+    post:
+      operationId: "registerUser"
+      description: "User is registered, with their name and password being added to the database. If this is not their first time in, they use their established information to log in."
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "RegisterRequest"
+        required: true
+        schema:
+          $ref: "#/definitions/RegisterRequest"
+      responses:
+        200:
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/RegisterUserResponse"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+        400: 
+          description: "400 response"
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        passthroughBehavior: "when_no_match"
+        httpMethod: "POST"
+        contentHandling: "CONVERT_TO_TEXT"
+        type: "aws"
+  /alternative/{alternativeID}:
+    get:
+      operationId: "getAlternative"
+      description: "Get a specific alternative based on an ID."
+      produces:
+      - "application/json"
+      parameters:
+      - name: "alternativeID"
+        in: "path"
+        required: true
+        type: "integer"
+      responses:
+        200:
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/GetAlternativeResponse"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+  /addapproval:
+    post:
+      operationId: "addApproval"
+      description: "Add an approval to the system."
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "ChangeApprovalRequest"
+        required: true
+        schema:
+          $ref: "#/definitions/AddApprovalRequest"
+      responses:
+        200:
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/UpdateResponse"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+  /removeapproval:
+    post:
+      operationId: "removeApproval"
+      description: "Remove an approval request a user sends."
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "ChangeApprovalRequest"
+        required: true
+        schema:
+          $ref: "#/definitions/RemoveApprovalRequest"
+      responses:
+        200:
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/UpdateResponse"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+      
+  /adddisapproval:
+    post:
+      operationId: "addDisapproval"
+      description: "Register a downvote request a user sends."
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "ChangeDisapprovalRequest"
+        required: true
+        schema:
+          $ref: "#/definitions/AddDisapprovalRequest"
+      responses:
+        200:
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/UpdateResponse"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+  
+  /removedisapproval:
+    post:
+      operationId: "removeDisapproval"
+      description: "Remove a downvote request a user sends."
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "ChangeDisapprovalRequest"
+        required: true
+        schema:
+          $ref: "#/definitions/RemoveDisapprovalRequest"
+      responses:
+        200:
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/UpdateResponse"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+  /feedback:
+    post:
+      operationId: "createFeedback"
+      description: "Create a new piece of feedback that an individual desires to send."
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "200 response"
+          schema:
+              $ref: "#/definitions/UpdateResponse"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+        400:
+          description: "400 response"
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        passthroughBehavior: "when_no_match"
+        httpMethod: "POST"
+        contentHandling: "CONVERT_TO_TEXT"
+        type: "aws"
+    
+definitions:
+  ListofChoices:
+    type: array
+    items:
+      $ref: "#/definitions/Choice"
+    
+  Choice:
+    type: "object"
+    required:
+    - "name"
+    - "choiceID"
+    - "completionDate"
+    - "isFinalized"
+    - ListofAlternatives
+    properties:
+      name:
+        type: "string"
+      choiceID:
+        type: "integer"
+      isFinalized:
+        type: "boolean"
+      completionDate:
+        type: "string"
+      ListOfAlternatives:
+        type: "array"
+        items: 
+          $ref: "#/definitions/Alternative"
+  Alternative:
+    type: "object"
+    required: 
+    - "name"
+    - "alternativeID"
+    - "Approvals"
+    - "Disapprovals"
+    - "isChosen"
+    - ListofFeedback
+    properties:
+      name:
+        type: "string"
+      alternativeID:
+        type: "integer"
+      Approvals:
+        $ref: "#/definitions/Approvals"
+      Disapprovals:
+        $ref: "#/definitions/Disapprovals"
+      isChosen:
+        type: "boolean"
+      ListofFeedback:
+        type: "array"
+        items:
+          $ref: "#/definitions/Feedback"
+  Approvals:
+    type: "object"
+    required:
+    - "approvalCount"
+    - "alternativeID"
+    - "approvalUsers"
+    properties:
+      approvalCount:
+        type: "integer"
+      alternativeID:
+        type: "integer"
+      approvalUsers:
+        type: "array"
+        items:
+          $ref: "#/definitions/User"
+        
+  Disapprovals:
+    type: "object"
+    required:
+    - "disapprovalCount"
+    - "alternativeID"
+    - "disapprovalUsers"
+    properties:
+      disapprovalCount:
+        type: "integer"
+      alternativeID:
+        type: "integer"
+      disapprovalUsers:
+        type: "array"
+        items:
+          $ref: "#/definitions/User"
+        
+  User:
+    type: "object"
+    required:
+    - "username"
+    - "choiceID"
+    - "feedbackInfo"
+    properties:
+      username:
+        type: "string"
+      choiceID:
+        type: "integer"
+      feedbackInfo:
+        type: "array"
+        items:
+          $ref: "#/definitions/Feedback"
+      password:
+        type: "string"
+    
+  Feedback:
+    type: "object"
+    required:
+    - "user"
+    - "text"
+    - "timestamp"
+    - "alternativeID"
+    properties:
+      user: 
+        type: "string"
+      text: 
+        type: "string"
+      timestamp: 
+        type: "number"
+      alternativeID:
+        type: "integer"
+  FinalChoiceRequest:
+    type: "object"
+    required:
+    - "choiceID"
+    - "alternativeID"
+    - "isFinalized"
+    properties:
+      choiceID:
+        type: "integer"
+      alternativeID:
+        type: "integer"
+      isFinalized:
+        type: "boolean"
+
+  RegisterRequest:
+    type: "object"
+    required: 
+    - "username"
+    - "choiceID"
+    properties:
+      username:
+        type: "string"
+      password:
+        type: "string"
+      choiceID:
+        type: integer
+        
+        
+  RegisterUserResponse:
+    type: "object"
+    required:
+    - "newUser"
+    - "loggedInUser"
+    - "statusCode"
+    - "error"
+    properties:
+      newUser:
+        type: "boolean"
+      loggedInUser:
+        type: "string"
+      statusCode:
+        type: "integer"
+      error:
+        type: "string"
+  AddApprovalRequest:
+    type: "object"
+    required: 
+    - "approvingUser"
+    - "alternativeID"
+    properties:
+      approvingUser:
+        type: "string"
+      alternativeID:
+        type: "integer"
+  RemoveApprovalRequest:
+    type: "object"
+    required: 
+    - "approvingUser"
+    - "alternativeID"
+    properties:
+      approvingUser:
+        type: "string"
+      alternativeID:
+        type: "integer"
+  AddDisapprovalRequest:
+    type: "object"
+    required: 
+    - "disapprovingUser"
+    - "alternativeID"
+    properties:
+      userList:
+        type: "string"
+      alternativeID:
+        type: "integer"
+  RemoveDisapprovalRequest:
+    type: "object"
+    required: 
+    - "disapprovingUser"
+    - "alternativeID"
+    properties:
+      userList:
+        type: "string"
+      alternativeID:
+        type: "integer"
+        
+ 
+     
+     
+  UpdateResponse:
+    type: "object"
+    required:
+    - "choice"
+    - "statusCode"
+    - "error"
+    properties:
+      choice:
+        $ref: "#/definitions/Choice"
+      statusCode:
+        type: "integer"
+      error:
+        type: "string"
+        
+  DeleteChoicesResponse:
+    type: "object"
+    required:
+    - "deleteTime"
+    - "statusCode"
+    - "error"
+    properties:
+      deleteTime:
+        type: "number"
+      statusCode:
+        type: "integer"
+      error:
+        type: "string"
+         
+  GetAlternativeResponse:
+    type: "object"
+    required:
+    - "alternativeID"
+    - "statusCode"
+    - "error"
+    properties:
+      alternativeID:
+        type: "integer"
+      statusCode:
+        type: "integer"
+      error:
+        type: "string"
+        
+  GetListOfChoicesResponse:
+    type: "object"
+    required:
+    - ListOfChoices
+    - "statusCode"
+    - "error"
+    properties:
+      ListOfChoices:
+        type: "array"
+        items:
+          $ref: "#/definitions/Choice"
+      statusCode:
+        type: "integer"
+      error:
+        type: "string"
+  
+# Added by API Auto Mocking Plugin
+host: virtserver.swaggerhub.com
+basePath: /justgaret23/cs3733wyvern/1.1.0
