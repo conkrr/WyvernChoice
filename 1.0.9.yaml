@@ -84,7 +84,7 @@ paths:
         200:
           description: "200 response"
           schema:
-            $ref: "#/definitions/UpdateResponse"
+            $ref: "#/definitions/FinalChoiceRequest"
         400:
           description: "400 response"
       x-amazon-apigateway-integration:
@@ -115,7 +115,7 @@ paths:
         200:
           description: "200 response"
           schema:
-            $ref: "#/definitions/FinalChoiceResponse"
+            $ref: "#/definitions/UpdateResponse"
           headers:
             Access-Control-Allow-Origin:
               type: "string"
