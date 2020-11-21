@@ -21,6 +21,7 @@
     height: 10rem;
 }
 
-#Choice{
+#ChoiceInfo{
    width: 50%;
+   flex-direction: column;
 }
