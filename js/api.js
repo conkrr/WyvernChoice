@@ -3,10 +3,11 @@
 
 //Base url: This will be the url we generate in AWS
 let base_url;
+let admin_url;
 
 //All unique urls generated for each request
-let choice_list_url = base_url + "admin";                    //GET
-let delete_date_url = base_url + "admin";                    //POST with {deleteData}
+let choice_list_url = admin_url + "admin";                    //GET
+let delete_date_url = admin_url + "admin";                    //POST with {deleteData}
 let get_choice_url = base_url + "choice";                    //GET with {choiceID}
 let create_choice_url = base_url + "choice";                 //GET
 let finalize_choice_url = base_url + "finalChoice";          //POST

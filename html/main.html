@@ -1,5 +1,7 @@
 <html>
     <head>
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
         <script type='text/javascript' src='../js/api.js'></script>
 
         <link rel="stylesheet" type="text/css" href="main.css">
@@ -25,6 +27,9 @@
                         
                         <h3>Password (optional):</h3>
                         <input name="password" value="" />
+
+                        <h3>Choice ID:</h3>
+                        <input name="registerID" value="" />
                         <input type="button" value="Submit"  onClick="JavaScript:handleAddClick(this)">
                       </form>
                 </nav>
@@ -33,8 +38,28 @@
                     <div id="userList"></div>
                 </nav>
             </nav>
-            <nav id="Choice">
-                <h2>Choice</h2>
+            <nav id="ChoiceInfo">
+                <nav id="CreateChoice">
+                    <form name="createChoiceForm" method="post">
+                        <h3>Name of Choice:</h3>
+                        <input name="choiceName" value="" />
+                        <h3>Number of Participants:</h3>
+                        <input name="numParticipants" value=""/>
+                        <h3>Alternatives (fill at least 2):</h3>
+                        <input name="alternative1" value=""/><br>
+                        <input name="alternative2" value=""/><br>
+                        <input name="alternative3" value=""/><br>
+                        <input name="alternative4" value=""/><br>
+                        <input name="alternative5" value=""/><br>
+                       
+                        <input type="button" id="createButton" value="Create Choice" onClick="JavaScript:handleCreateClick(this)">
+                     <br> 
+                     </form>
+                </nav>
+                <nav id="Choice">
+                    <h2>Choice</h2>
+                    <div id="currentChoice"></div>
+                </nav>
             </nav>
         </main>
     </body>
