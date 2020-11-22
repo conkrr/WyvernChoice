@@ -4,11 +4,21 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
+import com.amazonaws.lambda.demo.model.Choice;
+
 class UpdateResponseTest {
 
 	@Test
 	void test() {
-		fail("Not yet implemented");
+		//Fill in testChoice later when Jason does things
+		Choice testChoice = new Choice();
+		UpdateResponse ur = new UpdateResponse(testChoice, 200);
+		String rep = ur.toString();
+		assertTrue(rep.startsWith("Choice:"));
+		
+		ur = new UpdateResponse(400, "I farted");
+		rep = ur.toString();
+		assertTrue(rep.startsWith("Error"));
 	}
 
 }

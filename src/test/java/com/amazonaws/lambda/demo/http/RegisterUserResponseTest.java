@@ -12,7 +12,6 @@ class RegisterUserResponseTest {
 		String rep = rur.toString();
 		assertTrue(rep.startsWith("Username:"));
 		
-		//This is probably kinda dumb
 		rur = new RegisterUserResponse(400, "oops that's an error");
 		rep = rur.toString();
 		assertTrue(rep.startsWith("Error"));
