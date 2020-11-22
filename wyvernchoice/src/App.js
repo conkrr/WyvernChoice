@@ -1,24 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { Container, Row, Col } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 
 function App() {
+  function handleClick(e){
+    e.preventDefault();
+    console.log("Button has been clicked!");
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container>
+      <Row>
+        <Col>
+            <Label>Username:</Label>
+            <Input type="email" id="username"/>
+        </Col>
+        <Col>
+            <Label>Password:</Label>
+            <Input type="password" id="username"/>
+        </Col>
+        <Col>
+            <Label>Choice ID:</Label>
+            <Input type="email" id="username"/>
+        </Col>
+        <Col>
+          <Button onClick={handleClick}>Submit</Button>
+        </Col>
+      </Row>
+    </Container>
   );
 }
 
