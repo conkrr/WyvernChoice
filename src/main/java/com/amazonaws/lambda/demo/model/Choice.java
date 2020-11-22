@@ -18,7 +18,4 @@ public class Choice {
 		this.id = id;
 		this.description = description;
 	}
-	
-	
-	
 }
