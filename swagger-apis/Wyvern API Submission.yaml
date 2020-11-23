@@ -303,6 +303,7 @@ definitions:
     required:
     - "name"
     - "choiceID"
+    - "numParticipants"
     - "completionDate"
     - "isFinalized"
     - ListofAlternatives
@@ -310,6 +311,8 @@ definitions:
       name:
         type: "string"
       choiceID:
+        type: "integer"
+      numParticipants:
         type: "integer"
       isFinalized:
         type: "boolean"
