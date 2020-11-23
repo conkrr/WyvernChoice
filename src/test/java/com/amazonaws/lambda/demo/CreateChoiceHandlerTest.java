@@ -35,7 +35,8 @@ public class CreateChoiceHandlerTest extends LambdaTest {
     }
 
    
-    // NOTE: this proliferates large number of constants! Be mindful
+    // NOTE: this proliferates large number of constants! Be mindful\
+    //Also this fails, throws a 400
     @Test
     public void testShouldBeOk() {
     	int rndNum = (int)(990*(Math.random()));

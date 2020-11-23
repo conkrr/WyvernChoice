@@ -27,7 +27,7 @@ public class RegisterUserResponse {
 	
 	public String toString() {
 		if(statusCode == 200) {
-			return "Username: " + loggedInUser + " Password: " + password; 
+			return "RegisterUser(" + loggedInUser + "," + password + ")"; 
 		} else {
 			return "Error(" + statusCode + ", err=" + error + ")";
 		}

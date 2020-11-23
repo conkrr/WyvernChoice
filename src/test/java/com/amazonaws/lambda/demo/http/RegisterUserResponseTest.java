@@ -10,7 +10,7 @@ class RegisterUserResponseTest {
 	void test() {
 		RegisterUserResponse rur = new RegisterUserResponse("King Roland", "12345", 200);
 		String rep = rur.toString();
-		assertTrue(rep.startsWith("Username:"));
+		assertTrue(rep.startsWith("RegisterUser"));
 		
 		rur = new RegisterUserResponse(400, "oops that's an error");
 		rep = rur.toString();

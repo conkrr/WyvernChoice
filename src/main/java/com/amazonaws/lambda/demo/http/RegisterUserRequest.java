@@ -18,6 +18,6 @@ public class RegisterUserRequest {
 	}
 	
 	public RegisterUserRequest() {
-		//kek
+		
 	}
 }

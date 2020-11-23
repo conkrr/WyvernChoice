@@ -1,6 +1,7 @@
 package com.amazonaws.lambda.db;
 
 import java.sql.PreparedStatement;
+
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -121,6 +122,6 @@ java.sql.Connection connection;
     private Choice generateChoice(ResultSet resultSet) throws Exception {
         String id  = resultSet.getString("id");
         String description = resultSet.getString("description");
-        return new Choice (description, id);
+        return new Choice (id, description);
     }
 }

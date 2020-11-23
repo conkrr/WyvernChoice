@@ -121,6 +121,6 @@ java.sql.Connection connection;
     private Choice generateChoice(ResultSet resultSet) throws Exception {
         String id  = resultSet.getString("id");
         String description = resultSet.getString("description");
-        return new Choice (description, id);
+        return new Choice (id, description);
     }
 }

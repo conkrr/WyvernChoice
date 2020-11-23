@@ -13,8 +13,10 @@ public class UpdateResponse {
 	 * @param choice
 	 * @return
 	 */
+	
+	//Update when choice is updated
 	public String printChoice(Choice choice) {
-		return "";
+		return "Choice(" + choice.id + "," + choice.description + ")";
 	}
 	
 	//Success
