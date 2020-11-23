@@ -8,7 +8,7 @@ class RegisterUserResponseTest {
 
 	@Test
 	void test() {
-		RegisterUserResponse rur = new RegisterUserResponse("King Roland", "12345", 200);
+		RegisterUserResponse rur = new RegisterUserResponse("King Roland", "12345", "897", 200);
 		String rep = rur.toString();
 		assertTrue(rep.startsWith("RegisterUser"));
 		

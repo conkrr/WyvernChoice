@@ -36,6 +36,7 @@ public class RegisterUserHandler implements RequestHandler<RegisterUserRequest, 
 		
 		String choiceID = "";
 		choiceID = input.getChoiceID();
+		//Check query to see if choiceID is valid
 		
 		RegisterUserResponse response;
 		if(fail) {

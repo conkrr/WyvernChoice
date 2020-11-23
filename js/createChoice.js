@@ -3,7 +3,7 @@ function processCreateChoiceResponse(result) {
     // contents dynamically via javascript
     console.log("result:" + result);
   
-    refreshChoiceList();
+    refreshChoice();
 }
 
 function handleCreateChoiceClick(e){
