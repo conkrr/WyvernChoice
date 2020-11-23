@@ -4,10 +4,11 @@ public class RegisterUserResponse {
 	public boolean newUser;
 	public String loggedInUser;
 	public String password;
+	public String choiceID;
 	public int statusCode;
 	public String error;
 	
-	public RegisterUserResponse(String user, String password, int statusCode) {
+	public RegisterUserResponse(String user, String password, String choiceID, int statusCode) {
 		//Implementing newUser might be complicated?
 		this.loggedInUser = "" + user;
 		if(password != null) {
@@ -15,6 +16,7 @@ public class RegisterUserResponse {
 		} else {
 			this.password = "No password was given.";
 		}
+		this.choiceID = "" + choiceID;
 		this.statusCode = statusCode;
 		this.error = "";
 	}
@@ -27,7 +29,7 @@ public class RegisterUserResponse {
 	
 	public String toString() {
 		if(statusCode == 200) {
-			return "RegisterUser(" + loggedInUser + "," + password + ")"; 
+			return "RegisterUser(" + loggedInUser + "," + password + "," + choiceID + ")"; 
 		} else {
 			return "Error(" + statusCode + ", err=" + error + ")";
 		}
