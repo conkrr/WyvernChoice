@@ -7,6 +7,9 @@ public class Choice {
 //	public final String creationDate;
 //	public final boolean isFinalized;
 //	public final ArrayList<String> alternatives;
+//	public int maxParticipants;
+//	public int currentParticipants;
+	
 //	public Choice(String id, String description, String creationDate, boolean isFinalized) {
 //		this.id = id;
 //		this.description = description;

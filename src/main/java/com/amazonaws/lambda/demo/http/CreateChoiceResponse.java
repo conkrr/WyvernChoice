@@ -2,8 +2,8 @@ package com.amazonaws.lambda.demo.http;
 
 public class CreateChoiceResponse {
 	
-	public final String response;
-	public final int httpCode;
+	public String response;
+	public int httpCode;
 	
 	public CreateChoiceResponse (String s, int code) {
 		this.response = s;

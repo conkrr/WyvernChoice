@@ -1,8 +1,8 @@
 package com.amazonaws.lambda.demo.http;
 
 public class CreateChoiceRequest {
-	public String id;
-	public String description;
+	String id;
+	String description;
 	public String getId() {
 		return id;
 	}
@@ -12,8 +12,8 @@ public class CreateChoiceRequest {
 	public String getDescription() {
 		return description;
 	}
-	public void setDescription(String description) {
-		this.description = description;
+	public String toString() {
+		return "Create(" + id + "," + description + ")";
 	}
 	
 	public CreateChoiceRequest(String id, String description) {

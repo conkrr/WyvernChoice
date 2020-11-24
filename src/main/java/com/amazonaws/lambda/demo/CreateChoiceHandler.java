@@ -26,7 +26,8 @@ public class CreateChoiceHandler implements RequestHandler<CreateChoiceRequest, 
 		boolean exists = dao.getChoice(id) == null;
 		Choice choice = new Choice (id, description);
 		if (exists) {
-			return dao.addChoice(choice);
+			boolean addChoiceBoolean =  dao.addChoice(choice);
+			return addChoiceBoolean;
 		} else {
 			return false;
 		}
@@ -40,13 +41,14 @@ public class CreateChoiceHandler implements RequestHandler<CreateChoiceRequest, 
 
 		CreateChoiceResponse response;
 		try {
-			if (createChoice(req.id, req.description)) {
-				response = new CreateChoiceResponse(req.id);
+			boolean createChoiceBoolean = createChoice(req.getId(), req.getDescription());
+			if (createChoiceBoolean) {
+				response = new CreateChoiceResponse(req.getId());
 			} else {
-				response = new CreateChoiceResponse(req.id, 422);
+				response = new CreateChoiceResponse(req.getId(), 422);
 			}
 		} catch (Exception e) {
-			response = new CreateChoiceResponse("Unable to create choice: " + req.id + "(" + e.getMessage() + ")", 400);
+			response = new CreateChoiceResponse("Unable to create choice: " + req.getId() + "(" + e.getMessage() + ")", 400);
 		}
 
 		return response;

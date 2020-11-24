@@ -66,7 +66,7 @@ java.sql.Connection connection;
             int numAffected = ps.executeUpdate();
             ps.close();
             
-            return (numAffected == 1);
+            return (numAffected > 0);
 
         } catch (Exception e) {
             throw new Exception("Failed to delete choice: " + e.getMessage());

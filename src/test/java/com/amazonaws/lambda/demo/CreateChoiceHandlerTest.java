@@ -40,7 +40,7 @@ public class CreateChoiceHandlerTest extends LambdaTest {
     @Test
     public void testShouldBeOk() {
     	int rndNum = (int)(990*(Math.random()));
-    	String var = "throwAway" + rndNum;
+    	String var = "random" + rndNum;
     	
     	CreateChoiceRequest ccr = new CreateChoiceRequest(var, var);
         String SAMPLE_INPUT_STRING = new Gson().toJson(ccr);  
