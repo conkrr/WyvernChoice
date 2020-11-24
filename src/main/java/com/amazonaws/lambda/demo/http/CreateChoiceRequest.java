@@ -12,9 +12,9 @@ public class CreateChoiceRequest {
 //		return id;
 //	}
 	
-	public String toString() {
-		return String.format("Create(%s,%s,%s,%d)", description, creatingUserId, alternatives.toString(), maxParticipants);
-	}
+//	public String toString() {
+//		return String.format("Create(%s,%s,%s,%d)", description, creatingUserId, alternatives.toString(), maxParticipants);
+//	}
 	
 	public String getDescription() {
 		return description;

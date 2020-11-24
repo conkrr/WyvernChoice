@@ -26,7 +26,7 @@ public class CreateChoiceHandler implements RequestHandler<CreateChoiceRequest, 
 	 * 
 	 * @throws Exception 
 	 */
-	private Choice createChoiceHelper(String description, List<String> alternativeDescs, String creatingUserID,
+	private Choice createChoice(String description, List<String> alternativeDescs, String creatingUserID,
 			int maxParticipants){ 
 		
 		UUID id = UUID.randomUUID();
@@ -42,13 +42,10 @@ public class CreateChoiceHandler implements RequestHandler<CreateChoiceRequest, 
 		
 	}
 	
-	boolean createChoice(String description, List<String> alternativeDescs, String creatingUserID,
-			int maxParticipants) throws Exception { 
+	boolean choiceDAOHelper(Choice choice) throws Exception { 
 		if (logger != null) { logger.log("in createChoice"); }
 		ChoicesDAO dao = new ChoicesDAO(logger);
-		Choice choice = createChoiceHelper(description, alternativeDescs, creatingUserID,
-				maxParticipants);
-		// check if present
+				// check if present
 
 		boolean exists = dao.getChoice(choice.id.toString()) != null;
 		logger.log("exist == " + exists);
@@ -68,11 +65,12 @@ public class CreateChoiceHandler implements RequestHandler<CreateChoiceRequest, 
 
 		CreateChoiceResponse response;
 		try {
-			boolean createChoiceBoolean = createChoice(req.getDescription(), req.getAlternatives(), req.getCreatingUserId(), req.getMaxParticipants());
+			Choice c = createChoice(req.getDescription(), req.getAlternatives(), req.getCreatingUserId(), req.getMaxParticipants());
+			boolean createChoiceBoolean = choiceDAOHelper(c);
 			if (createChoiceBoolean) {
 				//response = new CreateChoiceResponse(req.getDescription());
-				ChoiceGsonCompatible c = new ChoiceGsonCompatible(createChoiceHelper(req.getDescription(), req.getAlternatives(), req.getCreatingUserId(), req.getMaxParticipants()));
-				response = new CreateChoiceResponse(c);
+				ChoiceGsonCompatible cGson = new ChoiceGsonCompatible(c);
+				response = new CreateChoiceResponse(cGson);
 			} else {
 				response = new CreateChoiceResponse(req.getDescription(), 422);
 			}
