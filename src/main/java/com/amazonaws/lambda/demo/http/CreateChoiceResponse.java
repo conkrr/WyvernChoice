@@ -1,9 +1,14 @@
 package com.amazonaws.lambda.demo.http;
 
 public class CreateChoiceResponse {
-	
+	public ChoiceGsonCompatible choice;
 	public String response;
 	public int httpCode;
+		
+	public CreateChoiceResponse (ChoiceGsonCompatible c) {
+		this.choice = c;
+		this.httpCode = 200;
+	}
 	
 	public CreateChoiceResponse (String s, int code) {
 		this.response = s;

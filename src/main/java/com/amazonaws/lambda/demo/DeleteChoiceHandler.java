@@ -29,9 +29,9 @@ public class DeleteChoiceHandler implements RequestHandler<DeleteChoiceRequest,D
 		
 		// See how awkward it is to call delete with an object, when you only
 		// have one part of its information?
-		Choice choice = new Choice(req.getId(), "");
+		String id = req.getId();
 		try {
-			if (dao.deleteChoice(choice)) {
+			if (dao.deleteChoice(id)) {
 				response = new DeleteChoiceResponse(req.getId(), 200);
 			} else {
 				response = new DeleteChoiceResponse(req.getId(), 422, "Unable to delete choice.");
