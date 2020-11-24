@@ -32,6 +32,7 @@ public class RegisterUserHandlerTest extends LambdaTest{
 		return ctx;
 	}
 	
+
 	RegisterUserResponse testSuccessInput(String incoming) throws IOException {
     	RegisterUserHandler handler = new RegisterUserHandler();
     	RegisterUserRequest req = new Gson().fromJson(incoming, RegisterUserRequest.class);
