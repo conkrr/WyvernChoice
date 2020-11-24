@@ -1,7 +1,9 @@
 package com.amazonaws.lambda.demo;
 
+import com.amazonaws.lambda.db.ChoicesDAO;
 import com.amazonaws.lambda.demo.http.RegisterUserRequest;
 import com.amazonaws.lambda.demo.http.RegisterUserResponse;
+import com.amazonaws.lambda.demo.model.Choice;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
@@ -36,8 +38,16 @@ public class RegisterUserHandler implements RequestHandler<RegisterUserRequest, 
 		
 		String choiceID = "";
 		choiceID = input.getChoiceID();
-		//Check query to see if choiceID is valid
-		
+		//Check query to see if choiceID is valid     TODO!!!
+
+		if (isValidChoiceID(choiceID) == false)
+		{
+			fail = true;
+			failMessage = "ChoiceID is not valid or does not exist";
+
+		}
+
+
 		RegisterUserResponse response;
 		if(fail) {
 			response = new RegisterUserResponse(400, failMessage);
@@ -47,6 +57,29 @@ public class RegisterUserHandler implements RequestHandler<RegisterUserRequest, 
 		
 		return response;
 		
+	}
+
+
+
+	private boolean isValidChoiceID(String choiceID) //checks if the id exists and is valid
+	{
+		ChoicesDAO choicesDAO = new ChoicesDAO();
+		Choice c = null;
+		if (choiceID.length() > 16) //TODO update to what the datebase says
+		{
+			return  false;
+
+		}
+
+		try
+		{
+			 c = choicesDAO.getChoice(choiceID);   //if id already exists
+
+		} catch (Exception e) {
+			return false; //doesnt exist --> dont register a user to a choice that doesnt exist
+		}
+
+		return c != null; //if c != null then the choice exists
 	}
 
 }

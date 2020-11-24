@@ -49,6 +49,7 @@ public class CreateChoiceHandler implements RequestHandler<CreateChoiceRequest, 
 		Choice choice = createChoiceHelper(description, alternativeDescs, creatingUserID,
 				maxParticipants);
 		// check if present
+
 		boolean exists = dao.getChoice(choice.id.toString()) != null;
 		logger.log("exist == " + exists);
 		if (!exists) {
@@ -59,7 +60,7 @@ public class CreateChoiceHandler implements RequestHandler<CreateChoiceRequest, 
 		
 	}
 	
-	
+
 	@Override 
 	public CreateChoiceResponse handleRequest(CreateChoiceRequest req, Context context)  {
 		logger = context.getLogger();
