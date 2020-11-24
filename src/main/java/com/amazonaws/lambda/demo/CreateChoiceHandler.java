@@ -23,16 +23,16 @@ public class CreateChoiceHandler implements RequestHandler<CreateChoiceRequest, 
 		ChoicesDAO dao = new ChoicesDAO();
 		
 		// check if present
-		boolean exists = dao.getChoice(id) == null;
+		boolean exists = dao.getChoice(id) != null; //changed logic here, exists implies true = does exist..
 		Choice choice = new Choice (id, description);
-		if (exists) {
+		if (!exists) {
 			return dao.addChoice(choice);
 		} else {
 			return false;
 		}
 	}
 	
-	
+
 	@Override 
 	public CreateChoiceResponse handleRequest(CreateChoiceRequest req, Context context)  {
 		logger = context.getLogger();
