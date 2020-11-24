@@ -17,6 +17,7 @@ function refreshChoice() {
     };
 }
 
+
 function processChoiceResponse(result) {
     console.log("res:" + result);
     // Can grab any DIV or SPAN HTML element and can then manipulate its contents dynamically via javascript
@@ -37,6 +38,9 @@ function processChoiceResponse(result) {
     }
 
     var cAlternatives = choice["ListofAlternatives"];
+
+    output = output + "<div id=\"choiceID" + cID + "\"><b>" + cName + "</b><b>#" + cID + "</b><br>" + cFinalized + "<br>";
+    
     for(let i = 0; i < cAlternatives.length; i++){
         let alternativeJson = cAlternatives[i];
         console.log(alternativeJson);
@@ -46,23 +50,22 @@ function processChoiceResponse(result) {
         let aDisapprovals = alternativeJson["Disapprovals"];
         let aChosen = alternativeJson["isChosen"];
         var aFeedback = alternativeJson["ListofFeedback"];
-        
+        output = output + "<div id=\"alternativeID" + aID +"\"><b>" + aname + "</b><b>" + aApprovals + "</b><b>" + aDisapprovals + "</b><b>" + aChosen;
+
         for(let j = 0; j < aFeedback.length; j++){
             let feedbackJson = aFeedback[j];
             console.log(feedbackJson);
             let fUser = feedbackJson["user"];
             let fText = feedbackJson["text"];
             let fTimestamp = feedbackJson["timestamp"];
+            let faID = feedbackJson["alternativeID"];
+            let fID = feedbackJson["feedbackID"];
 
-            //Should this come from the alternative or feedback json?
-            let fID = alternativeJson["alternativeID"];
+            output = output + "<div id=\"feedbackID" + fID + "\"><b>" + fUser + "</b><b>" + fText + "</b><b>" + fTimestamp;
         }
     }
-
+    output = output + "</div>"
     console.log(choice);
-
-    //Output choice here
-    output = output + "<div id=\"choiceID" + cID + "\"><b>" + cName + "</b><b>#" + cID + "</b><br>" + cFinalized + "<br>" + cAlternatives + "<br></div>";
 
     // Update computation result
     currentChoice.innerHTML = output;
