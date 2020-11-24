@@ -23,7 +23,7 @@ public class DeleteChoiceHandler implements RequestHandler<DeleteChoiceRequest,D
 		DeleteChoiceResponse response = null;
 		logger.log(req.toString());
 
-		ChoicesDAO dao = new ChoicesDAO();
+		ChoicesDAO dao = new ChoicesDAO(logger);
 
 		// MAKE sure that we prevent attempts to delete system constants...
 		

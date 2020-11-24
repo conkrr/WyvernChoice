@@ -8,7 +8,7 @@ public class Alternative {
 	public int Approvals;
 	public int Disapprovals;
 	public boolean isChosen;
-	public List<Feedback> ListofFeedback;
+	public List<Feedback> listofFeedback;
 	
 	
 	
@@ -19,7 +19,7 @@ public class Alternative {
 		this.Approvals = Approvals;
 		this.Disapprovals = Disapprovals;
 		this.isChosen = isChosen;
-		this.ListofFeedback = ListofFeedback;
+		this.listofFeedback = ListofFeedback;
 	}
 	
 	public Alternative(String name, String alternativeID, boolean isChosen) {
