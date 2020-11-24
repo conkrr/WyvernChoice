@@ -47,9 +47,9 @@ public class CreateChoiceHandlerTest extends LambdaTest {
     @Test
     public void testCreateChoice() {
 
-    	String description = "What should we have for dinner?";
-    	String creatingUserId ="01";
-    	List<String> alternatives = Arrays.asList("Enchiladas", "Tacos", "Soup");
+    	String description = "What is 2+2?";
+    	String creatingUserId ="03";
+    	List<String> alternatives = Arrays.asList("1", "2", "4", "200");
     	int maxParticipants = 4;
     	
     	CreateChoiceRequest ccr = new CreateChoiceRequest(description, creatingUserId, alternatives,maxParticipants);
