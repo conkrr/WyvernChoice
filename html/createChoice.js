@@ -9,7 +9,7 @@ function processCreateChoiceResponse(result) {
 function handleCreateChoiceClick(e){
     console.log("Creating choice...");
     //Form is actually a local reference to the form that was already created
-    //Generate
+    //Generate IDs on backend
     var form = document.createChoiceForm;
     var data = {};
     data["name"] = form.choiceName.value;
