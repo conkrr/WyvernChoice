@@ -65,8 +65,12 @@ public class CreateChoiceHandler implements RequestHandler<CreateChoiceRequest, 
 
 		CreateChoiceResponse response;
 		try {
+			logger.log("trying to create choice");
 			Choice c = createChoice(req.getDescription(), req.getAlternatives(), req.getCreatingUserId(), req.getMaxParticipants());
+			logger.log("choice creation worked: " + (c != null));
+			logger.log("trying to access DAO");
 			boolean createChoiceBoolean = choiceDAOHelper(c);
+			
 			if (createChoiceBoolean) {
 				//response = new CreateChoiceResponse(req.getDescription());
 				ChoiceGsonCompatible cGson = new ChoiceGsonCompatible(c);

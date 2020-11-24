@@ -31,8 +31,11 @@ java.sql.Connection connection;
     }
 
     public Choice getChoice(String id) throws Exception {
-        
+    	logger.log("getChoice start");
         try {
+        	
+        	
+        	
             Choice choice = null;
             PreparedStatement psChoices = connection.prepareStatement("SELECT * FROM " + tableName + " WHERE id=?;");
             PreparedStatement psAlternatives = connection.prepareStatement("SELECT * FROM " + subEntityTableName + " WHERE choiceID=?;");
@@ -48,6 +51,8 @@ java.sql.Connection connection;
             resultSetAlternatives.close();
             psAlternatives.close();
             
+            
+            logger.log("getChoice end");
             return choice;
 
         } catch (Exception e) {
@@ -92,6 +97,7 @@ java.sql.Connection connection;
 
 
     public boolean addChoice(Choice choice) throws Exception {
+    	logger.log("addChoice start");
         try {
 //            PreparedStatement ps = connection.prepareStatement("SELECT * FROM " + tableName + " WHERE id = ?;");
 //            ps.setString(1, choice.id);
@@ -129,7 +135,7 @@ java.sql.Connection connection;
                 
         	}
         	
-        	
+        	logger.log("addChoice end");
             return exists;
 
         } catch (Exception e) {
@@ -160,7 +166,8 @@ java.sql.Connection connection;
 //    }
     
     private Choice generateChoice(ResultSet resultSetChoice, ResultSet resultSetAlternatives) throws Exception {
-        String id  = resultSetChoice.getString("id");
+    	logger.log("generateChoice start");
+    	String id  = resultSetChoice.getString("id");
         String description = resultSetChoice.getString("description");
         Timestamp creationTime = resultSetChoice.getTimestamp("creationTime");
         String userId  = resultSetChoice.getString("creatingUserId");
@@ -176,7 +183,7 @@ java.sql.Connection connection;
         	
         	alternatives.add(new Alternative(aDesc, aId, aIsChosen));
         }
-        
+        logger.log("generateChoice end");
         return new Choice (id, description, creationTime, userId, false, alternatives, maxParticipants, currentParticipants);
     }
 }
