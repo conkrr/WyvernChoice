@@ -1,0 +1,14 @@
+com\amazonaws\lambda\demo\model\Feedback.class
+com\amazonaws\lambda\demo\http\ChoiceGsonCompatible.class
+com\amazonaws\lambda\demo\http\RegisterUserResponse.class
+com\amazonaws\lambda\demo\RegisterUserHandler.class
+com\amazonaws\lambda\db\ChoicesDAO.class
+com\amazonaws\lambda\demo\http\UpdateResponse.class
+com\amazonaws\lambda\demo\model\Alternative.class
+com\amazonaws\lambda\demo\http\RegisterUserRequest.class
+com\amazonaws\lambda\demo\model\Choice.class
+com\amazonaws\lambda\demo\CreateChoiceHandler.class
+com\amazonaws\lambda\demo\http\CreateChoiceResponse.class
+com\amazonaws\lambda\demo\LambdaFunctionHandler.class
+com\amazonaws\lambda\db\DatabaseUtil.class
+com\amazonaws\lambda\demo\http\CreateChoiceRequest.class
