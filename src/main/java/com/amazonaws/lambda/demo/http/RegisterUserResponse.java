@@ -29,9 +29,9 @@ public class RegisterUserResponse {
 	
 	public String toString() {
 		if(statusCode == 200) {
-			return "RegisterUser(" + loggedInUser + "," + password + "," + choiceID + ")"; 
+			return "{ \"loggedInUser\": \"" + loggedInUser + "\", \"password\": \"" + password + "\", \"choiceID\": \"" + choiceID + "\", \"statusCode\": \"" + statusCode +"\" }";
 		} else {
-			return "Error(" + statusCode + ", err=" + error + ")";
+			return "{ \"statusCode\": \"" + statusCode + "\", \"error\": \"" + error + "\" }";
 		}
 	}
 	

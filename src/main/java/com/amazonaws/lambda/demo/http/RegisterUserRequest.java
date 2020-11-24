@@ -14,7 +14,7 @@ public class RegisterUserRequest {
 	public String getChoiceID() {return choiceID;}
 	public void setChoiceID(String id) {this.choiceID = id;}
 	
-	public String toString() {return "RegisterUser(" + loggedInUser + "," + password + "," + choiceID + ")";}
+	public String toString() {return "{ \"loggedInUser\": " + loggedInUser + ", \"password\": " + password + ", \"choiceID\": " + choiceID + " }";}
 	
 	public RegisterUserRequest(String loggedInUser, String password) {
 		this.loggedInUser = loggedInUser;
