@@ -10,17 +10,22 @@ function processRegisterResponse(username, password){
 
     let user = JSON.parse(username);
     let pw = JSON.parse(password);
-
+ 
 }
 
 function handleRegisterClick(e){
-    var form = document.addForm;
+    console.log("Registering user...");
+    var form = document.registerUserForm;
     var username = form.username.value;
     var password = form.password.value;
+    var choiceID = form.registerID.value;
 
     var data = {};
-    data["Username: "] = username;
-    data["Password: "] = password;
+    data["username"] = username;
+    if(password !== null){
+        data["password"] = password;
+    }
+    data["choiceID"] = choiceID;;
 
     var js = JSON.stringify(data);
     console.log("JS: " + js);

@@ -15,11 +15,14 @@
         </script>
     </head>
     <body onload="initialize()">
+        <nav id="TopNav">
+            <h1>Main Page</h1>
+        </nav>
         <main id="MainPage">
             <nav id="UserInfo">
                 <nav id="Login">
                     <h2>User Login</h2>
-                    <form name="Register" method="post" name="registerUser">
+                    <form name="registerUserForm" method="post" name="registerUser">
                         <div>
                             <h3>Username:</h3>
                             <input name="username" value=""><br>
@@ -29,8 +32,8 @@
                         <input name="password" value="" />
 
                         <h3>Choice ID:</h3>
-                        <input name="registerID" value="" />
-                        <input type="button" value="Submit"  onClick="JavaScript:handleAddClick(this)">
+                        <input name="registerID" value="" /><br>
+                        <input type="button" value="Submit"  onClick="JavaScript:handleRegisterClick(this)">
                       </form>
                 </nav>
                 <nav id="List of Users">
@@ -44,7 +47,7 @@
                         <h3>Name of Choice:</h3>
                         <input name="choiceName" value="" />
                         <h3>Number of Participants:</h3>
-                        <input name="numParticipants" value=""/>
+                        <input name="participants" value=""/>
                         <h3>Alternatives (fill at least 2):</h3>
                         <input name="alternative1" value=""/><br>
                         <input name="alternative2" value=""/><br>
@@ -52,13 +55,13 @@
                         <input name="alternative4" value=""/><br>
                         <input name="alternative5" value=""/><br>
                        
-                        <input type="button" id="createButton" value="Create Choice" onClick="JavaScript:handleCreateClick(this)">
+                        <input type="button" id="createButton" value="Create Choice" onClick="JavaScript:handleCreateChoiceClick(this)">
                      <br> 
                      </form>
                 </nav>
                 <nav id="Choice">
                     <h2>Choice</h2>
-                    <div id="currentChoice"></div>
+                    <div id="currentChoice">Register with an ID to see a choice!</div>
                 </nav>
             </nav>
         </main>

@@ -3,24 +3,50 @@ function processCreateChoiceResponse(result) {
     // contents dynamically via javascript
     console.log("result:" + result);
   
-    refreshChoiceList();
+    refreshChoice();
 }
 
-function handleCreateClick(e){
-    var form = document.createForm;
+function handleCreateChoiceClick(e){
+    console.log("Creating choice...");
+    //Form is actually a local reference to the form that was already created
+    //Generate IDs on backend
+    var form = document.createChoiceForm;
     var data = {};
     data["name"] = form.choiceName.value;
-    data["choiceID"] = form.choiceID.value;
-    //Flag if a choice is completed here
-    if (form.isFinalized.checked) {  
-        data["isFinalized"] = true;
-        data["completionDate"] = form.completionDate.value;
-    } else {
-        //If choice is not complete, flag completion date as open
-        data["isFinalized"] = false;
-        data["completionDate"] = "Open";
+    data["choiceID"] = Math.random()*1000;
+    data["numParticipants"] = form.participants.value;
+    data["isFinalized"] = false;
+    data["completionDate"] = "Open";
+    
+    //Make an alternative list and check to see which ones are filled. Create alternatives out of the ones that are pushed
+    var alternativeList = [];
+    if(form.alternative1.value !== null){
+        alternativeList.push(createAlternative(form.alternative1.value));
     }
-    //What do for lists?
+
+    if(form.alternative2.value !== null){
+        alternativeList.push(createAlternative(form.alternative2.value));
+    }
+
+    if(form.alternative3.value !== null){
+        alternativeList.push(createAlternative(form.alternative3.value));
+    }
+
+    if(form.alternative4.value !== null){
+        alternativeList.push(createAlternative(form.alternative4.value));
+    }
+
+    if(form.alternative5.value !== null){
+        alternativeList.push(createAlternative(form.alternative5.value));
+    }
+
+    //If there are at least two alternatives, return the list of alternatives
+    if(alternativeList.length > 1){
+        data["ListOfAlternatives"] = alternativeList;
+    } else {
+        //display element that says "not enough choices"
+        console.log("Not enough choices...");
+    }
 
     var js = JSON.stringify(data);
     console.log("JS:" + js);
@@ -48,4 +74,12 @@ function handleCreateClick(e){
         processCreateResponse("N/A");
         }
     };
+}
+
+/**
+ * Create an alternative given a name. All other parameters are initialized.
+ * @param {*} alternativeName the name of the alternative
+ */
+function createAlternative(alternativeName){
+    return {name = alternativeName, alternativeID = Math.random()*1000, Approvals = 0, Disapprovals = 0, ListofFeedback = []};
 }
