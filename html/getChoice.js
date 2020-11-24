@@ -1,7 +1,7 @@
 function refreshChoice() {
     //Make and send GET request
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", list_url, true);
+    xhr.open("GET", base_url, true);
     xhr.send();
      
     console.log("sent");
