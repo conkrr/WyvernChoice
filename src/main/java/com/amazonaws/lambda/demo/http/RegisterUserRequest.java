@@ -16,9 +16,10 @@ public class RegisterUserRequest {
 	
 	public String toString() {return "{ \"loggedInUser\": " + loggedInUser + ", \"password\": " + password + ", \"choiceID\": " + choiceID + " }";}
 	
-	public RegisterUserRequest(String loggedInUser, String password) {
+	public RegisterUserRequest(String loggedInUser, String password, String choiceID) {
 		this.loggedInUser = loggedInUser;
 		this.password = password;
+		this.choiceID = choiceID;
 	}
 	
 	public RegisterUserRequest() {

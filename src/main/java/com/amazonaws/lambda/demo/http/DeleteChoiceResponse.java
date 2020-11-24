@@ -1,9 +1,9 @@
 package com.amazonaws.lambda.demo.http;
 
 public class DeleteChoiceResponse {
-		public final String id;
-		public final int statusCode;
-		public final String error;
+		public String id;
+		public int statusCode;
+		public String error;
 		
 		public DeleteChoiceResponse (String name, int statusCode) {
 			this.id = name;
