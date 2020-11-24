@@ -17,6 +17,6 @@ public class CreateChoiceResponse {
 	}
 	
 	public String toString() {
-		return "Response(" + response + ")";
+		return "{ \"response\": " + response + ", \"httpCode\": " + httpCode + " }";
 	}
 }

@@ -16,7 +16,7 @@ public class UpdateResponse {
 	
 	//Update when choice is updated
 	public String printChoice(Choice choice) {
-		return "Choice(" + choice.id + "," + choice.description + ")";
+		return "{ \"id\": \"" + choice.id + "\", \"description\": \"" + choice.description + "\", \"statusCode\" : \"" + statusCode + "\" }";
 	}
 	
 	//Success
@@ -39,7 +39,7 @@ public class UpdateResponse {
 			//Though how do we return choice?
 			return printChoice(choice);
 		} else {
-			return "Error(" + statusCode + ", err=" + error + ")";
+			return "{ \"statusCode\": \"" + statusCode + "\", \"error\": \"" + error + "\" }";
 		}
 	}
 	
