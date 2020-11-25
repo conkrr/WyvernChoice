@@ -1,19 +1,14 @@
 package com.amazonaws.lambda.demo;
 
+import com.amazonaws.lambda.demo.http.CreateChoiceRequest;
+import com.amazonaws.lambda.demo.http.CreateChoiceResponse;
+import com.google.gson.Gson;
+import org.junit.Assert;
+import org.junit.Test;
+
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
-
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
-import com.amazonaws.lambda.demo.http.CreateChoiceRequest;
-import com.amazonaws.lambda.demo.http.CreateChoiceResponse;
-import com.amazonaws.lambda.demo.http.DeleteChoiceRequest;
-import com.amazonaws.lambda.demo.http.DeleteChoiceResponse;
-import com.amazonaws.services.lambda.runtime.Context;
-import com.google.gson.Gson;
 
 /**
  * A simple test harness for locally invoking your Lambda function handler.
@@ -52,7 +47,7 @@ public class CreateChoiceHandlerTest extends LambdaTest {
     	List<String> alternatives = Arrays.asList("1", "2", "4", "200");
     	int maxParticipants = 4;
     	
-    	CreateChoiceRequest ccr = new CreateChoiceRequest(description, creatingUserId, alternatives,maxParticipants);
+    	CreateChoiceRequest ccr = new CreateChoiceRequest(description, creatingUserId, alternatives, );
         String SAMPLE_INPUT_STRING = new Gson().toJson(ccr);  
         String jsonResp;
         try {
