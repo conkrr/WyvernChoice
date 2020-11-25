@@ -3,7 +3,7 @@ package com.amazonaws.lambda.demo.http;
 import java.util.List;
 
 public class CreateChoiceRequest {
-	//String id;
+	String id;
 	String description;
 	String creatingUserId;
 	List<String> alternatives;
@@ -44,5 +44,8 @@ public class CreateChoiceRequest {
 
 	}
 
+	public String toString() {
+		return "CreateChoice(" + id + "," + description + ")";
+	}
 	
 }
