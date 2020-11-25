@@ -1,20 +1,14 @@
 package com.amazonaws.lambda.demo;
 
-
-import com.amazonaws.lambda.db.ChoicesDAO;
-import com.amazonaws.lambda.demo.http.CreateChoiceRequest;
-import com.amazonaws.lambda.demo.http.CreateChoiceResponse;
+//com.amazonaws.lambda.demo.RegisterUserHandlerTest
 import com.amazonaws.lambda.demo.http.RegisterUserRequest;
 import com.amazonaws.lambda.demo.http.RegisterUserResponse;
-import com.amazonaws.lambda.demo.model.Choice;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.google.gson.Gson;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
 
 
 public class RegisterUserHandlerTest extends LambdaTest{

@@ -38,7 +38,7 @@ public class ChoiceGsonCompatible {
 		this.isFinalized = isFinalized;
 		this.listofAlternatives = listofAlternatives;
 	}
-	
+	 
 	public ChoiceGsonCompatible(Choice c) {
 		this.name = c.description;
 		this.choiceID = c.id;
