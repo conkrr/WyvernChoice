@@ -72,5 +72,5 @@ function processChoiceResponse(result) {
     console.log(choice);
 
     // Update computation result
-    currentChoice.innerHTML = output;
+    choice.innerHTML = output;
 }
