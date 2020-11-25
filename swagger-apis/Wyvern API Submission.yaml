@@ -117,10 +117,10 @@ paths:
       - "application/json"
       parameters:
       - in: "body"
-        name: "RegisterRequest"
+        name: "RegisterUserRequest"
         required: true
         schema:
-          $ref: "#/definitions/RegisterRequest"
+          $ref: "#/definitions/RegisterUserRequest"
       responses:
         200:
           description: "200 response"
@@ -397,19 +397,22 @@ definitions:
     type: "object"
     required:
     - "name"
+    - "creatingUserID"
     - "numParticipants"
-    - "ListofAlternatives"
+    - "listofAlternatives"
     properties:
       name:
         type: "string"
+      creatingUserId:
+        type: "string"
       numParticipants:
         type: "integer"
-      ListofAlternatives:
+      listofAlternatives:
         type: "array"
         items:
           type: "string"
 
-  RegisterRequest:
+  RegisterUserRequest:
     type: "object"
     required: 
     - "username"
@@ -426,14 +429,11 @@ definitions:
   RegisterUserResponse:
     type: "object"
     required:
-    - "newUser"
-    - "loggedInUser"
+    - "username"
     - "statusCode"
     - "error"
     properties:
-      newUser:
-        type: "boolean"
-      loggedInUser:
+      username:
         type: "string"
       statusCode:
         type: "integer"

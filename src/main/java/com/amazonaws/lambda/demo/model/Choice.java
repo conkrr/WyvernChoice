@@ -14,6 +14,7 @@ public class Choice {
 	public final List<Alternative> alternatives;
 	public int maxParticipants;
 	public int currentParticipants;
+	
 	public Choice(String id, String description, Timestamp creationDate, String creatingUserId, boolean isFinalized, List<Alternative> alternatives,
 			int maxParticipants, int currentParticipants) {
 		this.id = id;

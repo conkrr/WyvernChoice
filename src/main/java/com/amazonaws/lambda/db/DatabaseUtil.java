@@ -57,14 +57,15 @@ public class DatabaseUtil {
 
 
 		//for quick testing
-		dbUsername = "conkDBAdmin";
-		dbPassword = "conkDBAdmin123";
-		rdsMySqlDatabaseUrl = "conkdb.cips1s0tfddd.us-east-1.rds.amazonaws.com";
+		//dbUsername = "conkDBAdmin";
+		//dbPassword = "conkDBAdmin123";
+		//rdsMySqlDatabaseUrl = "conkdb.cips1s0tfddd.us-east-1.rds.amazonaws.com";
+		
 
 		try {
 			System.out.println("start connecting......");
 			Class.forName("com.mysql.cj.jdbc.Driver");
-
+			System.out.println(jdbcTag + rdsMySqlDatabaseUrl + ":" + rdsMySqlDatabasePort + "/" + schemaName + multiQueries);
 			conn = DriverManager.getConnection(
 					jdbcTag + rdsMySqlDatabaseUrl + ":" + rdsMySqlDatabasePort + "/" + schemaName + multiQueries,
 					dbUsername,
