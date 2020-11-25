@@ -21,13 +21,13 @@ public class RegisterUserResponse {
 		this.statusCode = 200;
 	}
 	
-//	public String toString() {
-//		if(statusCode == 200) {
-//			return "{ \"loggedInUser\": \"" + loggedInUser + "\", \"password\": \"" + password + "\", \"choiceID\": \"" + choiceID + "\", \"statusCode\": \"" + statusCode +"\" }";
-//		} else {
-//			return "{ \"statusCode\": \"" + statusCode + "\", \"error\": \"" + error + "\" }";
-//		}
-//	}
+	public String toString() {
+		if(statusCode == 200) {
+			return "{ \"loggedInUser\": \"" + userGson.loggedInUser + "\", \"password\": \"" + userGson.password + "\", \"choiceID\": \"" + userGson.choiceID + "\", \"statusCode\": \"" + statusCode +"\" }";
+		} else {
+			return "{ \"statusCode\": \"" + statusCode + "\", \"error\": \"" + error + "\" }";
+		}
+	}
 	
 	
 }
