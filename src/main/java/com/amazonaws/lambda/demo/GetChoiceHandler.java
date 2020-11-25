@@ -28,17 +28,17 @@ public class GetChoiceHandler implements RequestHandler<GetChoiceRequest, GetCho
 
 			GetChoiceResponse response;
 			try {
-				Choice choice = getChoiceViaDAO(req.getChoiceId());
-				
+				Choice choice = getChoiceViaDAO(req.getChoiceID());
+				logger.log("After running getChoiceViaDAO()...choice is null:  " + (choice == null));
 				if (choice != null) {
 					//response = new GetChoiceResponse(req.getDescription());
 					ChoiceGsonCompatible cGson = new ChoiceGsonCompatible(choice);
 					response = new GetChoiceResponse(cGson);
 				} else {
-					response = new GetChoiceResponse(req.getChoiceId(), 422);
+					response = new GetChoiceResponse(req.getChoiceID(), 422);
 				}
 			} catch (Exception e) {
-				response = new GetChoiceResponse("Unable to get choice: " + req.getChoiceId() + "(" + e.getMessage() + ")", 400);
+				response = new GetChoiceResponse("Unable to get choice: " + req.getChoiceID() + "(" + e.getMessage() + ")", 400);
 			}
 
 			return response;
