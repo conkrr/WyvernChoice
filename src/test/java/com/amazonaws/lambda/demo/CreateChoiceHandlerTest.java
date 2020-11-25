@@ -52,7 +52,7 @@ public class CreateChoiceHandlerTest extends LambdaTest {
     	List<String> alternatives = Arrays.asList("1", "2", "4", "200");
     	int maxParticipants = 4;
     	
-    	CreateChoiceRequest ccr = new CreateChoiceRequest(description, creatingUserId, alternatives,maxParticipants);
+    	CreateChoiceRequest ccr = new CreateChoiceRequest(description, creatingUserId, maxParticipants, alternatives);
         String SAMPLE_INPUT_STRING = new Gson().toJson(ccr);  
         String jsonResp;
         try {
