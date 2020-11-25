@@ -4,6 +4,8 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.amazonaws.lambda.demo.http.AlternativeGsonCompatible;
+
 public class Choice {
 	
 	public final String id;
@@ -34,6 +36,12 @@ public class Choice {
 		}
 		return ids;
 	}
-	
+	public List<AlternativeGsonCompatible> getAlternativeGsonList(){
+		ArrayList<AlternativeGsonCompatible> altsGson = new ArrayList<AlternativeGsonCompatible>(alternatives.size());
+		for(Alternative a : alternatives) {
+			altsGson.add(new AlternativeGsonCompatible(a.alternativeID, a.name));
+		}
+		return altsGson;
+	}
 
 }

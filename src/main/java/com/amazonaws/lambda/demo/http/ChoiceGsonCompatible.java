@@ -10,7 +10,7 @@ public class ChoiceGsonCompatible {
 	 int numParticipants;
 	 String completionDate;
 	 boolean isFinalized;
-	 List<String> listofAlternatives;
+	 List<AlternativeGsonCompatible> listofAlternatives;
 	public String getName() {
 		return name;
 	}
@@ -26,11 +26,11 @@ public class ChoiceGsonCompatible {
 	public boolean isFinalized() {
 		return isFinalized;
 	}
-	public List<String> getListofAlternatives() {
+	public List<AlternativeGsonCompatible> getListofAlternatives() {
 		return listofAlternatives;
 	}
 	public ChoiceGsonCompatible(String name, String choiceID, int numParticipants, String completionDate,
-			boolean isFinalized, List<String> listofAlternatives) {
+			boolean isFinalized, List<AlternativeGsonCompatible> listofAlternatives) {
 		this.name = name;
 		this.choiceID = choiceID;
 		this.numParticipants = numParticipants;
@@ -45,7 +45,7 @@ public class ChoiceGsonCompatible {
 		this.numParticipants = c.maxParticipants;
 		this.completionDate = null;
 		this.isFinalized = c.isFinalized;
-		this.listofAlternatives = c.getAlternativeIdList();
+		this.listofAlternatives = c.getAlternativeGsonList();
 	}
 	 
 	 
