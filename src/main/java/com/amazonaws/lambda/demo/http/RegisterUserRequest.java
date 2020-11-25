@@ -1,12 +1,12 @@
 package com.amazonaws.lambda.demo.http;
 
 public class RegisterUserRequest {
-	String loggedInUser;
+	String username;
 	String password;
 	String choiceID;
 	
-	public String getLoggedInUser() {return loggedInUser;}
-	public void setLoggedInUser(String user) {this.loggedInUser = user;}
+	public String getLoggedInUser() {return username;}
+	public void setLoggedInUser(String user) {this.username = user;}
 	
 	public String getPassword() {return password;}
 	public void setPassword(String pw) {this.password = pw;}
@@ -14,10 +14,10 @@ public class RegisterUserRequest {
 	public String getChoiceID() {return choiceID;}
 	public void setChoiceID(String id) {this.choiceID = id;}
 	
-	public String toString() {return "{ \"loggedInUser\": " + loggedInUser + ", \"password\": " + password + ", \"choiceID\": " + choiceID + " }";}
+	public String toString() {return "{ \"username\": " + username + ", \"password\": " + password + ", \"choiceID\": " + choiceID + " }";}
 	
-	public RegisterUserRequest(String loggedInUser, String password, String choiceID) {
-		this.loggedInUser = loggedInUser;
+	public RegisterUserRequest(String username, String password, String choiceID) {
+		this.username = username;
 		this.password = password;
 		this.choiceID = choiceID;
 	}
