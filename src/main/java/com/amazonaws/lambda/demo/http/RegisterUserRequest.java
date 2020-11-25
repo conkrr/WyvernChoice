@@ -5,8 +5,8 @@ public class RegisterUserRequest {
 	String password;
 	String choiceID;
 	
-	public String getLoggedInUser() {return username;}
-	public void setLoggedInUser(String user) {this.username = user;}
+	public String getUsername() {return username;}
+	public void setUsername(String user) {this.username = user;}
 	
 	public String getPassword() {return password;}
 	public void setPassword(String pw) {this.password = pw;}

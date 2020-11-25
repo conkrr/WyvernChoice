@@ -22,6 +22,7 @@ public class RegisterUserHandler implements RequestHandler<RegisterUserRequest, 
 		UUID id = UUID.randomUUID();
 		//Timestamp creationDate = new Timestamp(Calendar.getInstance().getTimeInMillis());
 		
+
 		User user = new User(req.getChoiceID(), req.getLoggedInUser(), req.getPassword(), id.toString());
 		return user;
 		
@@ -58,10 +59,10 @@ public class RegisterUserHandler implements RequestHandler<RegisterUserRequest, 
 				UserGsonCompatible uGson = new UserGsonCompatible(u);
 				response = new RegisterUserResponse(uGson);
 			} else {
-				response = new RegisterUserResponse(422, req.getLoggedInUser());
+				response = new RegisterUserResponse(422, req.getUsername());
 			}
 		} catch (Exception e) {
-			response = new RegisterUserResponse(400, "Unable to create user: " + req.getLoggedInUser() + "(" + e.getMessage() + ")");
+			response = new RegisterUserResponse(400, "Unable to create user: " + req.getUsername() + "(" + e.getMessage() + ")");
 		}
 
 		return response;

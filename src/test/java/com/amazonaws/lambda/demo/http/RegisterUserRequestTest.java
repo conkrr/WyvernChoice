@@ -1,24 +1,25 @@
 package com.amazonaws.lambda.demo.http;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 class RegisterUserRequestTest {
 
 	@Test
 	void test() {
 		RegisterUserRequest rur = new RegisterUserRequest();
-		rur.setLoggedInUser("King Roland");
-		assertEquals("King Roland", rur.loggedInUser);
+		rur.setUsername("King Roland");
+		assertEquals("King Roland", rur.username);
 		
 		rur.setPassword("12345");
 		assertEquals("12345", rur.password);
 		
-		rur = new RegisterUserRequest("King Roland", "12345","");
-		assertEquals("King Roland", rur.loggedInUser);
+		rur = new RegisterUserRequest("King Roland", "12345", "superduperID");
+		assertEquals("King Roland", rur.username);
 		assertEquals("12345", rur.password);
-
+		assertEquals("superduperID", rur.choiceID);
 	}
 
 }

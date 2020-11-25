@@ -23,7 +23,7 @@ public class UserGsonCompatible {
 	}
 	public UserGsonCompatible(User u) {
 		this.newUser = true;
-		this.username = u.name;
+		this.username = u.username;
 		this.password = u.password;
 		this.choiceID = u.choiceId;
 	}

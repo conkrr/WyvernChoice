@@ -51,7 +51,7 @@ java.sql.Connection connection;
         	
         	e.printStackTrace();
         	
-            throw new Exception("Failed in getting choice: " + e.getMessage());
+            throw new Exception("Failed in getting user: " + e.getMessage());
         }
     }
     
@@ -109,7 +109,7 @@ java.sql.Connection connection;
         		             
         		
         		ps.setString(1, user.choiceId);
-                ps.setString(2, user.name);
+                ps.setString(2, user.username);
                 ps.setString(3, user.password);
                 ps.setString(4, user.userId.toString());
                 ps.execute();
@@ -148,11 +148,11 @@ java.sql.Connection connection;
     
     private User generateUser(ResultSet resultSet) throws Exception {
         String id  = resultSet.getString("userID");
-        String name = resultSet.getString("name");
+        String username = resultSet.getString("name");
         String password = resultSet.getString("password");
         String choiceID = resultSet.getString("choiceID");
         
         
-        return new User(choiceID, name, password, id);
+        return new User(choiceID, username, password, id);
     }
 }
