@@ -54,7 +54,7 @@ paths:
       - name: "choiceID"
         in: "path"
         required: true
-        type: "integer"
+        type: "string"
       responses:
         200:
           description: "200 response"
@@ -479,10 +479,7 @@ definitions:
         type: "string"
       alternativeID:
         type: "integer"
-        
- 
-     
-     
+
   UpdateResponse:
     type: "object"
     required:

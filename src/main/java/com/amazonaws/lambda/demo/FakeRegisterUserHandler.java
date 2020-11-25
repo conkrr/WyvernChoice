@@ -7,7 +7,7 @@ import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.s3.AmazonS3;
 
-public class RegisterUserHandler implements RequestHandler<RegisterUserRequest, RegisterUserResponse>{
+public class FakeRegisterUserHandler implements RequestHandler<RegisterUserRequest, RegisterUserResponse>{
 
 	
 	LambdaLogger logger;
