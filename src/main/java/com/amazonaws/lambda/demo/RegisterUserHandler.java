@@ -23,7 +23,7 @@ public class RegisterUserHandler implements RequestHandler<RegisterUserRequest, 
 		//Timestamp creationDate = new Timestamp(Calendar.getInstance().getTimeInMillis());
 		
 
-		User user = new User(req.getChoiceID(), req.getLoggedInUser(), req.getPassword(), id.toString());
+		User user = new User(req.getChoiceID(), req.getUsername(), req.getPassword(), id.toString());
 		return user;
 		
 	}
