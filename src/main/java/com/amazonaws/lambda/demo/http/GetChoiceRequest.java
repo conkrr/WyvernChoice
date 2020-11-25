@@ -2,18 +2,18 @@ package com.amazonaws.lambda.demo.http;
 
 public class GetChoiceRequest {
 	
-	private String choiceId;
+	private String choiceID;
 
 	public String getChoiceId() {
-		return choiceId;
+		return choiceID;
 	}
 
-	public void setChoiceId(String choiceId) {
-		this.choiceId = choiceId;
+	public void setChoiceId(String choiceID) {
+		this.choiceID = choiceID;
 	}
 
 	public GetChoiceRequest(String choiceId) {
-		this.choiceId = choiceId;
+		this.choiceID = choiceId;
 	}
 	
 	public GetChoiceRequest() {
