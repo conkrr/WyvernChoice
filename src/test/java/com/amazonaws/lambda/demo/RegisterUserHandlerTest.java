@@ -32,7 +32,7 @@ class RegisterUserHandlerTest {
 		RegisterUserResponse response = handler.handleRequest(req, createContext("compute"));
 
 		//result is not good, maybe return a string saying that the user was registered?
-		Assert.assertEquals(outgoing, response.result);
+		Assert.assertEquals(outgoing, response.toString());
 		Assert.assertEquals(200, response.statusCode);
 	}
 
