@@ -9,7 +9,7 @@ import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 
-public class GetChoiceHandler implements RequestHandler<GetChoiceRequest, ChoiceGsonCompatible>{
+public class GetChoiceHandler implements RequestHandler<GetChoiceRequest, GetChoiceResponse>{
 
 		LambdaLogger logger;
 		
@@ -22,23 +22,23 @@ public class GetChoiceHandler implements RequestHandler<GetChoiceRequest, Choice
 		
 
 		@Override 
-		public ChoiceGsonCompatible handleRequest(GetChoiceRequest req, Context context)  {
+		public GetChoiceResponse handleRequest(GetChoiceRequest req, Context context)  {
 			logger = context.getLogger();
 			logger.log("GetChoiceHandler::handleRequest()");
 
-			ChoiceGsonCompatible response = null;
+			GetChoiceResponse response = null;
 			try {
 				Choice choice = getChoiceViaDAO(req.getChoiceID());
 				logger.log("After running getChoiceViaDAO()...choice is null:  " + (choice == null));
 				if (choice != null) {
 					//response = new GetChoiceResponse(req.getDescription());
 					ChoiceGsonCompatible cGson = new ChoiceGsonCompatible(choice);
-					response = cGson;//new GetChoiceResponse(cGson);
+					response = new GetChoiceResponse(cGson);
 				} else {
-					//response = new GetChoiceResponse(req.getChoiceID(), 422);
+					response = new GetChoiceResponse(req.getChoiceID(), 422);
 				}
 			} catch (Exception e) {
-				//response = new GetChoiceResponse("Unable to get choice: " + req.getChoiceID() + "(" + e.getMessage() + ")", 400);
+				response = new GetChoiceResponse("Unable to get choice: " + req.getChoiceID() + "(" + e.getMessage() + ")", 400);
 			}
 
 			return response;
