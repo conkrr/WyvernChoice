@@ -429,14 +429,11 @@ definitions:
   RegisterUserResponse:
     type: "object"
     required:
-    - "newUser"
-    - "loggedInUser"
+    - "username"
     - "statusCode"
     - "error"
     properties:
-      newUser:
-        type: "boolean"
-      loggedInUser:
+      username:
         type: "string"
       statusCode:
         type: "integer"
