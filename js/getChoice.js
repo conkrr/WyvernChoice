@@ -37,7 +37,7 @@ function processChoiceResponse(result) {
         cFinalized = "Choice is still open...";
     }
 
-    var cAlternatives = choice["ListofAlternatives"];
+    var cAlternatives = choice["listofAlternatives"];
 
     output = output + "<div id=\"choiceID" + cID + "\"><b>" + cName + "</b><b>#" + cID + "</b><br>" + cFinalized + "<br>";
     
@@ -46,6 +46,9 @@ function processChoiceResponse(result) {
         console.log(alternativeJson);
         let aname = alternativeJson["name"];
         let aID = alternativeJson["alternativeID"];
+
+        output = output + "<div id=\"alternativeID" + aID + "\"><b>" + aname + "</b>";
+        /*
         let aApprovals = alternativeJson["Approvals"];
         let aDisapprovals = alternativeJson["Disapprovals"];
         let aChosen = alternativeJson["isChosen"];
@@ -63,6 +66,7 @@ function processChoiceResponse(result) {
 
             output = output + "<div id=\"feedbackID" + fID + "\"><b>" + fUser + "</b><b>" + fText + "</b><b>" + fTimestamp;
         }
+        */
     }
     output = output + "</div>"
     console.log(choice);

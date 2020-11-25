@@ -270,7 +270,7 @@ definitions:
     - "numParticipants"
     - "completionDate"
     - "isFinalized"
-    - ListofAlternatives
+    - listofAlternatives
     properties:
       name:
         type: "string"
@@ -282,7 +282,7 @@ definitions:
         type: "boolean"
       completionDate:
         type: "string"
-      ListofAlternatives:
+      listofAlternatives:
         type: "array"
         items: 
           $ref: "#/definitions/Alternative"
@@ -291,10 +291,10 @@ definitions:
     required: 
     - "name"
     - "alternativeID"
-    - "Approvals"
-    - "Disapprovals"
-    - "isChosen"
-    - ListofFeedback
+    #- "Approvals"
+    #- "Disapprovals"
+    #- "isChosen"
+    #- ListofFeedback
     properties:
       name:
         type: "string"
