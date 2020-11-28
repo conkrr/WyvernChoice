@@ -25,11 +25,11 @@ function processChoiceResponse(result) {
     var choice = document.getElementById('currentChoice');
 
     var output = "";
-    var cName = choice["name"];
-    var cID = choice["choiceID"];
-    var cParticipants = choice["numParticipants"];
-    var cDate = choice["completionDate"];
-    var cFinalized = choice["isFinalized"];
+    var cName = js["name"];
+    var cID = js["choiceID"];
+    var cParticipants = js["numParticipants"];
+    var cDate = js["completionDate"];
+    var cFinalized = js["isFinalized"];
     //Heh transforming variables
     if(cFinalized == true){
         cFinalized = "Choice Finalized!";
@@ -37,7 +37,7 @@ function processChoiceResponse(result) {
         cFinalized = "Choice is still open...";
     }
 
-    var cAlternatives = choice["listofAlternatives"];
+    var cAlternatives = js["listofAlternatives"];
 
     output = output + "<div id=\"choiceID" + cID + "\"><b>" + cName + "</b><b>#" + cID + "</b><br>" + cFinalized + "<br>";
     
@@ -72,5 +72,5 @@ function processChoiceResponse(result) {
     console.log(choice);
 
     // Update computation result
-    choice.innerHTML = output;
+    choice.innerHTML = "what wait why";
 }

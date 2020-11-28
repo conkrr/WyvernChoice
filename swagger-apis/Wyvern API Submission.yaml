@@ -101,7 +101,7 @@ paths:
         200:
           description: "200 response"
           schema:
-            $ref: "#/definitions/UpdateResponse"
+            $ref: "#/definitions/FinalChoiceResponse"
           headers:
             Access-Control-Allow-Origin:
               type: "string"
@@ -168,7 +168,7 @@ paths:
         200:
           description: "200 response"
           schema:
-            $ref: "#/definitions/UpdateResponse"
+            $ref: "#/definitions/AddApprovalResponse"
           headers:
             Access-Control-Allow-Origin:
               type: "string"
@@ -190,7 +190,7 @@ paths:
         200:
           description: "200 response"
           schema:
-            $ref: "#/definitions/UpdateResponse"
+            $ref: "#/definitions/RemoveApprovalResponse"
           headers:
             Access-Control-Allow-Origin:
               type: "string"
@@ -213,7 +213,7 @@ paths:
         200:
           description: "200 response"
           schema:
-            $ref: "#/definitions/UpdateResponse"
+            $ref: "#/definitions/AddDisapprovalResponse"
           headers:
             Access-Control-Allow-Origin:
               type: "string"
@@ -236,7 +236,7 @@ paths:
         200:
           description: "200 response"
           schema:
-            $ref: "#/definitions/UpdateResponse"
+            $ref: "#/definitions/RemoveDisapprovalResponse"
           headers:
             Access-Control-Allow-Origin:
               type: "string"
@@ -291,8 +291,8 @@ definitions:
     required: 
     - "name"
     - "alternativeID"
-    #- "Approvals"
-    #- "Disapprovals"
+    - "Approvals"
+    - "Disapprovals"
     #- "isChosen"
     #- ListofFeedback
     properties:
@@ -392,6 +392,25 @@ definitions:
         type: "integer"
       isFinalized:
         type: "boolean"
+  FinalChoiceResponse:
+    type: "object"
+    required:
+    - "choiceID"
+    - "alternativeID"
+    - "isFinalized"
+    - "statusCode"
+    - "error"
+    properties:
+      choiceID:
+        type: "integer"
+      alternativeID:
+        type: "integer"
+      isFinalized:
+        type: "boolean"
+      statusCode:
+        type: "integer"
+      error:
+        type: "string"
 
   CreateChoiceRequest:
     type: "object"
@@ -439,6 +458,7 @@ definitions:
         type: "integer"
       error:
         type: "string"
+
   AddApprovalRequest:
     type: "object"
     required: 
@@ -449,6 +469,24 @@ definitions:
         type: "string"
       alternativeID:
         type: "integer"
+  
+  AddApprovalResponse:
+    type: "object"
+    required:
+    - "approvingUser"
+    - "alternativeID"
+    - "statusCode"
+    - "error"
+    properties:
+      approvingUser:
+        type: "string"
+      alternativeID:
+        type: "integer"
+      statusCode:
+        type: "integer"
+      error:
+        type: "string"
+      
   RemoveApprovalRequest:
     type: "object"
     required: 
@@ -459,6 +497,22 @@ definitions:
         type: "string"
       alternativeID:
         type: "integer"
+  RemoveApprovalResponse:
+    type: "object"
+    required:
+    - "approvingUser"
+    - "alternativeID"
+    - "statusCode"
+    - "error"
+    properties:
+      approvingUser:
+        type: "string"
+      alternativeID:
+        type: "integer"
+      statusCode:
+        type: "integer"
+      error:
+        type: "string"
   AddDisapprovalRequest:
     type: "object"
     required: 
@@ -469,6 +523,22 @@ definitions:
         type: "string"
       alternativeID:
         type: "integer"
+  AddDisapprovalResponse:
+    type: "object"
+    required:
+    - "disapprovingUser"
+    - "alternativeID"
+    - "statusCode"
+    - "error"
+    properties:
+      disapprovingUser:
+        type: "string"
+      alternativeID:
+        type: "integer"
+      statusCode:
+        type: "integer"
+      error:
+        type: "string"
   RemoveDisapprovalRequest:
     type: "object"
     required: 
@@ -479,6 +549,22 @@ definitions:
         type: "string"
       alternativeID:
         type: "integer"
+  RemoveDisapprovalResponse:
+    type: "object"
+    required:
+    - "disapprovingUser"
+    - "alternativeID"
+    - "statusCode"
+    - "error"
+    properties:
+      disapprovingUser:
+        type: "string"
+      alternativeID:
+        type: "integer"
+      statusCode:
+        type: "integer"
+      error:
+        type: "string"
 
   UpdateResponse:
     type: "object"
