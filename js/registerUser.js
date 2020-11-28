@@ -2,15 +2,16 @@
 * Respond to a user's attempt to register
 */
 
-function processRegisterResponse(username, password){
+function processRegisterResponse(result){
     //Grab any div or span element
     //manipulate contents dynamically via Javascript
-    console.log("Username: " + username);
-    console.log("Password: " + password);
+  //  console.log("Username: " + username);
+    //console.log("Password: " + password);
+    const jsonObj = JSON.parse(result);
 
-    let user = JSON.parse(username);
-    let pw = JSON.parse(password);
- 
+     console.log("jSON username: " + jsonObj.userGson.username + "jSON password: " + jsonObj.userGson.password + "jSON choiceiD: "+ jsonObj.userGson.choiceID) ;
+
+    requestChoice(jsonObj.userGson.choiceID);
 }
 
 function handleRegisterClick(e){
@@ -42,7 +43,7 @@ function handleRegisterClick(e){
 
         if(xhr.readyState == XMLHttpRequest.DONE){
             console.log ("XHR response text:" + xhr.responseText);
-            processRegisterResponse
+            processRegisterResponse (xhr.responseText);
         }
     }
 }
