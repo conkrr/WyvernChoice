@@ -4,17 +4,25 @@ import java.sql.PreparedStatement;
 
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
+import com.amazonaws.lambda.demo.model.Alternative;
 import com.amazonaws.lambda.demo.model.Choice;
+import com.amazonaws.services.lambda.runtime.LambdaLogger;
 
 public class ChoicesDAO {
 java.sql.Connection connection;
 	
-	final String tableName = "ChoiceFake";
-
-    public ChoicesDAO() {
+	final String tableName = "Choices";
+	final String subEntityTableName = "Alternatives";
+	
+	final LambdaLogger logger;
+	
+    public ChoicesDAO(LambdaLogger logger) {
+    	this.logger = logger;
     	try  {
     		connection = DatabaseUtil.connect();
     	} catch (Exception e) {
@@ -23,23 +31,34 @@ java.sql.Connection connection;
     }
 
     public Choice getChoice(String id) throws Exception {
-        
+    	logger.log("getChoice start");
         try {
+        	
+        	
+        	
             Choice choice = null;
-            PreparedStatement ps = connection.prepareStatement("SELECT * FROM " + tableName + " WHERE id=?;");
-            ps.setString(1,  id);
-            ResultSet resultSet = ps.executeQuery();
-            
-            while (resultSet.next()) {
-                choice = generateChoice(resultSet);
+            PreparedStatement psChoices = connection.prepareStatement("SELECT * FROM " + tableName + " WHERE id=?;");
+            PreparedStatement psAlternatives = connection.prepareStatement("SELECT * FROM " + subEntityTableName + " WHERE choiceID=?;");
+            psChoices.setString(1,  id);
+            psAlternatives.setString(1,  id);
+            ResultSet resultSetChoices = psChoices.executeQuery();
+            ResultSet resultSetAlternatives = psAlternatives.executeQuery();
+            while (resultSetChoices.next()) {
+                choice = generateChoice(resultSetChoices, resultSetAlternatives);
             }
-            resultSet.close();
-            ps.close();
+            resultSetChoices.close();
+            psChoices.close();
+            resultSetAlternatives.close();
+            psAlternatives.close();
             
+            
+            logger.log("getChoice end");
             return choice;
 
         } catch (Exception e) {
+        	
         	e.printStackTrace();
+        	
             throw new Exception("Failed in getting choice: " + e.getMessage());
         }
     }
@@ -59,14 +78,17 @@ java.sql.Connection connection;
 //        }
 //    }
     
-    public boolean deleteChoice(Choice choice) throws Exception {
+    public boolean deleteChoice(String choiceID) throws Exception {
         try {
-            PreparedStatement ps = connection.prepareStatement("DELETE FROM " + tableName + " WHERE id = ?;");
-            ps.setString(1, choice.id);
-            int numAffected = ps.executeUpdate();
-            ps.close();
+            PreparedStatement psChoice = connection.prepareStatement("DELETE FROM " + tableName + " WHERE id = ?;");
+            PreparedStatement psAlternative = connection.prepareStatement("DELETE FROM " + subEntityTableName + " WHERE choiceId = ?;");
+            psChoice.setString(1, choiceID);
+            psAlternative.setString(1,  choiceID);
+            psAlternative.executeUpdate();
+            int numAffected = psChoice.executeUpdate();
+            psChoice.close();
             
-            return (numAffected == 1);
+            return (numAffected > 0);
 
         } catch (Exception e) {
             throw new Exception("Failed to delete choice: " + e.getMessage());
@@ -75,25 +97,49 @@ java.sql.Connection connection;
 
 
     public boolean addChoice(Choice choice) throws Exception {
+    	logger.log("addChoice start");
         try {
-            PreparedStatement ps = connection.prepareStatement("SELECT * FROM " + tableName + " WHERE id = ?;");
-            ps.setString(1, choice.id);
-            ResultSet resultSet = ps.executeQuery();
-            
-            // already present?
-            while (resultSet.next()) {
-                Choice c = generateChoice(resultSet);
-                resultSet.close();
-                return false;
-            }
+//            PreparedStatement ps = connection.prepareStatement("SELECT * FROM " + tableName + " WHERE id = ?;");
+//            ps.setString(1, choice.id);
+//            ResultSet resultSet = ps.executeQuery();
+//            
+//            // already present?
+//            while (resultSet.next()) {
+//                Choice c = generateChoice(resultSet);
+//                resultSet.close();
+//                return false;
+//            }
+        	boolean exists = getChoice(choice.id) != null;
 
-            ps = connection.prepareStatement("INSERT INTO " + tableName + " (id,description) values(?,?);");
-            ps.setString(1,  choice.id);
-            ps.setString(2,  choice.description);
-            ps.execute();
-            return true;
+        	if (!exists) {
+        		
+        		logger.log("in add choice");
+        		PreparedStatement ps = connection.prepareStatement("INSERT INTO " + tableName + " (id, description,creationTime,creatingUserID,completionTime,maxParticipants,currentParticipants) values(?, ?, ?, ?, ?, ?, ?);");
+                ps.setString(1,  choice.id.toString());
+                ps.setString(2,  choice.description);
+                ps.setTimestamp(3, choice.creationDate);
+                ps.setString(4, choice.creatingUserId);
+                ps.setNull(5, java.sql.Types.TIMESTAMP);
+                ps.setInt(6, choice.maxParticipants);
+                ps.setInt(7, choice.currentParticipants);
+                ps.execute();
+                
+                for(int i = 0; i < choice.alternatives.size(); i++) {
+                	ps = connection.prepareStatement("INSERT INTO " + subEntityTableName + " (alternativeID,choiceID,description,isChosen) values(?, ?, ?, ?);");
+                    ps.setString(2,  choice.id.toString());
+                    ps.setString(1,  choice.alternatives.get(i).alternativeID);
+                    ps.setString(3, choice.alternatives.get(i).name);
+                    ps.setBoolean(4, false);
+                    ps.execute();
+                }
+                
+        	}
+        	
+        	logger.log("addChoice end");
+            return exists;
 
         } catch (Exception e) {
+        	logger.log(e.toString());
             throw new Exception("Failed to insert choice: " + e.getMessage());
         }
     }
@@ -119,9 +165,25 @@ java.sql.Connection connection;
 //        }
 //    }
     
-    private Choice generateChoice(ResultSet resultSet) throws Exception {
-        String id  = resultSet.getString("id");
-        String description = resultSet.getString("description");
-        return new Choice (id, description);
+    private Choice generateChoice(ResultSet resultSetChoice, ResultSet resultSetAlternatives) throws Exception {
+    	logger.log("generateChoice start");
+    	String id  = resultSetChoice.getString("id");
+        String description = resultSetChoice.getString("description");
+        Timestamp creationTime = resultSetChoice.getTimestamp("creationTime");
+        String userId  = resultSetChoice.getString("creatingUserId");
+        //Timestamp completionTime = resultSetChoice.getTimestamp("completionTime");
+        int maxParticipants = resultSetChoice.getInt("maxParticipants");
+        int currentParticipants = resultSetChoice.getInt("currentParticipants");
+        		
+        List<Alternative> alternatives = new ArrayList<Alternative>();
+        while(resultSetAlternatives.next()) {
+        	String aId = resultSetAlternatives.getString("alternativeID");
+        	String aDesc = resultSetAlternatives.getString("description");
+        	boolean aIsChosen = resultSetAlternatives.getBoolean("isChosen");
+        	
+        	alternatives.add(new Alternative(aDesc, aId, aIsChosen));
+        }
+        logger.log("generateChoice end");
+        return new Choice (id, description, creationTime, userId, false, alternatives, maxParticipants, currentParticipants);
     }
 }

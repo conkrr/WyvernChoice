@@ -23,21 +23,21 @@ public class DeleteChoiceHandler implements RequestHandler<DeleteChoiceRequest,D
 		DeleteChoiceResponse response = null;
 		logger.log(req.toString());
 
-		ChoicesDAO dao = new ChoicesDAO();
+		ChoicesDAO dao = new ChoicesDAO(logger);
 
 		// MAKE sure that we prevent attempts to delete system constants...
 		
 		// See how awkward it is to call delete with an object, when you only
 		// have one part of its information?
-		Choice constant = new Choice(req.id, "");
+		String id = req.getId();
 		try {
-			if (dao.deleteChoice(constant)) {
-				response = new DeleteChoiceResponse(req.id, 200);
+			if (dao.deleteChoice(id)) {
+				response = new DeleteChoiceResponse(req.getId(), 200);
 			} else {
-				response = new DeleteChoiceResponse(req.id, 422, "Unable to delete choice.");
+				response = new DeleteChoiceResponse(req.getId(), 422, "Unable to delete choice.");
 			}
 		} catch (Exception e) {
-			response = new DeleteChoiceResponse(req.id, 403, "Unable to delete choice: " + req.id + "(" + e.getMessage() + ")");
+			response = new DeleteChoiceResponse(req.getId(), 403, "Unable to delete choice: " + req.getId() + "(" + e.getMessage() + ")");
 		}
 
 		return response;

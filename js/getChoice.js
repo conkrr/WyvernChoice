@@ -1,4 +1,5 @@
 
+
 function processRequestChoiceResponse(result) {
   // Can grab any DIV or SPAN HTML element and can then manipulate its
   // contents dynamically via javascript
@@ -100,17 +101,18 @@ function processChoiceResponse(result) {
     var choice = document.getElementById('currentChoice');
 
     var output = "";
-    var cName = choice["name"];
-    var cID = choice["choiceID"];
-    var cParticipants = choice["numParticipants"];
-    var cDate = choice["completionDate"];
-    var cFinalized = choice["isFinalized"];
+    var cName = js["name"];
+    var cID = js["choiceID"];
+    var cParticipants = js["numParticipants"];
+    var cDate = js["completionDate"];
+    var cFinalized = js["isFinalized"];
     //Heh transforming variables
     if(cFinalized == true){
         cFinalized = "Choice Finalized!";
     } else {
         cFinalized = "Choice is still open...";
     }
+
 
     //var cAlternatives = choice["listofAlternatives"];
 
@@ -143,7 +145,6 @@ function processChoiceResponse(result) {
 
             output = output + "<div id=\"feedbackID" + fID + "\"><b>" + fUser + "</b><b>" + fText + "</b><b>" + fTimestamp;
         }
-
     }
 
 
@@ -167,9 +168,5 @@ function processChoiceResponse(result) {
       } else {
           cFinalized = "Choice is still open...";
       }
-
-
-
-
 }
 */

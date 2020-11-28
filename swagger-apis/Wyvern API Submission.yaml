@@ -54,7 +54,7 @@ paths:
       - name: "choiceID"
         in: "path"
         required: true
-        type: "integer"
+        type: "string"
       responses:
         200:
           description: "200 response"
@@ -101,7 +101,7 @@ paths:
         200:
           description: "200 response"
           schema:
-            $ref: "#/definitions/UpdateResponse"
+            $ref: "#/definitions/FinalChoiceResponse"
           headers:
             Access-Control-Allow-Origin:
               type: "string"
@@ -117,10 +117,10 @@ paths:
       - "application/json"
       parameters:
       - in: "body"
-        name: "RegisterRequest"
+        name: "RegisterUserRequest"
         required: true
         schema:
-          $ref: "#/definitions/RegisterRequest"
+          $ref: "#/definitions/RegisterUserRequest"
       responses:
         200:
           description: "200 response"
@@ -168,7 +168,7 @@ paths:
         200:
           description: "200 response"
           schema:
-            $ref: "#/definitions/UpdateResponse"
+            $ref: "#/definitions/AddApprovalResponse"
           headers:
             Access-Control-Allow-Origin:
               type: "string"
@@ -190,7 +190,7 @@ paths:
         200:
           description: "200 response"
           schema:
-            $ref: "#/definitions/UpdateResponse"
+            $ref: "#/definitions/RemoveApprovalResponse"
           headers:
             Access-Control-Allow-Origin:
               type: "string"
@@ -213,7 +213,7 @@ paths:
         200:
           description: "200 response"
           schema:
-            $ref: "#/definitions/UpdateResponse"
+            $ref: "#/definitions/AddDisapprovalResponse"
           headers:
             Access-Control-Allow-Origin:
               type: "string"
@@ -236,7 +236,7 @@ paths:
         200:
           description: "200 response"
           schema:
-            $ref: "#/definitions/UpdateResponse"
+            $ref: "#/definitions/RemoveDisapprovalResponse"
           headers:
             Access-Control-Allow-Origin:
               type: "string"
@@ -270,7 +270,7 @@ definitions:
     - "numParticipants"
     - "completionDate"
     - "isFinalized"
-    - ListofAlternatives
+    - listofAlternatives
     properties:
       name:
         type: "string"
@@ -282,7 +282,7 @@ definitions:
         type: "boolean"
       completionDate:
         type: "string"
-      ListofAlternatives:
+      listofAlternatives:
         type: "array"
         items: 
           $ref: "#/definitions/Alternative"
@@ -293,8 +293,8 @@ definitions:
     - "alternativeID"
     - "Approvals"
     - "Disapprovals"
-    - "isChosen"
-    - ListofFeedback
+    #- "isChosen"
+    #- ListofFeedback
     properties:
       name:
         type: "string"
@@ -392,24 +392,46 @@ definitions:
         type: "integer"
       isFinalized:
         type: "boolean"
+  FinalChoiceResponse:
+    type: "object"
+    required:
+    - "choiceID"
+    - "alternativeID"
+    - "isFinalized"
+    - "statusCode"
+    - "error"
+    properties:
+      choiceID:
+        type: "integer"
+      alternativeID:
+        type: "integer"
+      isFinalized:
+        type: "boolean"
+      statusCode:
+        type: "integer"
+      error:
+        type: "string"
 
   CreateChoiceRequest:
     type: "object"
     required:
     - "name"
+    - "creatingUserID"
     - "numParticipants"
-    - "ListofAlternatives"
+    - "listofAlternatives"
     properties:
       name:
         type: "string"
+      creatingUserId:
+        type: "string"
       numParticipants:
         type: "integer"
-      ListofAlternatives:
+      listofAlternatives:
         type: "array"
         items:
           type: "string"
 
-  RegisterRequest:
+  RegisterUserRequest:
     type: "object"
     required: 
     - "username"
@@ -426,19 +448,17 @@ definitions:
   RegisterUserResponse:
     type: "object"
     required:
-    - "newUser"
-    - "loggedInUser"
+    - "username"
     - "statusCode"
     - "error"
     properties:
-      newUser:
-        type: "boolean"
-      loggedInUser:
+      username:
         type: "string"
       statusCode:
         type: "integer"
       error:
         type: "string"
+
   AddApprovalRequest:
     type: "object"
     required: 
@@ -449,6 +469,24 @@ definitions:
         type: "string"
       alternativeID:
         type: "integer"
+  
+  AddApprovalResponse:
+    type: "object"
+    required:
+    - "approvingUser"
+    - "alternativeID"
+    - "statusCode"
+    - "error"
+    properties:
+      approvingUser:
+        type: "string"
+      alternativeID:
+        type: "integer"
+      statusCode:
+        type: "integer"
+      error:
+        type: "string"
+      
   RemoveApprovalRequest:
     type: "object"
     required: 
@@ -459,6 +497,22 @@ definitions:
         type: "string"
       alternativeID:
         type: "integer"
+  RemoveApprovalResponse:
+    type: "object"
+    required:
+    - "approvingUser"
+    - "alternativeID"
+    - "statusCode"
+    - "error"
+    properties:
+      approvingUser:
+        type: "string"
+      alternativeID:
+        type: "integer"
+      statusCode:
+        type: "integer"
+      error:
+        type: "string"
   AddDisapprovalRequest:
     type: "object"
     required: 
@@ -469,6 +523,22 @@ definitions:
         type: "string"
       alternativeID:
         type: "integer"
+  AddDisapprovalResponse:
+    type: "object"
+    required:
+    - "disapprovingUser"
+    - "alternativeID"
+    - "statusCode"
+    - "error"
+    properties:
+      disapprovingUser:
+        type: "string"
+      alternativeID:
+        type: "integer"
+      statusCode:
+        type: "integer"
+      error:
+        type: "string"
   RemoveDisapprovalRequest:
     type: "object"
     required: 
@@ -479,10 +549,23 @@ definitions:
         type: "string"
       alternativeID:
         type: "integer"
-        
- 
-     
-     
+  RemoveDisapprovalResponse:
+    type: "object"
+    required:
+    - "disapprovingUser"
+    - "alternativeID"
+    - "statusCode"
+    - "error"
+    properties:
+      disapprovingUser:
+        type: "string"
+      alternativeID:
+        type: "integer"
+      statusCode:
+        type: "integer"
+      error:
+        type: "string"
+
   UpdateResponse:
     type: "object"
     required:

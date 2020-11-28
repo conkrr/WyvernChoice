@@ -5,7 +5,6 @@
 var base_url = "https://uyttzmj0g3.execute-api.us-east-1.amazonaws.com/testStage/";
 var admin_url = "https://uyttzmj0g3.execute-api.us-east-1.amazonaws.com/testStage/";
 
-
 //All unique urls generated for each request
 var choice_list_url = admin_url + "admin";                    //GET
 var delete_date_url = admin_url + "admin";                    //POST with {deleteData}

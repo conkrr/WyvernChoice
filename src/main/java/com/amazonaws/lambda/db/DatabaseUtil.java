@@ -3,6 +3,7 @@ package com.amazonaws.lambda.db;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
+
 public class DatabaseUtil {
 
 	// DB user names and passwords (as well as the db endpoint) should never be stored directly in code.
@@ -13,11 +14,11 @@ public class DatabaseUtil {
 	public final static String jdbcTag = "jdbc:mysql://";
 	public final static String rdsMySqlDatabasePort = "3306";
 	public final static String multiQueries = "?allowMultiQueries=true";
-	   
+
 	// Make sure matches Schema created from MySQL WorkBench
 	// Make sysEnv variable lambdaTesting so we know we are locally testing
 	public final static String lambdaTesting = "lambdaTesting";
-	public final static String dbName = "sys";
+	public final static String dbName = "new_schema";
 	public final static String testName = "test";
 	
 	// pooled across all usages.
@@ -35,8 +36,12 @@ public class DatabaseUtil {
 		if (test != null) {
 			schemaName = testName;
 		}
+
 		
 		// These three environment variables must be set!
+
+
+
 		String dbUsername = System.getenv("dbUsername");
 		if (dbUsername == null) {
 			System.err.println("Environment variable dbUsername is not set!");
@@ -49,17 +54,27 @@ public class DatabaseUtil {
 		if (rdsMySqlDatabaseUrl == null) {
 			System.err.println("Environment variable rdsMySqlDatabaseUrl is not set!");
 		}
+
+
+		//for quick testing
+		//dbUsername = "conkDBAdmin";
+		//dbPassword = "conkDBAdmin123";
+		//rdsMySqlDatabaseUrl = "conkdb.cips1s0tfddd.us-east-1.rds.amazonaws.com";
 		
+
 		try {
-			//System.out.println("start connecting......");
+			System.out.println("start connecting......");
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			
+			System.out.println(jdbcTag + rdsMySqlDatabaseUrl + ":" + rdsMySqlDatabasePort + "/" + schemaName + multiQueries);
 			conn = DriverManager.getConnection(
 					jdbcTag + rdsMySqlDatabaseUrl + ":" + rdsMySqlDatabasePort + "/" + schemaName + multiQueries,
 					dbUsername,
 					dbPassword);
 			return conn;
 		} catch (Exception ex) {
+
+
+			ex.printStackTrace();
 			System.err.println("DB-ERROR:" + schemaName + "," + dbUsername + "," + dbPassword + "," + rdsMySqlDatabaseUrl);
 			throw new Exception("Failed in database connection");
 		}
