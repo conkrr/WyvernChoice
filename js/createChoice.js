@@ -1,9 +1,11 @@
 function processCreateResponse(result) {
     // Can grab any DIV or SPAN HTML element and can then manipulate its
     // contents dynamically via javascript
-    console.log("result:" + result);
+    console.log("processCreateResponse result:" + result);
   
-    refreshChoice();
+	const jsonObj = JSON.parse(result);
+	const id = jsonObj.choice.choiceID
+    requestChoice(id);
 }
 
 function handleCreateChoiceClick(e){

@@ -3,7 +3,7 @@
 
 //Base url: This will be the url we generate in AWS
 var base_url = "https://uyttzmj0g3.execute-api.us-east-1.amazonaws.com/testStage/";
-var admin_url;
+var admin_url = "https://uyttzmj0g3.execute-api.us-east-1.amazonaws.com/testStage/";
 
 //All unique urls generated for each request
 var choice_list_url = admin_url + "admin";                    //GET
