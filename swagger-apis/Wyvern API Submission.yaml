@@ -59,7 +59,7 @@ paths:
         200:
           description: "200 response"
           schema:
-            $ref: "#/definitions/UpdateResponse"
+            $ref: "#/definitions/GetChoiceResponse"
         400:
           description: "400 response"
   /choice:
@@ -80,7 +80,7 @@ paths:
         200:
           description: "200 response"
           schema:
-            $ref: "#/definitions/UpdateResponse"
+            $ref: "#/definitions/CreateChoiceResponse"
         400:
           description: "400 response"
   /finalChoice:
@@ -141,7 +141,7 @@ paths:
       - name: "alternativeID"
         in: "path"
         required: true
-        type: "integer"
+        type: "string"
       responses:
         200:
           description: "200 response"
@@ -250,7 +250,7 @@ paths:
         200:
           description: "200 response"
           schema:
-              $ref: "#/definitions/UpdateResponse"
+              $ref: "#/definitions/CreateFeedbackResponse"
           headers:
             Access-Control-Allow-Origin:
               type: "string"
@@ -275,7 +275,7 @@ definitions:
       name:
         type: "string"
       choiceID:
-        type: "integer"
+        type: "string"
       numParticipants:
         type: "integer"
       isFinalized:
@@ -299,7 +299,7 @@ definitions:
       name:
         type: "string"
       alternativeID:
-        type: "integer"
+        type: "string"
       Approvals:
         $ref: "#/definitions/Approvals"
       Disapprovals:
@@ -320,7 +320,7 @@ definitions:
       approvalCount:
         type: "integer"
       alternativeID:
-        type: "integer"
+        type: "string"
       approvalUsers:
         type: "array"
         items:
@@ -336,7 +336,7 @@ definitions:
       disapprovalCount:
         type: "integer"
       alternativeID:
-        type: "integer"
+        type: "string"
       disapprovalUsers:
         type: "array"
         items:
@@ -352,7 +352,7 @@ definitions:
       username:
         type: "string"
       choiceID:
-        type: "integer"
+        type: "string"
       feedbackInfo:
         type: "array"
         items:
@@ -376,7 +376,7 @@ definitions:
       timestamp: 
         type: "number"
       alternativeID:
-        type: "integer"
+        type: "string"
       feedbackID:
         type: "integer"
   FinalChoiceRequest:
@@ -387,9 +387,9 @@ definitions:
     - "isFinalized"
     properties:
       choiceID:
-        type: "integer"
+        type: "string"
       alternativeID:
-        type: "integer"
+        type: "string"
       isFinalized:
         type: "boolean"
   FinalChoiceResponse:
@@ -402,9 +402,9 @@ definitions:
     - "error"
     properties:
       choiceID:
-        type: "integer"
+        type: "string"
       alternativeID:
-        type: "integer"
+        type: "string"
       isFinalized:
         type: "boolean"
       statusCode:
@@ -431,6 +431,20 @@ definitions:
         items:
           type: "string"
 
+  CreateChoiceResponse:
+    type: "object"
+    required:
+    - "choice"
+    - "statusCode"
+    - "error"
+    properties:
+      choice:
+        $ref: "#/definitions/Choice"
+      statusCode:
+        type: "integer"
+      error:
+        type: "string"
+
   RegisterUserRequest:
     type: "object"
     required: 
@@ -442,7 +456,7 @@ definitions:
       password:
         type: "string"
       choiceID:
-        type: integer
+        type: "string"
         
         
   RegisterUserResponse:
@@ -464,24 +478,30 @@ definitions:
     required: 
     - "approvingUser"
     - "alternativeID"
+    - "choiceID"
     properties:
       approvingUser:
         type: "string"
       alternativeID:
-        type: "integer"
+        type: "string"
+      choiceID:
+        type: "string"
   
   AddApprovalResponse:
     type: "object"
     required:
     - "approvingUser"
     - "alternativeID"
+    - "choiceID"
     - "statusCode"
     - "error"
     properties:
       approvingUser:
         type: "string"
       alternativeID:
-        type: "integer"
+        type: "string"
+      choiceID:
+        type: "string"
       statusCode:
         type: "integer"
       error:
@@ -492,23 +512,29 @@ definitions:
     required: 
     - "approvingUser"
     - "alternativeID"
+    - "choiceID"
     properties:
       approvingUser:
         type: "string"
       alternativeID:
-        type: "integer"
+        type: "string"
+      choiceID:
+        type: "string"
   RemoveApprovalResponse:
     type: "object"
     required:
     - "approvingUser"
     - "alternativeID"
+    - "choiceID"
     - "statusCode"
     - "error"
     properties:
       approvingUser:
         type: "string"
       alternativeID:
-        type: "integer"
+        type: "string"
+      choiceID:
+        type: "string"
       statusCode:
         type: "integer"
       error:
@@ -518,23 +544,29 @@ definitions:
     required: 
     - "disapprovingUser"
     - "alternativeID"
+    - "choiceID"
     properties:
       userList:
         type: "string"
       alternativeID:
-        type: "integer"
+        type: "string"
+      choiceID:
+        type: "string"
   AddDisapprovalResponse:
     type: "object"
     required:
     - "disapprovingUser"
     - "alternativeID"
+    - "choiceID"
     - "statusCode"
     - "error"
     properties:
       disapprovingUser:
         type: "string"
       alternativeID:
-        type: "integer"
+        type: "string"
+      choiceID:
+        type: "string"
       statusCode:
         type: "integer"
       error:
@@ -544,29 +576,35 @@ definitions:
     required: 
     - "disapprovingUser"
     - "alternativeID"
+    - "choiceID"
     properties:
       userList:
         type: "string"
       alternativeID:
-        type: "integer"
+        type: "string"
+      choiceID:
+        type: "string"
   RemoveDisapprovalResponse:
     type: "object"
     required:
     - "disapprovingUser"
     - "alternativeID"
+    - "choiceID"
     - "statusCode"
     - "error"
     properties:
       disapprovingUser:
         type: "string"
       alternativeID:
-        type: "integer"
+        type: "string"
+      choiceID:
+        type: "string"
       statusCode:
         type: "integer"
       error:
         type: "string"
 
-  UpdateResponse:
+  GetChoiceResponse:
     type: "object"
     required:
     - "choice"
@@ -602,7 +640,7 @@ definitions:
     - "error"
     properties:
       alternativeID:
-        type: "integer"
+        type: "string"
       statusCode:
         type: "integer"
       error:
@@ -623,6 +661,21 @@ definitions:
         type: "integer"
       error:
         type: "string"
+  CreateFeedbackResponse:
+    type: "object"
+    required:
+    - "feedback"
+    - "statusCode"
+    - "error"
+    properties:
+      feedback:
+        $ref: "#/definitions/Feedback"
+      statusCode:
+        type: "integer"
+      error:
+        type: "string"
+
+
   
 # Added by API Auto Mocking Plugin
 host: virtserver.swaggerhub.com
