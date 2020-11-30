@@ -59,7 +59,7 @@ paths:
         200:
           description: "200 response"
           schema:
-            $ref: "#/definitions/UpdateResponse"
+            $ref: "#/definitions/GetChoiceResponse"
         400:
           description: "400 response"
   /choice:
@@ -80,7 +80,7 @@ paths:
         200:
           description: "200 response"
           schema:
-            $ref: "#/definitions/UpdateResponse"
+            $ref: "#/definitions/CreateChoiceResponse"
         400:
           description: "400 response"
   /finalChoice:
@@ -250,7 +250,7 @@ paths:
         200:
           description: "200 response"
           schema:
-              $ref: "#/definitions/UpdateResponse"
+              $ref: "#/definitions/CreateFeedbackResponse"
           headers:
             Access-Control-Allow-Origin:
               type: "string"
@@ -431,6 +431,20 @@ definitions:
         items:
           type: "string"
 
+  CreateChoiceResponse:
+    type: "object"
+    required:
+    - "choice"
+    - "statusCode"
+    - "error"
+    properties:
+      choice:
+        $ref: "#/definitions/Choice"
+      statusCode:
+        type: "integer"
+      error:
+        type: "string"
+
   RegisterUserRequest:
     type: "object"
     required: 
@@ -590,7 +604,7 @@ definitions:
       error:
         type: "string"
 
-  UpdateResponse:
+  GetChoiceResponse:
     type: "object"
     required:
     - "choice"
@@ -647,6 +661,21 @@ definitions:
         type: "integer"
       error:
         type: "string"
+  CreateFeedbackResponse:
+    type: "object"
+    required:
+    - "feedback"
+    - "statusCode"
+    - "error"
+    properties:
+      feedback:
+        $ref: "#/definitions/Feedback"
+      statusCode:
+        type: "integer"
+      error:
+        type: "string"
+
+
   
 # Added by API Auto Mocking Plugin
 host: virtserver.swaggerhub.com
