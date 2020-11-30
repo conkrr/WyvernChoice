@@ -11,12 +11,13 @@ class AddApprovalResponseTest {
 
 	@Test
 	void test() {
-		ApprovalGsonCompatible u = new ApprovalGsonCompatible("Tommy", "1s4h7");
+		ApprovalGsonCompatible u = new ApprovalGsonCompatible("Tommy", "1s4h7", "auio9");
 		AddApprovalResponse aar = new AddApprovalResponse(u);
 		ObjectMapper rep = new ObjectMapper();
 		JsonNode actualRep = rep.readTree(aar.toString());
 		assertEquals(actualRep.get("approvingUser").asText(), "Tommy");
 		assertEquals(actualRep.get("alternativeID").asText(), "1s4h7");
+		assertEquals(actualRep.get("choiceID").asText(), "auio9");
 		
 		aar = new AddApprovalResponse(400, "whoop I dropped my chocolate bar");
 		rep = new ObjectMapper();
