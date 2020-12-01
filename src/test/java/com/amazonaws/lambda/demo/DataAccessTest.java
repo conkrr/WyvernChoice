@@ -55,7 +55,7 @@ public class DataAccessTest extends LambdaTest {
 
 		try {
 			testList = dao.get(generatedList.get(0).getAlternativeId());
-
+			
 		} catch (Exception e) {
 			Assert.fail("Invalid:" + e.getMessage());
 		}
