@@ -10,7 +10,7 @@ class AddApprovalRequestTest {
 	void test() {
 		AddApprovalRequest aar = new AddApprovalRequest();
 		aar.setApprovingUser("Billy");
-		assertEquals("Billy", aar.approvingUser);
+		assertEquals("Billy", aar.getUser());
 		
 		aar.setAlternativeID("12345");
 		assertEquals("12345", aar.alternativeID);

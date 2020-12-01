@@ -13,7 +13,8 @@ public class AddDisapprovalRequest
     	this.alternativeID = alternativeID;
     	this.choiceID = choiceID;
     }
-    
+
+
     public void setDisapprovingUser(String disapprovingUser) {
     	this.disapprovingUser = disapprovingUser;
     }

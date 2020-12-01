@@ -36,7 +36,7 @@ public class RemoveApprovalHandler  implements RequestHandler<RemoveApprovalRequ
     public RemoveApprovalResponse handleRequest(RemoveApprovalRequest request, Context context) { // So much of this is subject to change :(
         logger = context.getLogger();
 
-        RemoveApprovalResponse response = new RemoveApprovalResponse(); //Final version wont need to initialize this, this is so it compiles
+        RemoveApprovalResponse response = new RemoveApprovalResponse("approvingUser", "alternativeID",  "choiceID"); //Final version wont need to initialize this, this is so it compiles
         try {
 
             boolean removeApprovalSuccess = approvalDAOHelper(request);
@@ -50,7 +50,7 @@ public class RemoveApprovalHandler  implements RequestHandler<RemoveApprovalRequ
                 //response = new RemoveApprovalResponse(request.getApprovingUser() + " :  " + request.getAlternativeID(), 422); //null
             }
         } catch (Exception e) {
-            response = new RemoveApprovalResponse(); //   new RemoveApprovalResponse("Unable to remove approval: " + request.getApprovingUser() + ": altID: "  + request.getAlternativeID() + "(" + e.getMessage() + ")", 400);
+            response = new RemoveApprovalResponse("approvingUser", "alternativeID",  "choiceID"); //   new RemoveApprovalResponse("Unable to remove approval: " + request.getApprovingUser() + ": altID: "  + request.getAlternativeID() + "(" + e.getMessage() + ")", 400);
         }
 
         return response;

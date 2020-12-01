@@ -36,7 +36,7 @@ public class RemoveDisapprovalHandler implements RequestHandler<RemoveDisapprova
     public RemoveDisapprovalResponse handleRequest(RemoveDisapprovalRequest request, Context context) {  // So much of this is subject to change :(
         logger = context.getLogger();
 
-        RemoveDisapprovalResponse response = new RemoveDisapprovalResponse(); //Final version wont need to initialize this, this is so it compiles
+        RemoveDisapprovalResponse response = new RemoveDisapprovalResponse("disapprovingUser", "alternativeID",  "choiceID"); //Final version wont need to initialize this, this is so it compiles
         try {
 
             boolean removeDisapprovalSuccess = disapprovalDAOHelper(request);
@@ -50,7 +50,7 @@ public class RemoveDisapprovalHandler implements RequestHandler<RemoveDisapprova
                 //response = new RemoveDisapprovalResponse(request.getDisapprovingUser() + " :  " + request.getAlternativeID(), 422); //null
             }
         } catch (Exception e) {
-            response = new RemoveDisapprovalResponse(); //   new RemoveDisapprovalResponse("Unable to remove disapproval: " + request.getDisapprovingUser() + ": altID: "  + request.getAlternativeID() + "(" + e.getMessage() + ")", 400);
+            response = new RemoveDisapprovalResponse("disapprovingUser", "alternativeID",  "choiceID"); //   new RemoveDisapprovalResponse("Unable to remove disapproval: " + request.getDisapprovingUser() + ": altID: "  + request.getAlternativeID() + "(" + e.getMessage() + ")", 400);
         }
 
         return response;

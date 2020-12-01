@@ -36,7 +36,7 @@ public class AddApprovalHandler implements RequestHandler<AddApprovalRequest, Ad
     public AddApprovalResponse handleRequest(AddApprovalRequest request, Context context) { // So much of this is subject to change :(
         logger = context.getLogger();
 
-        AddApprovalResponse response = new AddApprovalResponse(); //Final version wont need to initialize this, this is so it compiles
+        AddApprovalResponse response = new AddApprovalResponse("approvingUser", "alternativeID",  "choiceID"); //Final version wont need to initialize this, this is so it compiles
         try {
 
             boolean addApprovalSuccess = approvalDAOHelper(request);
@@ -50,7 +50,7 @@ public class AddApprovalHandler implements RequestHandler<AddApprovalRequest, Ad
                 //response = new AddApprovalResponse(request.getApprovingUser() + " :  " + request.getAlternativeID(), 422); //null
             }
         } catch (Exception e) {
-            response = new AddApprovalResponse(); //   new AddApprovalResponse("Unable to add approval: " + request.getApprovingUser() + ": altID: "  + request.getAlternativeID() + "(" + e.getMessage() + ")", 400);
+            response = new AddApprovalResponse("approvingUser", "alternativeID",  "choiceID"); //   new AddApprovalResponse("Unable to add approval: " + request.getApprovingUser() + ": altID: "  + request.getAlternativeID() + "(" + e.getMessage() + ")", 400);
         }
 
         return response;

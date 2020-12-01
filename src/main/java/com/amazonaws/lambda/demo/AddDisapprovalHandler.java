@@ -37,7 +37,7 @@ public class AddDisapprovalHandler implements RequestHandler<AddDisapprovalReque
     public AddDisapprovalResponse handleRequest(AddDisapprovalRequest request, Context context) {  // So much of this is subject to change :(
         logger = context.getLogger();
 
-        AddDisapprovalResponse response = new AddDisapprovalResponse(); //Final version wont need to initialize this, this is so it compiles
+        AddDisapprovalResponse response = new AddDisapprovalResponse("disapprovingUser", "alternativeID",  "choiceID"); //Final version wont need to initialize this, this is so it compiles
         try {
 
             boolean addDisapprovalSuccess = disapprovalDAOHelper(request);
@@ -51,7 +51,7 @@ public class AddDisapprovalHandler implements RequestHandler<AddDisapprovalReque
                 //response = new AddDisapprovalResponse(request.getDisapprovingUser() + " :  " + request.getAlternativeID(), 422); //null
             }
         } catch (Exception e) {
-            response = new AddDisapprovalResponse(); //   new AddDisapprovalResponse("Unable to add disapproval: " + request.getDisapprovingUser() + ": altID: "  + request.getAlternativeID() + "(" + e.getMessage() + ")", 400);
+            response = new AddDisapprovalResponse("disapprovingUser", "alternativeID",  "choiceID"); //   new AddDisapprovalResponse("Unable to add disapproval: " + request.getDisapprovingUser() + ": altID: "  + request.getAlternativeID() + "(" + e.getMessage() + ")", 400);
         }
 
         return response;
