@@ -10,7 +10,7 @@ import java.util.ListIterator;
 import com.amazonaws.lambda.demo.model.Approval;
 //import com.amazonaws.services.lambda.runtime.LambdaLogger;
 
-public class ApprovalsDAO implements DataAccess<List<Approval>>{
+public class ApprovalsDAO implements DataAccessAsymmetric<Approval>{
 
 	
 	private Connection connection;
@@ -65,21 +65,27 @@ public class ApprovalsDAO implements DataAccess<List<Approval>>{
 	}
 
 	@Override
-	public boolean insert(List<Approval> t) throws Exception {
+	public boolean insert(Approval t) throws Exception {
 		//logger.log("ApprovalsDAO::insert -- Begin");
 		try {
-			boolean alreadyExists = get(t.get(0).getAlternativeId()) != null;
+			boolean alreadyExists = false;
+			//perhaps make this a function?
+			List<Approval> list = get(t.getAlternativeId());
+			ListIterator<Approval> iterator = list.listIterator();
+			while (iterator.hasNext()) { 
+				Approval apv = iterator.next();
+				if(apv.getUserId() == t.getUserId()) {
+					alreadyExists = true;
+					break;
+				}
+			} 	
 			if (!alreadyExists) {
 				PreparedStatement ps = connection.prepareStatement("INSERT INTO " + tableName + " (alternativeID, userID, timestamp, status) values(?, ?, ?, ?);");
-				ListIterator<Approval> iterator = t.listIterator();
-				while (iterator.hasNext()) { 
-					Approval apv = iterator.next();
-					ps.setString(1, apv.getAlternativeId());
-					ps.setString(2, apv.getUserId());
-					ps.setTimestamp(3, apv.getTimestamp());
+					ps.setString(1, t.getAlternativeId());
+					ps.setString(2, t.getUserId());
+					ps.setTimestamp(3, t.getTimestamp());
 					ps.setInt(4, 1); // 1 indicates approval
 					ps.execute();
-				} 
 			}
 			//logger.log("ApprovalsDAO::insert() -- End");
 			return alreadyExists;

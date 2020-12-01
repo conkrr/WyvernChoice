@@ -19,7 +19,7 @@ import com.google.gson.Gson;
 
 public class DataAccessTest extends LambdaTest {
 
-	private List<Approval> commonList;
+	
 	
 	private Approval generateApproval(String alternativeID) {
 		//String alternativeID = UUID.randomUUID().toString();
@@ -64,23 +64,28 @@ public class DataAccessTest extends LambdaTest {
 		
 	}
 
-	@Test
-	public void aaatestInsert() {
-
-		commonList = generateApprovalList();
-		//List<Approval> testList = new ArrayList<Approval>();
-		boolean alreadyExists = true;
-		ApprovalsDAO dao = new ApprovalsDAO();
-
-		try {
-			alreadyExists = dao.insert(commonList);
-
-		} catch (Exception e) {
-			Assert.fail("Invalid:" + e.getMessage());
-		}
-		Assert.assertFalse(alreadyExists);
-		
-	}
+//	@Test
+//	public void aaatestInsert() {
+//
+//		commonList = generateApproval();
+//		//List<Approval> testList = new ArrayList<Approval>();
+//		boolean alreadyExists = true;
+//		ApprovalsDAO dao = new ApprovalsDAO();
+//
+//		try {
+//			for(int i = 0; i < commonList.size(); i++) {
+//				alreadyExists = dao.insert(commonList.get(i));
+//				Assert.assertFalse(alreadyExists);
+//			}
+//			
+//			
+//
+//		} catch (Exception e) {
+//			Assert.fail("Invalid:" + e.getMessage());
+//		}
+//		
+//		
+//	}
 	
 //	@Test
 //	public void testGet() {
