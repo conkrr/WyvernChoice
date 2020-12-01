@@ -1,12 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Admin - Choicemaker</title>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <script type='text/javascript' src='../js/api.js'></script>
+        <script type='text/javascript' src='../js/getChoice.js'></script>
+        <script type='text/javascript' src='../js/createChoice.js'></script>
+        <script type='text/javascript' src='../js/registerUser.js'></script>
+
+        <link rel="shortcut icon" href="#" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="admin.css">
 </head>
 <body>
-    <nav id="TopNav">
+    <nav id="TopNav" class="jumbotron text-center">
         <h1>Administrator Settings</h1>
     </nav>
     <main id="MainPage">
@@ -19,10 +30,10 @@
             <pre><h4>Who is employee of the week?                 2187               Open</h4></pre>
             <div id="choiceList"></div>
         </nav>
-        <nav id="DeleteChoices">
+        <nav id="DeleteChoices" class="form-group">
             <h1>Delete Choices</h1>
             <h3>Delete all choices older than:</h3>
-            <nav id="DaySelect">
+            <nav id="DaySelect" class="form-control">
                 <select>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -69,7 +80,7 @@
                 </select>
                 <h3>Hours</h3>
             </nav>
-            <button>Delete Choices</button>
+            <button class="btn btn-danger">Delete Choices</button>
         </nav>
     </main>
 </body>
