@@ -9,8 +9,8 @@ class AddApprovalRequestTest {
 	@Test
 	void test() {
 		AddApprovalRequest aar = new AddApprovalRequest();
-		aar.setUser("Billy");
-		assertEquals("Billy", aar.getUser());
+		aar.setUsername("Billy");
+		assertEquals("Billy", aar.getUsername());
 		
 		aar.setAlternativeID("12345");
 		assertEquals("12345", aar.getAlternativeID());
@@ -18,8 +18,8 @@ class AddApprovalRequestTest {
 		aar.setChoiceID("7654");
 		assertEquals("7654", aar.getChoiceID());
 		
-		aar = new AddApprovalRequest("Billy", "12345", "7654");
-		assertEquals("Billy", aar.getUser());
+		aar = new AddApprovalRequest("Billy", "9000","12345", "7654");
+		assertEquals("Billy", aar.getUsername());
 		assertEquals("12345", aar.getAlternativeID());
 		assertEquals("7654", aar.getChoiceID());
 	}

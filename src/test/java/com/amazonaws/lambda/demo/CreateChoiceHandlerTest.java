@@ -58,6 +58,7 @@ public class CreateChoiceHandlerTest extends LambdaTest {
         try {
         	
         	jsonResp = getJsonResponse(SAMPLE_INPUT_STRING);
+            System.out.println(jsonResp);
         } catch (IOException ioe) {
         	Assert.fail("Invalid:" + ioe.getMessage());
         }

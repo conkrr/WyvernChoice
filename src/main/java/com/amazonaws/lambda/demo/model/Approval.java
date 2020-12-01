@@ -15,6 +15,7 @@ public class Approval {
 //	}
 	
 	private final String alternativeId;
+	private final String choiceId;
 	private final String userId;
 	private final Timestamp timestamp;
 	private final String userName;	
@@ -23,7 +24,17 @@ public class Approval {
 		this.userId = userId;
 		this.timestamp = timestamp;
 		this.userName = userName;
+		this.choiceId = "";
 	}
+
+	public Approval(String alternativeId, String userId, Timestamp timestamp, String userName, String choiceId) {
+		this.alternativeId = alternativeId;
+		this.userId = userId;
+		this.timestamp = timestamp;
+		this.userName = userName;
+		this.choiceId = choiceId;
+	}
+
 	public String getAlternativeId() {
 		return alternativeId;
 	}
@@ -37,6 +48,8 @@ public class Approval {
 		return userName;
 	}
 
-	
+	public String getChoiceId() {
+		return choiceId;
+	}
 	
 }

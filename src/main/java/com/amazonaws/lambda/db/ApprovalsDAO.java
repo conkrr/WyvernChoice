@@ -27,7 +27,7 @@ public class ApprovalsDAO implements DataAccess<List<Approval>>{
     }    
 
 	@Override
-	public List<Approval> get(String uniqueId) throws Exception {
+	public List<Approval> get(String uniqueId) throws Exception { //uniqueID = alternative ID
 		//logger.log("ApprovalsDAO::get() -- Begin");
     	List<Approval> list;  	
         try {

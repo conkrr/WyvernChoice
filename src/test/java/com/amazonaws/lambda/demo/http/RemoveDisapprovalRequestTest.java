@@ -9,14 +9,14 @@ class RemoveDisapprovalRequestTest {
 	@Test
 	void test() {
 		RemoveDisapprovalRequest rdr = new RemoveDisapprovalRequest();
-		rdr.setDisapprovingUser("Billy");
-		assertEquals("Billy", rdr.getDisappearingUser());
+		rdr.setUsername("Billy");
+		assertEquals("Billy", rdr.getUsername());
 		
 		rdr.setAlternativeID("12345");
 		assertEquals("12345", rdr.getAlternativeID());
 		
-		rdr = new RemoveDisapprovalRequest("Billy", "12345", "6789");
-		assertEquals("Billy", rdr.getDisappearingUser());
+		rdr = new RemoveDisapprovalRequest("Billy", "9000","12345", "6789");
+		assertEquals("Billy", rdr.getUsername());
 		assertEquals("12345", rdr.getAlternativeID());
 		assertEquals("6789", rdr.getChoiceID());
 	}

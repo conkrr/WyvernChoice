@@ -4,6 +4,7 @@ public class AddDisapprovalRequest
 {
 	
 	private String disapprovingUser;
+    private String disapprovingUserID;
 	private String alternativeID;
 	private String choiceID;
 	
@@ -11,22 +12,31 @@ public class AddDisapprovalRequest
 		
 	}
 
-    public AddDisapprovalRequest(String disapprovingUser, String alternativeID, String choiceID)
+    public AddDisapprovalRequest(String disapprovingUser, String disapprovingUserID, String alternativeID, String choiceID)
     {
     	this.disapprovingUser = disapprovingUser;
     	this.alternativeID = alternativeID;
     	this.choiceID = choiceID;
+        this.disapprovingUserID = disapprovingUserID;
     }
 
-
-    public void setDisapprovingUser(String disapprovingUser) {
+    public void setUsername(String disapprovingUser) {
     	this.disapprovingUser = disapprovingUser;
     }
     
-    public String getDisappearingUser() {
+    public String getUsername() {
     	return this.disapprovingUser;
     }
-    
+
+    public void setDisapprovingUserID(String disapprovingUserID) {
+        this.disapprovingUserID = disapprovingUserID;
+    }
+
+    public String getDisapprovingUserID() {
+        return this.disapprovingUserID;
+    }
+
+
     public void setAlternativeID(String alternativeID) {
     	this.alternativeID = alternativeID;
     }
@@ -42,10 +52,5 @@ public class AddDisapprovalRequest
     public String getChoiceID() {
     	return this.choiceID;
     }
-
-    /*
-        TODO: For Geoff to finish
-    */
-
 
 }
