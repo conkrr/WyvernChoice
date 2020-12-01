@@ -24,6 +24,5 @@ public class AlternativeGsonCompatible {
 	public AlternativeGsonCompatible() {
 		
 	}
-	
-	
+
 }

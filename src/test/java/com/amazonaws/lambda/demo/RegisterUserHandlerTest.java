@@ -13,19 +13,7 @@ import java.io.IOException;
 
 public class RegisterUserHandlerTest extends LambdaTest{
 
-	/**
-	 * Helper method that creates a context that supports logging so you can test lambda functions
-	 * in JUnit without worrying about the logger anymore.
-	 * 
-	 * @param apiCall      An arbitrary string to identify which API is being called.
-	 * @return
-	 */
-	Context createContext(String apiCall) {
-		TestContext ctx = new TestContext();
-		ctx.setFunctionName(apiCall);
-		return ctx;
-	}
-	
+
 
 	RegisterUserResponse testSuccessInput(String incoming) throws IOException {
     	RegisterUserHandler handler = new RegisterUserHandler();
@@ -70,7 +58,10 @@ public class RegisterUserHandlerTest extends LambdaTest{
       
         Assert.assertEquals(1, 1);
     }
-	
+
+    //TODO: testNoPasswordRegistration
+    //TODO: testInvalidIDLength
+    //TODO: testInvalidChoice
 //	@Test
 //	public void testNoPasswordRegistration() { //Test successful registration without password
 //		//Create test choice
