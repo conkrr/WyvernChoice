@@ -1,72 +1,65 @@
 
 
 function processRequestChoiceResponse(result) {
-  // Can grab any DIV or SPAN HTML element and can then manipulate its
-  // contents dynamically via javascript
-  console.log("requested :" + result);
+    // Can grab any DIV or SPAN HTML element and can then manipulate its
+    // contents dynamically via javascript
+    console.log("requested: " + result);
 
-  //refreshConstantsList();
+    //refreshConstantsList();
 
-		var jsonObj = JSON.parse(result);
-      var choice = document.getElementById('currentChoice');
+	var jsonObj = JSON.parse(result);
+    var choice = document.getElementById('currentChoice');
 
-      var output = "";
-      var cName = jsonObj.choice.name;
-      var cID = jsonObj.choice.choiceID;
-      var cParticipants = jsonObj.choice.numParticipants;
-      var cDate = jsonObj.choice.completionDate;
-      var cFinalized = jsonObj.choice.isFinalized;
+    var output = "";
+    var cName = jsonObj.choice.name;
+    var cID = jsonObj.choice.choiceID;
+    var cParticipants = jsonObj.choice.numParticipants;
+    var cDate = jsonObj.choice.completionDate;
+    var cFinalized = jsonObj.choice.isFinalized;
 
       //Heh transforming variables
 
-       console.log("js = " + jsonObj);
+    console.log("js = " + jsonObj);
+    console.log("cID = " + cID);
+    console.log("cName = " + cName);
 
-      console.log("cID = " + cID);
-       console.log("cName = " + cName);
-      if(cFinalized == true){
-          cFinalized = "Choice Finalized!";
-      } else {
-          cFinalized = "Still open for discussion.";
-      }
+    if(cFinalized == true){
+        cFinalized = "Choice Finalized!";
+    } else {
+        cFinalized = "Still open for discussion.";
+    }
 
-      //var cAlternatives = choice["listofAlternatives"];
+    //var cAlternatives = choice["listofAlternatives"];
 
-         output = output + "<div id=\"const" + cName + "\">"+ cName + "<br> ID:" + cID + "<br>" + cFinalized + "<br></div>";
+    output = output + "<div id=\"const" + cName + "\">"+ cName + "<br> ID:" + cID + "<br>" + cFinalized + "<br></div>";
 
-       var cAlternatives = jsonObj.choice.listofAlternatives;
+    var cAlternatives = jsonObj.choice.listofAlternatives;
 
-        console.log("cAlternatives = " + cAlternatives);
+    console.log("cAlternatives = " + cAlternatives);
 
-			output = output + "<div id=\"alternatives\"> Alternatives: <br></div>";
-           for(let i = 0; i < cAlternatives.length; i++)
-           {
-               let alternativeJson = cAlternatives[i];
-               console.log("alt " + i + +"   " + alternativeJson);
+    output = output + "<div id=\"alternatives\"> Alternatives: <br></div>";
+    
+    for(let i = 0; i < cAlternatives.length; i++){
+        let alternativeJson = cAlternatives[i];
+        console.log("alt " + i + +"   " + alternativeJson);
+        output = output + "<div id=\"alternativeID" + alternativeJson.id + "\"><b>" +  alternativeJson.description + "</b><b> " + alternativeJson.Approvals + "</b><b>" + alternativeJson.Disapprovals + "</b><br>";
+    }
+    
+    output = output + "</div>"
+    console.log(choice);
 
-               output = output + "<div id=\"alternativeID" + alternativeJson.id + "\"><b>" +  alternativeJson.description + "</b>";
-
-            }
-
-
-
-         output = output + "</div>"
-        console.log(choice);
-
-        // Update computation result
-        currentChoice.innerHTML = output;
+    // Update computation result
+    currentChoice.innerHTML = output;
 
 }
 
-
-
-
-function requestChoice(val) { //caled by create choice -> entry point
-   processChoiceRequest (val);
+function requestChoice(val) { 
+    //called by create choice -> entry point
+    processChoiceRequest (val);
 }
 
 
-function processChoiceRequest (val)
-{
+function processChoiceRequest (val){
   var xhr = new XMLHttpRequest();
   xhr.open("GET", get_choice_url + "/" + val, true);  // Can't be DELETE b/c of preflight CORS error with non-simple requests
 
@@ -92,6 +85,8 @@ function processChoiceRequest (val)
 
   xhr.send(null);  //  NEED TO GET IT GOING
 }
+
+//Reference
 
 /*
 function processChoiceResponse(result) {

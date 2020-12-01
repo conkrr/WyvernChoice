@@ -1,7 +1,12 @@
 package com.amazonaws.lambda.demo.http;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.junit.jupiter.api.Test;
+
+import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
 
@@ -9,12 +14,13 @@ class RegisterUserResponseTest {
 
 	@Test
 	void test() throws JsonProcessingException, IOException {
-		/*
-		RegisterUserResponse rur = new RegisterUserResponse("King Roland", "12345", "897", 200);
+		
+		UserGsonCompatible u = new UserGsonCompatible(true, "King Roland", "12345", "897");
+		RegisterUserResponse rur = new RegisterUserResponse(u);
 		ObjectMapper rep = new ObjectMapper();
 		JsonNode actualRep = rep.readTree(rur.toString());
 		//String rep = rur.toString();
-		assertEquals(actualRep.get("loggedInUser").asText(), "King Roland");
+		assertEquals(actualRep.get("username").asText(), "King Roland");
 		assertEquals(actualRep.get("password").asText(), "12345");
 		assertEquals(actualRep.get("choiceID").asText(), "897");
 		assertEquals(actualRep.get("statusCode").asText(), "200");
@@ -27,7 +33,6 @@ class RegisterUserResponseTest {
 		//rep = rur.toString();
 		///assertTrue(rep.startsWith("Error"));
 
-		 */
 	}
 
 }
