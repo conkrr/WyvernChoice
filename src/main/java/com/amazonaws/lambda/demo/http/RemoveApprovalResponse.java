@@ -46,9 +46,17 @@ public class RemoveApprovalResponse
     	this.error = "";
 	}
 	
+	public RemoveApprovalResponse(int statusCode, String errorMessage) {
+		this.statusCode = statusCode;
+		this.error = errorMessage;
+	}
 
 	public String toString() {
-		return "Response(" + error + ")";
+		if(statusCode == 200) {
+			return "{ \"approvingUser\": \"" + approvingUser + "\", \"alternativeID\": \"" + alternativeID + "\", \"choiceID\": \"" + choiceID + "\", \"statusCode\": \"" + statusCode +"\" }";
+		} else {
+			return "{ \"statusCode\": \"" + statusCode + "\", \"error\": \"" + error + "\" }";
+		}
 	}
 
     /*

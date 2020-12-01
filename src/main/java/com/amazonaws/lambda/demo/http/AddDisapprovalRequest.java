@@ -6,6 +6,10 @@ public class AddDisapprovalRequest
 	private String disapprovingUser;
 	private String alternativeID;
 	private String choiceID;
+	
+	public AddDisapprovalRequest() {
+		
+	}
 
     public AddDisapprovalRequest(String disapprovingUser, String alternativeID, String choiceID)
     {

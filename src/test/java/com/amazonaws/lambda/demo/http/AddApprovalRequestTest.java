@@ -9,19 +9,19 @@ class AddApprovalRequestTest {
 	@Test
 	void test() {
 		AddApprovalRequest aar = new AddApprovalRequest();
-		aar.setApprovingUser("Billy");
+		aar.setUser("Billy");
 		assertEquals("Billy", aar.getUser());
 		
 		aar.setAlternativeID("12345");
-		assertEquals("12345", aar.alternativeID);
+		assertEquals("12345", aar.getAlternativeID());
 		
-		aar.setChoiceID("678910");
-		assertEquals("678910", aar.choiceID);
+		aar.setChoiceID("7654");
+		assertEquals("7654", aar.getChoiceID());
 		
-		aar = new AddApprovalRequest("Billy", "12345", "678910");
-		assertEquals("Billy", aar.approvingUser);
-		assertEquals("12345", aar.alternativeID);
-		assertEquals("678910", aar.choiceID);
+		aar = new AddApprovalRequest("Billy", "12345", "7654");
+		assertEquals("Billy", aar.getUser());
+		assertEquals("12345", aar.getAlternativeID());
+		assertEquals("7654", aar.getChoiceID());
 	}
 
 }
