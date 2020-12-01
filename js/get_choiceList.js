@@ -1,3 +1,66 @@
+
+
+function requestChoiceList(result){
+  processChoiceListRequest(result);
+}
+
+
+//Might be different due to it being a list?
+function processChoiceListRequest(val){
+  var xhr = new XMLHttpRequest();
+  xhr.open("GET", choice_list_url + "/" + val, true);  // Can't be DELETE b/c of preflight CORS error with non-simple requests
+
+  // This will process results and update HTML as appropriate.
+  xhr.onloadend = function ()
+  {
+    console.log(xhr);
+    console.log(xhr.request);
+    if (xhr.readyState == XMLHttpRequest.DONE) {
+      if (xhr.status == 200) {
+        console.log ("XHR:" + xhr.responseText);
+        processRequestChoiceListResponse(xhr.responseText);
+      } else {
+        console.log("actual:" + xhr.responseText)
+        var js = JSON.parse(xhr.responseText);
+        var err = js["error"];
+        alert (err);
+      }
+    } else {
+      processDeleteResponse("N/A");
+    }
+};
+xhr.send(null);  //  NEED TO GET IT GOING
+}
+
+
+function processRequestChoiceListResponse(result){
+
+  console.log("requested: " + result);
+
+  var jsonObj = JSON.parse(result);
+  var choiceList = document.getElementById('choiceList');
+
+  var output = "";
+
+  for(let i=0; i < jsonObj.list.length; i++){
+    var choiceJson = js.list[i];
+
+    var cName = choiceJson.choice.name;
+    var cID = choiceJson.choice.choiceID;
+    var cFinalized = choiceJson.choice.isFinalized;
+    var cDate;
+    if(cFinalized === true){
+      cDate = choiceJson.choice.completionDate;
+    } else {
+      cDate = "Open";
+    }
+
+    output = output + "<div id=\"const" + cName + "\"><b>" + cName + "</b>   <b>" + cID + "</b>     <b>"+ cDate + "</b></div><br>";
+  }
+};
+
+
+/*
 function refreshChoiceList() {
   //Make and send GET request
   var xhr = new XMLHttpRequest();
@@ -21,7 +84,6 @@ function refreshChoiceList() {
  * Respond to server JSON object.
  *
  * Replace the contents of 'choiceList' with a <br>-separated list of name,value pairs.
- */
 function processListResponse(result) {
   console.log("res:" + result);
   // Can grab any DIV or SPAN HTML element and can then manipulate its contents dynamically via javascript
@@ -37,6 +99,8 @@ function processListResponse(result) {
     var cval = choiceJson["id"];
     var sysvar = choiceJson["system"];
 
+    output = output + "<div id=\"const" + cname + "\"><b>" + cname + ":</b> = " + cval + "<br></div>";
+
     //Not useful but could be good reference
     /*
     if (sysvar) {
@@ -44,11 +108,11 @@ function processListResponse(result) {
     } else {
     	output = output + "<div id=\"const" + cname + "\"><b>" + cname + ":</b> = " + cval + "(<a href='javaScript:requestDelete(\"" + cname + "\")'><img src='deleteIcon.png'></img></a>) <br></div>";
     }
-    */
+    
   }
 
   // Update computation result
   choiceList.innerHTML = output;
 }
-
-
+}
+*/
