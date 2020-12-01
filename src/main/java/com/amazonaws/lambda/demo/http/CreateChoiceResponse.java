@@ -8,7 +8,6 @@ public class CreateChoiceResponse {
 	public CreateChoiceResponse (ChoiceGsonCompatible c) {
 		this.choice = c;
 		this.httpCode = 200;
-		//kek
 	}
 	
 	public CreateChoiceResponse (String s, int code) {
