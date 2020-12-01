@@ -10,14 +10,18 @@ class AddDisapprovalRequestTest {
 	void test() {
 		AddDisapprovalRequest adr = new AddDisapprovalRequest();
 		adr.setDisapprovingUser("Billy");
-		assertEquals("Billy", adr.disapprovingUser);
+		assertEquals("Billy", adr.getDisappearingUser());
 		
 		adr.setAlternativeID("12345");
-		assertEquals("12345", adr.alternativeID);
+		assertEquals("12345", adr.getAlternativeID());
 		
-		adr = new AddDisapprovalRequest("Billy", "12345");
-		assertEquals("Billy", adr.disapprovingUser);
-		assertEquals("12345", adr.alternativeID);
+		adr.setChoiceID("7654");
+		assertEquals("7654", adr.getChoiceID());
+		
+		adr = new AddDisapprovalRequest("Billy", "12345", "7654");
+		assertEquals("Billy", adr.getDisappearingUser());
+		assertEquals("12345", adr.getAlternativeID());
+		assertEquals("7654", adr.getChoiceID());
 	}
 
 }

@@ -48,8 +48,17 @@ public class RemoveDisapprovalResponse
     	this.error = "";
     }
     
-    public String toString() {
-		return "Response(" + error + ")";
+    public RemoveDisapprovalResponse(int statusCode, String errorMessage) {
+		this.statusCode = statusCode;
+		this.error = errorMessage;
+	}
+
+	public String toString() {
+		if(statusCode == 200) {
+			return "{ \"disapprovingUser\": \"" + disapprovingUser + "\", \"alternativeID\": \"" + alternativeID + "\", \"choiceID\": \"" + choiceID + "\", \"statusCode\": \"" + statusCode +"\" }";
+		} else {
+			return "{ \"statusCode\": \"" + statusCode + "\", \"error\": \"" + error + "\" }";
+		}
 	}
 
     /*

@@ -6,6 +6,10 @@ public class RemoveDisapprovalRequest
 	private String disapprovingUser;
 	private String alternativeID;
 	private String choiceID;
+	
+	public RemoveDisapprovalRequest() {
+		
+	}
 
     public RemoveDisapprovalRequest(String disapprovingUser, String alternativeID, String choiceID)
     {

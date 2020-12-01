@@ -8,16 +8,17 @@ class RemoveApprovalRequestTest {
 
 	@Test
 	void test() {
-		RemoveApprovalRequestTest rar = new RemoveApprovalRequestTest();
-		rar.setApprovingUser("Billy");
-		assertEquals("Billy", rar.approvingUser);
+		RemoveApprovalRequest rar = new RemoveApprovalRequest();
+		rar.setUser("Billy");
+		assertEquals("Billy", rar.getUser());
 		
 		rar.setAlternativeID("12345");
-		assertEquals("12345", rar.alternativeID);
+		assertEquals("12345", rar.getAlternativeID());
 		
-		rar = new RemoveApprovalRequestTest("Billy", "12345");
-		assertEquals("Billy", rar.approvingUser);
-		assertEquals("12345", rar.alternativeID);
+		rar = new RemoveApprovalRequest("Billy", "12345", "6789");
+		assertEquals("Billy", rar.getUser());
+		assertEquals("12345", rar.getAlternativeID());
+		assertEquals("6789", rar.getChoiceID());
 	}
 
 }

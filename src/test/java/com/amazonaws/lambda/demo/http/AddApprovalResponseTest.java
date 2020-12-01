@@ -2,17 +2,19 @@ package com.amazonaws.lambda.demo.http;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.IOException;
+
 import org.junit.jupiter.api.Test;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 class AddApprovalResponseTest {
 
 	@Test
-	void test() {
-		ApprovalGsonCompatible u = new ApprovalGsonCompatible("Tommy", "1s4h7", "auio9");
-		AddApprovalResponse aar = new AddApprovalResponse(u);
+	void test() throws JsonProcessingException, IOException {
+		AddApprovalResponse aar = new AddApprovalResponse("Tommy", "1s4h7", "auio9");
 		ObjectMapper rep = new ObjectMapper();
 		JsonNode actualRep = rep.readTree(aar.toString());
 		assertEquals(actualRep.get("approvingUser").asText(), "Tommy");
