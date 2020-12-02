@@ -315,11 +315,14 @@ definitions:
     required:
     - "approvalCount"
     - "alternativeID"
+    - "choiceID"
     - "approvalUsers"
     properties:
       approvalCount:
         type: "integer"
       alternativeID:
+        type: "string"
+      choiceID:
         type: "string"
       approvalUsers:
         type: "array"
@@ -331,11 +334,14 @@ definitions:
     required:
     - "disapprovalCount"
     - "alternativeID"
+    - "choiceID"
     - "disapprovalUsers"
     properties:
       disapprovalCount:
         type: "integer"
       alternativeID:
+        type: "string"
+      choiceID:
         type: "string"
       disapprovalUsers:
         type: "array"
@@ -477,10 +483,13 @@ definitions:
     type: "object"
     required: 
     - "approvingUser"
+    - "approvingUserID"
     - "alternativeID"
     - "choiceID"
     properties:
       approvingUser:
+        type: "string"
+      approvingUserID:
         type: "string"
       alternativeID:
         type: "string"
@@ -511,10 +520,13 @@ definitions:
     type: "object"
     required: 
     - "approvingUser"
+    - "approvingUserID"
     - "alternativeID"
     - "choiceID"
     properties:
       approvingUser:
+        type: "string"
+      approvingUserID:
         type: "string"
       alternativeID:
         type: "string"
@@ -543,10 +555,13 @@ definitions:
     type: "object"
     required: 
     - "disapprovingUser"
+    - "disapprovingUserID" 
     - "alternativeID"
     - "choiceID"
     properties:
-      userList:
+      disapprovingUser:
+        type: "string"
+      disapprovingUserID:
         type: "string"
       alternativeID:
         type: "string"
@@ -575,10 +590,13 @@ definitions:
     type: "object"
     required: 
     - "disapprovingUser"
+    - "disapprovingUserID"
     - "alternativeID"
     - "choiceID"
     properties:
-      userList:
+      disapprovingUser:
+        type: "string"
+      disapprovingUserID:
         type: "string"
       alternativeID:
         type: "string"
