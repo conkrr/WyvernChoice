@@ -29,9 +29,10 @@ function processRequestChoiceResponse(result) {
         cFinalized = "Still open for discussion.";
     }
 
-    //var cAlternatives = choice["listofAlternatives"];
+    var cAlternatives = choice["listofAlternatives"];
 
-    output = output + "<div id=\"const" + cName + "\">"+ cName + "<br> ID:" + cID + "<br>" + cFinalized + "<br></div>";
+    /*
+    output = output + "<div id=\"choice" + cName + "\">"+ cName + "<br> ID:" + cID + "<br>" + cFinalized + "<br></div>";
 
     var cAlternatives = jsonObj.choice.listofAlternatives;
 
@@ -42,11 +43,76 @@ function processRequestChoiceResponse(result) {
     for(let i = 0; i < cAlternatives.length; i++){
         let alternativeJson = cAlternatives[i];
         console.log("alt " + i + +"   " + alternativeJson);
-        output = output + "<div id=\"alternativeID" + alternativeJson.id + "\"><b>" +  alternativeJson.description + "</b><b> " + alternativeJson.Approvals + "</b><b>" + alternativeJson.Disapprovals + "</b><br>";
+        output = output + "<div id=\"alternativeID" + alternativeJson.id + "\"><b>" +  alternativeJson.description + "</b><div id> " + alternativeJson.Approvals + "</b><b>" + alternativeJson.Disapprovals + "</b><br>";
     }
     
     output = output + "</div>"
     console.log(choice);
+    */
+
+    /////////////////////////////
+    //Initialize Choice Headers//
+    /////////////////////////////
+    document.getElementById("NameOfChoice").innerHTML = cName;
+    document.getElementById("IDOfChoice").innerHTML = cID;
+    document.getElementById("ChoiceStatus").innerHTML = cFinalized;
+
+    /////////////////////////////
+    //Initialize Choice Headers//
+    /////////////////////////////
+    let alternativeJson;
+    if(cAlternatives[0] !== null){
+        alternativeJson = cAlternatives[0];
+        document.getElementById("alternative1name").innerHTML = alternativeJson.description;
+        document.getElementById("alternative1approvalcount").innerHTML = alternativeJson.Approvals.approvalCount;
+        //Deal with list of users
+
+        document.getElementById("alternative1disapprovalcount").innerHTML = alternativeJson.Disapprovals.disapprovalCount;
+        //Deal with list of users
+    }
+
+    if(cAlternatives[1] !== null){
+        alternativeJson = cAlternatives[1];
+        document.getElementById("alternative2name").innerHTML = alternativeJson.description;
+        document.getElementById("alternative2approvalcount").innerHTML = alternativeJson.Approvals.approvalCount;
+        //Deal with list of users
+
+        document.getElementById("alternative2disapprovalcount").innerHTML = alternativeJson.Disapprovals.disapprovalCount;
+        //Deal with list of users
+
+    }
+
+    if(cAlternatives[2] !== null){
+        alternativeJson = cAlternatives[2];
+        document.getElementById("alternative3name").innerHTML = alternativeJson.description;
+        document.getElementById("alternative3approvalcount").innerHTML = alternativeJson.Approvals.approvalCount;
+        //Deal with list of users
+
+        document.getElementById("alternative3disapprovalcount").innerHTML = alternativeJson.Disapprovals.disapprovalCount;
+        //Deal with list of users
+    }
+
+    if(cAlternatives[3] !== null){
+        alternativeJson = cAlternatives[3];
+        document.getElementById("alternative4name").innerHTML = alternativeJson.description;
+        document.getElementById("alternative4approvalcount").innerHTML = alternativeJson.Approvals.approvalCount;
+        //Deal with list of users
+
+        document.getElementById("alternative4disapprovalcount").innerHTML = alternativeJson.Disapprovals.disapprovalCount;
+        //Deal with list of users
+    }
+
+    if(cAlternatives[4] !== null){
+        alternativeJson = cAlternatives[4];
+        document.getElementById("alternative5name").innerHTML = alternativeJson.description;
+        document.getElementById("alternative5approvalcount").innerHTML = alternativeJson.Approvals.approvalCount;
+        //Deal with list of users
+
+        document.getElementById("alternative5disapprovalcount").innerHTML = alternativeJson.Disapprovals.disapprovalCount;
+        //Deal with list of users
+    }
+
+    document.getElementById("currentChoice").style.visibility = visible;
 
     // Update computation result
     currentChoice.innerHTML = output;

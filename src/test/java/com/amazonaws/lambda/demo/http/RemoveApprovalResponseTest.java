@@ -22,7 +22,7 @@ class RemoveApprovalResponseTest {
 		assertEquals(actualRep.get("choiceID").asText(), "auio9");
 		
 		rar = new RemoveApprovalResponse(400, "whoop I dropped my chocolate bar");
-		rep = new ObjectMapper();
+		rep = new ObjectMapper(); 
 		actualRep = rep.readTree(rar.toString());
 		assertEquals(actualRep.get("statusCode").asText(), "400");
 		assertEquals(actualRep.get("error").asText(), "whoop I dropped my chocolate bar");

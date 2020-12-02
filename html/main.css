@@ -28,3 +28,89 @@
    width: 60%;
    flex-direction: column;
 }
+
+#currentChoice{
+    display: flex;
+    flex-direction: column;
+    visibility: hidden;
+}
+
+#ChoiceHeader{
+    display: flex;
+    flex-direction: row;
+}
+
+#Alternative1{
+    display: flex;
+    flex-direction: row;
+}
+
+#alternative1approval{
+    display: flex;
+    flex-direction: column;
+}
+
+#alternative1disapproval{
+    display: flex;
+    flex-direction: column;
+}
+
+#Alternative2{
+    display: flex;
+    flex-direction: row;
+}
+
+#alternative2approval{
+    display: flex;
+    flex-direction: column;
+}
+
+#alternative2disapproval{
+    display: flex;
+    flex-direction: column;
+}
+
+#Alternative3{
+    display: flex;
+    flex-direction: row;
+}
+
+#alternative3approval{
+    display: flex;
+    flex-direction: column;
+}
+
+#alternative3disapproval{
+    display: flex;
+    flex-direction: column;
+}
+
+#Alternative4{
+    display: flex;
+    flex-direction: row;
+}
+
+#alternative4approval{
+    display: flex;
+    flex-direction: column;
+}
+
+#alternative4disapproval{
+    display: flex;
+    flex-direction: column;
+}
+
+#Alternative5{
+    display: flex;
+    flex-direction: row;
+}
+
+#alternative5approval{
+    display: flex;
+    flex-direction: column;
+}
+
+#alternative5disapproval{
+    display: flex;
+    flex-direction: column;
+}
