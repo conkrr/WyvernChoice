@@ -11,13 +11,13 @@ public class AddApprovalRequest {
 
     }
 
-    public AddApprovalRequest(String approvingUser, String approvingUserID, String alternativeID, String choiceID) {
+    public AddApprovalRequest(String approvingUser, String approvingUserID, String alternativeID, String choiceID)
+    {
         this.approvingUser = approvingUser;
         this.alternativeID = alternativeID;
         this.choiceID = choiceID;
         this.approvingUserID = approvingUserID;
     }
-
 
     public void setUsername(String approvingUser) {
         this.approvingUser = approvingUser;
@@ -26,7 +26,6 @@ public class AddApprovalRequest {
     public String getUsername() {
         return this.approvingUser;
     }
-
 
     public void setApprovingUserID(String approvingUserID) {
         this.approvingUserID = approvingUserID;

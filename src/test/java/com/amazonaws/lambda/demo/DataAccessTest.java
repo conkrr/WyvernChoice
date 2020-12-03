@@ -55,7 +55,7 @@ public class DataAccessTest extends LambdaTest {
 
 		try {
 			testList = dao.get(generatedList.get(0).getAlternativeId());
-
+			
 		} catch (Exception e) {
 			Assert.fail("Invalid:" + e.getMessage());
 		}
@@ -73,7 +73,7 @@ public class DataAccessTest extends LambdaTest {
 		ApprovalsDAO dao = new ApprovalsDAO();
 
 		try {
-			alreadyExists = dao.insert(testList);
+			alreadyExists = dao.insert(testList.get(0));
 
 		} catch (Exception e) {
 			Assert.fail("Invalid:" + e.getMessage());

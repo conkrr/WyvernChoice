@@ -2,7 +2,6 @@ package com.amazonaws.lambda.demo.http;
 
 public class AddDisapprovalRequest
 {
-	
 	private String disapprovingUser;
     private String disapprovingUserID;
 	private String alternativeID;
@@ -35,7 +34,6 @@ public class AddDisapprovalRequest
     public String getDisapprovingUserID() {
         return this.disapprovingUserID;
     }
-
 
     public void setAlternativeID(String alternativeID) {
     	this.alternativeID = alternativeID;
