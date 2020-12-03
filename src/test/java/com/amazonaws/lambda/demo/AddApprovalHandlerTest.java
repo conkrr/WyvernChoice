@@ -2,6 +2,10 @@ package com.amazonaws.lambda.demo;
 
 
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.util.Calendar;
+import java.util.Random;
+import java.util.UUID;
 
 import com.amazonaws.lambda.demo.http.*;
 import com.google.gson.Gson;
@@ -50,11 +54,19 @@ public class AddApprovalHandlerTest extends LambdaTest {
         Create parameters for AddApprovalRequest
       */
 
-        String approvingUser = "ShaneTest";
-        String userId = "141307d5-101d-4fc2-b1d0-0685bdd8ab9c"; //shane ipad
-        String alternativeID = "05f62ea0-98dc-4699-8d66-a7075195e1a5"; //ipad 1
-        String choiceID = "936219db-1f89-4d71-b3ab-cb58011d821e";
+//        String approvingUser = "ShaneTest";
+//        String userId = "141307d5-101d-4fc2-b1d0-0685bdd8ab9c"; //shane ipad
+//        String alternativeID = "05f62ea0-98dc-4699-8d66-a7075195e1a5"; //ipad 1
+//        String choiceID = "936219db-1f89-4d71-b3ab-cb58011d821e";
+        String userId = UUID.randomUUID().toString();
+        String alternativeID = UUID.randomUUID().toString();
+        String choiceID = UUID.randomUUID().toString();
+		String approvingUser = "";
 
+		Random random = new Random();
+		for(int i = 0; i < random.nextInt(8)+3; i++) {
+			approvingUser += (char) random.nextInt(91) + 65;
+		}
 
 
 

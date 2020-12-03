@@ -29,15 +29,17 @@ public class ApprovalsDAO implements DataAccess<List<Approval>>{
 	@Override
 	public List<Approval> get(String uniqueId) throws Exception { //uniqueID = alternative ID
 		//logger.log("ApprovalsDAO::get() -- Begin");
+//		System.out.println("ApprovalsDAO::get() -- Begin");
     	List<Approval> list;  	
         try {
-            PreparedStatement ps = connection.prepareStatement("SELECT Users.userID, Users.name, Approvals.status FROM Users JOIN Alternatives ON Users.choiceID = Alternatives.choiceID JOIN Approvals ON Approvals.alternativeID = Alternatives.alternativeID AND Approvals.userID = Users.userID JOIN (SELECT Approvals.userID, MAX(Approvals.timestamp) AS timestamp FROM Approvals WHERE Approvals.alternativeID = ? GROUP BY Approvals.userID) Maxtimes ON Users.userID = Maxtimes.userID AND Approvals.timestamp = Maxtimes.timestamp WHERE Approvals.alternativeID = ?");           
+            PreparedStatement ps = connection.prepareStatement("SELECT Users.userID, Users.name, Approvals.status, Approvals.timestamp, Alternatives.alternativeID FROM Users JOIN Alternatives ON Users.choiceID = Alternatives.choiceID JOIN Approvals ON Approvals.alternativeID = Alternatives.alternativeID AND Approvals.userID = Users.userID JOIN (SELECT Approvals.userID, MAX(Approvals.timestamp) AS timestamp FROM Approvals WHERE Approvals.alternativeID = ? GROUP BY Approvals.userID) Maxtimes ON Users.userID = Maxtimes.userID AND Approvals.timestamp = Maxtimes.timestamp WHERE Approvals.alternativeID = ?");           
             ps.setString(1,  uniqueId);
             ps.setString(2,  uniqueId);
             ResultSet resultSet = ps.executeQuery();
             list = generate(resultSet);
             resultSet.close();
             ps.close();
+//            System.out.println("ApprovalsDAO::get() -- End");
             //logger.log("ApprovalsDAO::get() -- End");
             return list;
         } catch (Exception e) {
@@ -67,9 +69,12 @@ public class ApprovalsDAO implements DataAccess<List<Approval>>{
 	@Override
 	public boolean insert(List<Approval> t) throws Exception {
 		//logger.log("ApprovalsDAO::insert -- Begin");
+//		System.out.println("ApprovalsDAO::insert -- Begin");
 		try {
-			boolean alreadyExists = get(t.get(0).getAlternativeId()) != null;
+			boolean alreadyExists = !get(t.get(0).getAlternativeId()).isEmpty();
+//			System.out.println("ApprovalsDAO::insert -- alreadyExists = " + alreadyExists);
 			if (!alreadyExists) {
+				
 				PreparedStatement ps = connection.prepareStatement("INSERT INTO " + tableName + " (alternativeID, userID, timestamp, status) values(?, ?, ?, ?);");
 				ListIterator<Approval> iterator = t.listIterator();
 				while (iterator.hasNext()) { 
@@ -82,6 +87,7 @@ public class ApprovalsDAO implements DataAccess<List<Approval>>{
 				} 
 			}
 			//logger.log("ApprovalsDAO::insert() -- End");
+//			System.out.println("ApprovalsDAO::insert() -- End");
 			return alreadyExists;
 		} catch (Exception e) {
 			e.printStackTrace();
