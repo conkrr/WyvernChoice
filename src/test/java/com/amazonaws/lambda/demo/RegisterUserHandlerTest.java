@@ -51,7 +51,7 @@ public class RegisterUserHandlerTest extends LambdaTest{
         String jsonResp;
         try {
         	
-        	jsonResp = getJsonResponse(SAMPLE_INPUT_STRING);
+            	jsonResp = getJsonResponse(SAMPLE_INPUT_STRING);
         } catch (IOException ioe) {
         	Assert.fail("Invalid:" + ioe.getMessage());
         }
