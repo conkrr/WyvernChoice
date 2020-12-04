@@ -11,17 +11,28 @@ function processApprovalResponse(result){
 
 function handleApprovalClick(e){
     console.log("Registering approval request...");
-    let response = document.getElementById('');
-    let data = {};
-    let userAlreadyApproved = false;
-    //for list of users registered
-        //check if the user currently responding has requested 
-        //if this turns out to be the case, userAlreadyApproved is true
+    //Get the approval count?
+    //let response = document.getElementById('');
+    //let data = {};
     
-    if(userAlreadyApproved === false){
-        addApprovalRequest();
-    } else {
+    //store user data in approval
+    
+
+    //return a user id
+    //If a cookie exists, 
+    //force the cookie to expire and do remove approval request
+    //else
+    //Create a cookie that says the user clicked on approval
+    if(document.cookie.split(";").some(function(item){
+        return item.trim().indexOf("I clicked on Approval!") == 0
+    })){
+        //approvalCount += 1;
+        document.cookie = "I clicked on Approval!=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
         removeApprovalRequest();
+    } else {
+        //approvalCount -= 1;
+        document.cookie = "I clicked on Approval!"
+        addApprovalRequest();
     }
 }
 
