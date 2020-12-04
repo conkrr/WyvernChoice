@@ -21,25 +21,22 @@ import com.amazonaws.services.s3.model.S3ObjectSummary;
 
 public class GetListOfChoicesHandler implements RequestHandler<Object, GetListOfChoicesResponse>{
 	public LambdaLogger logger;
-	
-	/** Load from RDS, if it exists
-	 * 
-	 * @throws Exception 
-	 */
+	/*
+
 	List<Choice> getChoices() throws Exception {
 		logger.log("in getConstants");
 		ChoicesDAO dao = new ChoicesDAO(logger);
 		
-		return dao.getAllChoices;
+		return dao.getAllChoices();
 	}
 	
 	// I am leaving in this S3 code so it can be a LAST RESORT if the constant is not in the database
 	private AmazonS3 s3 = null;
 	
-	/**
+	*//**
 	 * Retrieve all SYSTEM constants. This code is surprisingly dangerous since there could
 	 * be an incredible number of objects in the bucket. Ignoring this for now.
-	 */
+	 *//*
 	List<Choice> systemChoices() throws Exception {
 		logger.log("in systemConstants");
 		if (s3 == null) {
@@ -84,9 +81,10 @@ public class GetListOfChoicesHandler implements RequestHandler<Object, GetListOf
 		
 		return sysChoices;
 	}
-	
+*/
 	@Override
 	public GetListOfChoicesResponse handleRequest(Object input, Context context)  {
+		/*
 		logger = context.getLogger();
 		logger.log("Loading Java Lambda handler to list all constants");
 
@@ -106,6 +104,10 @@ public class GetListOfChoicesHandler implements RequestHandler<Object, GetListOf
 		}
 		
 		return response;
+
+		 */
+		return null;
 	}
-	
+
+
 }
