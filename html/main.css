@@ -32,7 +32,7 @@
 #currentChoice{
     display: flex;
     flex-direction: column;
-    visibility: hidden;
+    visibility: visible;
 }
 
 #ChoiceHeader{

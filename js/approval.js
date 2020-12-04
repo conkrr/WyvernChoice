@@ -15,6 +15,10 @@ function handleApprovalClick(e){
     //let response = document.getElementById('');
     //let data = {};
     
+    //store user data in approval
+    
+
+    //return a user id
     //If a cookie exists, 
     //force the cookie to expire and do remove approval request
     //else
