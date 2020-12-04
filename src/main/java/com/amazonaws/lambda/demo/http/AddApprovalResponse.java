@@ -6,13 +6,28 @@ public class AddApprovalResponse
 	public String approvingUser;
 	public String alternativeID;
 	public String choiceID;
+	public int approvals;
+	public int disapprovals;
 	public int statusCode;
 	public String error;
 	
-	public AddApprovalResponse(String approvingUser, String alternativeID, String choiceID) {
+	//For database
+	public AddApprovalResponse(String approvingUser, String alternativeID, String choiceID, int approvals, int disapprovals, int statusCode) {
 		this.approvingUser = approvingUser;
     	this.alternativeID = alternativeID;
     	this.choiceID = choiceID;
+    	this.approvals = approvals;
+    	this.disapprovals = disapprovals;
+    	this.statusCode = statusCode;
+    	this.error = "";
+	}
+	
+	public AddApprovalResponse(String approvingUser, String alternativeID, String choiceID, int approvals, int disapprovals) {
+		this.approvingUser = approvingUser;
+    	this.alternativeID = alternativeID;
+    	this.choiceID = choiceID;
+    	this.approvals = approvals;
+    	this.disapprovals = disapprovals;
     	this.statusCode = 200;
     	this.error = "";
 	}
@@ -25,7 +40,7 @@ public class AddApprovalResponse
 
 	public String toString() {
 		if(statusCode == 200) {
-			return "{ \"approvingUser\": \"" + approvingUser + "\", \"alternativeID\": \"" + alternativeID + "\", \"choiceID\": \"" + choiceID + "\", \"statusCode\": \"" + statusCode +"\" }";
+			return "{ \"approvingUser\": \"" + approvingUser + "\", \"alternativeID\": \"" + alternativeID + "\", \"choiceID\": \"" + choiceID + "\", \"approvals\": \"" + approvals + "\", \"disapprovals\": \"" + disapprovals + "\", \"statusCode\": \"" + statusCode +"\" }";
 		} else {
 			return "{ \"statusCode\": \"" + statusCode + "\", \"error\": \"" + error + "\" }";
 		}

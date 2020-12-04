@@ -31,9 +31,9 @@ public class AddApprovalHandler implements RequestHandler<AddApprovalRequest, Ad
         // if (logger != null) { logger.log("in AddApproval"); }
 
         ApprovalsDAO approvalsDAO = new ApprovalsDAO(/*logger*/);
-        List<Approval> approvalsList = approvalsDAO.get(approval.getAlternativeId());
+        //List<Approval> approvalsList = approvalsDAO.get(approval.getAlternativeId());
 
-        boolean exists = approvalsList.stream().anyMatch(a -> a.getUserId().equals(approval.getUserId())); // this is either very cool or very bad
+        boolean exists = false; //approvalsList.stream().anyMatch(a -> a.getUserId().equals(approval.getUserId())); // this is either very cool or very bad
 
         logger.log("Does this approval exist in the database already? " + exists);
         if (!exists) {
@@ -55,6 +55,8 @@ public class AddApprovalHandler implements RequestHandler<AddApprovalRequest, Ad
 
             boolean addApprovalSuccess = approvalDAOHelper(a);
 
+            //Need to return list of approvals for given alternative ID instead of returning the same approval
+            
             if (addApprovalSuccess)
                 response = new AddApprovalResponse(a.getUserName(), a.getAlternativeId(), a.getChoiceId());
             else
