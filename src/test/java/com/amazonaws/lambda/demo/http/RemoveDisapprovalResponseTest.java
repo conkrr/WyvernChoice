@@ -15,7 +15,7 @@ class RemoveDisapprovalResponseTest {
 	@Test
 	void test() throws JsonProcessingException, IOException {
 		RemoveDisapprovalResponse rdr = new RemoveDisapprovalResponse("Tommy", "1s4h7", "auio9");
-		ObjectMapper rep = new ObjectMapper();
+		ObjectMapper rep = new ObjectMapper(); 
 		JsonNode actualRep = rep.readTree(rdr.toString());
 		assertEquals(actualRep.get("disapprovingUser").asText(), "Tommy");
 		assertEquals(actualRep.get("alternativeID").asText(), "1s4h7");
