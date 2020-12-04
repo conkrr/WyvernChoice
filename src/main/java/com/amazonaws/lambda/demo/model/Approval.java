@@ -18,7 +18,8 @@ public class Approval {
 	private final String choiceId;
 	private final String userId;
 	private final Timestamp timestamp;
-	private final String userName;	
+	private final String userName;
+
 	public Approval(String alternativeId, String userId, Timestamp timestamp, String userName) {
 		this.alternativeId = alternativeId;
 		this.userId = userId;

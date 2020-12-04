@@ -89,36 +89,38 @@ public class AddApprovalHandlerTest extends LambdaTest {
 
 
     @Test
-    public void testAddApprovalInvalidInput() {  //Test fresh approval:  no response -> approval
-
-        String approvingUser = "not a user";
-        String alternativeID = "not an id that exists"; //ipad 1
-        String choiceID = "not a choice that exists"; //ipad
-        String userId = "not a use that exists"; //shane ipad
+    public void testAddApprovalOnDisapproval() {
 
 
-        /*
+        String userId = UUID.randomUUID().toString();
+        String alternativeID = UUID.randomUUID().toString();
+        String choiceID = UUID.randomUUID().toString();
+        String approvingUser = "";
+        Random random = new Random();
+        for(int i = 0; i < random.nextInt(8)+3; i++) {
+            approvingUser += (char) random.nextInt(91) + 65;
+        }
 
+        //Add approval
+        AddDisapprovalRequest dreq = new AddDisapprovalRequest(approvingUser,userId,alternativeID,choiceID);
 
+        AddDisapprovalHandler  dhandler = new AddDisapprovalHandler();
+        AddDisapprovalResponse dresp = dhandler.handleRequest(dreq, createContext("adddisapproval"));
+
+        //add disapproval
 
         AddApprovalRequest req = new AddApprovalRequest(approvingUser,userId,alternativeID,choiceID);
-
         String SAMPLE_INPUT_STRING = new Gson().toJson(req);
         String jsonResp;
+        try {
 
-		try {
-			testFailInput(SAMPLE_INPUT_STRING,400);
-		} catch (IOException ioe) {
-			Assert.fail("Invalid:" + ioe.getMessage());
-		}
-
-        //TODO: Delete approval
+            jsonResp = getJsonResponse(SAMPLE_INPUT_STRING);
+        } catch (IOException ioe) {
+            Assert.fail("Invalid:" + ioe.getMessage());
+        }
 
         Assert.assertEquals(1, 1); // should probably refactor this
-
-        */
     }
-
 
     //Test switching:  disapproval -> Approval
     //Test duplicate: Approval -> Approval
