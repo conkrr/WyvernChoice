@@ -1,6 +1,12 @@
 package com.amazonaws.lambda.demo.http;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+
+import com.amazonaws.lambda.demo.model.Approval;
+import com.amazonaws.lambda.demo.model.Disapproval;
+import com.amazonaws.lambda.demo.model.Opinion;
 
 public class OpinionResponse {
 
@@ -27,10 +33,32 @@ public class OpinionResponse {
 	}
 
 
+	public OpinionResponse(String alternativeID, List<Approval> approvalsList,
+			List<Disapproval> disapprovalsList, String error, int statusCode) {
+		this.alternativeID = alternativeID;
+		this.error = error;
+		this.statusCode = statusCode;
+		
+		this.approvals = approvalsList.size();
+		this.disapprovals = disapprovalsList.size();
+		this.approvalUsers = getOpinionUsers(new ArrayList<Opinion>(approvalsList));
+		this.disapprovalUsers = getOpinionUsers(new ArrayList<Opinion>(disapprovalsList));
+		
+		
+	}
 
 	public OpinionResponse(String error, int statusCode) {
 		this.error = error;
 		this.statusCode = statusCode;
+	}
+	
+	private List<String> getOpinionUsers(List<Opinion> approvals) {
+		List<String> nameList = new ArrayList<String>();
+		Iterator<Opinion> iterator = approvals.iterator();
+		while(iterator.hasNext()){
+		  nameList.add(iterator.next().getUserName());
+		}
+		return nameList;
 	}
 	
 	

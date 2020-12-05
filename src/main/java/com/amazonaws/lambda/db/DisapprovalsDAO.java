@@ -29,7 +29,7 @@ public class DisapprovalsDAO implements DataAccessAsymmetric<Disapproval>{
 
 	@Override
 	public List<Disapproval> get(String uniqueId) throws Exception { //uniqueID = alternative ID
-		logger.log("DisapprovalsDAO::get() -- Begin");
+		if(logger != null )logger.log("DisapprovalsDAO::get() -- Begin");
 //		System.out.println("DisapprovalsDAO::get() -- Begin");
     	List<Disapproval> list;  	
         try {
@@ -41,7 +41,7 @@ public class DisapprovalsDAO implements DataAccessAsymmetric<Disapproval>{
             resultSet.close();
             ps.close();
 //            System.out.println("DisapprovalsDAO::get() -- End");
-           logger.log("DisapprovalsDAO::get() -- End");
+           if(logger != null )logger.log("DisapprovalsDAO::get() -- End");
             return list;
         } catch (Exception e) {
         	e.printStackTrace();
@@ -51,7 +51,7 @@ public class DisapprovalsDAO implements DataAccessAsymmetric<Disapproval>{
 
 	@Override
 	public int delete(String uniqueId) throws Exception {
-		logger.log("DisapprovalsDAO::delete() -- Begin");
+		if(logger != null )logger.log("DisapprovalsDAO::delete() -- Begin");
 		int rowsAffected = 0;
 		
 		try {
@@ -59,7 +59,7 @@ public class DisapprovalsDAO implements DataAccessAsymmetric<Disapproval>{
             ps.setString(1, uniqueId);
             rowsAffected = ps.executeUpdate();
             ps.close();       
-            logger.log("DisapprovalsDAO::delete() -- End");
+            if(logger != null )logger.log("DisapprovalsDAO::delete() -- End");
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new Exception("Exception in DisapprovalsDAO::delete(): " + e.getMessage());
@@ -69,7 +69,7 @@ public class DisapprovalsDAO implements DataAccessAsymmetric<Disapproval>{
 
 	@Override
 	public boolean insert(Disapproval t) throws Exception {
-		logger.log("DisapprovalsDAO::insert -- Begin");
+		if(logger != null )logger.log("DisapprovalsDAO::insert -- Begin");
 //		System.out.println("DisapprovalsDAO::insert -- Begin");
 		try {
 			boolean alreadyExists = !get(t.getAlternativeId()).isEmpty();
@@ -83,7 +83,7 @@ public class DisapprovalsDAO implements DataAccessAsymmetric<Disapproval>{
 					ps.setInt(4, -1); // 1 indicates disapproval
 					ps.execute();
 //			}
-			logger.log("DisapprovalsDAO::insert() -- End");
+			if(logger != null )logger.log("DisapprovalsDAO::insert() -- End");
 //			System.out.println("DisapprovalsDAO::insert() -- End");
 			return alreadyExists;
 		} catch (Exception e) {
@@ -94,7 +94,7 @@ public class DisapprovalsDAO implements DataAccessAsymmetric<Disapproval>{
 
 	@Override
 	public List<Disapproval> generate(ResultSet resultSet) throws Exception {
-		logger.log("DisapprovalsDAO::generate() -- Begin");
+		if(logger != null )logger.log("DisapprovalsDAO::generate() -- Begin");
         
     	ArrayList<Disapproval> approvals = new ArrayList<Disapproval>();
         try {
@@ -115,7 +115,7 @@ public class DisapprovalsDAO implements DataAccessAsymmetric<Disapproval>{
         	e.printStackTrace();
             throw new Exception("Exception in DisapprovalsDAO::generate(): " + e.getMessage());
         }
-        logger.log("DisapprovalsDAO::generate() -- End");
+        if(logger != null )logger.log("DisapprovalsDAO::generate() -- End");
         return approvals;
 	}
 

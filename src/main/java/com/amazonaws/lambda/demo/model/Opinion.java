@@ -37,13 +37,4 @@ public abstract class Opinion {
 		return choiceId;
 	}
 	
-	public static List<String> getOpinionUsers(List<Opinion> approvals) {
-		List<String> nameList = new ArrayList<String>();
-		Iterator<Opinion> iterator = approvals.iterator();
-		while(iterator.hasNext()){
-		  nameList.add(iterator.next().userName);
-		}
-		return nameList;
-	}
-	
 }

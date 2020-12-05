@@ -108,10 +108,11 @@ public class AlternativesDAO implements DataAccessAsymmetric<Alternative>{
 				final boolean isChosen = resultSet.getBoolean("isChosen");
 				
 				ApprovalsDAO dao = new ApprovalsDAO(logger);
-				List<Opinion> approvals = new ArrayList<Opinion>(dao.get(alternativeId));
-				
+				List<Approval> approvals = new ArrayList<Approval>(dao.get(alternativeId));
+				DisapprovalsDAO dao2 = new DisapprovalsDAO(logger);
+				List<Disapproval> disapprovals = new ArrayList<Disapproval>(dao2.get(alternativeId));
 
-					alternatives.add(new Alternative(description, choiceId, alternativeId, approvals, isChosen));
+					alternatives.add(new Alternative(description, choiceId, alternativeId, approvals, disapprovals, isChosen));
 				
 				
 			}

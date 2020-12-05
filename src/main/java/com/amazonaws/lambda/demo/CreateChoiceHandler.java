@@ -9,10 +9,12 @@ import java.util.UUID;
 import com.amazonaws.lambda.db.ChoicesDAO;
 import com.amazonaws.lambda.demo.http.CreateChoiceRequest;
 import com.amazonaws.lambda.demo.http.CreateChoiceResponse;
+import com.amazonaws.lambda.demo.http.GetChoiceResponse;
 import com.amazonaws.lambda.demo.http.ChoiceGsonCompatible;
 import com.amazonaws.lambda.demo.model.Alternative;
 import com.amazonaws.lambda.demo.model.Approval;
 import com.amazonaws.lambda.demo.model.Choice;
+import com.amazonaws.lambda.demo.model.Disapproval;
 import com.amazonaws.lambda.demo.model.Opinion;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.LambdaLogger;
@@ -20,7 +22,7 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 
 
 
-public class CreateChoiceHandler implements RequestHandler<CreateChoiceRequest, CreateChoiceResponse> {
+public class CreateChoiceHandler implements RequestHandler<CreateChoiceRequest, GetChoiceResponse> {
 
 	LambdaLogger logger;
 	
@@ -40,9 +42,10 @@ public class CreateChoiceHandler implements RequestHandler<CreateChoiceRequest, 
 		ArrayList<Alternative> alternatives = new ArrayList<Alternative>();
 		for(int i = 0; i < alternativeDescs.size(); i++) {
 			UUID alternativeID = UUID.randomUUID();
-			List<Opinion> emptyApprovals = new ArrayList<Opinion>();
+			List<Approval> emptyApprovals = new ArrayList<Approval>();
+			List<Disapproval> emptyDispprovals = new ArrayList<Disapproval>();
 			
-			alternatives.add(new Alternative(alternativeDescs.get(i), choiceID.toString(), alternativeID.toString(), emptyApprovals, false));
+			alternatives.add(new Alternative(alternativeDescs.get(i), choiceID.toString(), alternativeID.toString(), emptyApprovals,emptyDispprovals, false));
 		}
 		
 		logger.log("create choice");
@@ -71,7 +74,7 @@ public class CreateChoiceHandler implements RequestHandler<CreateChoiceRequest, 
 	
 
 	@Override 
-	public CreateChoiceResponse handleRequest(CreateChoiceRequest req, Context context)  {
+	public GetChoiceResponse handleRequest(CreateChoiceRequest req, Context context)  {
 		logger = context.getLogger();
 		logger.log(req.toString());
 		logger.log("name: " + req.getName());
@@ -79,7 +82,7 @@ public class CreateChoiceHandler implements RequestHandler<CreateChoiceRequest, 
 		logger.log("userID: " + req.getCreatingUserID());
 		logger.log("participants: " + req.getNumParticipants());
 
-		CreateChoiceResponse response;
+		GetChoiceResponse response;
 		try {
 			logger.log("trying to create choice");
 			Choice c = createChoice(req.getName(), req.getListofAlternatives(), req.getCreatingUserID(), req.getNumParticipants());
@@ -89,13 +92,12 @@ public class CreateChoiceHandler implements RequestHandler<CreateChoiceRequest, 
 			
 			if (createChoiceBoolean) {
 				//response = new CreateChoiceResponse(req.getDescription());
-				ChoiceGsonCompatible cGson = new ChoiceGsonCompatible(c);
-				response = new CreateChoiceResponse(cGson);
+				response = new GetChoiceResponse(c);
 			} else {
-				response = new CreateChoiceResponse(req.getName(), 422);
+				response = new GetChoiceResponse(req.getName(), 422);
 			}
 		} catch (Exception e) {
-			response = new CreateChoiceResponse("Unable to create choice: " + req.getName() + "(" + e.getMessage() + ")", 400);
+			response = new GetChoiceResponse("Unable to create choice: " + req.getName() + "(" + e.getMessage() + ")", 400);
 		}
 
 		return response;

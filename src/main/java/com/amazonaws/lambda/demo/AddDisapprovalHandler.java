@@ -59,16 +59,13 @@ public class AddDisapprovalHandler implements RequestHandler<AddDisapprovalReque
 
             ApprovalsDAO apvDao = new ApprovalsDAO(logger);
             DisapprovalsDAO disDao = new DisapprovalsDAO(logger);
-            //List<Approval> appList = apvDao.get(a.getAlternativeId());
-            //List<Disapproval> disList = disDao.get(a.getAlternativeId());          
-            
-            List<String> appUsers = Opinion.getOpinionUsers(new ArrayList<Opinion>(apvDao.get(a.getAlternativeId())));
-            List<String> disUsers = Opinion.getOpinionUsers(new ArrayList<Opinion>(disDao.get(a.getAlternativeId())));
+            List<Approval> appList = apvDao.get(a.getAlternativeId());
+            List<Disapproval> disList = disDao.get(a.getAlternativeId());          
             
             if (addDisapprovalSuccess)
-                response = new OpinionResponse(a.getAlternativeId(), appUsers.size(), disUsers.size(), appUsers, disUsers, "", 200);
+                response = new OpinionResponse(a.getAlternativeId(), appList, disList, "", 200);
             else
-                response = new OpinionResponse(a.getAlternativeId(), appUsers.size(), disUsers.size(), appUsers, disUsers, "", 422);
+            	response = new OpinionResponse(a.getAlternativeId(), appList, disList, "", 422);
 
         }  catch (Exception e) {
             response = new OpinionResponse("Unable to add disapproval for User: " + request.getUsername() + ", altID: " + request.getAlternativeID() + "(error: " + e.getMessage() + ")", 400);
