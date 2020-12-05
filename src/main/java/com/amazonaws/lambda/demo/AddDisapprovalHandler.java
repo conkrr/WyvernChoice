@@ -33,7 +33,7 @@ public class AddDisapprovalHandler implements RequestHandler<AddDisapprovalReque
     boolean disapprovalDAOHelper(Disapproval disapproval) throws Exception {
         // if (logger != null) { logger.log("in AddApproval"); }
 
-        DisapprovalsDAO disapprovalsDAO = new DisapprovalsDAO(/*logger*/);
+        DisapprovalsDAO disapprovalsDAO = new DisapprovalsDAO(logger);
        // List<Disapproval> disapprovalsList = disapprovalsDAO.get(disapproval.getAlternativeId());
 
         boolean exists = false; //disapprovalsList.stream().anyMatch(a -> a.getUserId().equals(disapproval.getUserId())); // this is either very cool or very bad
@@ -57,8 +57,8 @@ public class AddDisapprovalHandler implements RequestHandler<AddDisapprovalReque
         	Disapproval a = createDisapproval(request);
             boolean addApprovalSuccess = disapprovalDAOHelper(a);
 
-            ApprovalsDAO apvDao = new ApprovalsDAO();
-            DisapprovalsDAO disDao = new DisapprovalsDAO();
+            ApprovalsDAO apvDao = new ApprovalsDAO(logger);
+            DisapprovalsDAO disDao = new DisapprovalsDAO(logger);
             List<Approval> appList = apvDao.get(a.getAlternativeId());
             List<Disapproval> disList = disDao.get(a.getAlternativeId());
             List<Opinion> opList = new ArrayList<Opinion>();
