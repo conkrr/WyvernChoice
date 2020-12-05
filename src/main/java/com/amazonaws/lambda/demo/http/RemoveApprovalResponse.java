@@ -10,34 +10,6 @@ public class RemoveApprovalResponse
 	public int statusCode;
 	public String error;
 	
-	public RemoveApprovalResponse(String approvingUser, String alternativeID, String choiceID, int statusCode,
-			String error) {
-		this.approvingUser = approvingUser;
-    	this.alternativeID = alternativeID;
-    	this.choiceID = choiceID;
-    	this.statusCode = statusCode;
-    	this.error = error;
-	}
-	
-	// Status code defaults to 200, signaling all good
-	public RemoveApprovalResponse(String approvingUser, String alternativeID, String choiceID,
-			String error) {
-		this.approvingUser = approvingUser;
-    	this.alternativeID = alternativeID;
-    	this.choiceID = choiceID;
-    	this.statusCode = 200;
-    	this.error = error;
-	}
-	
-	public RemoveApprovalResponse(String approvingUser, String alternativeID, String choiceID,
-			int statusCode) {
-		this.approvingUser = approvingUser;
-    	this.alternativeID = alternativeID;
-    	this.choiceID = choiceID;
-    	this.statusCode = statusCode;
-    	this.error = "";
-	}
-	
 	public RemoveApprovalResponse(String approvingUser, String alternativeID, String choiceID) {
 		this.approvingUser = approvingUser;
     	this.alternativeID = alternativeID;

@@ -25,10 +25,10 @@ public class GetListOfChoicesResponse {
 	
 	public String toString() {
 		if(statusCode == 200) {
-			String output = "{ \" choice0\" : \"" + listOfChoices.get(0) + "\"";
+			String output = "{ \" choice0ID\" : \"" + listOfChoices.get(0).id + "\" , \"choice0Description\": \"" + listOfChoices.get(0).description + "\" , \"choice0CreationDate\": \"" + listOfChoices.get(0).creationDate + "\" , \"choice0IsFinalized\": \""+ listOfChoices.get(0).isFinalized + "\"";
 			if(listOfChoices.size() > 1) {
 				for(int i = 1; i < listOfChoices.size(); i++) {
-					output = output + ", \"choice" + i + "\" : \"" + listOfChoices.get(i)+ "\"";
+					output = output + ", \"choice" + i + "ID\" : \"" + listOfChoices.get(i).id+ "\" , \"choice" + i + "Description\" : \"" + listOfChoices.get(i).description + "\", \"choice" + i + "CreationDate\" : \"" + listOfChoices.get(i).creationDate + "\" , \"choice" + i + "IsFinalized\": \""+ listOfChoices.get(i).isFinalized + "\"";
 				}
 			}
 			return output + "}";

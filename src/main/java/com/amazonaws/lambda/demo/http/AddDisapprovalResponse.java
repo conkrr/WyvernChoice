@@ -6,44 +6,29 @@ public class AddDisapprovalResponse
 	public String disapprovingUser;
 	public String alternativeID;
 	public String choiceID;
+	public int approvals;
+	public int disapprovals;
 	public int statusCode;
 	public String error;
 	
-    public AddDisapprovalResponse(String disapprovingUser, String alternativeID, String choiceID, int statusCode,
-    		String error)
+	public AddDisapprovalResponse(String disapprovingUser, String alternativeID, String choiceID, int approvals, int disapprovals, int statusCode)
     {
     	this.disapprovingUser = disapprovingUser;
     	this.alternativeID = alternativeID;
     	this.choiceID = choiceID;
-    	this.statusCode = statusCode;
-    	this.error = error;
-    }
-    
-    public AddDisapprovalResponse(String disapprovingUser, String alternativeID, String choiceID,
-    		String error)
-    {
-    	this.disapprovingUser = disapprovingUser;
-    	this.alternativeID = alternativeID;
-    	this.choiceID = choiceID;
-    	this.statusCode = 200;
-    	this.error = error;
-    }
-    
-    public AddDisapprovalResponse(String disapprovingUser, String alternativeID, String choiceID,
-    		int statusCode)
-    {
-    	this.disapprovingUser = disapprovingUser;
-    	this.alternativeID = alternativeID;
-    	this.choiceID = choiceID;
+    	this.approvals = approvals;
+    	this.disapprovals = disapprovals;
     	this.statusCode = statusCode;
     	this.error = "";
     }
     
-    public AddDisapprovalResponse(String disapprovingUser, String alternativeID, String choiceID)
+    public AddDisapprovalResponse(String disapprovingUser, String alternativeID, String choiceID, int approvals, int disapprovals)
     {
     	this.disapprovingUser = disapprovingUser;
     	this.alternativeID = alternativeID;
     	this.choiceID = choiceID;
+    	this.approvals = approvals;
+    	this.disapprovals = disapprovals;
     	this.statusCode = 200;
     	this.error = "";
     }
