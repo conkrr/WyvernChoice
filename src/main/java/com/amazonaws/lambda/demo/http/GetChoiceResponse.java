@@ -6,14 +6,14 @@ import com.amazonaws.lambda.demo.model.Alternative;
 import com.amazonaws.lambda.demo.model.Choice;
 
 public class GetChoiceResponse {
-	String error;
-	int statusCode;
-	String name;
-	String choiceID;
-	int numParticipants;
-	String creationDate;
-	boolean isFinalized;
-	List<AlternativeResponse> listofAlternatives;
+	public String error;
+	public int statusCode;
+	public String name;
+	public String choiceID;
+	public int numParticipants;
+	public String creationDate;
+	public boolean isFinalized;
+	public List<AlternativeResponse> listofAlternatives;
 	
 	public GetChoiceResponse (String s, int code) {
 		this.error = s;
