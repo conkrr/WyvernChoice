@@ -32,6 +32,31 @@ java.sql.Connection connection;
     	}
     }
 
+    public List<Choice> getAll() throws Exception{
+    	List<Choice> choices = new ArrayList<Choice>();
+    	try {
+            
+            PreparedStatement psChoices = connection.prepareStatement("SELECT * FROM " + tableName + ";");
+            ResultSet resultSetChoices = psChoices.executeQuery();
+            while (resultSetChoices.next()) {
+                choices.add(generate(resultSetChoices));
+            }
+            resultSetChoices.close();
+            psChoices.close();
+           
+            
+            logger.log("getAllChoice end");
+            
+
+        } catch (Exception e) {
+        	
+        	e.printStackTrace();
+        	
+            throw new Exception("Failed in getting all choice: " + e.getMessage());
+        }
+    	return choices;
+    }
+    
 	@Override
 	public Choice get(String uniqueId) throws Exception {
 		logger.log("getChoice start");
