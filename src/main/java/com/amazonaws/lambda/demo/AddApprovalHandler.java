@@ -13,6 +13,7 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Iterator;
 import java.util.List;
 
 
@@ -59,20 +60,16 @@ public class AddApprovalHandler implements RequestHandler<AddApprovalRequest, Op
 
             ApprovalsDAO apvDao = new ApprovalsDAO(logger);
             DisapprovalsDAO disDao = new DisapprovalsDAO(logger);
-            List<Approval> appList = apvDao.get(a.getAlternativeId());
-            List<Disapproval> disList = disDao.get(a.getAlternativeId());
-            List<Opinion> opList = new ArrayList<Opinion>();
-            opList.addAll(appList);
-            opList.addAll(disList);
-            List<String> users =new ArrayList<String>();
-            for(Opinion opn: opList) {
-            	users.add(opn.getUserName());
-            }
+            //List<Approval> appList = apvDao.get(a.getAlternativeId());
+            //List<Disapproval> disList = disDao.get(a.getAlternativeId());          
+            
+            List<String> appUsers = Opinion.getOpinionUsers(new ArrayList<Opinion>(apvDao.get(a.getAlternativeId())));
+            List<String> disUsers = Opinion.getOpinionUsers(new ArrayList<Opinion>(disDao.get(a.getAlternativeId())));
             
             if (addApprovalSuccess)
-                response = new OpinionResponse(appList.size(), disList.size(), users, "", 200);
+                response = new OpinionResponse(a.getAlternativeId(), appUsers.size(), disUsers.size(), appUsers, disUsers, "", 200);
             else
-                response = new OpinionResponse(appList.size(), disList.size(), users, "", 422);;
+                response = new OpinionResponse(a.getAlternativeId(), appUsers.size(), disUsers.size(), appUsers, disUsers, "", 422);
 
         } catch (Exception e) {
             response = new OpinionResponse("Unable to add approval for User: " + request.getUsername() + ", altID: " + request.getAlternativeID() + "(error: " + e.getMessage() + ")", 400);
