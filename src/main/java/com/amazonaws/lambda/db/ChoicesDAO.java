@@ -68,7 +68,7 @@ java.sql.Connection connection;
           PreparedStatement psChoices = connection.prepareStatement("SELECT * FROM " + tableName + " WHERE id=?;");
           psChoices.setString(1,  uniqueId);
           ResultSet resultSetChoices = psChoices.executeQuery();
-                        choice = generate(resultSetChoices);
+          choice = generate(resultSetChoices);
           
           resultSetChoices.close();
           psChoices.close();
@@ -134,7 +134,7 @@ java.sql.Connection connection;
 		logger.log("AlternativesDAO::generate() -- Begin");
     	Choice c = null;
         try {
-			while(resultSet.next()) {
+			//while(resultSet.next()) {
 				logger.log("AlternativesDAO::generate() -- extraction from resultSet");
 				final String choiceId = resultSet.getString("id");
 				final String userId = resultSet.getString("creatingUserID");
@@ -149,7 +149,7 @@ java.sql.Connection connection;
 				c = new Choice(choiceId, description, creationTime, userId, false, alternatives,
 						maxParticipants, currentParticipants);
 				
-			}
+			//}
 
 		} catch (Exception e) {
         	e.printStackTrace();
