@@ -45,18 +45,21 @@ function processRequestChoiceListResponse(result){
   for(let i=0; i < jsonObj.list.length; i++){
     var choiceJson = js.list[i];
 
-    var cName = choiceJson.choice.name;
+    //var cName = choiceJson.choice.name;
     var cID = choiceJson.choice.choiceID;
     var cFinalized = choiceJson.choice.isFinalized;
-    var cDate;
+    var cDate = choiceJson.choice.creationDate;
     if(cFinalized === true){
-      cDate = choiceJson.choice.completionDate;
+      cFinalized = "Closed"
     } else {
-      cDate = "Open";
+      cFinalized = "Open";
     }
 
-    output = output + "<div id=\"const" + cName + "\"><b>" + cName + "</b>   <b>" + cID + "</b>     <b>"+ cDate + "</b></div><br>";
+    output = output + "<div id=\"choice" + cID + "\"><b>" + cID + "</b>   <b>" + cDate + "</b>     <b>"+ cFinalized + "</b></div><br>";
   }
+
+  //Output list of choices here
+  choiceList.innerHTML = output;
 };
 
 

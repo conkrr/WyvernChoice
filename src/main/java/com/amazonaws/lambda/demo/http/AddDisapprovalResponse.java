@@ -40,7 +40,7 @@ public class AddDisapprovalResponse
 
 	public String toString() {
 		if(statusCode == 200) {
-			return "{ \"disapprovingUser\": \"" + disapprovingUser + "\", \"alternativeID\": \"" + alternativeID + "\", \"choiceID\": \"" + choiceID + "\", \"statusCode\": \"" + statusCode +"\" }";
+			return "{ \"disapprovingUser\": \"" + disapprovingUser + "\", \"alternativeID\": \"" + alternativeID + "\", \"choiceID\": \"" + choiceID + "\", \"approvals\": \"" + approvals + "\", \"disapprovals\": \"" + disapprovals + "\", \"statusCode\": \"" + statusCode +"\" }";
 		} else {
 			return "{ \"statusCode\": \"" + statusCode + "\", \"error\": \"" + error + "\" }";
 		}
