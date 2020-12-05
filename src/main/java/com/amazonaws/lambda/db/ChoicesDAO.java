@@ -144,7 +144,7 @@ java.sql.Connection connection;
 				final boolean isChosen = resultSet.getBoolean("isChosen");
 				final Timestamp creationTime = resultSet.getTimestamp("creationTime");
 				
-				AlternativesDAO dao = new AlternativesDAO();
+				AlternativesDAO dao = new AlternativesDAO(logger);
 				List<Alternative> alternatives = dao.get(choiceId);
 				c = new Choice(choiceId, description, creationTime, userId, false, alternatives,
 						maxParticipants, currentParticipants);

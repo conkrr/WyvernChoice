@@ -32,7 +32,7 @@ public class AddApprovalHandler implements RequestHandler<AddApprovalRequest, Op
     boolean approvalDAOHelper(Approval approval) throws Exception {
         // if (logger != null) { logger.log("in AddApproval"); }
 
-        ApprovalsDAO approvalsDAO = new ApprovalsDAO(/*logger*/);
+        ApprovalsDAO approvalsDAO = new ApprovalsDAO(logger);
         //List<Approval> approvalsList = approvalsDAO.get(approval.getAlternativeId());
 
 
@@ -57,7 +57,7 @@ public class AddApprovalHandler implements RequestHandler<AddApprovalRequest, Op
             Approval a = createApproval(request);
             boolean addApprovalSuccess = approvalDAOHelper(a);
 
-            ApprovalsDAO apvDao = new ApprovalsDAO();
+            ApprovalsDAO apvDao = new ApprovalsDAO(logger);
             DisapprovalsDAO disDao = new DisapprovalsDAO();
             List<Approval> appList = apvDao.get(a.getAlternativeId());
             List<Disapproval> disList = disDao.get(a.getAlternativeId());

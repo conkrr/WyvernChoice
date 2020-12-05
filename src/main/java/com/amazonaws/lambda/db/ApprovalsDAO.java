@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 import com.amazonaws.lambda.demo.model.Approval;
+import com.amazonaws.services.lambda.runtime.LambdaLogger;
 //import com.amazonaws.services.lambda.runtime.LambdaLogger;
 
 public class ApprovalsDAO implements DataAccessAsymmetric<Approval>{
@@ -15,10 +16,10 @@ public class ApprovalsDAO implements DataAccessAsymmetric<Approval>{
 	
 	private Connection connection;
 	private static final String tableName = "Approvals";
-//	private final LambdaLogger logger;
+	private final LambdaLogger logger;
 	
-    public ApprovalsDAO(/*LambdaLogger logger*/) {
-//    	this.logger = logger;
+    public ApprovalsDAO(LambdaLogger logger) {
+    	this.logger = logger;
     	try  {
     		connection = DatabaseUtil.connect();
     	} catch (Exception e) {
@@ -28,7 +29,7 @@ public class ApprovalsDAO implements DataAccessAsymmetric<Approval>{
 
 	@Override
 	public List<Approval> get(String uniqueId) throws Exception { //uniqueID = alternative ID
-		//logger.log("ApprovalsDAO::get() -- Begin");
+		logger.log("ApprovalsDAO::get() -- Begin");
 //		System.out.println("ApprovalsDAO::get() -- Begin");
     	List<Approval> list;  	
         try {
@@ -40,7 +41,7 @@ public class ApprovalsDAO implements DataAccessAsymmetric<Approval>{
             resultSet.close();
             ps.close();
 //            System.out.println("ApprovalsDAO::get() -- End");
-            //logger.log("ApprovalsDAO::get() -- End");
+            logger.log("ApprovalsDAO::get() -- End");
             return list;
         } catch (Exception e) {
         	e.printStackTrace();
@@ -50,7 +51,7 @@ public class ApprovalsDAO implements DataAccessAsymmetric<Approval>{
 
 	@Override
 	public int delete(String uniqueId) throws Exception {
-		//logger.log("ApprovalsDAO::delete() -- Begin");
+		logger.log("ApprovalsDAO::delete() -- Begin");
 		int rowsAffected = 0;
 		
 		try {
@@ -68,7 +69,7 @@ public class ApprovalsDAO implements DataAccessAsymmetric<Approval>{
 
 	@Override
 	public boolean insert(Approval t) throws Exception {
-		//logger.log("ApprovalsDAO::insert -- Begin");
+		logger.log("ApprovalsDAO::insert -- Begin");
 //		System.out.println("ApprovalsDAO::insert -- Begin");
 		try {
 			boolean alreadyExists = !get(t.getAlternativeId()).isEmpty();
@@ -82,7 +83,7 @@ public class ApprovalsDAO implements DataAccessAsymmetric<Approval>{
 					ps.setInt(4, 1); // 1 indicates approval
 					ps.execute();
 			}
-			//logger.log("ApprovalsDAO::insert() -- End");
+			logger.log("ApprovalsDAO::insert() -- End");
 //			System.out.println("ApprovalsDAO::insert() -- End");
 			return alreadyExists;
 		} catch (Exception e) {
@@ -93,7 +94,7 @@ public class ApprovalsDAO implements DataAccessAsymmetric<Approval>{
 
 	@Override
 	public List<Approval> generate(ResultSet resultSet) throws Exception {
-		//logger.log("ApprovalsDAO::generate() -- Begin");
+		logger.log("ApprovalsDAO::generate() -- Begin");
         
     	ArrayList<Approval> approvals = new ArrayList<Approval>();
         try {
@@ -106,7 +107,9 @@ public class ApprovalsDAO implements DataAccessAsymmetric<Approval>{
 				final String choiceID = resultSet.getString("choiceID");
 				
 				if (approveStatus == 1) {
+					
 					approvals.add(new Approval(alternativeId, userId, timestamp, userName, choiceID));
+					logger.log("ApprovalsDAO::generate() -- Added approval to list");
 				}
 				
 			}
@@ -114,7 +117,7 @@ public class ApprovalsDAO implements DataAccessAsymmetric<Approval>{
         	e.printStackTrace();
             throw new Exception("Exception in ApprovalsDAO::generate(): " + e.getMessage());
         }
-        //logger.log("ApprovalsDAO::generate() -- End");
+        logger.log("ApprovalsDAO::generate() -- End");
         return approvals;
 	}
 

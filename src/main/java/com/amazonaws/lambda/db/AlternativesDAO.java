@@ -11,15 +11,16 @@ import java.util.ListIterator;
 import com.amazonaws.lambda.demo.model.Alternative;
 import com.amazonaws.lambda.demo.model.Approval;
 import com.amazonaws.lambda.demo.model.Disapproval;
+import com.amazonaws.services.lambda.runtime.LambdaLogger;
 
 public class AlternativesDAO implements DataAccessAsymmetric<Alternative>{
 
 	private Connection connection;
 	private static final String tableName = "Alternatives";
-//	private final LambdaLogger logger;
+	private final LambdaLogger logger;
 	
-    public AlternativesDAO(/*LambdaLogger logger*/) {
-//    	this.logger = logger;
+    public AlternativesDAO(LambdaLogger logger) {
+    	this.logger = logger;
     	try  {
     		connection = DatabaseUtil.connect();
     	} catch (Exception e) {
@@ -105,7 +106,7 @@ public class AlternativesDAO implements DataAccessAsymmetric<Alternative>{
 				final String alternativeId = resultSet.getString("alternativeID");
 				final boolean isChosen = resultSet.getBoolean("isChosen");
 				
-				ApprovalsDAO dao = new ApprovalsDAO();
+				ApprovalsDAO dao = new ApprovalsDAO(logger);
 				List<Approval> approvals = dao.get(alternativeId);
 				
 
