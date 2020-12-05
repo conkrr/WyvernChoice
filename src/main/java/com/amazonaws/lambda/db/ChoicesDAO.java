@@ -141,7 +141,7 @@ java.sql.Connection connection;
 				final String description = resultSet.getString("description");
 				final int maxParticipants = resultSet.getInt("maxParticipants");
 				final int currentParticipants = resultSet.getInt("currentParticipants");
-				final boolean isChosen = resultSet.getBoolean("isChosen");
+				//final boolean isChosen = resultSet.getBoolean("isChosen");
 				final Timestamp creationTime = resultSet.getTimestamp("creationTime");
 				
 				AlternativesDAO dao = new AlternativesDAO(logger);

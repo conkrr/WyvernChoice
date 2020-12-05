@@ -7,6 +7,7 @@
         <script type='text/javascript' src='../js/getChoice.js'></script>
         <script type='text/javascript' src='../js/createChoice.js'></script>
         <script type='text/javascript' src='../js/registerUser.js'></script>
+        <script type='text/javascript' src='../js/get_choiceList.js'></script>
 
         <link rel="shortcut icon" href="#" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,8 +23,9 @@
     </nav>
     <main id="MainPage">
         <nav id="ListofChoices">
+            <input type="button" class="btn btn-info"id="getListOfChoicesButton" value="Refresh Choice List" onClick="JavaScript:requestChoiceList(this)">
             <h1>List of Created Choices</h1>
-            <pre>           NAME                              ID#              COMPLETION DATE</pre>
+            <pre>           ID                              Creation Date              Completed?</pre>
             <br>
             <pre><h4>What days should we get go golfing?          4643               11/13/2020</h4></pre>
             <pre><h4>What should we get for lunch?                3733               04/04/2021</h4></pre>
