@@ -1,6 +1,9 @@
 package com.amazonaws.lambda.demo.model;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 public abstract class Opinion {
 	protected final String alternativeId;
@@ -32,6 +35,15 @@ public abstract class Opinion {
 
 	public String getChoiceId() {
 		return choiceId;
+	}
+	
+	public static List<String> getOpinionUsers(List<Opinion> approvals) {
+		List<String> nameList = new ArrayList<String>();
+		Iterator<Opinion> iterator = approvals.iterator();
+		while(iterator.hasNext()){
+		  nameList.add(iterator.next().userName);
+		}
+		return nameList;
 	}
 	
 }
