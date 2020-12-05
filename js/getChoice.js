@@ -66,7 +66,6 @@ function processRequestChoiceResponse(result) {
 
     if(cAlternatives[0] !== null){
         alternativeJson = cAlternatives[0];
-
         document.getElementById("alternative1name").innerHTML = alternativeJson.description;
 
         console.log("altJson: " + alternativeJson);
@@ -93,8 +92,11 @@ function processRequestChoiceResponse(result) {
         document.getElementById("Alternative1").style.visibility = visible;
     }
 
+    //Alternative 2
     if(cAlternatives[1] !== null){
         alternativeJson = cAlternatives[1];
+        approvalUserOutput = "";
+        disapprovalUserOutput = "";
         document.getElementById("alternative2name").innerHTML = alternativeJson.description;
         document.getElementById("alternative2approvalcount").innerHTML = alternativeJson.Approvals.approvalCount;
         //Deal with list of users
@@ -105,8 +107,11 @@ function processRequestChoiceResponse(result) {
         document.getElementById("Alternative2").style.visibility = visible;
     }
 
+    //Alternative 3
     if(cAlternatives[2] !== null){
         alternativeJson = cAlternatives[2];
+        approvalUserOutput = "";
+        disapprovalUserOutput = "";
         document.getElementById("alternative3name").innerHTML = alternativeJson.description;
         document.getElementById("alternative3approvalcount").innerHTML = alternativeJson.Approvals.approvalCount;
         //Deal with list of users
@@ -117,8 +122,11 @@ function processRequestChoiceResponse(result) {
         document.getElementById("Alternative3").style.visibility = visible;
     }
 
+    //Alternative 4
     if(cAlternatives[3] !== null){
         alternativeJson = cAlternatives[3];
+        approvalUserOutput = "";
+        disapprovalUserOutput = "";
         document.getElementById("alternative4name").innerHTML = alternativeJson.description;
         document.getElementById("alternative4approvalcount").innerHTML = alternativeJson.Approvals.approvalCount;
         //Deal with list of users
@@ -129,8 +137,11 @@ function processRequestChoiceResponse(result) {
         document.getElementById("Alternative4").style.visibility = visible;
     }
 
+    //Alternative 5
     if(cAlternatives[4] !== null){
         alternativeJson = cAlternatives[4];
+        approvalUserOutput = "";
+        disapprovalUserOutput = "";
         document.getElementById("alternative5name").innerHTML = alternativeJson.description;
         document.getElementById("alternative5approvalcount").innerHTML = alternativeJson.Approvals.approvalCount;
         //Deal with list of users

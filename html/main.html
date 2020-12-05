@@ -6,6 +6,8 @@
         <script type='text/javascript' src='../js/getChoice.js'></script>
         <script type='text/javascript' src='../js/createChoice.js'></script>
         <script type='text/javascript' src='../js/registerUser.js'></script>
+        <script type='text/javascript' src='../js/approval.js'></script>
+        <script type='text/javascript' src='../js/disapproval.js'></script>
 
 
         <link rel="stylesheet" type="text/css" href="main.css">
@@ -73,6 +75,7 @@
                 <nav id="Choice">
                     <h2>Choice</h2>
                     <div id="choiceView">Register with an ID to see a choice!</div>
+                    <input type="button" class="btn btn-info"id="getChoiceButton" value="Refresh Curent Choice" onClick="JavaScript:requestChoice(this)">
                     <div id="currentChoice">
                         <div id="ChoiceHeader">
                             <div id="NameOfChoice"> Placeholder Choice Name</div>
