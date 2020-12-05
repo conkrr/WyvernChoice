@@ -11,6 +11,7 @@ import com.amazonaws.lambda.demo.http.CreateChoiceRequest;
 import com.amazonaws.lambda.demo.http.CreateChoiceResponse;
 import com.amazonaws.lambda.demo.http.ChoiceGsonCompatible;
 import com.amazonaws.lambda.demo.model.Alternative;
+import com.amazonaws.lambda.demo.model.Approval;
 import com.amazonaws.lambda.demo.model.Choice;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.LambdaLogger;
@@ -30,18 +31,21 @@ public class CreateChoiceHandler implements RequestHandler<CreateChoiceRequest, 
 			int maxParticipants){ 
 		
 		logger.log("initialize stuff");
-		UUID id = UUID.randomUUID();
+		UUID choiceID = UUID.randomUUID();
 		Timestamp creationDate = new Timestamp(Calendar.getInstance().getTimeInMillis());
 		
 		logger.log("make alternatives");
 		logger.log("alternatives: " + (alternativeDescs==null));
 		ArrayList<Alternative> alternatives = new ArrayList<Alternative>();
 		for(int i = 0; i < alternativeDescs.size(); i++) {
-			alternatives.add(new Alternative(alternativeDescs.get(i), UUID.randomUUID().toString(), false));
+			UUID alternativeID = UUID.randomUUID();
+			List<Approval> emptyApprovals = new ArrayList<Approval>();
+			
+			alternatives.add(new Alternative(alternativeDescs.get(i), choiceID.toString(), alternativeID.toString(), emptyApprovals, false));
 		}
 		
 		logger.log("create choice");
-		Choice choice = new Choice (id.toString(), description, creationDate, creatingUserID, false, alternatives,
+		Choice choice = new Choice (choiceID.toString(), description, creationDate, creatingUserID, false, alternatives,
 					maxParticipants, 1);
 		
 		logger.log("return choice");
@@ -54,11 +58,11 @@ public class CreateChoiceHandler implements RequestHandler<CreateChoiceRequest, 
 		ChoicesDAO dao = new ChoicesDAO(logger);
 				// check if present
 
-		boolean exists = dao.getChoice(choice.id.toString()) != null;
+		boolean exists = dao.get(choice.id.toString()) != null;
 		logger.log("exist == " + exists);
 		if (!exists) {
 			
-			dao.addChoice(choice);
+			dao.insert(choice);
 		}
 		return !exists;
 		

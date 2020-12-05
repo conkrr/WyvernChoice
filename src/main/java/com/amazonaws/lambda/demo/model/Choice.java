@@ -32,14 +32,14 @@ public class Choice {
 	public List<String >getAlternativeIdList(){
 		ArrayList<String> ids = new ArrayList<String>(alternatives.size());
 		for(Alternative a : alternatives) {
-			ids.add(a.alternativeID);
+			ids.add(a.getAlternativeID());
 		}
 		return ids;
 	}
 	public List<AlternativeGsonCompatible> getAlternativeGsonList(){
 		ArrayList<AlternativeGsonCompatible> altsGson = new ArrayList<AlternativeGsonCompatible>(alternatives.size());
 		for(Alternative a : alternatives) {
-			altsGson.add(new AlternativeGsonCompatible(a.alternativeID, a.name));
+			altsGson.add(new AlternativeGsonCompatible(a.getAlternativeID(), a.getName()));
 		}
 		return altsGson;
 	}

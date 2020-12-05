@@ -1,18 +1,19 @@
 package com.amazonaws.lambda.demo.http;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.amazonaws.lambda.demo.model.Choice;
 
 public class GetListOfChoicesResponse {
-	public ArrayList<Choice> listOfChoices;
+	public List<Choice> listOfChoices;
 	public int statusCode;
 	public String error;
 	
 	public GetListOfChoicesResponse() {
 	}
 	
-	public GetListOfChoicesResponse(ArrayList<Choice> choices, int statusCode, String error) {
+	public GetListOfChoicesResponse(List<Choice> choices, int statusCode, String error) {
 		this.listOfChoices = choices;
 		this.statusCode = statusCode;
 		this.error = error;

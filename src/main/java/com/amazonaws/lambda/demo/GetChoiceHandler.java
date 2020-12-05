@@ -16,7 +16,7 @@ public class GetChoiceHandler implements RequestHandler<GetChoiceRequest, GetCho
 		Choice getChoiceViaDAO(String id) throws Exception { 
 			logger.log("GetChoiceHandler::getChoiceDAO()");
 			ChoicesDAO dao = new ChoicesDAO(logger);
-			Choice choice = dao.getChoice(id);
+			Choice choice = dao.get(id);
 			return choice;
 		}
 		
