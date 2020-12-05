@@ -68,9 +68,8 @@ java.sql.Connection connection;
           PreparedStatement psChoices = connection.prepareStatement("SELECT * FROM " + tableName + " WHERE id=?;");
           psChoices.setString(1,  uniqueId);
           ResultSet resultSetChoices = psChoices.executeQuery();
-          while (resultSetChoices.next()) {
-              choice = generate(resultSetChoices);
-          }
+                        choice = generate(resultSetChoices);
+          
           resultSetChoices.close();
           psChoices.close();
          
@@ -132,10 +131,11 @@ java.sql.Connection connection;
 
 	@Override
 	public Choice generate(ResultSet resultSet) throws Exception {
-
+		logger.log("AlternativesDAO::generate() -- Begin");
     	Choice c = null;
         try {
 			while(resultSet.next()) {
+				logger.log("AlternativesDAO::generate() -- extraction from resultSet");
 				final String choiceId = resultSet.getString("id");
 				final String userId = resultSet.getString("creatingUserID");
 				final String description = resultSet.getString("description");
@@ -155,7 +155,7 @@ java.sql.Connection connection;
         	e.printStackTrace();
             throw new Exception("Exception in AlternativesDAO::generate(): " + e.getMessage());
         }
-        //logger.log("AlternativesDAO::generate() -- End");
+        logger.log("AlternativesDAO::generate() -- End");
         return c;
 	}
     
