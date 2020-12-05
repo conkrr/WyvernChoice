@@ -74,7 +74,7 @@ public class ApprovalsDAO implements DataAccessAsymmetric<Approval>{
 		try {
 			boolean alreadyExists = !get(t.getAlternativeId()).isEmpty();
 //			System.out.println("ApprovalsDAO::insert -- alreadyExists = " + alreadyExists);
-			if (!alreadyExists) {
+//			if (!alreadyExists) {
 				
 				PreparedStatement ps = connection.prepareStatement("INSERT INTO " + tableName + " (alternativeID, userID, timestamp, status) values(?, ?, ?, ?);");
 					ps.setString(1, t.getAlternativeId());
@@ -82,7 +82,7 @@ public class ApprovalsDAO implements DataAccessAsymmetric<Approval>{
 					ps.setTimestamp(3, t.getTimestamp());
 					ps.setInt(4, 1); // 1 indicates approval
 					ps.execute();
-			}
+//			}
 			logger.log("ApprovalsDAO::insert() -- End");
 //			System.out.println("ApprovalsDAO::insert() -- End");
 			return alreadyExists;

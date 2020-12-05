@@ -58,7 +58,7 @@ public class AddApprovalHandler implements RequestHandler<AddApprovalRequest, Op
             boolean addApprovalSuccess = approvalDAOHelper(a);
 
             ApprovalsDAO apvDao = new ApprovalsDAO(logger);
-            DisapprovalsDAO disDao = new DisapprovalsDAO();
+            DisapprovalsDAO disDao = new DisapprovalsDAO(logger);
             List<Approval> appList = apvDao.get(a.getAlternativeId());
             List<Disapproval> disList = disDao.get(a.getAlternativeId());
             List<Opinion> opList = new ArrayList<Opinion>();
