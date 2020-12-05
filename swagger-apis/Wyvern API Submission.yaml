@@ -1,4 +1,4 @@
- swagger: '2.0'
+swagger: '2.0'
 info:
   description: "Wyvern Choice API"
   version: 1.1.0
