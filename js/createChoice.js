@@ -2,7 +2,7 @@ function processCreateResponse(result) {
     // Can grab any DIV or SPAN HTML element and can then manipulate its
     // contents dynamically via javascript
     console.log("processCreateResponse result:" + result);
-  
+
 	const jsonObj = JSON.parse(result);
 	const id = jsonObj.choice.choiceID
     requestChoice(id);

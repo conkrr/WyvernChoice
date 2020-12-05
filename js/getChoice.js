@@ -27,7 +27,7 @@ function processRequestChoiceResponse(result) {
         cFinalized = "Still open for discussion.";
     }
 
-    var cAlternatives = choice["listofAlternatives"];
+    var cAlternatives = jsonObj.choice.listofAlternatives;//choice["listofAlternatives"];
 
     /*
     output = output + "<div id=\"choice" + cName + "\">"+ cName + "<br> ID:" + cID + "<br>" + cFinalized + "<br></div>";
@@ -58,14 +58,25 @@ function processRequestChoiceResponse(result) {
     /////////////////////////////
     //Initialize Choice Headers//
     /////////////////////////////
-    let alternativeJson;
-    let approvalUserOutput;
-    let disapprovalUserOutput;
+    var alternativeJson;
+    var approvalUserOutput;
+    var disapprovalUserOutput;
+
+    console.log("cAlternatives = " + cAlternatives);
+
     if(cAlternatives[0] !== null){
         alternativeJson = cAlternatives[0];
+
         document.getElementById("alternative1name").innerHTML = alternativeJson.description;
 
+        console.log("altJson: " + alternativeJson);
+        console.log("altJson desc: " +  alternativeJson.description);
         //Get Approval Elements
+
+        console.log("alternativeJson.Approvals " +  alternativeJson.Approvals);
+        console.log("alternativeJson.Approvals.count " +  alternativeJson.Approvals.approvalCount);
+
+
         document.getElementById("alternative1approvalcount").innerHTML = alternativeJson.Approvals.approvalCount;
         for(let i=0; i < alternativeJson.Approvals.Users.length; i++){
             approvalUserOutput = approvalUserOutput + "<b>" + alternativeJson.Approvals.Users[i] + "</b><br>"
