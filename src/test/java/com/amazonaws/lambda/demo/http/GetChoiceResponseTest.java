@@ -33,7 +33,7 @@ class GetChoiceResponseTest {
 		rep = new ObjectMapper();
 		actualRep = rep.readTree(gcr.toString());
 		assertEquals(actualRep.get("statusCode").asText(), "400");
-		assertEquals(actualRep.get("error").asText(), "whoop I dropped my chocolate bar");
+		assertEquals(actualRep.get("error").asText(), "bye bye chocolate bar");
 		
 	}
 
