@@ -31,7 +31,7 @@ public class DeleteChoiceHandler implements RequestHandler<DeleteChoiceRequest,D
 		// have one part of its information?
 		String id = req.getId();
 		try {
-			if (dao.deleteChoice(id)) {
+			if (dao.delete(id) > 0) {
 				response = new DeleteChoiceResponse(req.getId(), 200);
 			} else {
 				response = new DeleteChoiceResponse(req.getId(), 422, "Unable to delete choice.");
