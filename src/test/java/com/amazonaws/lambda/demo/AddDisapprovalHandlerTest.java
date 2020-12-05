@@ -14,11 +14,11 @@ public class AddDisapprovalHandlerTest extends LambdaTest
 {
 //************************* THIS CLASS IS JUST AN OUTLINE *************************
 
-    AddDisapprovalResponse testSuccessInput(String incoming) throws IOException
+	OpinionResponse testSuccessInput(String incoming) throws IOException
     {
         AddDisapprovalHandler  handler = new AddDisapprovalHandler();
         AddDisapprovalRequest  req = new Gson().fromJson(incoming, AddDisapprovalRequest.class); //TODO: Fix after we remove GSON compatible stuff
-        AddDisapprovalResponse resp = handler.handleRequest(req, createContext("adddisapproval"));
+        OpinionResponse resp = handler.handleRequest(req, createContext("adddisapproval"));
 
         //Assert.assertEquals(200, resp.statusCode);
         return resp;
@@ -28,13 +28,13 @@ public class AddDisapprovalHandlerTest extends LambdaTest
         AddDisapprovalHandler  handler = new AddDisapprovalHandler();
         AddDisapprovalRequest req = new Gson().fromJson(incoming, AddDisapprovalRequest.class); //TODO: Fix after we remove GSON compatible stuff
 
-        AddDisapprovalResponse resp = handler.handleRequest(req, createContext("adddisapproval"));
+        OpinionResponse resp = handler.handleRequest(req, createContext("adddisapproval"));
         //Assert.assertEquals(failureCode, resp.statusCode);
     }
 
     String getJsonResponse(String incoming) throws IOException { //TODO: might be able to remove this entirely
 
-        AddDisapprovalResponse resp = testSuccessInput(incoming);
+    	OpinionResponse resp = testSuccessInput(incoming);
 
         //return new Gson().toJson(resp.disapprovalGson); //TODO: fix
 
@@ -91,7 +91,7 @@ public class AddDisapprovalHandlerTest extends LambdaTest
         AddApprovalRequest areq = new AddApprovalRequest(approvingUser,userId,alternativeID,choiceID);
 
         AddApprovalHandler  ahandler = new AddApprovalHandler();
-        AddApprovalResponse aresp = ahandler.handleRequest(areq, createContext("addapproval"));
+        OpinionResponse resp = ahandler.handleRequest(areq, createContext("addapproval"));
 
         //add disapproval
 

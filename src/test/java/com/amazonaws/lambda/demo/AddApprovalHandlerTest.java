@@ -20,13 +20,13 @@ public class AddApprovalHandlerTest extends LambdaTest {
 
 
 
-    AddApprovalResponse testSuccessInput(String incoming) throws IOException
+    OpinionResponse testSuccessInput(String incoming) throws IOException
     {
         AddApprovalHandler  handler = new AddApprovalHandler();
         AddApprovalRequest  req = new Gson().fromJson(incoming, AddApprovalRequest.class);
 
 
-        AddApprovalResponse resp = handler.handleRequest(req, createContext("addapproval"));
+        OpinionResponse resp = handler.handleRequest(req, createContext("addapproval"));
 
         Assert.assertEquals(200, resp.statusCode);
         return resp;
@@ -36,13 +36,13 @@ public class AddApprovalHandlerTest extends LambdaTest {
         AddApprovalHandler  handler = new AddApprovalHandler();
         AddApprovalRequest req = new Gson().fromJson(incoming, AddApprovalRequest.class);
 
-        AddApprovalResponse resp = handler.handleRequest(req, createContext("addapproval"));
+        OpinionResponse resp = handler.handleRequest(req, createContext("addapproval"));
         Assert.assertEquals(failureCode, resp.statusCode);
     }
 
     String getJsonResponse(String incoming) throws IOException
     {
-        AddApprovalResponse resp = testSuccessInput(incoming);
+    	OpinionResponse resp = testSuccessInput(incoming);
 
         return new Gson().toJson(resp);
     }
@@ -105,7 +105,7 @@ public class AddApprovalHandlerTest extends LambdaTest {
         AddDisapprovalRequest dreq = new AddDisapprovalRequest(approvingUser,userId,alternativeID,choiceID);
 
         AddDisapprovalHandler  dhandler = new AddDisapprovalHandler();
-        AddDisapprovalResponse dresp = dhandler.handleRequest(dreq, createContext("adddisapproval"));
+        OpinionResponse dresp = dhandler.handleRequest(dreq, createContext("adddisapproval"));
 
         //add disapproval
 

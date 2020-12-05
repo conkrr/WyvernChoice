@@ -23,6 +23,7 @@ public class DataAccessTest extends LambdaTest {
 	
 	private Approval generateApproval(String alternativeID) {
 		//String alternativeID = UUID.randomUUID().toString();
+		String choiceID = UUID.randomUUID().toString();
 		String userID = UUID.randomUUID().toString();
 		Timestamp timestamp = new Timestamp(Calendar.getInstance().getTimeInMillis());
 		int status = 1;
@@ -32,7 +33,7 @@ public class DataAccessTest extends LambdaTest {
 		for(int i = 0; i < random.nextInt(8)+3; i++) {
 			name += (char) random.nextInt(91) + 65;
 		}
-		return new Approval(alternativeID, userID, timestamp, name);
+		return new Approval(alternativeID, userID, timestamp, name, choiceID);
 	}
 	
 	private List<Approval> generateApprovalList() {
