@@ -35,9 +35,9 @@ public class AddDisapprovalHandler implements RequestHandler<AddDisapprovalReque
         // if (logger != null) { logger.log("in AddApproval"); }
 
         DisapprovalsDAO disapprovalsDAO = new DisapprovalsDAO(/*logger*/);
-        List<Disapproval> disapprovalsList = disapprovalsDAO.get(disapproval.getAlternativeId());
+       // List<Disapproval> disapprovalsList = disapprovalsDAO.get(disapproval.getAlternativeId());
 
-        boolean exists = disapprovalsList.stream().anyMatch(a -> a.getUserId().equals(disapproval.getUserId())); // this is either very cool or very bad
+        boolean exists = false; //disapprovalsList.stream().anyMatch(a -> a.getUserId().equals(disapproval.getUserId())); // this is either very cool or very bad
 
         logger.log("Does this disapproval exist in the database already? " + exists);
         if (!exists) {
