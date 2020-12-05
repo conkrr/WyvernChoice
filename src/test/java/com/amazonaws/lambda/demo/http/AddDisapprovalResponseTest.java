@@ -14,12 +14,14 @@ class AddDisapprovalResponseTest {
 
 	@Test
 	void test() throws JsonProcessingException, IOException {
-		AddDisapprovalResponse adr = new AddDisapprovalResponse("Tommy", "1s4h7", "auio9");
+		AddDisapprovalResponse adr = new AddDisapprovalResponse("Tommy", "1s4h7", "auio9", 2, 3);
 		ObjectMapper rep = new ObjectMapper();
 		JsonNode actualRep = rep.readTree(adr.toString());
 		assertEquals(actualRep.get("disapprovingUser").asText(), "Tommy");
 		assertEquals(actualRep.get("alternativeID").asText(), "1s4h7");
 		assertEquals(actualRep.get("choiceID").asText(), "auio9");
+		assertEquals(actualRep.get("approvals").asText(), "2");
+		assertEquals(actualRep.get("disapprovals").asText(), "3");
 		
 		adr = new AddDisapprovalResponse(400, "whoop I dropped my chocolate bar");
 		rep = new ObjectMapper();

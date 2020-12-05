@@ -43,11 +43,13 @@
 #Alternative1{
     display: flex;
     flex-direction: row;
+    visibility: hidden;
 }
 
 #alternative1approval{
     display: flex;
     flex-direction: column;
+    
 }
 
 #alternative1disapproval{
@@ -58,6 +60,7 @@
 #Alternative2{
     display: flex;
     flex-direction: row;
+    visibility: hidden;
 }
 
 #alternative2approval{
@@ -73,6 +76,7 @@
 #Alternative3{
     display: flex;
     flex-direction: row;
+    visibility: hidden;
 }
 
 #alternative3approval{
@@ -88,6 +92,7 @@
 #Alternative4{
     display: flex;
     flex-direction: row;
+    visibility: hidden;
 }
 
 #alternative4approval{
@@ -103,6 +108,7 @@
 #Alternative5{
     display: flex;
     flex-direction: row;
+    visibility: hidden;
 }
 
 #alternative5approval{

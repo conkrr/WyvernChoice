@@ -17,8 +17,6 @@ function processRequestChoiceResponse(result) {
     var cDate = jsonObj.choice.completionDate;
     var cFinalized = jsonObj.choice.isFinalized;
 
-      //Heh transforming variables
-
     console.log("js = " + jsonObj);
     console.log("cID = " + cID);
     console.log("cName = " + cName);
@@ -61,14 +59,27 @@ function processRequestChoiceResponse(result) {
     //Initialize Choice Headers//
     /////////////////////////////
     let alternativeJson;
+    let approvalUserOutput;
+    let disapprovalUserOutput;
     if(cAlternatives[0] !== null){
         alternativeJson = cAlternatives[0];
         document.getElementById("alternative1name").innerHTML = alternativeJson.description;
-        document.getElementById("alternative1approvalcount").innerHTML = alternativeJson.Approvals.approvalCount;
-        //Deal with list of users
 
+        //Get Approval Elements
+        document.getElementById("alternative1approvalcount").innerHTML = alternativeJson.Approvals.approvalCount;
+        for(let i=0; i < alternativeJson.Approvals.Users.length; i++){
+            approvalUserOutput = approvalUserOutput + "<b>" + alternativeJson.Approvals.Users[i] + "</b><br>"
+        }
+        document.getElementById("alternative1approvalusers").innerHTML = approvalUserOutput;
+
+        //Get Disapproval Elements
         document.getElementById("alternative1disapprovalcount").innerHTML = alternativeJson.Disapprovals.disapprovalCount;
-        //Deal with list of users
+        for(let i=0; i < alternativeJson.Disapprovals.Users.length; i++){
+            disapprovalUserOutput = disapprovalUserOutput + "<b>" + alternativeJson.Disapprovals.Users[i] + "</b><br>"
+        }
+        document.getElementById("alternative1disapprovalusers").innerHTML = disapprovalUserOutput;
+
+        document.getElementById("Alternative1").style.visibility = visible;
     }
 
     if(cAlternatives[1] !== null){
@@ -80,6 +91,7 @@ function processRequestChoiceResponse(result) {
         document.getElementById("alternative2disapprovalcount").innerHTML = alternativeJson.Disapprovals.disapprovalCount;
         //Deal with list of users
 
+        document.getElementById("Alternative2").style.visibility = visible;
     }
 
     if(cAlternatives[2] !== null){
@@ -90,6 +102,8 @@ function processRequestChoiceResponse(result) {
 
         document.getElementById("alternative3disapprovalcount").innerHTML = alternativeJson.Disapprovals.disapprovalCount;
         //Deal with list of users
+
+        document.getElementById("Alternative3").style.visibility = visible;
     }
 
     if(cAlternatives[3] !== null){
@@ -100,6 +114,8 @@ function processRequestChoiceResponse(result) {
 
         document.getElementById("alternative4disapprovalcount").innerHTML = alternativeJson.Disapprovals.disapprovalCount;
         //Deal with list of users
+
+        document.getElementById("Alternative4").style.visibility = visible;
     }
 
     if(cAlternatives[4] !== null){
@@ -110,6 +126,8 @@ function processRequestChoiceResponse(result) {
 
         document.getElementById("alternative5disapprovalcount").innerHTML = alternativeJson.Disapprovals.disapprovalCount;
         //Deal with list of users
+
+        document.getElementById("Alternative5").style.visibility = visible;
     }
 
     document.getElementById("currentChoice").style.visibility = visible;
