@@ -3,29 +3,40 @@ package com.amazonaws.lambda.demo.model;
 import java.util.List;
 
 public class Alternative {
-	public final String name;
-	public final String alternativeID;
-	public int Approvals;
-	public int Disapprovals;
-	public boolean isChosen;
-	public List<Feedback> listofFeedback;
-	
-	
-	
-	
-	public Alternative(String name, String alternativeID, int Approvals, int Disapprovals, boolean isChosen,List<Feedback> ListofFeedback) {
+	private final String name;
+	private final String choiceID;
+	private final String alternativeID;
+	//public int Approvals;
+	//public int Disapprovals;
+	private final List<Approval> approvals;
+	private final boolean isChosen;
+//	public final List<Feedback> listofFeedback;
+	public Alternative(String name, String choiceID, String alternativeID, List<Approval> approvals, boolean isChosen) {
 		this.name = name;
+		this.choiceID = choiceID;
 		this.alternativeID = alternativeID;
-		this.Approvals = Approvals;
-		this.Disapprovals = Disapprovals;
-		this.isChosen = isChosen;
-		this.listofFeedback = ListofFeedback;
-	}
-	
-	public Alternative(String name, String alternativeID, boolean isChosen) {
-		this.name = name;
-		this.alternativeID = alternativeID;
+		this.approvals = approvals;
 		this.isChosen = isChosen;
 	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	public String getChoiceID() {
+		return choiceID;
+	}
+	public String getAlternativeID() {
+		return alternativeID;
+	}
+	public List<Approval> getApprovals() {
+		return approvals;
+	}
+	public boolean isChosen() {
+		return isChosen;
+	}
+	
+	
+	
 	
 }

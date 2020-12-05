@@ -27,17 +27,19 @@ public class DisapprovalsDAO implements DataAccessAsymmetric<Disapproval>{
     }    
 
 	@Override
-	public List<Disapproval> get(String uniqueId) throws Exception {
+	public List<Disapproval> get(String uniqueId) throws Exception { //uniqueID = alternative ID
 		//logger.log("DisapprovalsDAO::get() -- Begin");
+//		System.out.println("DisapprovalsDAO::get() -- Begin");
     	List<Disapproval> list;  	
         try {
-            PreparedStatement ps = connection.prepareStatement("SELECT Users.userID, Users.name, Approvals.status FROM Users JOIN Alternatives ON Users.choiceID = Alternatives.choiceID JOIN Approvals ON Approvals.alternativeID = Alternatives.alternativeID AND Approvals.userID = Users.userID JOIN (SELECT Approvals.userID, MAX(Approvals.timestamp) AS timestamp FROM Approvals WHERE Approvals.alternativeID = ? GROUP BY Approvals.userID) Maxtimes ON Users.userID = Maxtimes.userID AND Approvals.timestamp = Maxtimes.timestamp WHERE Approvals.alternativeID = ?");           
+            PreparedStatement ps = connection.prepareStatement("SELECT Users.userID, Users.name, Approvals.status, Approvals.timestamp, Alternatives.alternativeID, Alternatives.choiceID FROM Users JOIN Alternatives ON Users.choiceID = Alternatives.choiceID JOIN Approvals ON Approvals.alternativeID = Alternatives.alternativeID AND Approvals.userID = Users.userID JOIN (SELECT Approvals.userID, MAX(Approvals.timestamp) AS timestamp FROM Approvals WHERE Approvals.alternativeID = ? GROUP BY Approvals.userID) Maxtimes ON Users.userID = Maxtimes.userID AND Approvals.timestamp = Maxtimes.timestamp WHERE Approvals.alternativeID = ?");           
             ps.setString(1,  uniqueId);
             ps.setString(2,  uniqueId);
             ResultSet resultSet = ps.executeQuery();
             list = generate(resultSet);
             resultSet.close();
             ps.close();
+//            System.out.println("DisapprovalsDAO::get() -- End");
             //logger.log("DisapprovalsDAO::get() -- End");
             return list;
         } catch (Exception e) {
@@ -67,27 +69,21 @@ public class DisapprovalsDAO implements DataAccessAsymmetric<Disapproval>{
 	@Override
 	public boolean insert(Disapproval t) throws Exception {
 		//logger.log("DisapprovalsDAO::insert -- Begin");
+//		System.out.println("DisapprovalsDAO::insert -- Begin");
 		try {
-			boolean alreadyExists = false;
-			//perhaps make this a function?
-			List<Disapproval> list = get(t.getAlternativeId());
-			ListIterator<Disapproval> iterator = list.listIterator();
-			while (iterator.hasNext()) { 
-				Disapproval apv = iterator.next();
-				if(apv.getUserId() == t.getUserId()) {
-					alreadyExists = true;
-					break;
-				}
-			} 	
+			boolean alreadyExists = !get(t.getAlternativeId()).isEmpty();
+//			System.out.println("DisapprovalsDAO::insert -- alreadyExists = " + alreadyExists);
 			if (!alreadyExists) {
+				
 				PreparedStatement ps = connection.prepareStatement("INSERT INTO " + tableName + " (alternativeID, userID, timestamp, status) values(?, ?, ?, ?);");
 					ps.setString(1, t.getAlternativeId());
 					ps.setString(2, t.getUserId());
 					ps.setTimestamp(3, t.getTimestamp());
-					ps.setInt(4, -1); // 1 indicates Disapproval
+					ps.setInt(4, -1); // 1 indicates disapproval
 					ps.execute();
 			}
 			//logger.log("DisapprovalsDAO::insert() -- End");
+//			System.out.println("DisapprovalsDAO::insert() -- End");
 			return alreadyExists;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -99,17 +95,18 @@ public class DisapprovalsDAO implements DataAccessAsymmetric<Disapproval>{
 	public List<Disapproval> generate(ResultSet resultSet) throws Exception {
 		//logger.log("DisapprovalsDAO::generate() -- Begin");
         
-    	ArrayList<Disapproval> disapprovals = new ArrayList<Disapproval>();
+    	ArrayList<Disapproval> approvals = new ArrayList<Disapproval>();
         try {
 			while(resultSet.next()) {
 				final String userId = resultSet.getString("userID");
 				final String userName = resultSet.getString("name");
 				final String alternativeId = resultSet.getString("alternativeID");
 				final Timestamp timestamp = resultSet.getTimestamp("timestamp");
-				int approveStatus = resultSet.getInt("status");
+				final int approveStatus = resultSet.getInt("status");
+				final String choiceID = resultSet.getString("choiceID");
 				
 				if (approveStatus == -1) {
-					disapprovals.add(new Disapproval(alternativeId, userId, timestamp, userName));
+					approvals.add(new Disapproval(alternativeId, userId, timestamp, userName, choiceID));
 				}
 				
 			}
@@ -118,7 +115,7 @@ public class DisapprovalsDAO implements DataAccessAsymmetric<Disapproval>{
             throw new Exception("Exception in DisapprovalsDAO::generate(): " + e.getMessage());
         }
         //logger.log("DisapprovalsDAO::generate() -- End");
-        return disapprovals;
+        return approvals;
 	}
 
 }

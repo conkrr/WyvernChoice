@@ -5,21 +5,20 @@ import com.amazonaws.lambda.db.DisapprovalsDAO;
 import com.amazonaws.lambda.demo.http.*;
 import com.amazonaws.lambda.demo.model.Approval;
 import com.amazonaws.lambda.demo.model.Disapproval;
-
-
+import com.amazonaws.lambda.demo.model.Opinion;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class AddDisapprovalHandler implements RequestHandler<AddDisapprovalRequest, AddDisapprovalResponse> {
+public class AddDisapprovalHandler implements RequestHandler<AddDisapprovalRequest, OpinionResponse> {
 
 
     //************************* THIS CLASS IS JUST AN OUTLINE *************************
-
 
     LambdaLogger logger;
 
@@ -35,7 +34,7 @@ public class AddDisapprovalHandler implements RequestHandler<AddDisapprovalReque
         // if (logger != null) { logger.log("in AddApproval"); }
 
         DisapprovalsDAO disapprovalsDAO = new DisapprovalsDAO(/*logger*/);
-        List<Disapproval> disapprovalsList = disapprovalsDAO.get(disapproval.getAlternativeId());
+       // List<Disapproval> disapprovalsList = disapprovalsDAO.get(disapproval.getAlternativeId());
 
         boolean exists = false; //disapprovalsList.stream().anyMatch(a -> a.getUserId().equals(disapproval.getUserId())); // this is either very cool or very bad
 
@@ -49,21 +48,36 @@ public class AddDisapprovalHandler implements RequestHandler<AddDisapprovalReque
     }
 
     @Override
-    public AddDisapprovalResponse handleRequest(AddDisapprovalRequest request, Context context) {  // So much of this is subject to change :(
+    public OpinionResponse handleRequest(AddDisapprovalRequest request, Context context) {  // So much of this is subject to change :(
         logger = context.getLogger();
 
-        AddDisapprovalResponse response; //Final version wont need to initialize this, this is so it compiles
+        OpinionResponse response; //Final version wont need to initialize this, this is so it compiles
         try {
 
-            Disapproval d = createDisapproval(request);
-            boolean addDisapprovalSuccess = disapprovalDAOHelper(d);
+        	Disapproval a = createDisapproval(request);
+            boolean addApprovalSuccess = disapprovalDAOHelper(a);
 
-            if (addDisapprovalSuccess)
-                response = new AddDisapprovalResponse(d.getUserName(), d.getAlternativeId(), d.getChoiceId());
+            ApprovalsDAO apvDao = new ApprovalsDAO();
+            DisapprovalsDAO disDao = new DisapprovalsDAO();
+            List<Approval> appList = apvDao.get(a.getAlternativeId());
+            List<Disapproval> disList = disDao.get(a.getAlternativeId());
+            List<Opinion> opList = new ArrayList<Opinion>();
+            opList.addAll(appList);
+            opList.addAll(disList);
+            List<String> users =new ArrayList<String>();
+            for(Opinion opn: opList) {
+            	users.add(opn.getUserName());
+            }
+            
+            if (addApprovalSuccess)
+                response = new OpinionResponse(appList.size(), disList.size(), users, "", 200);
             else
-                response = new AddDisapprovalResponse(d.getUserName(), d.getAlternativeId(), d.getChoiceId(), 422);
+                response = new OpinionResponse(appList.size(), disList.size(), users, "", 422);;
+
+        	
+            
         } catch (Exception e) {
-            response = new AddDisapprovalResponse(400, "Unable to add disapproval for User: " + request.getUsername() + ", altID: " + request.getAlternativeID() + "(error: " + e.getMessage() + ")");
+            response = new OpinionResponse("Unable to add disapproval for User: " + request.getUsername() + ", altID: " + request.getAlternativeID() + "(error: " + e.getMessage() + ")", 400);
         }
 
         return response;
