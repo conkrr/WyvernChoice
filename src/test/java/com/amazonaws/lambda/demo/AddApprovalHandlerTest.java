@@ -25,7 +25,7 @@ public class AddApprovalHandlerTest extends LambdaTest {
         AddApprovalHandler  handler = new AddApprovalHandler();
         AddApprovalRequest  req = new Gson().fromJson(incoming, AddApprovalRequest.class);
 
-
+        System.out.println(incoming);
         AddApprovalResponse resp = handler.handleRequest(req, createContext("addapproval"));
 
         Assert.assertEquals(200, resp.statusCode);
@@ -70,6 +70,7 @@ public class AddApprovalHandlerTest extends LambdaTest {
         AddApprovalRequest req = new AddApprovalRequest(approvingUser,userId,alternativeID,choiceID);
 
         String SAMPLE_INPUT_STRING = new Gson().toJson(req);
+        System.out.println("req: " + SAMPLE_INPUT_STRING);
         String jsonResp;
         try {
 
