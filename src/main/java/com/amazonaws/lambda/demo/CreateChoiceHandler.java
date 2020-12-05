@@ -13,6 +13,7 @@ import com.amazonaws.lambda.demo.http.ChoiceGsonCompatible;
 import com.amazonaws.lambda.demo.model.Alternative;
 import com.amazonaws.lambda.demo.model.Approval;
 import com.amazonaws.lambda.demo.model.Choice;
+import com.amazonaws.lambda.demo.model.Opinion;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
@@ -39,7 +40,7 @@ public class CreateChoiceHandler implements RequestHandler<CreateChoiceRequest, 
 		ArrayList<Alternative> alternatives = new ArrayList<Alternative>();
 		for(int i = 0; i < alternativeDescs.size(); i++) {
 			UUID alternativeID = UUID.randomUUID();
-			List<Approval> emptyApprovals = new ArrayList<Approval>();
+			List<Opinion> emptyApprovals = new ArrayList<Opinion>();
 			
 			alternatives.add(new Alternative(alternativeDescs.get(i), choiceID.toString(), alternativeID.toString(), emptyApprovals, false));
 		}

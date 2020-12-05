@@ -11,6 +11,7 @@ import java.util.ListIterator;
 import com.amazonaws.lambda.demo.model.Alternative;
 import com.amazonaws.lambda.demo.model.Approval;
 import com.amazonaws.lambda.demo.model.Disapproval;
+import com.amazonaws.lambda.demo.model.Opinion;
 import com.amazonaws.services.lambda.runtime.LambdaLogger;
 
 public class AlternativesDAO implements DataAccessAsymmetric<Alternative>{
@@ -107,7 +108,7 @@ public class AlternativesDAO implements DataAccessAsymmetric<Alternative>{
 				final boolean isChosen = resultSet.getBoolean("isChosen");
 				
 				ApprovalsDAO dao = new ApprovalsDAO(logger);
-				List<Approval> approvals = dao.get(alternativeId);
+				List<Opinion> approvals = new ArrayList<Opinion>(dao.get(alternativeId));
 				
 
 					alternatives.add(new Alternative(description, choiceId, alternativeId, approvals, isChosen));

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.amazonaws.lambda.demo.http.AlternativeGsonCompatible;
+import com.amazonaws.lambda.demo.http.OpinionResponse;
 
 public class Choice {
 	
@@ -29,19 +30,20 @@ public class Choice {
 		this.currentParticipants = currentParticipants;
 	}
 	
-	public List<String >getAlternativeIdList(){
-		ArrayList<String> ids = new ArrayList<String>(alternatives.size());
-		for(Alternative a : alternatives) {
-			ids.add(a.getAlternativeID());
-		}
-		return ids;
-	}
-	public List<AlternativeGsonCompatible> getAlternativeGsonList(){
-		ArrayList<AlternativeGsonCompatible> altsGson = new ArrayList<AlternativeGsonCompatible>(alternatives.size());
-		for(Alternative a : alternatives) {
-			altsGson.add(new AlternativeGsonCompatible(a.getAlternativeID(), a.getName()));
-		}
-		return altsGson;
-	}
+//	public List<String >getAlternativeIdList(){
+//		ArrayList<String> ids = new ArrayList<String>(alternatives.size());
+//		for(Alternative a : alternatives) {
+//			ids.add(a.getAlternativeID());
+//		}
+//		return ids;
+//	}
+//	public List<AlternativeGsonCompatible> getAlternativeGsonList(){
+//		ArrayList<AlternativeGsonCompatible> altsGson = new ArrayList<AlternativeGsonCompatible>(alternatives.size());
+//		for(Alternative a : alternatives) {
+//			altsGson.add(new AlternativeGsonCompatible(a.getAlternativeID(), a.getName(),
+//					new OpinionResponse()));
+//		}
+//		return altsGson;
+//	}
 
 }

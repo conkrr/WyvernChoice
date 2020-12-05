@@ -8,10 +8,10 @@ public class Alternative {
 	private final String alternativeID;
 	//public int Approvals;
 	//public int Disapprovals;
-	private final List<Approval> approvals;
+	private final List<Opinion> approvals;
 	private final boolean isChosen;
 //	public final List<Feedback> listofFeedback;
-	public Alternative(String name, String choiceID, String alternativeID, List<Approval> approvals, boolean isChosen) {
+	public Alternative(String name, String choiceID, String alternativeID, List<Opinion> approvals, boolean isChosen) {
 		this.name = name;
 		this.choiceID = choiceID;
 		this.alternativeID = alternativeID;
@@ -29,7 +29,7 @@ public class Alternative {
 	public String getAlternativeID() {
 		return alternativeID;
 	}
-	public List<Approval> getApprovals() {
+	public List<Opinion> getApprovals() {
 		return approvals;
 	}
 	public boolean isChosen() {
