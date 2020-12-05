@@ -64,7 +64,7 @@ public class AddApprovalHandler implements RequestHandler<AddApprovalRequest, Op
             List<Opinion> opList = new ArrayList<Opinion>();
             opList.addAll(appList);
             opList.addAll(disList);
-            List<String> users =new ArrayList<String>();
+            List<String> users = new ArrayList<String>();
             for(Opinion opn: opList) {
             	users.add(opn.getUserName());
             }

@@ -51,7 +51,7 @@ public class AddDisapprovalHandler implements RequestHandler<AddDisapprovalReque
     public OpinionResponse handleRequest(AddDisapprovalRequest request, Context context) {  // So much of this is subject to change :(
         logger = context.getLogger();
 
-        OpinionResponse response; //Final version wont need to initialize this, this is so it compiles
+        OpinionResponse response;
         try {
 
         	Disapproval a = createDisapproval(request);
