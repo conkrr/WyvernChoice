@@ -27,13 +27,6 @@ public class GetListOfChoicesHandler implements RequestHandler<GetListOfChoicesR
 
 		LambdaLogger logger;
 		
-		Choice getChoiceViaDAO(String id) throws Exception { 
-			logger.log("GetChoiceHandler::getChoiceDAO()");
-			ChoicesDAO dao = new ChoicesDAO(logger);
-			Choice choice = dao.get(id);
-			return choice;
-		}
-		
 
 		@Override 
 		public GetListOfChoicesResponse handleRequest(GetListOfChoicesRequest req, Context context)  {
