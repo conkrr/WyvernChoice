@@ -8,9 +8,9 @@ function requestChoiceList(result){
 //Might be different due to it being a list?
 function processChoiceListRequest(val){
   var xhr = new XMLHttpRequest();
-  xhr.open("GET", choice_list_url + "/" + val, true);  // Can't be DELETE b/c of preflight CORS error with non-simple requests
+  xhr.open("GET", choice_list_url, true);
 
-  // This will process results and update HTML as appropriate.
+  // This will process results and update HTlML as appropriate.
   xhr.onloadend = function ()
   {
     console.log(xhr);
