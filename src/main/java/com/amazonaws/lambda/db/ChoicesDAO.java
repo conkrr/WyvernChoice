@@ -120,6 +120,12 @@ java.sql.Connection connection;
 					ps.setInt(6, t.maxParticipants);
 					ps.setInt(7, t.currentParticipants);
 					ps.execute();
+					
+					AlternativesDAO dao = new AlternativesDAO(logger);
+					for(Alternative a : c.alternatives){
+						dao.insert(a);
+					}
+					
 			}
 			//logger.log("AlternativesDAO::insert() -- End");
 			return alreadyExists;

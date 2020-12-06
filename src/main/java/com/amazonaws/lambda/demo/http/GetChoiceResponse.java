@@ -59,7 +59,7 @@ public class GetChoiceResponse {
 	
 	public String toString() {
 		if(statusCode == 200) {
-			return "{ \"choice\": \"" + "oooooooof" + "\", \"statusCode\": \"" + statusCode + "\" }";
+			return "{ \"choice\": \"" + choiceID + "\", \"statusCode\": \"" + statusCode + "\" }";
 		} else {
 			return "{ \"statusCode\": \"" + statusCode + "\", \"error\": \"" + error + "\" }";
 		}
