@@ -1,0 +1,947 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Wyvern Choice API",
+    "version": "1.1.0",
+    "title": "Wyvern Choice API"
+  },
+  "host": "uyttzmj0g3.execute-api.us-east-1.amazonaws.com",
+  "basePath": "/testStage",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/addapproval": {
+      "post": {
+        "operationId": "addApproval",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "AddApprovalRequest",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AddApprovalRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/OpinionResponse"
+            },
+            "headers": {
+              "Access-Control-Allow-Header": {
+                "type": "string"
+              },
+              "Access-Control-Allow-Method": {
+                "type": "string"
+              },
+              "Access-Control-Allow-Origin": {
+                "type": "string"
+              }
+            }
+          },
+          "400": {
+            "description": "400 response"
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "type": "aws",
+          "uri": "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:360474612808:function:addApproval/invocations",
+          "responses": {
+            "default": {
+              "statusCode": "200",
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              }
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT"
+        }
+      },
+      "options": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {},
+        "x-amazon-apigateway-integration": {
+          "type": "mock",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "requestTemplates": {
+            "application/json": "{\"statusCode\": 200}"
+          },
+          "passthroughBehavior": "when_no_match"
+        }
+      }
+    },
+    "/adddisapproval": {
+      "post": {
+        "operationId": "addDisapproval",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "AddDisapprovalRequest",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AddDisapprovalRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/OpinionResponse"
+            },
+            "headers": {
+              "Access-Control-Allow-Header": {
+                "type": "string"
+              },
+              "Access-Control-Allow-Method": {
+                "type": "string"
+              },
+              "Access-Control-Allow-Origin": {
+                "type": "string"
+              }
+            }
+          },
+          "400": {
+            "description": "400 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "type": "aws",
+          "uri": "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:360474612808:function:addDisapproval/invocations",
+          "responses": {
+            "default": {
+              "statusCode": "200",
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              }
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT"
+        }
+      },
+      "options": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {},
+        "x-amazon-apigateway-integration": {
+          "type": "mock",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "requestTemplates": {
+            "application/json": "{\"statusCode\": 200}"
+          },
+          "passthroughBehavior": "when_no_match"
+        }
+      }
+    },
+    "/admin": {
+      "get": {
+        "operationId": "getListofChoices",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/GetListOfChoicesResponse"
+            },
+            "headers": {
+              "Access-Control-Allow-Header": {
+                "type": "string"
+              },
+              "Access-Control-Allow-Method": {
+                "type": "string"
+              },
+              "Access-Control-Allow-Origin": {
+                "type": "string"
+              }
+            }
+          },
+          "400": {
+            "description": "400 response"
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "type": "aws",
+          "uri": "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:360474612808:function:getListOfChoices/invocations",
+          "responses": {
+            "default": {
+              "statusCode": "200",
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              }
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT"
+        }
+      },
+      "options": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "type": "string"
+              },
+              "Access-Control-Allow-Methods": {
+                "type": "string"
+              },
+              "Access-Control-Allow-Headers": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "type": "mock",
+          "responses": {
+            "default": {
+              "statusCode": "200",
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Methods": "'GET,OPTIONS'",
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              }
+            }
+          },
+          "requestTemplates": {
+            "application/json": "{\"statusCode\": 200}"
+          },
+          "passthroughBehavior": "when_no_match"
+        }
+      }
+    },
+    "/choice": {
+      "post": {
+        "operationId": "createChoice",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "CreateChoiceRequest",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateChoiceRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/CreateChoiceResponse"
+            },
+            "headers": {
+              "Access-Control-Allow-Header": {
+                "type": "string"
+              },
+              "Access-Control-Allow-Method": {
+                "type": "string"
+              },
+              "Access-Control-Allow-Origin": {
+                "type": "string"
+              }
+            }
+          },
+          "400": {
+            "description": "400 response"
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "type": "aws",
+          "uri": "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:360474612808:function:betaCreateChoice/invocations",
+          "responses": {
+            "default": {
+              "statusCode": "200",
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              }
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT"
+        }
+      },
+      "options": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "type": "string"
+              },
+              "Access-Control-Allow-Methods": {
+                "type": "string"
+              },
+              "Access-Control-Allow-Headers": {
+                "type": "string"
+              }
+            }
+          },
+          "400": {
+            "description": "400 response"
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "type": "mock",
+          "responses": {
+            "default": {
+              "statusCode": "200",
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,POST'",
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              }
+            }
+          },
+          "requestTemplates": {
+            "application/json": "{\"statusCode\": 200}"
+          },
+          "passthroughBehavior": "when_no_match"
+        }
+      }
+    },
+    "/choice/{choiceID}": {
+      "get": {
+        "operationId": "getSpecificChoice",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "choiceID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/GetChoiceResponse"
+            },
+            "headers": {
+              "Access-Control-Allow-Header": {
+                "type": "string"
+              },
+              "Access-Control-Allow-Method": {
+                "type": "string"
+              },
+              "Access-Control-Allow-Origin": {
+                "type": "string"
+              }
+            }
+          },
+          "400": {
+            "description": "400 response"
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "type": "aws",
+          "uri": "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:360474612808:function:getSpecificChoice/invocations",
+          "responses": {
+            "default": {
+              "statusCode": "200",
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              }
+            }
+          },
+          "requestTemplates": {
+            "application/json": "{\"choiceID\" : \"$input.params('choiceID')\"\n}"
+          },
+          "passthroughBehavior": "when_no_templates",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT"
+        }
+      },
+      "options": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "type": "string"
+              },
+              "Access-Control-Allow-Methods": {
+                "type": "string"
+              },
+              "Access-Control-Allow-Headers": {
+                "type": "string"
+              }
+            }
+          },
+          "400": {
+            "description": "400 response"
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "type": "mock",
+          "responses": {
+            "default": {
+              "statusCode": "200",
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Methods": "'GET,OPTIONS'",
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              }
+            }
+          },
+          "requestTemplates": {
+            "application/json": "{\"statusCode\": 200}"
+          },
+          "passthroughBehavior": "when_no_match"
+        }
+      }
+    },
+    "/register": {
+      "post": {
+        "operationId": "registerUser",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "RegisterUserRequest",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegisterUserRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/RegisterUserResponse"
+            },
+            "headers": {
+              "Access-Control-Allow-Header": {
+                "type": "string"
+              },
+              "Access-Control-Allow-Method": {
+                "type": "string"
+              },
+              "Access-Control-Allow-Origin": {
+                "type": "string"
+              }
+            }
+          },
+          "400": {
+            "description": "400 response"
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "type": "aws",
+          "uri": "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:360474612808:function:RegisterUserHandler/invocations",
+          "responses": {
+            "default": {
+              "statusCode": "200",
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              }
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "POST",
+          "contentHandling": "CONVERT_TO_TEXT"
+        }
+      },
+      "options": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {},
+        "x-amazon-apigateway-integration": {
+          "type": "mock",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "requestTemplates": {
+            "application/json": "{\"statusCode\": 200}"
+          },
+          "passthroughBehavior": "when_no_match"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Disapprovals": {
+      "type": "object",
+      "required": [
+        "alternativeID",
+        "choiceID",
+        "disapprovalCount",
+        "disapprovalUsers"
+      ],
+      "properties": {
+        "disapprovalCount": {
+          "type": "integer"
+        },
+        "alternativeID": {
+          "type": "string"
+        },
+        "choiceID": {
+          "type": "string"
+        },
+        "disapprovalUsers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/User"
+          }
+        }
+      }
+    },
+    "Choice": {
+      "type": "object",
+      "required": [
+        "choiceID",
+        "completionDate",
+        "isFinalized",
+        "listofAlternatives",
+        "name",
+        "numParticipants"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "choiceID": {
+          "type": "string"
+        },
+        "numParticipants": {
+          "type": "integer"
+        },
+        "isFinalized": {
+          "type": "boolean"
+        },
+        "completionDate": {
+          "type": "string"
+        },
+        "listofAlternatives": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Alternative"
+          }
+        }
+      }
+    },
+    "Alternative": {
+      "type": "object",
+      "required": [
+        "Approvals",
+        "Disapprovals",
+        "alternativeID",
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "alternativeID": {
+          "type": "string"
+        },
+        "Approvals": {
+          "$ref": "#/definitions/Approvals"
+        },
+        "Disapprovals": {
+          "$ref": "#/definitions/Disapprovals"
+        },
+        "isChosen": {
+          "type": "boolean"
+        },
+        "ListofFeedback": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Feedback"
+          }
+        }
+      }
+    },
+    "User": {
+      "type": "object",
+      "required": [
+        "choiceID",
+        "feedbackInfo",
+        "username"
+      ],
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "choiceID": {
+          "type": "string"
+        },
+        "feedbackInfo": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Feedback"
+          }
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "RegisterUserRequest": {
+      "type": "object",
+      "required": [
+        "choiceID",
+        "username"
+      ],
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "choiceID": {
+          "type": "string"
+        }
+      }
+    },
+    "Approvals": {
+      "type": "object",
+      "required": [
+        "alternativeID",
+        "approvalCount",
+        "approvalUsers",
+        "choiceID"
+      ],
+      "properties": {
+        "approvalCount": {
+          "type": "integer"
+        },
+        "alternativeID": {
+          "type": "string"
+        },
+        "choiceID": {
+          "type": "string"
+        },
+        "approvalUsers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/User"
+          }
+        }
+      }
+    },
+    "CreateChoiceRequest": {
+      "type": "object",
+      "required": [
+        "listofAlternatives",
+        "name",
+        "numParticipants"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "creatingUserId": {
+          "type": "string"
+        },
+        "numParticipants": {
+          "type": "integer"
+        },
+        "listofAlternatives": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "OpinionResponse": {
+      "type": "object",
+      "required": [
+        "approvalUsers",
+        "approvals",
+        "disapprovalUsers",
+        "disapprovals",
+        "error",
+        "statusCode"
+      ],
+      "properties": {
+        "approvals": {
+          "type": "integer"
+        },
+        "disapprovals": {
+          "type": "integer"
+        },
+        "approvalUsers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "disapprovalUsers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "statusCode": {
+          "type": "integer"
+        },
+        "error": {
+          "type": "string"
+        }
+      }
+    },
+    "AddApprovalRequest": {
+      "type": "object",
+      "required": [
+        "alternativeID",
+        "approvingUser",
+        "approvingUserID",
+        "choiceID"
+      ],
+      "properties": {
+        "approvingUser": {
+          "type": "string"
+        },
+        "approvingUserID": {
+          "type": "string"
+        },
+        "alternativeID": {
+          "type": "string"
+        },
+        "choiceID": {
+          "type": "string"
+        }
+      }
+    },
+    "Feedback": {
+      "type": "object",
+      "required": [
+        "alternativeID",
+        "feedbackID",
+        "text",
+        "timestamp",
+        "user"
+      ],
+      "properties": {
+        "user": {
+          "type": "string"
+        },
+        "text": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "number"
+        },
+        "alternativeID": {
+          "type": "string"
+        },
+        "feedbackID": {
+          "type": "integer"
+        }
+      }
+    },
+    "GetListOfChoicesResponse": {
+      "type": "object",
+      "required": [
+        "ListOfChoices",
+        "error",
+        "statusCode"
+      ],
+      "properties": {
+        "ListOfChoices": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Choice"
+          }
+        },
+        "statusCode": {
+          "type": "integer"
+        },
+        "error": {
+          "type": "string"
+        }
+      }
+    },
+    "RegisterUserResponse": {
+      "type": "object",
+      "required": [
+        "error",
+        "statusCode",
+        "username"
+      ],
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "statusCode": {
+          "type": "integer"
+        },
+        "error": {
+          "type": "string"
+        }
+      }
+    },
+    "AddDisapprovalRequest": {
+      "type": "object",
+      "required": [
+        "alternativeID",
+        "choiceID",
+        "disapprovingUser",
+        "disapprovingUserID"
+      ],
+      "properties": {
+        "disapprovingUser": {
+          "type": "string"
+        },
+        "disapprovingUserID": {
+          "type": "string"
+        },
+        "alternativeID": {
+          "type": "string"
+        },
+        "choiceID": {
+          "type": "string"
+        }
+      }
+    },
+    "CreateChoiceResponse": {
+      "type": "object",
+      "required": [
+        "choice",
+        "error",
+        "statusCode"
+      ],
+      "properties": {
+        "choice": {
+          "$ref": "#/definitions/Choice"
+        },
+        "statusCode": {
+          "type": "integer"
+        },
+        "error": {
+          "type": "string"
+        }
+      }
+    },
+    "GetChoiceResponse": {
+      "type": "object",
+      "required": [
+        "choiceID",
+        "creationDate",
+        "error",
+        "isFinalized",
+        "name",
+        "numParticipants",
+        "statusCode"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "choiceID": {
+          "type": "string"
+        },
+        "numParticipants": {
+          "type": "integer"
+        },
+        "creationDate": {
+          "type": "string"
+        },
+        "isFinalized": {
+          "type": "boolean"
+        },
+        "listofAlternatives": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Alternative"
+          }
+        },
+        "statusCode": {
+          "type": "integer"
+        },
+        "error": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

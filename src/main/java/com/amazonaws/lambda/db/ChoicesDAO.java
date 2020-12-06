@@ -38,9 +38,8 @@ java.sql.Connection connection;
             
             PreparedStatement psChoices = connection.prepareStatement("SELECT * FROM " + tableName + ";");
             ResultSet resultSetChoices = psChoices.executeQuery();
-            while (resultSetChoices.next()) {
-                choices.add(generate(resultSetChoices));
-            }
+            //while (resultSetChoices.next()) {
+                choices = generateList(resultSetChoices);
             resultSetChoices.close();
             psChoices.close();
            
@@ -68,8 +67,9 @@ java.sql.Connection connection;
           PreparedStatement psChoices = connection.prepareStatement("SELECT * FROM " + tableName + " WHERE id=?;");
           psChoices.setString(1,  uniqueId);
           ResultSet resultSetChoices = psChoices.executeQuery();
-                        choice = generate(resultSetChoices);
-          
+          while (resultSetChoices.next()) {
+          choice = generate(resultSetChoices);
+          }
           resultSetChoices.close();
           psChoices.close();
          
@@ -120,6 +120,12 @@ java.sql.Connection connection;
 					ps.setInt(6, t.maxParticipants);
 					ps.setInt(7, t.currentParticipants);
 					ps.execute();
+					
+					AlternativesDAO dao = new AlternativesDAO(logger);
+					for(Alternative a : t.alternatives){
+						dao.insert(a);
+					}
+					
 			}
 			//logger.log("AlternativesDAO::insert() -- End");
 			return alreadyExists;
@@ -134,8 +140,9 @@ java.sql.Connection connection;
 		logger.log("AlternativesDAO::generate() -- Begin");
     	Choice c = null;
         try {
-			while(resultSet.next()) {
+			//while(resultSet.next()) {
 				logger.log("AlternativesDAO::generate() -- extraction from resultSet");
+				logger.log(resultSet.toString());
 				final String choiceId = resultSet.getString("id");
 				final String userId = resultSet.getString("creatingUserID");
 				final String description = resultSet.getString("description");
@@ -149,7 +156,7 @@ java.sql.Connection connection;
 				c = new Choice(choiceId, description, creationTime, userId, false, alternatives,
 						maxParticipants, currentParticipants);
 				
-			}
+			//}
 
 		} catch (Exception e) {
         	e.printStackTrace();
@@ -159,6 +166,37 @@ java.sql.Connection connection;
         return c;
 	}
     
+	
+	public List<Choice> generateList(ResultSet resultSet) throws Exception {
+		logger.log("AlternativesDAO::generate() -- Begin");
+    	List<Choice> list = new ArrayList<Choice>();
+        try {
+        	while(resultSet.next()) {
+				logger.log("AlternativesDAO::generate() -- extraction from resultSet");
+				logger.log(resultSet.toString());
+				final String choiceId = resultSet.getString("id");
+				final String userId = resultSet.getString("creatingUserID");
+				final String description = resultSet.getString("description");
+				final int maxParticipants = resultSet.getInt("maxParticipants");
+				final int currentParticipants = resultSet.getInt("currentParticipants");
+				//final boolean isChosen = resultSet.getBoolean("isChosen");
+				final Timestamp creationTime = resultSet.getTimestamp("creationTime");
+				
+				AlternativesDAO dao = new AlternativesDAO(logger);
+				List<Alternative> alternatives = dao.get(choiceId);
+				Choice c = new Choice(choiceId, description, creationTime, userId, false, alternatives,
+						maxParticipants, currentParticipants);
+				list.add(c);
+			}
+
+		} catch (Exception e) {
+        	e.printStackTrace();
+            throw new Exception("Exception in AlternativesDAO::generate(): " + e.getMessage());
+        }
+        logger.log("AlternativesDAO::generate() -- End");
+        return list;
+	}
+	
 //    public Choice getChoice(String id) throws Exception {
 //    	logger.log("getChoice start");
 //        try {
