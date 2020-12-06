@@ -2,6 +2,7 @@ var savedChoiceID = "";
 var savedAlternatives = [];
 
 function processRequestChoiceResponse(result) {
+	document.getElementById("ChoiceInfo").style.display = "flex";
     // Can grab any DIV or SPAN HTML element and can then manipulate its
     // contents dynamically via javascript
     console.log("requested: " + result);
@@ -69,6 +70,8 @@ function processRequestChoiceResponse(result) {
 
 	var i;
 	for (i = 0; i < cAlternatives.length; i++) {
+		approvalUserOutput = "";
+		disapprovalUserOutput = "";
 		if(cAlternatives[i] !== null){
         alternativeJson = cAlternatives[i];
         document.getElementById("alternative" + (i+1) +"name").innerHTML = alternativeJson.description;
@@ -79,23 +82,27 @@ function processRequestChoiceResponse(result) {
 
         console.log("alternativeJson.opinions " +  alternativeJson.opinions);
         //console.log("alternativeJson.Approvals.count " +  alternativeJson.opinions.approvalCount);
-
-
+	
+		console.log("alternativeJson.opinions.approvals " +  alternativeJson.opinions.approvals);
+		console.log("alternativeJson.opinions.approvalUserss " +  alternativeJson.opinions.approvalUsers);
+		console.log("alternativeJson.opinions.disapprovals " +  alternativeJson.opinions.disapprovals);
+		console.log("alternativeJson.opinions.disapprovalUserss " +  alternativeJson.opinions.disapprovalUsers);
         document.getElementById("alternative" + (i+1) +"approvalcount").innerHTML = alternativeJson.opinions.approvals;
-        for(let i=0; i < alternativeJson.opinions.approvalUsers.length; i++){
-            approvalUserOutput = approvalUserOutput + "<b>" + alternativeJson.opinions.approvalUsers[i] + "</b><br>"
+        for(let j=0; j < alternativeJson.opinions.approvalUsers.length; j++){
+            approvalUserOutput = approvalUserOutput + "<b>" + alternativeJson.opinions.approvalUsers[j] + "</b><br>"
         }
         document.getElementById("alternative" + (i+1) +"approvalusers").innerHTML = approvalUserOutput;
 
         //Get Disapproval Elements
         document.getElementById("alternative" + (i+1) +"disapprovalcount").innerHTML = alternativeJson.opinions.disapprovals;
-        for(let i=0; i < alternativeJson.opinions.disapprovalUsers.length; i++){
-            disapprovalUserOutput = disapprovalUserOutput + "<b>" + alternativeJson.opinions.disapprovalUsers[i] + "</b><br>"
+        for(let k=0; k < alternativeJson.opinions.disapprovalUsers.length; k++){
+            disapprovalUserOutput = disapprovalUserOutput + "<b>" + alternativeJson.opinions.disapprovalUsers[k] + "</b><br>"
         }
         document.getElementById("alternative" + (i+1) +"disapprovalusers").innerHTML = disapprovalUserOutput;
 
         document.getElementById("Alternative" + (i+1)).style.visibility = "visible";
     }
+
 	} 
 /*
     if(cAlternatives[0] !== null){
