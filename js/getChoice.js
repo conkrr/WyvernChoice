@@ -11,12 +11,11 @@ function processRequestChoiceResponse(result) {
 	var jsonObj = JSON.parse(result);
     var choice = document.getElementById("currentChoice");
 
-    document.getElementById("ChoiceInfo").style.display = "flex";
 
     var output = "";
     var cName = jsonObj.name;
     var cID = jsonObj.choiceID;
-	savedChoiceID = cID;
+	savedChoiceID = cID; 
     var cParticipants = jsonObj.numParticipants;
     var cDate = jsonObj.creationDate;
     var cFinalized = jsonObj.isFinalized;
@@ -41,13 +40,13 @@ function processRequestChoiceResponse(result) {
     console.log("cAlternatives = " + cAlternatives);
 
     output = output + "<div id=\"alternatives\"> Alternatives: <br></div>";
-
+    
     for(let i = 0; i < cAlternatives.length; i++){
         let alternativeJson = cAlternatives[i];
         console.log("alt " + i + +"   " + alternativeJson);
         output = output + "<div id=\"alternativeID" + alternativeJson.id + "\"><b>" +  alternativeJson.description + "</b><div id> " + alternativeJson.Approvals + "</b><b>" + alternativeJson.Disapprovals + "</b><br>";
     }
-
+    
     output = output + "</div>"
     console.log(choice);
     */
@@ -70,8 +69,7 @@ function processRequestChoiceResponse(result) {
 
 	var i;
 	for (i = 0; i < cAlternatives.length; i++) {
-		if(cAlternatives[i] !== null) //
-		{
+		if(cAlternatives[i] !== null){
         alternativeJson = cAlternatives[i];
         document.getElementById("alternative" + (i+1) +"name").innerHTML = alternativeJson.description;
 
@@ -98,7 +96,7 @@ function processRequestChoiceResponse(result) {
 
         document.getElementById("Alternative" + (i+1)).style.visibility = "visible";
     }
-	}
+	} 
 /*
     if(cAlternatives[0] !== null){
         alternativeJson = cAlternatives[0];
@@ -189,7 +187,7 @@ function processRequestChoiceResponse(result) {
     }
 */
 
-
+    
 
     // Update computation result
     //choice.innerHTML = output;
@@ -197,11 +195,11 @@ function processRequestChoiceResponse(result) {
 	document.getElementById("currentChoice").style.visibility = "visible";
 }
 
-function requestChoice(val) {
+function requestChoice(val) { 
     //called by create choice -> entry point
     processChoiceRequest (val);
 }
-function processRefreshChoice(val) {
+function processRefreshChoice(val) { 
      console.log("processRefreshChoice val:" + val);
     requestChoice(savedChoiceID);
 }

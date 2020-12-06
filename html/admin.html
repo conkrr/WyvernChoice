@@ -23,18 +23,23 @@
     </nav>
     <main id="MainPage">
         <nav id="ListofChoices">
-            <input type="button" class="btn btn-info"id="getListOfChoicesButton" value="Refresh Choice List" onClick="JavaScript:requestChoiceList(this)">
+            <input type="button" class="btn btn-info"id="getListOfChoicesButton" value="Refresh List Of Choices" onClick="JavaScript:requestChoiceList(this)">
             <h1>List of Created Choices</h1>
             <pre>           ID                              Creation Date              Completed?</pre>
             <br>
+            <!---
             <pre><h4>What days should we get go golfing?          4643               11/13/2020</h4></pre>
             <pre><h4>What should we get for lunch?                3733               04/04/2021</h4></pre>
             <pre><h4>Who is employee of the week?                 2187               Open</h4></pre>
+            -->
             <div id="choiceList"></div>
         </nav>
         <nav id="DeleteChoices" class="form-group">
             <h1>Delete Choices</h1>
             <h3>Delete all choices older than:</h3>
+            <input name="participants" type="email" class="form-control" placeholder="Days"/><br>
+            <input name="participants" type="email" class="form-control" placeholder="Hours"/><br>
+            <!---
             <nav id="DaySelect" class="form-control">
                 <select>
                     <option value="1">1</option>
@@ -81,7 +86,9 @@
                     <option value="23">23</option>
                 </select>
                 <h3>Hours</h3>
+            
             </nav>
+            -->
             <button class="btn btn-danger">Delete Choices</button>
         </nav>
     </main>
