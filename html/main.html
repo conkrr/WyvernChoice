@@ -34,7 +34,7 @@
         <main id="MainPage">
             <nav id="UserInfo">
                 <nav id="Login">
-                    <h2>User Login</h2>
+                    <h1>User Login</h1>
                     <form name="registerUserForm" method="post" name="registerUser">
                         <div>
                             <h3>Username:</h3>
@@ -46,40 +46,47 @@
 
                         <h3>Choice ID:</h3>
                         <input name="registerID" type="email" class="form-control" placeholder="Choice ID" /><br>
-                        <input type="button" value="Register" class="btn btn-secondary" onClick="JavaScript:handleRegisterClick(this)">
+                        <input type="button" value="Register" class="btn btn-info" onClick="JavaScript:handleRegisterClick(this)">
                       </form>
                 </nav>
+                <!--
                 <nav id="CreateChoiceButton">
                     <h1>Want to create a choice?</h1>
                     <input type="button" class="btn btn-link" value="Click here">
                 </nav>
+                -->
                 <nav id="CreateChoice">
                     <form name="createChoiceForm" method="post">
+                        <h1>Create Choice</h1>
                         <h3>Name of Choice:</h3>
-                        <input name="choiceName" value="" />
+                        <input name="choiceName" type="email" class="form-control" placeholder="Choice Name" /><br>
                         <h3>Number of Participants:</h3>
-                        <input name="participants" value=""/>
+                        <input name="participants" type="email" class="form-control" placeholder="Max Participants"/><br>
                         <h3>Alternatives (fill at least 2):</h3>
-                        <input name="alternative1" value=""/><br>
-                        <input name="alternative2" value=""/><br>
-                        <input name="alternative3" value=""/><br>
-                        <input name="alternative4" value=""/><br>
-                        <input name="alternative5" value=""/><br>
+                        <input name="alternative1" type="email" class="form-control" placeholder="Alternative 1"/><br>
+                        <input name="alternative2" type="email" class="form-control" placeholder="Alternative 2"/><br>
+                        <input name="alternative3" type="email" class="form-control" placeholder="Alternative 3"/><br>
+                        <input name="alternative4" type="email" class="form-control" placeholder="Alternative 4"/><br>
+                        <input name="alternative5" type="email" class="form-control" placeholder="Alternative 5"/><br>
                        
                         <input type="button" class="btn btn-info"id="createButton" value="Create Choice" onClick="JavaScript:handleCreateChoiceClick(this)">
                      <br> 
                      </form>
                 </nav>
             </nav>
+            <nav id="emptynav"></nav>
             <nav id="ChoiceInfo">
                 <nav id="Choice">
-                    <h2>Choice</h2>
+                    <h1>Choice</h1>
                     <div id="choiceView">Register with an ID to see a choice!</div>
                     <input type="button" class="btn btn-info"id="getChoiceButton" value="Refresh Curent Choice" onClick="JavaScript:processRefreshChoice(this)">
                     <div id="currentChoice">
-                        <div id="ChoiceHeader">
-                            <div id="NameOfChoice"> Placeholder Choice Name</div>
-                            <div id="IDOfChoice">1234567890</div>
+                        <div id="ChoiceHeader" class="container-sm border">
+                            <b id="nameLabel">Choice Name: </b>
+                            <div id="NameOfChoice"> Placeholder Choice Name</div><br>
+                            <b id="idLabel">Choice ID: </b>
+                            <div id="IDOfChoice">1234567890</div><br>
+                            <b id="nameLabel">Choice Status: </b>
                             <div id="ChoiceStatus">Not Finalized</div>
                         </div>
                         <div id="Alternative1">
