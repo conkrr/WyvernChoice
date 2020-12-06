@@ -79,7 +79,7 @@
                 <nav id="Choice">
                     <h1>Choice</h1>
                     <div id="choiceView">Register with an ID to see a choice!</div>
-                    <input type="button" class="btn btn-info"id="getChoiceButton" value="Refresh Curent Choice" onClick="JavaScript:requestChoice(this)">
+                    <input type="button" class="btn btn-info"id="getChoiceButton" value="Refresh Curent Choice" onClick="JavaScript:processRefreshChoice(this)">
                     <div id="currentChoice">
                         <div id="ChoiceHeader" class="container-sm border">
                             <b id="nameLabel">Choice Name: </b>
@@ -89,137 +89,97 @@
                             <b id="nameLabel">Choice Status: </b>
                             <div id="ChoiceStatus">Not Finalized</div>
                         </div>
-                        <b id="a1">Alternative 1</b>
-                        <div id="Alternative1"class="container-sm border">
-                            <div id="alternative1namelabel" >
-                                <b>Name:</b>
-                                <div id="alternative1name">Cheeseburgers</div>
+                        <div id="Alternative1">
+                            <div id="alternative1name">Cheeseburgers</div>
+                            <div id="alternative1approval">
+                                <input type="button" value="Approve" onClick="JavaScript:handleApprovalClick(0)">
+                                <div id="alternative1approvalcount">2</div>
+                                <div id="alternative1approvalusers">
+                                    <b>Billy</b><br>
+                                    <b>Tommy</b>
+                                </div>
                             </div>
-                            <div id="alternative1approvallabel">
-                                <b>Ratings:</b>
-                                <div id="alternative1approvalbuttons">
-                                    <div id="alternative1approval">
-                                        <input type="button" value="Approve" onClick="JavaScript:handleApprovalClick(this)">
-                                        <div id="alternative1approvalcount">2</div>
-                                        <div id="alternative1approvalusers">
-                                            <b>Billy</b><br>
-                                            <b>Tommy</b>
-                                        </div>
-                                    </div>
-                                    <div id="alternative1disapproval">
-                                        <input type="button" value="Disapprove" onClick="JavaScript:handleDisapprovalClick(this)">
-                                        <div id="alternative1disapprovalcount">2</div>
-                                        <div id="alternative1disapprovalusers">
-                                        </div>
-                                    </div>
-                                </div> 
-                            </div>
-                            <div id="alternative1finalizelabel">
-                                <input type="button" id="finalizeButton1" value="Finalize Choice">
+                            <div id="alternative1disapproval">
+                                <input type="button" value="Disapprove" onClick="JavaScript:handleDisapprovalClick(0)">
+                                <div id="alternative1disapprovalcount">2</div>
+                                <div id="alternative1disapprovalusers">
+                                </div>
                             </div>
                         </div>
-                        <b id="a2">Alternative 2</b>
-                        <div id="Alternative2"class="container-sm border">
-                            <div id="alternative2namelabel" >
-                                <b>Name:</b>
-                                <div id="alternative2name">Cheeseburgers</div>
+                        <div id="Alternative2">
+                            <div id="alternative2name">Cheeseburgers</div>
+                            <div id="alternative2approval">
+                                <input type="button" value="Approve" onClick="JavaScript:handleApprovalClick(1)">
+                                <div id="alternative2approvalcount">2</div>
+                                <div id="alternative2approvalusers">
+                                    <b>Billy</b><br>
+                                    <b>Tommy</b>
+                                </div>
                             </div>
-                            <div id="alternative2approvallabel">
-                                <b>Ratings:</b>
-                                <div id="alternative2approvalbuttons">
-                                    <div id="alternative2approval">
-                                        <input type="button" value="Approve" onClick="JavaScript:handleApprovalClick(this)">
-                                        <div id="alternative2approvalcount">2</div>
-                                        <div id="alternative2approvalusers">
-                                            <b>Billy</b><br>
-                                            <b>Tommy</b>
-                                        </div>
-                                    </div>
-                                    <div id="alternative2disapproval">
-                                        <input type="button" value="Disapprove" onClick="JavaScript:handleDisapprovalClick(this)">
-                                        <div id="alternative2disapprovalcount">2</div>
-                                        <div id="alternative2disapprovalusers">
-                                        </div>
-                                    </div>
-                                </div> 
+                            <div id="alternative2disapproval">
+                                <input type="button" value="Disapprove" onClick="JavaScript:handleDisapprovalClick(1)">
+                                <div id="alternative2disapprovalcount">2</div>
+                                <div id="alternative2disapprovalusers">
+                                    <b>Billy</b><br>
+                                    <b>Tommy</b>
+                                </div>
                             </div>
                         </div>
-                        <b id="a3">Alternative 3</b>
-                        <div id="Alternative3"class="container-sm border">
-                            <div id="alternative3namelabel" >
-                                <b>Name:</b>
-                                <div id="alternative3name">Today i went on a walk and played no games today </div>
+                        <div id="Alternative3">
+                            <div id="alternative3name">Cheeseburgers</div>
+                            <div id="alternative3approval">
+                                <input type="button" value="Approve" onClick="JavaScript:handleApprovalClick(2)">
+                                <div id="alternative3approvalcount">2</div>
+                                <div id="alternative3approvalusers">
+                                    <b>Billy</b><br>
+                                    <b>Tommy</b>
+                                </div>
                             </div>
-                            <div id="alternative3approvallabel">
-                                <b>Ratings:</b>
-                                <div id="alternative3approvalbuttons">
-                                    <div id="alternative3approval">
-                                        <input type="button" value="Approve" onClick="JavaScript:handleApprovalClick(this)">
-                                        <div id="alternative3approvalcount">2</div>
-                                        <div id="alternative3approvalusers">
-                                            <b>Billy</b><br>
-                                            <b>Tommy</b>
-                                        </div>
-                                    </div>
-                                    <div id="alternative3disapproval">
-                                        <input type="button" value="Disapprove" onClick="JavaScript:handleDisapprovalClick(this)">
-                                        <div id="alternative3disapprovalcount">2</div>
-                                        <div id="alternative3disapprovalusers">
-                                        </div>
-                                    </div>
-                                </div> 
+                            <div id="alternative3disapproval">
+                                <input type="button" value="Disapprove" onClick="JavaScript:handleDisapprovalClick(2)">
+                                <div id="alternative3disapprovalcount">2</div>
+                                <div id="alternative3disapprovalusers">
+                                    <b>Billy</b><br>
+                                    <b>Tommy</b>
+                                </div>
                             </div>
                         </div>
-                        <b id="a4">Alternative 4</b>
-                        <div id="Alternative4"class="container-sm border">
-                            <div id="alternative4namelabel" >
-                                <b>Name:</b>
-                                <div id="alternative4name">Cheeseburgers</div>
+                        <div id="Alternative4">
+                            <div id="alternative4name">Cheeseburgers</div>
+                            <div id="alternative4approval">
+                                <input type="button" value="Approve" onClick="JavaScript:handleApprovalClick(3)">
+                                <div id="alternative4approvalcount">2</div>
+                                <div id="alternative4approvalusers">
+                                    <b>Billy</b><br>
+                                    <b>Tommy</b>
+                                </div>
                             </div>
-                            <div id="alternative4approvallabel">
-                                <b>Ratings:</b>
-                                <div id="alternative4approvalbuttons">
-                                    <div id="alternative4approval">
-                                        <input type="button" value="Approve" onClick="JavaScript:handleApprovalClick(this)">
-                                        <div id="alternative4approvalcount">2</div>
-                                        <div id="alternative4approvalusers">
-                                            <b>Billy</b><br>
-                                            <b>Tommy</b>
-                                        </div>
-                                    </div>
-                                    <div id="alternative4disapproval">
-                                        <input type="button" value="Disapprove" onClick="JavaScript:handleDisapprovalClick(this)">
-                                        <div id="alternative4disapprovalcount">2</div>
-                                        <div id="alternative4disapprovalusers">
-                                        </div>
-                                    </div>
-                                </div> 
+                            <div id="alternative4disapproval">
+                                <input type="button" value="Disapprove" onClick="JavaScript:handleDisapprovalClick(3)">
+                                <div id="alternative4disapprovalcount">2</div>
+                                <div id="alternative4disapprovalusers">
+                                    <b>Billy</b><br>
+                                    <b>Tommy</b>
+                                </div>
                             </div>
                         </div>
-                        <b id="a5">Alternative 5</b>
-                        <div id="Alternative5"class="container-sm border">
-                            <div id="alternative5namelabel" >
-                                <b>Name:</b>
-                                <div id="alternative5name">Cheeseburgers</div>
+                        <div id="Alternative5">
+                            <div id="alternative5name">Cheeseburgers</div>
+                            <div id="alternative5approval">
+                                <input type="button" value="Approve" onClick="JavaScript:handleApprovalClick(4)">
+                                <div id="alternative5approvalcount">2</div>
+                                <div id="alternative5approvalusers">
+                                    <b>Billy</b><br>
+                                    <b>Tommy</b>
+                                </div>
                             </div>
-                            <div id="alternative5approvallabel">
-                                <b>Ratings:</b>
-                                <div id="alternative5approvalbuttons">
-                                    <div id="alternative5approval">
-                                        <input type="button" value="Approve" onClick="JavaScript:handleApprovalClick(this)">
-                                        <div id="alternative5approvalcount">2</div>
-                                        <div id="alternative5approvalusers">
-                                            <b>Billy</b><br>
-                                            <b>Tommy</b>
-                                        </div>
-                                    </div>
-                                    <div id="alternative5disapproval">
-                                        <input type="button" value="Disapprove" onClick="JavaScript:handleDisapprovalClick(this)">
-                                        <div id="alternative5disapprovalcount">2</div>
-                                        <div id="alternative5disapprovalusers">
-                                        </div>
-                                    </div>
-                                </div> 
+                            <div id="alternative5disapproval">
+                                <input type="button" value="Disapprove" onClick="JavaScript:handleDisapprovalClick(4)">
+                                <div id="alternative5disapprovalcount">2</div>
+                                <div id="alternative5disapprovalusers">
+                                    <b>Billy</b><br>
+                                    <b>Tommy</b>
+                                </div>
                             </div>
                         </div>
                     </div>

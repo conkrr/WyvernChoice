@@ -7,6 +7,7 @@ public class UserGsonCompatible {
 	public String username;
 	public String password;
 	public String choiceID;
+	public String userID;
 	
 	public UserGsonCompatible(boolean newUser, String username, String password, String choiceID) {
 		this.newUser = newUser;
@@ -26,6 +27,8 @@ public class UserGsonCompatible {
 		this.username = u.username;
 		this.password = u.password;
 		this.choiceID = u.choiceId;
+		this.userID = u.userId;
+		
 	}
 	
 	

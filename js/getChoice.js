@@ -1,4 +1,5 @@
-
+var savedChoiceID = "";
+var savedAlternatives = [];
 
 function processRequestChoiceResponse(result) {
     // Can grab any DIV or SPAN HTML element and can then manipulate its
@@ -8,14 +9,16 @@ function processRequestChoiceResponse(result) {
     //refreshConstantsList();
 
 	var jsonObj = JSON.parse(result);
-    var choice = document.getElementById('currentChoice');
+    var choice = document.getElementById("currentChoice");
+
 
     var output = "";
-    var cName = jsonObj.choice.name;
-    var cID = jsonObj.choice.choiceID;
-    var cParticipants = jsonObj.choice.numParticipants;
-    var cDate = jsonObj.choice.completionDate;
-    var cFinalized = jsonObj.choice.isFinalized;
+    var cName = jsonObj.name;
+    var cID = jsonObj.choiceID;
+	savedChoiceID = cID; 
+    var cParticipants = jsonObj.numParticipants;
+    var cDate = jsonObj.creationDate;
+    var cFinalized = jsonObj.isFinalized;
 
     console.log("js = " + jsonObj);
     console.log("cID = " + cID);
@@ -27,8 +30,8 @@ function processRequestChoiceResponse(result) {
         cFinalized = "Still open for discussion.";
     }
 
-    var cAlternatives = jsonObj.choice.listofAlternatives;//choice["listofAlternatives"];
-
+    var cAlternatives = jsonObj.listofAlternatives;//choice["listofAlternatives"];
+	savedAlternatives = cAlternatives;
     /*
     output = output + "<div id=\"choice" + cName + "\">"+ cName + "<br> ID:" + cID + "<br>" + cFinalized + "<br></div>";
 
@@ -61,9 +64,40 @@ function processRequestChoiceResponse(result) {
     var alternativeJson;
     var approvalUserOutput;
     var disapprovalUserOutput;
-
+	//console.log("cAlternatives = " + cAlternatives);
     console.log("cAlternatives = " + cAlternatives);
 
+	var i;
+	for (i = 0; i < cAlternatives.length; i++) {
+		if(cAlternatives[i] !== null){
+        alternativeJson = cAlternatives[i];
+        document.getElementById("alternative" + (i+1) +"name").innerHTML = alternativeJson.description;
+
+        console.log("altJson: " + alternativeJson);
+        console.log("altJson desc: " +  alternativeJson.description);
+        //Get Approval Elements
+
+        console.log("alternativeJson.opinions " +  alternativeJson.opinions);
+        //console.log("alternativeJson.Approvals.count " +  alternativeJson.opinions.approvalCount);
+
+
+        document.getElementById("alternative" + (i+1) +"approvalcount").innerHTML = alternativeJson.opinions.approvals;
+        for(let i=0; i < alternativeJson.opinions.approvalUsers.length; i++){
+            approvalUserOutput = approvalUserOutput + "<b>" + alternativeJson.opinions.approvalUsers[i] + "</b><br>"
+        }
+        document.getElementById("alternative" + (i+1) +"approvalusers").innerHTML = approvalUserOutput;
+
+        //Get Disapproval Elements
+        document.getElementById("alternative" + (i+1) +"disapprovalcount").innerHTML = alternativeJson.opinions.disapprovals;
+        for(let i=0; i < alternativeJson.opinions.disapprovalUsers.length; i++){
+            disapprovalUserOutput = disapprovalUserOutput + "<b>" + alternativeJson.opinions.disapprovalUsers[i] + "</b><br>"
+        }
+        document.getElementById("alternative" + (i+1) +"disapprovalusers").innerHTML = disapprovalUserOutput;
+
+        document.getElementById("Alternative" + (i+1)).style.visibility = "visible";
+    }
+	} 
+/*
     if(cAlternatives[0] !== null){
         alternativeJson = cAlternatives[0];
         document.getElementById("alternative1name").innerHTML = alternativeJson.description;
@@ -151,20 +185,24 @@ function processRequestChoiceResponse(result) {
 
         document.getElementById("Alternative5").style.visibility = visible;
     }
+*/
 
-    document.getElementById("currentChoice").style.visibility = visible;
+    
 
     // Update computation result
-    currentChoice.innerHTML = output;
+    //choice.innerHTML = output;
 
+	document.getElementById("currentChoice").style.visibility = "visible";
 }
 
 function requestChoice(val) { 
     //called by create choice -> entry point
     processChoiceRequest (val);
 }
-
-
+function processRefreshChoice(val) { 
+     console.log("processRefreshChoice val:" + val);
+    requestChoice(savedChoiceID);
+}
 function processChoiceRequest (val){
   var xhr = new XMLHttpRequest();
   xhr.open("GET", get_choice_url + "/" + val, true);  // Can't be DELETE b/c of preflight CORS error with non-simple requests
@@ -181,7 +219,7 @@ function processChoiceRequest (val){
 		  } else {
 			  console.log("actual:" + xhr.responseText)
 			  var js = JSON.parse(xhr.responseText);
-			  var err = js["error"];
+			  var err = js.error;
 			  alert (err);
 		  }
 	  } else {

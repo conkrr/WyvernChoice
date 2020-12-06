@@ -1,7 +1,8 @@
 /*
 * Respond to a user's attempt to register
 */
-
+var savedUserId = "";
+var savedUserName = "";
 function processRegisterResponse(result){
     //Grab any div or span element
     //manipulate contents dynamically via Javascript
@@ -10,7 +11,8 @@ function processRegisterResponse(result){
     const jsonObj = JSON.parse(result);
 
      console.log("jSON username: " + jsonObj.userGson.username + "jSON password: " + jsonObj.userGson.password + "jSON choiceiD: "+ jsonObj.userGson.choiceID) ;
-
+	savedUserName = jsonObj.userGson.username;
+	savedUserId = jsonObj.userGson.userID;
     requestChoice(jsonObj.userGson.choiceID);
 }
 
