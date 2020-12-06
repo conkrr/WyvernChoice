@@ -57,11 +57,11 @@ public class GetChoiceResponse {
 		this.error = errorMessage;
 	}
 	
-//	public String toString() {
-//		if(statusCode == 200) {
-//			return "{ \"choice\": \"" + choice + "\", \"statusCode\": \"" + statusCode + "\" }";
-//		} else {
-//			return "{ \"statusCode\": \"" + statusCode + "\", \"error\": \"" + error + "\" }";
-//		}
-//	}
+	public String toString() {
+		if(statusCode == 200) {
+			return "{ \"choice\": \"" + "oooooooof" + "\", \"statusCode\": \"" + statusCode + "\" }";
+		} else {
+			return "{ \"statusCode\": \"" + statusCode + "\", \"error\": \"" + error + "\" }";
+		}
+	}
 }
