@@ -122,7 +122,7 @@ java.sql.Connection connection;
 					ps.execute();
 					
 					AlternativesDAO dao = new AlternativesDAO(logger);
-					for(Alternative a : c.alternatives){
+					for(Alternative a : t.alternatives){
 						dao.insert(a);
 					}
 					
