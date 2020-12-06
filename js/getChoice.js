@@ -1,4 +1,5 @@
-var savedInfo = "";
+var savedChoiceID = "";
+var savedAlternatives = [];
 
 function processRequestChoiceResponse(result) {
     // Can grab any DIV or SPAN HTML element and can then manipulate its
@@ -14,7 +15,7 @@ function processRequestChoiceResponse(result) {
     var output = "";
     var cName = jsonObj.name;
     var cID = jsonObj.choiceID;
-	savedInfo = cID; 
+	savedChoiceID = cID; 
     var cParticipants = jsonObj.numParticipants;
     var cDate = jsonObj.creationDate;
     var cFinalized = jsonObj.isFinalized;
@@ -30,7 +31,7 @@ function processRequestChoiceResponse(result) {
     }
 
     var cAlternatives = jsonObj.listofAlternatives;//choice["listofAlternatives"];
-
+	savedAlternatives = cAlternatives;
     /*
     output = output + "<div id=\"choice" + cName + "\">"+ cName + "<br> ID:" + cID + "<br>" + cFinalized + "<br></div>";
 
@@ -200,7 +201,7 @@ function requestChoice(val) {
 }
 function processRefreshChoice(val) { 
      console.log("processRefreshChoice val:" + val);
-    requestChoice(savedInfo);
+    requestChoice(savedChoiceID);
 }
 function processChoiceRequest (val){
   var xhr = new XMLHttpRequest();
