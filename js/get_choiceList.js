@@ -9,6 +9,8 @@ function requestChoiceList(result){
 function processChoiceListRequest(val){
   var xhr = new XMLHttpRequest();
   xhr.open("GET", choice_list_url, true);
+  xhr.send();
+  console.log("choicelistrequest sent");
 
   // This will process results and update HTlML as appropriate.
   xhr.onloadend = function ()
@@ -22,14 +24,14 @@ function processChoiceListRequest(val){
       } else {
         console.log("actual:" + xhr.responseText)
         var js = JSON.parse(xhr.responseText);
-        var err = js["error"];
+        var err = js.error;
         alert (err);
       }
     } else {
       processDeleteResponse("N/A");
     }
 };
-xhr.send(null);  //  NEED TO GET IT GOING
+//xhr.send(null);  //  NEED TO GET IT GOING
 }
 
 
@@ -42,13 +44,17 @@ function processRequestChoiceListResponse(result){
 
   var output = "";
 
-  for(let i=0; i < jsonObj.list.length; i++){
-    var choiceJson = js.list[i];
+  for(let i=0; i < jsonObj.listOfChoices.length; i++){
+    var choiceJson = jsonObj.listOfChoices[i];
 
     //var cName = choiceJson.choice.name;
-    var cID = choiceJson.choice.choiceID;
-    var cFinalized = choiceJson.choice.isFinalized;
-    var cDate = choiceJson.choice.creationDate;
+    //var cID = choiceJson.choice.choiceID;
+   // var cFinalized = choiceJson.choice.isFinalized;
+    //var cDate = choiceJson.choice.creationDate;
+     var cID = choiceJson.id;
+     var cFinalized = choiceJson.isFinalized;
+     var cDate = choiceJson.creationDate;
+
     if(cFinalized === true){
       cFinalized = "Closed"
     } else {

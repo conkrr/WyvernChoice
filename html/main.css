@@ -18,15 +18,24 @@
     
 }
 
+#Login{
+    padding-bottom: 50px;
+}
+
 #UserInfo{
     display: flex;
     flex-direction: column;
-    width: 40%;
+    width: 30%;
+}
+#emptynav{
+    width: 10%;
 }
 
 #ChoiceInfo{
    width: 60%;
    flex-direction: column;
+   float: right;
+   display: none;
 }
 
 #currentChoice{
@@ -37,19 +46,62 @@
 
 #ChoiceHeader{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+}
+
+#a1{
+    visibility: visible;
+}
+
+#a2{
+    visibility: visible;
+}
+
+#a3{
+    visibility: visible;
+}
+
+#a4{
+    visibility: visible;
+}
+
+#a5{
+    visibility: visible;
 }
 
 #Alternative1{
     display: flex;
     flex-direction: row;
-    visibility: hidden;
+    visibility: visible;
+}
+
+#alternative1namelabel{
+    display: flex;
+    flex-direction: column;
+    padding-right: 20px;
+}
+
+#alternative1approvallabel{
+    display: flex;
+    flex-direction: column;
+}
+
+#alternative1finalizelabel{
+    margin: 0;
+    position: relative;
+    top: 50%;
+    transform: translateY(50%);
+}
+
+#alternative1approvalbuttons{
+    display: flex;
+    flex-direction: row;
 }
 
 #alternative1approval{
     display: flex;
     flex-direction: column;
-    
+    padding-right: 10px;
 }
 
 #alternative1disapproval{
@@ -60,12 +112,29 @@
 #Alternative2{
     display: flex;
     flex-direction: row;
-    visibility: hidden;
+    visibility: visible;
+}
+
+#alternative2namelabel{
+    display: flex;
+    flex-direction: column;
+    padding-right: 20px;
+}
+
+#alternative2approvallabel{
+    display: flex;
+    flex-direction: column;
+}
+
+#alternative2approvalbuttons{
+    display: flex;
+    flex-direction: row;
 }
 
 #alternative2approval{
     display: flex;
     flex-direction: column;
+    padding-right: 10px;
 }
 
 #alternative2disapproval{
@@ -76,12 +145,29 @@
 #Alternative3{
     display: flex;
     flex-direction: row;
-    visibility: hidden;
+    visibility: visible;
+}
+
+#alternative3namelabel{
+    display: flex;
+    flex-direction: column;
+    padding-right: 20px;
+}
+
+#alternative3approvallabel{
+    display: flex;
+    flex-direction: column;
+}
+
+#alternative3approvalbuttons{
+    display: flex;
+    flex-direction: row;
 }
 
 #alternative3approval{
     display: flex;
     flex-direction: column;
+    padding-right: 10px;
 }
 
 #alternative3disapproval{
@@ -92,12 +178,29 @@
 #Alternative4{
     display: flex;
     flex-direction: row;
-    visibility: hidden;
+    visibility: visible;
+}
+
+#alternative4namelabel{
+    display: flex;
+    flex-direction: column;
+    padding-right: 20px;
+}
+
+#alternative4approvallabel{
+    display: flex;
+    flex-direction: column;
+}
+
+#alternative4approvalbuttons{
+    display: flex;
+    flex-direction: row;
 }
 
 #alternative4approval{
     display: flex;
     flex-direction: column;
+    padding-right: 10px;
 }
 
 #alternative4disapproval{
@@ -108,12 +211,29 @@
 #Alternative5{
     display: flex;
     flex-direction: row;
-    visibility: hidden;
+    visibility: visible;
+}
+
+#alternative5namelabel{
+    display: flex;
+    flex-direction: column;
+    padding-right: 20px;
+}
+
+#alternative5approvallabel{
+    display: flex;
+    flex-direction: column;
+}
+
+#alternative5approvalbuttons{
+    display: flex;
+    flex-direction: row;
 }
 
 #alternative5approval{
     display: flex;
     flex-direction: column;
+    padding-right: 10px;
 }
 
 #alternative5disapproval{
