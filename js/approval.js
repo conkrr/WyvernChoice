@@ -1,3 +1,6 @@
+let data = {};
+let currentUserID = ;
+
 function processApprovalResponse(result){
     // Can grab any DIV or SPAN HTML element and can then manipulate its
     // contents dynamically via javascript
@@ -13,7 +16,9 @@ function handleApprovalClick(e){
     console.log("Registering approval request...");
     //Get the approval count?
     //let response = document.getElementById('');
-    //let data = {};
+    
+    data["approvingUser"] = 
+    data["approvingUserID"] = 
     
     //store user data in approval
     
