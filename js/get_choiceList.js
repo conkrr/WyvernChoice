@@ -61,7 +61,7 @@ function processRequestChoiceListResponse(result){
       cFinalized = "Open";
     }
 
-    output = output + "<div id=\"choice" + cID + "\">"  + cName +  "</b>    <b>" + cID + "</b>   <b>" + cDate + "</b>     <b>"+ cFinalized + "</b></div><br>";
+    output = output + "<div id=\"choice" + cID + "\">"  + cID +  "</b>    <b>" + cName + "</b>   <b>" + cDate + "</b>     <b>"+ cFinalized + "</b></div><br>";
   }
   //Output list of choices here
   choiceList.innerHTML = output;
