@@ -2,6 +2,7 @@ package com.amazonaws.lambda.demo.http;
 
 import java.util.List;
 
+import com.amazonaws.lambda.demo.model.Alternative;
 import com.amazonaws.lambda.demo.model.Choice;
 
 public class ChoiceGsonCompatible {
@@ -10,7 +11,7 @@ public class ChoiceGsonCompatible {
 	 int numParticipants;
 	 String completionDate;
 	 boolean isFinalized;
-	 List<AlternativeGsonCompatible> listofAlternatives;
+	 List<Alternative> listofAlternatives;
 	public String getName() {
 		return name;
 	}
@@ -26,11 +27,11 @@ public class ChoiceGsonCompatible {
 	public boolean isFinalized() {
 		return isFinalized;
 	}
-	public List<AlternativeGsonCompatible> getListofAlternatives() {
+	public List<Alternative> getListofAlternatives() {
 		return listofAlternatives;
 	}
 	public ChoiceGsonCompatible(String name, String choiceID, int numParticipants, String completionDate,
-			boolean isFinalized, List<AlternativeGsonCompatible> listofAlternatives) {
+			boolean isFinalized, List<Alternative> listofAlternatives) {
 		this.name = name;
 		this.choiceID = choiceID;
 		this.numParticipants = numParticipants;
@@ -45,7 +46,7 @@ public class ChoiceGsonCompatible {
 		this.numParticipants = c.maxParticipants;
 		this.completionDate = null;
 		this.isFinalized = c.isFinalized;
-		this.listofAlternatives = c.getAlternativeGsonList();
+		this.listofAlternatives = c.alternatives;
 	}
 	 
 	 

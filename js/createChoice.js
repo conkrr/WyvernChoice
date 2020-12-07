@@ -2,10 +2,11 @@ function processCreateResponse(result) {
     // Can grab any DIV or SPAN HTML element and can then manipulate its
     // contents dynamically via javascript
     console.log("processCreateResponse result:" + result);
-  
+
 	const jsonObj = JSON.parse(result);
-	const id = jsonObj.choice.choiceID
+	const id = jsonObj.choiceID
     requestChoice(id);
+	//processRequestChoiceResponse(result);
 }
 
 function handleCreateChoiceClick(e){
@@ -15,17 +16,23 @@ function handleCreateChoiceClick(e){
     var form = document.createChoiceForm;
     var data = {};
     data["name"] = form.choiceName.value;
-    data["creatingUserID"] = Math.random()*1000;
+    data["creatingUserID"] = null;
     data["numParticipants"] = form.participants.value;
     data["isFinalized"] = false;
-    data["completionDate"] = "Open";
+    data["completionDate"] = null;
     
     //Make an alternative list and check to see which ones are filled. Create alternatives out of the ones that are pushed
     var alternativeList = [];
+console.log("alternative1 content:" + form.alternative1.value);
+console.log("alternative2 content:" + form.alternative2.value);
+console.log("alternative3 content:" + form.alternative3.value);
+console.log("alternative4 content:" + form.alternative4.value);
+console.log("alternative5 content:" + form.alternative5.value);
 
     if(form.alternative1.value !== null || form.alternative1.value != "" ){
-        alternativeList.push(form.alternative1.value);
-
+        
+	alternativeList.push(form.alternative1.value);
+		
     }
 
     if(form.alternative2.value !== null || form.alternative2.value != ""){

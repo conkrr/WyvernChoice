@@ -4,14 +4,11 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
+import com.amazonaws.lambda.demo.http.*;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.amazonaws.lambda.demo.http.CreateChoiceRequest;
-import com.amazonaws.lambda.demo.http.CreateChoiceResponse;
-import com.amazonaws.lambda.demo.http.DeleteChoiceRequest;
-import com.amazonaws.lambda.demo.http.DeleteChoiceResponse;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.google.gson.Gson;
 
@@ -20,10 +17,10 @@ import com.google.gson.Gson;
  */
 public class CreateChoiceHandlerTest extends LambdaTest {
 
-	CreateChoiceResponse testSuccessInput(String incoming) throws IOException {
+    GetChoiceResponse testSuccessInput(String incoming) throws IOException {
     	CreateChoiceHandler handler = new CreateChoiceHandler();
     	CreateChoiceRequest req = new Gson().fromJson(incoming, CreateChoiceRequest.class);
-        CreateChoiceResponse resp = handler.handleRequest(req, createContext("create"));
+        GetChoiceResponse resp = handler.handleRequest(req, createContext("create"));
         Assert.assertEquals(200, resp.statusCode);
         return resp;
     }
@@ -32,15 +29,15 @@ public class CreateChoiceHandlerTest extends LambdaTest {
     	CreateChoiceHandler handler = new CreateChoiceHandler();
     	CreateChoiceRequest req = new Gson().fromJson(incoming, CreateChoiceRequest.class);
 
-    	CreateChoiceResponse resp = handler.handleRequest(req, createContext("create"));
+    	GetChoiceResponse resp = handler.handleRequest(req, createContext("create"));
         Assert.assertEquals(failureCode, resp.statusCode);
     }
 
     String getJsonResponse(String incoming) throws IOException {
-    	
-        CreateChoiceResponse resp = testSuccessInput(incoming);
+
+        GetChoiceResponse resp = testSuccessInput(incoming);
         
-       return new Gson().toJson(resp.choice);  
+       return new Gson().toJson(resp);
     }
     // NOTE: this proliferates large number of constants! Be mindful\
     //Also this fails, throws a 400

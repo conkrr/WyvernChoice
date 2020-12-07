@@ -8,9 +8,9 @@ function requestChoiceList(result){
 //Might be different due to it being a list?
 function processChoiceListRequest(val){
   var xhr = new XMLHttpRequest();
-  xhr.open("GET", choice_list_url + "/" + val, true);  // Can't be DELETE b/c of preflight CORS error with non-simple requests
+  xhr.open("GET", choice_list_url, true);
 
-  // This will process results and update HTML as appropriate.
+  // This will process results and update HTlML as appropriate.
   xhr.onloadend = function ()
   {
     console.log(xhr);
@@ -45,18 +45,20 @@ function processRequestChoiceListResponse(result){
   for(let i=0; i < jsonObj.list.length; i++){
     var choiceJson = js.list[i];
 
-    var cName = choiceJson.choice.name;
+    //var cName = choiceJson.choice.name;
     var cID = choiceJson.choice.choiceID;
     var cFinalized = choiceJson.choice.isFinalized;
-    var cDate;
+    var cDate = choiceJson.choice.creationDate;
     if(cFinalized === true){
-      cDate = choiceJson.choice.completionDate;
+      cFinalized = "Closed"
     } else {
-      cDate = "Open";
+      cFinalized = "Open";
     }
 
-    output = output + "<div id=\"const" + cName + "\"><b>" + cName + "</b>   <b>" + cID + "</b>     <b>"+ cDate + "</b></div><br>";
+    output = output + "<div id=\"choice" + cID + "\"><b>" + cID + "</b>   <b>" + cDate + "</b>     <b>"+ cFinalized + "</b></div><br>";
   }
+  //Output list of choices here
+  choiceList.innerHTML = output;
 };
 
 

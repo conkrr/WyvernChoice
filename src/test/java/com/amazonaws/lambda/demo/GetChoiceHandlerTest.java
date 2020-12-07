@@ -52,6 +52,9 @@ public class GetChoiceHandlerTest  extends LambdaTest
         Create parameters forGetChoiceRequest
       */
 
+
+
+
        GetChoiceRequest req = new GetChoiceRequest(/* add parameters here*/);
         String SAMPLE_INPUT_STRING = new Gson().toJson(req);
         String jsonResp;

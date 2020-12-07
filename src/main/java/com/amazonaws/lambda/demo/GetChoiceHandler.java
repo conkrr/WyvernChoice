@@ -14,9 +14,10 @@ public class GetChoiceHandler implements RequestHandler<GetChoiceRequest, GetCho
 		LambdaLogger logger;
 		
 		Choice getChoiceViaDAO(String id) throws Exception { 
-			logger.log("GetChoiceHandler::getChoiceDAO()");
+			logger.log("GetChoiceHandler::getChoiceDAO(id =  " + id + ")");
+			
 			ChoicesDAO dao = new ChoicesDAO(logger);
-			Choice choice = dao.getChoice(id);
+			Choice choice = dao.get(id);
 			return choice;
 		}
 		
@@ -32,10 +33,9 @@ public class GetChoiceHandler implements RequestHandler<GetChoiceRequest, GetCho
 				logger.log("After running getChoiceViaDAO()...choice is null:  " + (choice == null));
 				if (choice != null) {
 					//response = new GetChoiceResponse(req.getDescription());
-					ChoiceGsonCompatible cGson = new ChoiceGsonCompatible(choice);
-					response = new GetChoiceResponse(cGson);
+					response = new GetChoiceResponse(choice);
 				} else {
-					response = new GetChoiceResponse(req.getChoiceID(), 422);
+					response = new GetChoiceResponse("", 422, choice);
 				}
 			} catch (Exception e) {
 				response = new GetChoiceResponse("Unable to get choice: " + req.getChoiceID() + "(" + e.getMessage() + ")", 400);
