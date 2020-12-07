@@ -37,8 +37,10 @@
         <nav id="DeleteChoices" class="form-group">
             <h1>Delete Choices</h1>
             <h3>Delete all choices older than:</h3>
-            <input name="participants" type="email" class="form-control" placeholder="Days"/><br>
-            <input name="participants" type="email" class="form-control" placeholder="Hours"/><br>
+            <form name="deleteChoicesForm" method = "post">
+                <input name="deleteDay" type="email" class="form-control" placeholder="Days"/><br>
+                <input name="deleteHour" type="email" class="form-control" placeholder="Hours"/><br>
+            </form>
             <!---
             <nav id="DaySelect" class="form-control">
                 <select>

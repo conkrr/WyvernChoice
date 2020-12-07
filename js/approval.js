@@ -1,6 +1,4 @@
-
 /*
->>>>>>> 9cfaaf58f98c47b9796837c1573ef34aa8b3dd03
 function processApprovalResponse(result){
     // Can grab any DIV or SPAN HTML element and can then manipulate its
     // contents dynamically via javascript
@@ -12,7 +10,6 @@ function processApprovalResponse(result){
     requestChoice(id);
 }*/
 function handleApprovalClick(e){
-
     console.log(" " + e);
     var data = {};
     data["approvingUser"] = savedUserName;
