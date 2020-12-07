@@ -73,35 +73,35 @@ function processRequestChoiceResponse(result) {
 		approvalUserOutput = "";
 		disapprovalUserOutput = "";
 		if(cAlternatives[i] !== null){
-        alternativeJson = cAlternatives[i];
-        document.getElementById("alternative" + (i+1) +"name").innerHTML = alternativeJson.description;
+            alternativeJson = cAlternatives[i];
+            document.getElementById("alternative" + (i+1) +"name").innerHTML = alternativeJson.description;
 
-        console.log("altJson: " + alternativeJson);
-        console.log("altJson desc: " +  alternativeJson.description);
-        //Get Approval Elements
+            console.log("altJson: " + alternativeJson);
+            console.log("altJson desc: " +  alternativeJson.description);
+            //Get Approval Elements
 
-        console.log("alternativeJson.opinions " +  alternativeJson.opinions);
-        //console.log("alternativeJson.Approvals.count " +  alternativeJson.opinions.approvalCount);
-	
-		console.log("alternativeJson.opinions.approvals " +  alternativeJson.opinions.approvals);
-		console.log("alternativeJson.opinions.approvalUserss " +  alternativeJson.opinions.approvalUsers);
-		console.log("alternativeJson.opinions.disapprovals " +  alternativeJson.opinions.disapprovals);
-		console.log("alternativeJson.opinions.disapprovalUserss " +  alternativeJson.opinions.disapprovalUsers);
-        document.getElementById("alternative" + (i+1) +"approvalcount").innerHTML = alternativeJson.opinions.approvals;
-        for(let j=0; j < alternativeJson.opinions.approvalUsers.length; j++){
-            approvalUserOutput = approvalUserOutput + "<b>" + alternativeJson.opinions.approvalUsers[j] + "</b><br>"
+            console.log("alternativeJson.opinions " +  alternativeJson.opinions);
+            //console.log("alternativeJson.Approvals.count " +  alternativeJson.opinions.approvalCount);
+        
+            console.log("alternativeJson.opinions.approvals " +  alternativeJson.opinions.approvals);
+            console.log("alternativeJson.opinions.approvalUserss " +  alternativeJson.opinions.approvalUsers);
+            console.log("alternativeJson.opinions.disapprovals " +  alternativeJson.opinions.disapprovals);
+            console.log("alternativeJson.opinions.disapprovalUserss " +  alternativeJson.opinions.disapprovalUsers);
+            document.getElementById("alternative" + (i+1) +"approvalcount").innerHTML = alternativeJson.opinions.approvals;
+            for(let j=0; j < alternativeJson.opinions.approvalUsers.length; j++){
+                approvalUserOutput = approvalUserOutput + "<b>" + alternativeJson.opinions.approvalUsers[j] + "</b><br>"
+            }
+            document.getElementById("alternative" + (i+1) +"approvalusers").innerHTML = approvalUserOutput;
+
+            //Get Disapproval Elements
+            document.getElementById("alternative" + (i+1) +"disapprovalcount").innerHTML = alternativeJson.opinions.disapprovals;
+            for(let k=0; k < alternativeJson.opinions.disapprovalUsers.length; k++){
+                disapprovalUserOutput = disapprovalUserOutput + "<b>" + alternativeJson.opinions.disapprovalUsers[k] + "</b><br>"
+            }
+            document.getElementById("alternative" + (i+1) +"disapprovalusers").innerHTML = disapprovalUserOutput;
+
+            document.getElementById("Alternative" + (i+1)).style.visibility = "visible";
         }
-        document.getElementById("alternative" + (i+1) +"approvalusers").innerHTML = approvalUserOutput;
-
-        //Get Disapproval Elements
-        document.getElementById("alternative" + (i+1) +"disapprovalcount").innerHTML = alternativeJson.opinions.disapprovals;
-        for(let k=0; k < alternativeJson.opinions.disapprovalUsers.length; k++){
-            disapprovalUserOutput = disapprovalUserOutput + "<b>" + alternativeJson.opinions.disapprovalUsers[k] + "</b><br>"
-        }
-        document.getElementById("alternative" + (i+1) +"disapprovalusers").innerHTML = disapprovalUserOutput;
-
-        document.getElementById("Alternative" + (i+1)).style.visibility = "visible";
-    }
 
 	} 
 /*
