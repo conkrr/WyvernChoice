@@ -20,7 +20,7 @@ public class CreateFeedbackResponse {
 	
 	public String toString() {
 		if(statusCode == 200) {
-			return "{ \"user\": \"" + feedback.user + "\", \"text\": \"" + feedback.text + "\", \"feedback\": \"" + feedback.timestamp + "\", \"statusCode\": \"" + statusCode +"\" }";
+			return "{ \"feedbackUser\": \"" + feedback.user + "\", \"feedbackText\": \"" + feedback.text + "\", \"feedbackTimestamp\": \"" + feedback.timestamp + "\", \"statusCode\": \"" + statusCode +"\" }";
 		} else {
 			return "{ \"statusCode\": \"" + statusCode + "\", \"error\": \"" + error + "\" }";
 		}
