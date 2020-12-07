@@ -1,5 +1,13 @@
 function processFinalizeResponse(result){
+    // Can grab any DIV or SPAN HTML element and can then manipulate its
+    // contents dynamically via javascript
+    console.log("processFinalizeResponse result:" + result);
 
+    /*
+	const jsonObj = JSON.parse(result);
+	const id = jsonObj.alternativeID;
+    requestChoice(id);
+    */
 }
 
 function handleFinalizeClick(e){
@@ -7,18 +15,10 @@ function handleFinalizeClick(e){
     let data = {};
 
     data["choiceID"] = savedChoiceID;
-
-    //Not sure how to get the alternative we click in...
-    //Whenever you sign into the choice, that's when the info
-    //When you know it's finalized, disable a bunch of stuff
-    //Check calculator example!
-        //use an href tag. Do a request.
-        //5 different constants, with a different trash can
-        //Use deleteChoice, embed information
-    data["alternativeID"] = savedAlternatives;
-
-    //Am I missing something here?
+    data["alternativeID"] = savedAlternatives[e];
     data["isFinalized"] = true;
+
+    document.getElementById("GreaterAlternative" + (e+1)).class = "container p-3 my-3 bg-dark text-white";
 
     //Change container type of the correct alternative
     //Do other things?

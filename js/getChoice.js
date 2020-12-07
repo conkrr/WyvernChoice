@@ -1,4 +1,5 @@
 var savedChoiceID = "";
+var savedIsFinalized;
 var savedAlternatives = [];
 
 function processRequestChoiceResponse(result) {
@@ -20,6 +21,7 @@ function processRequestChoiceResponse(result) {
     var cParticipants = jsonObj.numParticipants;
     var cDate = jsonObj.creationDate;
     var cFinalized = jsonObj.isFinalized;
+    savedIsFinalized = cFinalized;
 
     console.log("js = " + jsonObj);
     console.log("cID = " + cID);
@@ -63,6 +65,7 @@ function processRequestChoiceResponse(result) {
     //Initialize Choice Headers//
     /////////////////////////////
     var alternativeJson;
+    var feedbackJson;
     var approvalUserOutput;
     var disapprovalUserOutput;
 	//console.log("cAlternatives = " + cAlternatives);
@@ -101,6 +104,8 @@ function processRequestChoiceResponse(result) {
             document.getElementById("alternative" + (i+1) +"disapprovalusers").innerHTML = disapprovalUserOutput;
 
             document.getElementById("Alternative" + (i+1)).style.visibility = "visible";
+
+            feedbackJson = alternativeJson.listofFeedback;
         }
 
 	} 

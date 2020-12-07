@@ -44,8 +44,17 @@ function handleRegisterClick(e){
         console.log("XHR Request: " + xhr.request);
 
         if(xhr.readyState == XMLHttpRequest.DONE){
-            console.log ("XHR response text:" + xhr.responseText);
-            processRegisterResponse (xhr.responseText);
+            if(xhr.status === 200){
+                console.log ("XHR response text:" + xhr.responseText);
+                document.getElementById("errorView").innerHTML = "";
+                processRegisterResponse (xhr.responseText);
+            } else {
+                console.log("actual: " + xhr.responseText);
+                var js = JSON.parse(xhr.responseText);
+                var err = js["response"];
+                document.getElementById("errorView").innerHTML = err;
+            }
+            
         }
     }
 }
