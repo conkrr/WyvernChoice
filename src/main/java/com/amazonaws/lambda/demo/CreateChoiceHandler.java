@@ -15,6 +15,7 @@ import com.amazonaws.lambda.demo.model.Alternative;
 import com.amazonaws.lambda.demo.model.Approval;
 import com.amazonaws.lambda.demo.model.Choice;
 import com.amazonaws.lambda.demo.model.Disapproval;
+import com.amazonaws.lambda.demo.model.Feedback;
 import com.amazonaws.lambda.demo.model.Opinion;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.LambdaLogger;
@@ -44,8 +45,9 @@ public class CreateChoiceHandler implements RequestHandler<CreateChoiceRequest, 
 			UUID alternativeID = UUID.randomUUID();
 			List<Approval> emptyApprovals = new ArrayList<Approval>();
 			List<Disapproval> emptyDispprovals = new ArrayList<Disapproval>();
+			List<Feedback> emptyfeedback = new ArrayList<Feedback>();
 			
-			alternatives.add(new Alternative(alternativeDescs.get(i), choiceID.toString(), alternativeID.toString(), emptyApprovals,emptyDispprovals, false));
+			alternatives.add(new Alternative(alternativeDescs.get(i), choiceID.toString(), alternativeID.toString(), emptyApprovals,emptyDispprovals,emptyfeedback, false));
 		}
 		
 		logger.log("create choice");

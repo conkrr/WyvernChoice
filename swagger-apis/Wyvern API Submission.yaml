@@ -168,7 +168,7 @@ paths:
         200:
           description: "200 response"
           schema:
-            $ref: "#/definitions/AddApprovalResponse"
+            $ref: "#/definitions/OpinionResponse"
           headers:
             Access-Control-Allow-Origin:
               type: "string"
@@ -190,7 +190,7 @@ paths:
         200:
           description: "200 response"
           schema:
-            $ref: "#/definitions/RemoveApprovalResponse"
+            $ref: "#/definitions/OpinionResponse"
           headers:
             Access-Control-Allow-Origin:
               type: "string"
@@ -213,7 +213,7 @@ paths:
         200:
           description: "200 response"
           schema:
-            $ref: "#/definitions/AddDisapprovalResponse"
+            $ref: "#/definitions/OpinionResponse"
           headers:
             Access-Control-Allow-Origin:
               type: "string"
@@ -236,7 +236,7 @@ paths:
         200:
           description: "200 response"
           schema:
-            $ref: "#/definitions/RemoveDisapprovalResponse"
+            $ref: "#/definitions/OpinionResponse"
           headers:
             Access-Control-Allow-Origin:
               type: "string"
@@ -268,7 +268,7 @@ definitions:
     - "name"
     - "choiceID"
     - "numParticipants"
-    - "completionDate"
+    - "creationDate"
     - "isFinalized"
     - listofAlternatives
     properties:
@@ -280,7 +280,7 @@ definitions:
         type: "integer"
       isFinalized:
         type: "boolean"
-      completionDate:
+      creationDate:
         type: "string"
       listofAlternatives:
         type: "array"
@@ -293,8 +293,8 @@ definitions:
     - "alternativeID"
     - "Approvals"
     - "Disapprovals"
-    #- "isChosen"
-    #- ListofFeedback
+    - "isChosen"
+    - ListofFeedback
     properties:
       name:
         type: "string"
@@ -479,6 +479,33 @@ definitions:
       error:
         type: "string"
 
+  OpinionResponse:
+    type: "object"
+    required:
+    - "approvals"
+    - "disapprovals"
+    - "approvalUsers"
+    - "disapprovalUsers"
+    - "statusCode"
+    - "error"
+    properties:
+      approvals:
+        type: "integer"
+      disapprovals:
+        type: "integer"
+      approvalUsers:
+        type: "array"
+        items: 
+          type: "string"
+      disapprovalUsers:
+        type: "array"
+        items: 
+          type: "string"
+      statusCode:
+        type: "integer"
+      error:
+        type: "string"
+
   AddApprovalRequest:
     type: "object"
     required: 
@@ -625,12 +652,28 @@ definitions:
   GetChoiceResponse:
     type: "object"
     required:
-    - "choice"
+    - "name"
+    - "choiceID"
+    - "numParticipants"
+    - "creationDate"
+    - "isFinalized"
     - "statusCode"
     - "error"
     properties:
-      choice:
-        $ref: "#/definitions/Choice"
+      name:
+        type: "string"
+      choiceID:
+        type: "string"
+      numParticipants:
+        type: "integer"
+      creationDate:
+        type: "string"
+      isFinalized:
+        type: "boolean"
+      listofAlternatives:
+        type: "array"
+        items: 
+          $ref: "#/definitions/Alternative"
       statusCode:
         type: "integer"
       error:
@@ -679,6 +722,21 @@ definitions:
         type: "integer"
       error:
         type: "string"
+
+  CreateFeedbackRequest:
+    type: "object"
+    required:
+    - "user"
+    - "text"
+    - "alternativeID"
+    properties:
+      user: 
+        type: "string"
+      text: 
+        type: "string"
+      alternativeID:
+        type: "string"
+
   CreateFeedbackResponse:
     type: "object"
     required:

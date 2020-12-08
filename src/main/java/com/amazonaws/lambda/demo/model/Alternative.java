@@ -10,14 +10,16 @@ public class Alternative {
 	//public int Disapprovals;
 	private final List<Approval> approvals;
 	private final List<Disapproval> disapprovals;
+	private final List<Feedback> feedback;
 	private final boolean isChosen;
 //	public final List<Feedback> listofFeedback;
-	public Alternative(String name, String choiceID, String alternativeID, List<Approval> approvals,List<Disapproval> disapprovals, boolean isChosen) {
+	public Alternative(String name, String choiceID, String alternativeID, List<Approval> approvals,List<Disapproval> disapprovals,List<Feedback> feedback, boolean isChosen) {
 		this.name = name;
 		this.choiceID = choiceID;
 		this.alternativeID = alternativeID;
 		this.approvals = approvals;
 		this.disapprovals = disapprovals;
+		this.feedback = feedback;
 		this.isChosen = isChosen;
 	}
 	
@@ -36,6 +38,9 @@ public class Alternative {
 	}
 	public List<Disapproval> getDisapprovals() {
 		return disapprovals;
+	}
+	public List<Feedback> getFeedback() {
+		return feedback;
 	}
 	public boolean isChosen() {
 		return isChosen;
