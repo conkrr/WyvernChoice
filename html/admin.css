@@ -8,7 +8,7 @@
 /*Body display type*/
 #MainPage{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 }
 
 #TopNav{
@@ -19,7 +19,7 @@
 }
 
 #ListofChoices{
-    width: 50%;
+    width: 100%;
 }
 
 #DeleteChoices{
