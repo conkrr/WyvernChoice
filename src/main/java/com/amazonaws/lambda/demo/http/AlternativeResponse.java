@@ -10,14 +10,16 @@ public class AlternativeResponse {
 	private String id;
 	private String description;
 	//private String isChosen;
-	private OpinionResponse opinions; 
+	private OpinionResponse opinions;
+	private FeedbackResponse feedback;
 	
 
 
-	public AlternativeResponse(String id, String description, OpinionResponse opinions) {
+	public AlternativeResponse(String id, String description, OpinionResponse opinions, FeedbackResponse feedback) {
 		this.id = id;
 		this.description = description;
 		this.opinions = opinions;
+		this.feedback = feedback;
 	}
 
 
@@ -38,6 +40,9 @@ public class AlternativeResponse {
 		return opinions;
 	}
 
+	public FeedbackResponse getFeedback() {
+		return feedback;
+	}
 
 
 	public AlternativeResponse() {
@@ -49,7 +54,8 @@ public class AlternativeResponse {
 		ArrayList<AlternativeResponse> resp = new ArrayList<AlternativeResponse>();
 		for (Alternative a : alts) {
 			resp.add(new AlternativeResponse(a.getAlternativeID(), a.getName(),
-					new OpinionResponse(a.getAlternativeID(), a.getApprovals(), a.getDisapprovals(), "", 200)));
+					new OpinionResponse(a.getAlternativeID(), a.getApprovals(), a.getDisapprovals(), "", 200),
+					new FeedbackResponse(a)));
 		}
 		return resp;
 	}
