@@ -5,10 +5,10 @@ function processCreateFeedbackResponse(result){
 
 	const jsonObj = JSON.parse(result);
 	const id = jsonObj.feedbackID
-    requestChoice(id);
+    requestFeedback(id);
 }
 
-function handleCreateFeedbackClick(e){
+function handleCreateFeedbackClick(e){ 
     if(savedIsFinalized === false){
         console.log("Creating feedback...");
 
@@ -33,7 +33,7 @@ function handleCreateFeedbackClick(e){
             if (xhr.readyState == XMLHttpRequest.DONE) {
                 if (xhr.status == 200) {
                 console.log ("XHR:" + xhr.responseText);
-                processCreateFeedbackResponse(xhr.responseText);
+                processRefreshChoice(xhr.responseText);
                 } else {
                     console.log("actual:" + xhr.responseText)
                     var js = JSON.parse(xhr.responseText);
@@ -41,7 +41,7 @@ function handleCreateFeedbackClick(e){
                     document.getElementById("errorView").innerHTML = "Dang I'm impressed, feedback was messed up?";
                 }
             } else {
-                processCreateFeedbackResponse("N/A");
+                
             }
         };
     } else {

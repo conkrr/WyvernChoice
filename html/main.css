@@ -113,8 +113,11 @@
 }
 
 #alternative1feedback{
-    padding-left: 10px;
     padding-right: 10px;
+}
+
+#alternative1feedbacktext{
+    padding-bottom: 10px;
 }
 
 #GreaterAlternative2{
@@ -157,6 +160,14 @@
     padding-right: 30px;
 }
 
+#alternative2feedback{
+    padding-right: 10px;
+}
+
+#alternative2feedbacktext{
+    padding-bottom: 10px;
+}
+
 #GreaterAlternative3{
     display: flex;
     flex-direction: column;
@@ -195,6 +206,14 @@
     display: flex;
     flex-direction: column;
     padding-right: 30px;
+}
+
+#alternative3feedback{
+    padding-right: 10px;
+}
+
+#alternative3feedbacktext{
+    padding-bottom: 10px;
 }
 
 #GreaterAlternative4{
@@ -237,6 +256,14 @@
     padding-right: 30px;
 }
 
+#alternative4feedback{
+    padding-right: 10px;
+}
+
+#alternative4feedbacktext{
+    padding-bottom: 10px;
+}
+
 #GreaterAlternative5{
     display: flex;
     flex-direction: column;
@@ -275,4 +302,12 @@
     display: flex;
     flex-direction: column;
     padding-right: 30px;
+}
+
+#alternative5feedback{
+    padding-right: 10px;
+}
+
+#alternative5feedbacktext{
+    padding-bottom: 10px;
 }

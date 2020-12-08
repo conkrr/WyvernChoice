@@ -1,15 +1,3 @@
-function processFinalizeResponse(result){
-    // Can grab any DIV or SPAN HTML element and can then manipulate its
-    // contents dynamically via javascript
-    console.log("processFinalizeResponse result:" + result);
-
-    /*
-	const jsonObj = JSON.parse(result);
-	const id = jsonObj.alternativeID;
-    requestChoice(id);
-    */
-}
-
 function handleFinalizeClick(e){
     console.log("Input: " + e);
     let data = {};
@@ -38,7 +26,7 @@ function handleFinalizeClick(e){
         if (xhr.readyState == XMLHttpRequest.DONE) {
             if (xhr.status == 200) {
             console.log ("XHR:" + xhr.responseText);
-            processFinalizeResponse(xhr.responseText);
+            processRefreshChoice(xhr.responseText); 
             } else {
                 console.log("actual:" + xhr.responseText)
                 var js = JSON.parse(xhr.responseText);
@@ -46,7 +34,6 @@ function handleFinalizeClick(e){
                 alert (err);
             }
         } else {
-        processFinalizeResponse("N/A");
         }
     };
 }
