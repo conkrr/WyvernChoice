@@ -8,7 +8,7 @@ public class DeleteChoicesResponse {
 	public DeleteChoicesResponse (float time) {
 		this.time = time;
 		this.statusCode = 200;
-		this.error = "";
+		this.error = "All choices more than " + time + " days old were deleted!";
 	}
 	
 	// 200 means success
