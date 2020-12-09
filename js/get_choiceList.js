@@ -47,7 +47,7 @@ function processRequestChoiceListResponse(result){
   for(let i=0; i < jsonObj.listOfChoices.length; i++){
     var choiceJson = jsonObj.listOfChoices[i];
 
-    var cName = choiceJson.choice.name;
+    var cName = choiceJson.description;
     //var cID = choiceJson.choice.choiceID;
 
     //var cFinalized = choiceJson.choice.isFinalized;
