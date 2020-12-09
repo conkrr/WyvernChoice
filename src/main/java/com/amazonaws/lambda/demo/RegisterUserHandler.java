@@ -18,48 +18,32 @@ public class RegisterUserHandler implements RequestHandler<RegisterUserRequest, 
 	
 
 	private User createUser(RegisterUserRequest req){ 
-		
 		UUID id = UUID.randomUUID();
-		//Timestamp creationDate = new Timestamp(Calendar.getInstance().getTimeInMillis());
-		
-
 		User user = new User(req.getChoiceID(), req.getUsername(), req.getPassword(), id.toString());
 		return user;
 		
 	}
 	
-	
-	boolean userDAOHelper(User u) throws Exception { 
-		if (logger != null) { logger.log("in userDAOHelper"); }
-		UsersDAO dao = new UsersDAO(logger);
-				// check if present
-
-		boolean exists = dao.getUser(u.userId) != null;
-		logger.log("Does this User exist in the database already? " + exists);
-		if (!exists) {
-			
-			dao.addUser(u);
-		}
-		return !exists;
-		
-	}
-	
-
 	@Override 
 	public RegisterUserResponse handleRequest(RegisterUserRequest req, Context context)  {
 		logger = context.getLogger();
 		logger.log(req.toString());
-
 		RegisterUserResponse response;
+		User u = createUser(req);
+		UsersDAO dao = new UsersDAO(logger);		
 		try {
-			User u = createUser(req);
-			boolean createUserBoolean = userDAOHelper(u);
-			if (createUserBoolean) {
-				//response = new CreateChoiceResponse(req.getDescription());
-				UserGsonCompatible uGson = new UserGsonCompatible(u);
-				response = new RegisterUserResponse(uGson);
+			boolean isOpen = dao.isChoiceOpen(u.choiceId);
+			
+			if(isOpen) {
+				boolean exists = dao.addUser(u);
+					if(!exists) {
+						UserGsonCompatible uGson = new UserGsonCompatible(u);
+						response = new RegisterUserResponse(uGson);
+					} else {
+						response = new RegisterUserResponse(422, "Unable to create user \"" + req.getUsername() + "\" -- User already exists");
+					}
 			} else {
-				response = new RegisterUserResponse(422, req.getUsername());
+				response = new RegisterUserResponse(422, "Unable to create user \"" + req.getUsername() + "\" -- Choice already full");
 			}
 		} catch (Exception e) {
 			response = new RegisterUserResponse(400, "Unable to create user: " + req.getUsername() + "(" + e.getMessage() + ")");
