@@ -14,14 +14,11 @@ public class GetChoiceHandlerTest  extends LambdaTest
 
 
 
-//************************* THIS CLASS IS JUST AN OUTLINE *************************
-
-
    GetChoiceResponse testSuccessInput(String incoming) throws IOException
     {
        GetChoiceHandler  handler = new GetChoiceHandler();
-       GetChoiceRequest req = new Gson().fromJson(incoming,GetChoiceRequest.class); //TODO: Fix after we remove GSON compatible stuff
-       GetChoiceResponse resp = handler.handleRequest(req, createContext("admin/{param  }"/*TODO*/)); //TODO: look up in the lectures how to test this...cuz this isnt right
+       GetChoiceRequest req = new Gson().fromJson(incoming,GetChoiceRequest.class);
+       GetChoiceResponse resp = handler.handleRequest(req, createContext("admin/{param}"/*TODO*/)); //TODO: look up in the lectures how to test this...cuz this isnt right
 
         //Assert.assertEquals(200, resp.statusCode);
         return resp;
@@ -29,17 +26,17 @@ public class GetChoiceHandlerTest  extends LambdaTest
 
     void testFailInput(String incoming, int failureCode) throws IOException {
        GetChoiceHandler  handler = new GetChoiceHandler();
-       GetChoiceRequest req = new Gson().fromJson(incoming,GetChoiceRequest.class); //TODO: Fix after we remove GSON compatible stuff
+       GetChoiceRequest req = new Gson().fromJson(incoming,GetChoiceRequest.class);
 
-       GetChoiceResponse resp = handler.handleRequest(req, createContext("removedisapproval"));
+       GetChoiceResponse resp = handler.handleRequest(req, createContext("admin/{param}"));
         //Assert.assertEquals(failureCode, resp.statusCode);
     }
 
-    String getJsonResponse(String incoming) throws IOException { //TODO: might be able to remove this entirely
+    String getJsonResponse(String incoming) throws IOException {
 
        GetChoiceResponse resp = testSuccessInput(incoming);
 
-        //return new Gson().toJson(resp.deletChoiceGson); //TODO: fix
+        //return new Gson().toJson(resp.deletChoiceGson);
 
         return null; //TODO: return actual result
     }

@@ -19,7 +19,7 @@ public class DeleteChoicesResponse {
 	
 	public String toString() {
 		if(statusCode == 200) {
-			return "{ \"time\": \"" + time + "\", \"statusCode\": \"" + statusCode +"\" }";
+			return "{ \"time\": \"" + (long)time + "\", \"statusCode\": \"" + statusCode +"\" }";
 		} else {
 			return "{ \"statusCode\": \"" + statusCode + "\", \"error\": \"" + error + "\" }";
 		}

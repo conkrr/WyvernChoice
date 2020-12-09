@@ -17,7 +17,7 @@ public class AddDisapprovalHandlerTest extends LambdaTest
 	OpinionResponse testSuccessInput(String incoming) throws IOException
     {
         AddDisapprovalHandler  handler = new AddDisapprovalHandler();
-        AddDisapprovalRequest  req = new Gson().fromJson(incoming, AddDisapprovalRequest.class); //TODO: Fix after we remove GSON compatible stuff
+        AddDisapprovalRequest  req = new Gson().fromJson(incoming, AddDisapprovalRequest.class);
         OpinionResponse resp = handler.handleRequest(req, createContext("adddisapproval"));
 
         //Assert.assertEquals(200, resp.statusCode);
@@ -26,17 +26,17 @@ public class AddDisapprovalHandlerTest extends LambdaTest
 
     void testFailInput(String incoming, int failureCode) throws IOException {
         AddDisapprovalHandler  handler = new AddDisapprovalHandler();
-        AddDisapprovalRequest req = new Gson().fromJson(incoming, AddDisapprovalRequest.class); //TODO: Fix after we remove GSON compatible stuff
+        AddDisapprovalRequest req = new Gson().fromJson(incoming, AddDisapprovalRequest.class);
 
         OpinionResponse resp = handler.handleRequest(req, createContext("adddisapproval"));
         //Assert.assertEquals(failureCode, resp.statusCode);
     }
 
-    String getJsonResponse(String incoming) throws IOException { //TODO: might be able to remove this entirely
+    String getJsonResponse(String incoming) throws IOException {
 
     	OpinionResponse resp = testSuccessInput(incoming);
 
-        //return new Gson().toJson(resp.disapprovalGson); //TODO: fix
+        //return new Gson().toJson(resp.disapprovalGson);
 
         return null; //TODO: return actual result
     }
