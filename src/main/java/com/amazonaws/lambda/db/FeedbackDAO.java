@@ -61,7 +61,7 @@ public class FeedbackDAO implements DataAccessAsymmetric<Feedback> {
 //			System.out.println("FeedbackDAO::insert -- alreadyExists = " + alreadyExists);
 //			if (!alreadyExists) {
 				
-				PreparedStatement ps = connection.prepareStatement("INSERT INTO " + tableName + " Feedback (alternativeID, content, creationTime, creatingUser ) VALUES (?,?,?,?);");
+				PreparedStatement ps = connection.prepareStatement("INSERT INTO " + tableName + " (alternativeID, content, creationTime, creatingUser ) values(?,?,?,?);");
 					ps.setString(1, t.alternativeID);
 					ps.setString(2, t.text);
 					ps.setTimestamp(3, t.timestamp);
