@@ -66,17 +66,21 @@ java.sql.Connection connection;
     
     public boolean isChoiceOpen(String choiceId) throws Exception {
     	 try {
-             int currentUsers;
-             int maxUsers;
+             int currentUsers = 0;
+             int maxUsers = 0;
              
              PreparedStatement ps = connection.prepareStatement("SELECT * FROM Choices WHERE id=?;");
             
              ps.setString(1,  choiceId);
             
              ResultSet resultSet = ps.executeQuery();
+             
+             while (resultSet.next()) {
+            	 currentUsers = resultSet.getInt("maxParticipants");
+                 maxUsers = resultSet.getInt("currentParticipants");
+             }
           
-             currentUsers = resultSet.getInt("maxParticipants");
-             maxUsers = resultSet.getInt("currentParticipants");
+             
 
              resultSet.close();
              ps.close();
