@@ -69,7 +69,7 @@ java.sql.Connection connection;
              int currentUsers;
              int maxUsers;
              
-             PreparedStatement ps = connection.prepareStatement("SELECT * FROM " + tableName + " WHERE choiceID=?;");
+             PreparedStatement ps = connection.prepareStatement("SELECT * FROM Choices WHERE choiceID=?;");
             
              ps.setString(1,  choiceId);
             
