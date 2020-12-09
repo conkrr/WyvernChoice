@@ -87,14 +87,13 @@ public class FeedbackDAO implements DataAccessAsymmetric<Feedback> {
 				final String userName = resultSet.getString("creatingUser");
 				final String content = resultSet.getString("content");
 				final Timestamp timestamp = resultSet.getTimestamp("creationTime");
-				final int approveStatus = resultSet.getInt("status");
 				final String altID = resultSet.getString("alternativeID");
 				
-				if (approveStatus == 1) {
+				
 					
 					feedbacks.add(new Feedback(userName, content, timestamp, altID));
 					if(logger != null )logger.log("FeedbackDAO::generate() -- Added approval to list");
-				}
+				
 				
 			}
 		} catch (Exception e) {
