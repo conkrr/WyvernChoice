@@ -1,18 +1,9 @@
-function processCreateFeedbackResponse(result){
-    // Can grab any DIV or SPAN HTML element and can then manipulate its
-    // contents dynamically via javascript
-    console.log("processCreateFeedbackResponse result:" + result);
-
-	const jsonObj = JSON.parse(result);
-	const id = jsonObj.feedbackID
-    requestChoice(id);
-}
-
 function handleCreateFeedbackClick(e){
     if(savedIsFinalized === false){
         console.log("Creating feedback...");
 
-        var form1 = document.createFeedbackForm1;
+        var form1 = document.forms["createfeedbackform"+(e+1)];
+        //var form1 = document.createfeedbackform1;
         var data = {};
         data["user"] = savedUserName;
         data["text"] = form1.feedback1.value;

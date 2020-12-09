@@ -10,9 +10,13 @@ function processRegisterResponse(result){
     //console.log("Password: " + password);
     const jsonObj = JSON.parse(result);
 
-     console.log("jSON username: " + jsonObj.userGson.username + "jSON password: " + jsonObj.userGson.password + "jSON choiceiD: "+ jsonObj.userGson.choiceID) ;
+     console.log("jSON username: " + jsonObj.userGson.username + "jSON password: " + jsonObj.userGson.password + "jSON choiceiD: "+ jsonObj.userGson.choiceID);
+    
 	savedUserName = jsonObj.userGson.username;
-	savedUserId = jsonObj.userGson.userID;
+    savedUserId = jsonObj.userGson.userID;
+    
+    document.getElementById("errorView").innerHTML = savedUserName + "registered for the choice!";
+
     requestChoice(jsonObj.userGson.choiceID);
 }
 

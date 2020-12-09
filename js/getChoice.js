@@ -77,7 +77,7 @@ function processRequestChoiceResponse(result) {
 		disapprovalUserOutput = "";
 		if(cAlternatives[i] !== null){
             alternativeJson = cAlternatives[i];
-            document.getElementById("alternative" + (i+1) +"name").innerHTML = alternativeJson.description;
+            document.getElementById("alternative" + (i+1) +"namelabel").innerHTML = alternativeJson.description;
 
             console.log("altJson: " + alternativeJson);
             console.log("altJson desc: " +  alternativeJson.description);

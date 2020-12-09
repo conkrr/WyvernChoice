@@ -18,7 +18,7 @@ import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 
-public class CreateFeedbackHandler implements RequestHandler<CreateFeedbackRequest, CreateFeedbackResponse>{
+public class CreateFeedbackHandler implements RequestHandler<CreateFeedbackRequest, FeedbackResponse>{
 	
 	LambdaLogger logger;
 	
@@ -40,26 +40,25 @@ public class CreateFeedbackHandler implements RequestHandler<CreateFeedbackReque
 	}
 
 	@Override
-	public CreateFeedbackResponse handleRequest(CreateFeedbackRequest req, Context context) {
+	public FeedbackResponse handleRequest(CreateFeedbackRequest req, Context context) {
 		logger = context.getLogger();
 		logger.log(req.toString());
 		logger.log("user: " + req.getUser());
 		logger.log("text: " + req.getText());
 		logger.log("alternativeID: " + req.getAlternativeID());
-		CreateFeedbackResponse response = null;
+		FeedbackResponse response = null;
 		FeedbackDAO dao = new FeedbackDAO(logger);
 		try {
-			Feedback f = createFeedback(req);
 			boolean alreadyExists = dao.insert(createFeedback(req));
 
 			if (alreadyExists)
-                response = new CreateFeedbackResponse(f);
+                response = new FeedbackResponse(200, "");
             else
-            	response = new CreateFeedbackResponse(422, "");
+            	response = new FeedbackResponse(422, "");
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			response = new CreateFeedbackResponse(400, " " + e.toString());
+			response = new FeedbackResponse(400, " " + e.toString());
 			
 		}
 		
