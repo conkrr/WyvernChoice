@@ -42,7 +42,7 @@ public class DeleteChoicesHandlerTest  extends LambdaTest
     public void testDeleteChoices()
     {
         //3897b337-17a3-448f-a771-c8806e738bd
-        float deleteTime = 1607231710000f; //in miliseconds since  January 1, 1970, 00:00:00 GMT
+        float deleteTime = 3;  //in days ex: 2.5
 
 
         DeleteChoicesRequest ccr = new DeleteChoicesRequest(deleteTime);
