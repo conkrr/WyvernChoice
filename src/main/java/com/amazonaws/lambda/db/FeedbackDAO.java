@@ -66,7 +66,8 @@ public class FeedbackDAO implements DataAccessAsymmetric<Feedback> {
 					ps.setString(2, t.text);
 					ps.setTimestamp(3, t.timestamp);
 					ps.setString(4, t.userID);
-					ps.execute();
+					boolean queryResult = ps.execute();
+					if(logger != null )logger.log("FeedbackDAO::insert() -- queryResult=" + queryResult);
 //			}
 			if(logger != null )logger.log("FeedbackDAO::insert() -- End");
 //			System.out.println("FeedbackDAO::insert() -- End");
@@ -82,7 +83,9 @@ public class FeedbackDAO implements DataAccessAsymmetric<Feedback> {
 		if(logger != null )logger.log("FeedbackDAO::generate() -- Begin");
         
     	ArrayList<Feedback> feedbacks = new ArrayList<Feedback>();
-        try {
+    	if(!resultSet.isClosed()) {
+    	try {
+        	
 			while(resultSet.next()) {
 				final String userName = resultSet.getString("creatingUser");
 				final String content = resultSet.getString("content");
@@ -100,6 +103,7 @@ public class FeedbackDAO implements DataAccessAsymmetric<Feedback> {
         	e.printStackTrace();
             throw new Exception("Exception in FeedbackDAO::generate(): " + e.getMessage());
         }
+    	}
         if(logger != null )logger.log("FeedbackDAO::generate() -- End");
         return feedbacks;
 	}
