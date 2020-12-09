@@ -68,13 +68,15 @@ function processRequestChoiceResponse(result) {
     var feedbackJson;
     var approvalUserOutput;
     var disapprovalUserOutput;
+    var feedbackOutput;
 	//console.log("cAlternatives = " + cAlternatives);
     console.log("cAlternatives = " + cAlternatives);
 
 	var i;
 	for (i = 0; i < cAlternatives.length; i++) {
 		approvalUserOutput = "";
-		disapprovalUserOutput = "";
+        disapprovalUserOutput = "";
+        feedbackOutput = "";
 		if(cAlternatives[i] !== null){
             alternativeJson = cAlternatives[i];
             document.getElementById("alternative" + (i+1) +"namelabel").innerHTML = alternativeJson.description;
@@ -103,9 +105,19 @@ function processRequestChoiceResponse(result) {
             }
             document.getElementById("alternative" + (i+1) +"disapprovalusers").innerHTML = disapprovalUserOutput;
 
+            feedbackJson = alternativeJson.feedback.feedbackObjects;
+            //feedback
+            for(let l=0; l < feedbackJson.length; l++){
+                feedbackOutput = feedbackOutput + feedbackJson[l].text + "  -- "  + feedbackJson[l].userName  + " at " + feedbackJson[l].timestamp +  "<br>"
+            }
+            document.getElementById("alternative" + (i+1) +"feedbacktext").innerHTML = feedbackOutput;
+
+
             document.getElementById("Alternative" + (i+1)).style.visibility = "visible";
 
-            feedbackJson = alternativeJson.listofFeedback;
+            
+
+
         }
 
 	} 
