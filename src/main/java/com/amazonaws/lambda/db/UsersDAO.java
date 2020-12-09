@@ -76,11 +76,11 @@ java.sql.Connection connection;
              ResultSet resultSet = ps.executeQuery();
              
              while (resultSet.next()) {
-            	 currentUsers = resultSet.getInt("maxParticipants");
-                 maxUsers = resultSet.getInt("currentParticipants");
+            	 maxUsers = resultSet.getInt("maxParticipants");
+            	 currentUsers = resultSet.getInt("currentParticipants");
              }
           
-             
+             logger.log("UsersDAO::isChoiceOpen -- Max: " + maxUsers + " Current: " + currentUsers);
 
              resultSet.close();
              ps.close();
