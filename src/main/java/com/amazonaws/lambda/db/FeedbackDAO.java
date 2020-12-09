@@ -57,7 +57,7 @@ public class FeedbackDAO implements DataAccessAsymmetric<Feedback> {
 		if(logger != null )logger.log("FeedbackDAO::insert -- Begin");
 //		System.out.println("FeedbackDAO::insert -- Begin");
 		try {
-			boolean alreadyExists = !get(t.alternativeID).contains(t);
+			boolean alreadyExists = get(t.alternativeID).contains(t);
 //			System.out.println("FeedbackDAO::insert -- alreadyExists = " + alreadyExists);
 //			if (!alreadyExists) {
 				
