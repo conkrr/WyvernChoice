@@ -35,7 +35,7 @@ public class RegisterUserHandlerTest extends LambdaTest{
 
 	    RegisterUserResponse resp = testSuccessInput(incoming);
         
-       return new Gson().toJson(resp.userGson);  
+       return new Gson().toJson(resp);  
     }
 
     // NOTE: this proliferates large number of constants! Be mindful\

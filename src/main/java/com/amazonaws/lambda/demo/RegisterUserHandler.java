@@ -23,7 +23,7 @@ public class RegisterUserHandler implements RequestHandler<RegisterUserRequest, 
 		//Timestamp creationDate = new Timestamp(Calendar.getInstance().getTimeInMillis());
 		
 
-		User user = new User(req.getChoiceID(), req.getUsername(), req.getPassword(), id.toString());
+		User user = new User(req.getChoiceID(), req.getPassword(), id.toString());
 		return user;
 		
 	}
@@ -56,8 +56,7 @@ public class RegisterUserHandler implements RequestHandler<RegisterUserRequest, 
 			boolean createUserBoolean = userDAOHelper(u);
 			if (createUserBoolean) {
 				//response = new CreateChoiceResponse(req.getDescription());
-				UserGsonCompatible uGson = new UserGsonCompatible(u);
-				response = new RegisterUserResponse(uGson);
+				response = new RegisterUserResponse(u);
 			} else {
 				response = new RegisterUserResponse(422, req.getUsername());
 			}

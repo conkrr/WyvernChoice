@@ -2,7 +2,6 @@ package com.amazonaws.lambda.demo.http;
 
 public class AddApprovalRequest {
 
-    private String approvingUser;
     private String approvingUserID;
     private String alternativeID;
     private String choiceID;
@@ -11,20 +10,19 @@ public class AddApprovalRequest {
 
     }
 
-    public AddApprovalRequest(String approvingUser, String approvingUserID, String alternativeID, String choiceID)
+    public AddApprovalRequest(String approvingUserID, String alternativeID, String choiceID)
     {
-        this.approvingUser = approvingUser;
         this.alternativeID = alternativeID;
         this.choiceID = choiceID;
         this.approvingUserID = approvingUserID;
     }
 
-    public void setUsername(String approvingUser) {
-        this.approvingUser = approvingUser;
+    public void setUsername(String approvingUserID) {
+        this.approvingUserID = approvingUserID;
     }
 
     public String getUsername() {
-        return this.approvingUser;
+        return this.approvingUserID;
     }
 
     public void setApprovingUserID(String approvingUserID) {

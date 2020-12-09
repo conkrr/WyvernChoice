@@ -61,7 +61,7 @@ public class AddDisapprovalHandlerTest extends LambdaTest
 
 
 
-        AddDisapprovalRequest req = new AddDisapprovalRequest(approvingUser,userId,alternativeID,choiceID);
+        AddDisapprovalRequest req = new AddDisapprovalRequest(userId,alternativeID,choiceID);
         String SAMPLE_INPUT_STRING = new Gson().toJson(req);
         String jsonResp;
         try {
@@ -88,14 +88,14 @@ public class AddDisapprovalHandlerTest extends LambdaTest
         }
 
         //Add approval
-        AddApprovalRequest areq = new AddApprovalRequest(approvingUser,userId,alternativeID,choiceID);
+        AddApprovalRequest areq = new AddApprovalRequest(userId,alternativeID,choiceID);
 
         AddApprovalHandler  ahandler = new AddApprovalHandler();
         OpinionResponse resp = ahandler.handleRequest(areq, createContext("addapproval"));
 
         //add disapproval
 
-        AddDisapprovalRequest req = new AddDisapprovalRequest(approvingUser,userId,alternativeID,choiceID);
+        AddDisapprovalRequest req = new AddDisapprovalRequest(userId,alternativeID,choiceID);
         String SAMPLE_INPUT_STRING = new Gson().toJson(req);
         String jsonResp;
         try {

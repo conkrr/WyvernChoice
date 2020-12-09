@@ -3,7 +3,7 @@ package com.amazonaws.lambda.demo.http;
 public class AddApprovalResponse
 {
 
-	public String approvingUser;
+	public String approvingUserID;
 	public String alternativeID;
 	public String choiceID;
 	public int approvals;
@@ -12,8 +12,8 @@ public class AddApprovalResponse
 	public String error;
 	
 	//For database
-	public AddApprovalResponse(String approvingUser, String alternativeID, String choiceID, int approvals, int disapprovals, int statusCode) {
-		this.approvingUser = approvingUser;
+	public AddApprovalResponse(String approvingUserID, String alternativeID, String choiceID, int approvals, int disapprovals, int statusCode) {
+		this.approvingUserID = approvingUserID;
     	this.alternativeID = alternativeID;
     	this.choiceID = choiceID;
     	this.approvals = approvals;
@@ -22,8 +22,8 @@ public class AddApprovalResponse
     	this.error = "";
 	}
 	
-	public AddApprovalResponse(String approvingUser, String alternativeID, String choiceID, int approvals, int disapprovals) {
-		this.approvingUser = approvingUser;
+	public AddApprovalResponse(String approvingUserID, String alternativeID, String choiceID, int approvals, int disapprovals) {
+		this.approvingUserID = approvingUserID;
     	this.alternativeID = alternativeID;
     	this.choiceID = choiceID;
     	this.approvals = approvals;
@@ -40,7 +40,7 @@ public class AddApprovalResponse
 
 	public String toString() {
 		if(statusCode == 200) {
-			return "{ \"approvingUser\": \"" + approvingUser + "\", \"alternativeID\": \"" + alternativeID + "\", \"choiceID\": \"" + choiceID + "\", \"approvals\": \"" + approvals + "\", \"disapprovals\": \"" + disapprovals + "\", \"statusCode\": \"" + statusCode +"\" }";
+			return "{ \"approvingUser\": \"" + approvingUserID + "\", \"alternativeID\": \"" + alternativeID + "\", \"choiceID\": \"" + choiceID + "\", \"approvals\": \"" + approvals + "\", \"disapprovals\": \"" + disapprovals + "\", \"statusCode\": \"" + statusCode +"\" }";
 		} else {
 			return "{ \"statusCode\": \"" + statusCode + "\", \"error\": \"" + error + "\" }";
 		}

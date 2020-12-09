@@ -1,14 +1,27 @@
 package com.amazonaws.lambda.demo.http;
 
+import com.amazonaws.lambda.demo.model.User;
+
 public class RegisterUserResponse {
 
-	public UserGsonCompatible userGson;
+	public String userID;
+	public String password;
+	public String choiceID;
 	
 	public int statusCode;
 	public String error;
 	
-	public RegisterUserResponse(UserGsonCompatible u) {
-		this.userGson = u;
+	public RegisterUserResponse(String userID, String password, String choiceID) {
+		this.userID = userID;
+		this.password = password;
+		this.choiceID = choiceID;
+		this.statusCode = 200;
+	}
+	
+	public RegisterUserResponse(User u) {
+		this.userID = u.userId;
+		this.password = u.password;
+		this.choiceID = u.choiceId;
 		this.statusCode = 200;
 	}
 	
@@ -23,7 +36,7 @@ public class RegisterUserResponse {
 	
 	public String toString() {
 		if(statusCode == 200) {
-			return "{ \"username\": \"" + userGson.username + "\", \"password\": \"" + userGson.password + "\", \"choiceID\": \"" + userGson.choiceID + "\", \"statusCode\": \"" + statusCode +"\" }";
+			return "{ \"userID\": \"" + userID + "\", \"password\": \"" + password + "\", \"choiceID\": \"" + choiceID + "\", \"statusCode\": \"" + statusCode +"\" }";
 		} else {
 			return "{ \"statusCode\": \"" + statusCode + "\", \"error\": \"" + error + "\" }";
 		}

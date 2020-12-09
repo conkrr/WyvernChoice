@@ -3,7 +3,7 @@ package com.amazonaws.lambda.demo.http;
 public class AddDisapprovalResponse
 {
 
-	public String disapprovingUser;
+	public String disapprovingUserID;
 	public String alternativeID;
 	public String choiceID;
 	public int approvals;
@@ -11,9 +11,9 @@ public class AddDisapprovalResponse
 	public int statusCode;
 	public String error;
 	
-	public AddDisapprovalResponse(String disapprovingUser, String alternativeID, String choiceID, int approvals, int disapprovals, int statusCode)
+	public AddDisapprovalResponse(String disapprovingUserID, String alternativeID, String choiceID, int approvals, int disapprovals, int statusCode)
     {
-    	this.disapprovingUser = disapprovingUser;
+    	this.disapprovingUserID = disapprovingUserID;
     	this.alternativeID = alternativeID;
     	this.choiceID = choiceID;
     	this.approvals = approvals;
@@ -22,9 +22,9 @@ public class AddDisapprovalResponse
     	this.error = "";
     }
     
-    public AddDisapprovalResponse(String disapprovingUser, String alternativeID, String choiceID, int approvals, int disapprovals)
+    public AddDisapprovalResponse(String disapprovingUserID, String alternativeID, String choiceID, int approvals, int disapprovals)
     {
-    	this.disapprovingUser = disapprovingUser;
+    	this.disapprovingUserID = disapprovingUserID;
     	this.alternativeID = alternativeID;
     	this.choiceID = choiceID;
     	this.approvals = approvals;
@@ -40,7 +40,7 @@ public class AddDisapprovalResponse
 
 	public String toString() {
 		if(statusCode == 200) {
-			return "{ \"disapprovingUser\": \"" + disapprovingUser + "\", \"alternativeID\": \"" + alternativeID + "\", \"choiceID\": \"" + choiceID + "\", \"approvals\": \"" + approvals + "\", \"disapprovals\": \"" + disapprovals + "\", \"statusCode\": \"" + statusCode +"\" }";
+			return "{ \"disapprovingUserID\": \"" + disapprovingUserID + "\", \"alternativeID\": \"" + alternativeID + "\", \"choiceID\": \"" + choiceID + "\", \"approvals\": \"" + approvals + "\", \"disapprovals\": \"" + disapprovals + "\", \"statusCode\": \"" + statusCode +"\" }";
 		} else {
 			return "{ \"statusCode\": \"" + statusCode + "\", \"error\": \"" + error + "\" }";
 		}

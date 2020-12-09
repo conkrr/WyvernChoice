@@ -1,5 +1,6 @@
 package com.amazonaws.lambda.demo.http;
 
+import com.amazonaws.lambda.demo.model.User;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -15,7 +16,7 @@ class RegisterUserResponseTest {
 	@Test
 	void test() throws JsonProcessingException, IOException {
 		
-		UserGsonCompatible u = new UserGsonCompatible(true, "King Roland", "12345", "897");
+		User u = new User("King Roland", "12345", "897");
 		RegisterUserResponse rur = new RegisterUserResponse(u);
 		ObjectMapper rep = new ObjectMapper();
 		JsonNode actualRep = rep.readTree(rur.toString());

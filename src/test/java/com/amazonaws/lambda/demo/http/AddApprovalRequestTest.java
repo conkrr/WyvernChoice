@@ -11,6 +11,7 @@ class AddApprovalRequestTest {
 		AddApprovalRequest aar = new AddApprovalRequest();
 		aar.setUsername("Billy");
 		assertEquals("Billy", aar.getUsername());
+		assertEquals("Billy", aar.getApprovingUserID());
 		
 		aar.setAlternativeID("12345");
 		assertEquals("12345", aar.getAlternativeID());
@@ -18,9 +19,9 @@ class AddApprovalRequestTest {
 		aar.setChoiceID("7654");
 		assertEquals("7654", aar.getChoiceID());
 		
-		aar = new AddApprovalRequest("Billy", "9000","12345", "7654");
+		aar = new AddApprovalRequest("Billy","12345", "7654");
 		assertEquals("Billy", aar.getUsername());
-		assertEquals("9000", aar.getApprovingUserID());
+		assertEquals("Billy", aar.getApprovingUserID());
 		assertEquals("12345", aar.getAlternativeID());
 		assertEquals("7654", aar.getChoiceID());
 	}
