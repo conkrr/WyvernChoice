@@ -8,6 +8,8 @@ import com.amazonaws.lambda.demo.model.Feedback;
 
 public class FeedbackResponse {
 	
+	public final int status;
+	public final String error;
 		public final String alternativeID;
 		public final List<FeedBackResponseObject> feedbackObjects;
 	
@@ -20,6 +22,8 @@ public class FeedbackResponse {
 				this.userName = userName;
 				this.text = text;
 				this.timestamp = timestamp;
+				
+				
 			}
 		}
 
@@ -31,6 +35,13 @@ public class FeedbackResponse {
 				
 			}
 			this.feedbackObjects = feedbackObjects;
+			this.status = 200;
+			this.error = "";
 		}
-		
+		public FeedbackResponse(int status, String error) {
+			this.alternativeID = null;
+			this.feedbackObjects = null;
+			this.status = status;
+			this.error = error;
+		}
 }
