@@ -49,14 +49,23 @@ function handleRegisterClick(e){
 
         if(xhr.readyState == XMLHttpRequest.DONE){
             if(xhr.status === 200){
-                console.log ("XHR response text:" + xhr.responseText);
-                document.getElementById("errorView").innerHTML = "";
-                processRegisterResponse (xhr.responseText);
-            } else {
-                console.log("actual: " + xhr.responseText);
+                console.log ("XHR response text: " + xhr.responseText);
                 var js = JSON.parse(xhr.responseText);
-                var err = js["response"];
-                document.getElementById("errorView").innerHTML = err;
+                if(js.status === 200){
+                    console.log ("XHR response status " + xhr.status);
+                    console.log ("js response status " + js.status);
+                    processRegisterResponse (xhr.responseText);    
+                }
+                else{
+                    var err = js["error"];
+                    document.getElementById("errorView").innerHTML = err;
+                }
+                
+            } else {
+                console.log("" + xhr.status + " " + xhr.responseText);
+                // var js = JSON.parse(xhr.responseText);
+                // var err = js["response"];
+                // document.getElementById("errorView").innerHTML = err;
             }
             
         }
