@@ -3,7 +3,7 @@ function handleFinalizeClick(e){
     let data = {};
 
     data["choiceID"] = savedChoiceID;
-    data["alternativeID"] = savedAlternatives[e];
+    data["alternativeID"] = savedAlternatives[e].id;
     data["isFinalized"] = true;
 
     document.getElementById("GreaterAlternative" + (e+1)).class = "container p-3 my-3 bg-dark text-white";

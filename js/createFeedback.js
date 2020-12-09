@@ -7,7 +7,7 @@ function handleCreateFeedbackClick(e){
         var data = {};
         data["user"] = savedUserName;
         data["text"] = form1.feedback1.value;
-        data["alternativeID"] = savedAlternatives[e];
+        data["alternativeID"] = savedAlternatives[e].id;
 
         var js = JSON.stringify(data);
         console.log("JS:" + js);
