@@ -20,6 +20,7 @@ public class GetChoiceResponse {
 		this.statusCode = code;
 	}
 	
+	
 	public GetChoiceResponse (Choice c) {
 		this.error = "";
 		this.statusCode = 200;
@@ -43,14 +44,6 @@ public class GetChoiceResponse {
 		this.listofAlternatives = AlternativeResponse.getResponseForm(c.alternatives);
 	}
 
-
-
-	// 200 means success
-	public GetChoiceResponse (String s) {
-		this.error = s;
-		this.statusCode = 200;
-	}
-	
 		
 	public GetChoiceResponse(int statusCode, String errorMessage) {
 		this.statusCode = statusCode;
