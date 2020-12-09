@@ -1,16 +1,18 @@
-function handleDisapprovalClick(e){
+function handleCreateFeedbackClick(e){
     if(savedIsFinalized === false){
-        console.log(" " + e);
+        console.log("Creating feedback...");
+
+        var form1 = document.forms["createfeedbackform"+(e+1)];
+        //var form1 = document.createfeedbackform1;
         var data = {};
-        data["disapprovingUser"] = savedUserName;
-        data["disapprovingUserID"] = savedUserId;
+        data["user"] = savedUserName;
+        data["text"] = form1.feedback1.value;
         data["alternativeID"] = savedAlternatives[e].id;
-        data["choiceID"] = savedChoiceID;
 
         var js = JSON.stringify(data);
         console.log("JS:" + js);
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", add_disapproval_url, true);
+        xhr.open("POST", create_feedback_url, true);
 
         // send the collected data as JSON
         xhr.send(js);
@@ -27,14 +29,14 @@ function handleDisapprovalClick(e){
                     console.log("actual:" + xhr.responseText)
                     var js = JSON.parse(xhr.responseText);
                     var err = js["response"];
-                    alert (err);
+                    document.getElementById("errorView").innerHTML = "Dang I'm impressed, feedback was messed up?";
                 }
             } else {
-
+               
             }
         };
     } else {
-        document.getElementById("errorView").innerHTML = "Cannot disapprove, choice is already finalized";
+        document.getElementById("errorView").innerHTML = "Cannot add feedback, choice is already finalized";
     }
     
 }

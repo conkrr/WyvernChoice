@@ -123,7 +123,10 @@ java.sql.Connection connection;
 					
 					AlternativesDAO dao = new AlternativesDAO(logger);
 					for(Alternative a : t.alternatives){
-						dao.insert(a);
+						if (a.getName() != "") {
+							dao.insert(a);	
+						}
+						
 					}
 					
 			}

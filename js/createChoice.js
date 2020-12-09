@@ -23,11 +23,11 @@ function handleCreateChoiceClick(e){
     
     //Make an alternative list and check to see which ones are filled. Create alternatives out of the ones that are pushed
     var alternativeList = [];
-console.log("alternative1 content:" + form.alternative1.value);
-console.log("alternative2 content:" + form.alternative2.value);
-console.log("alternative3 content:" + form.alternative3.value);
-console.log("alternative4 content:" + form.alternative4.value);
-console.log("alternative5 content:" + form.alternative5.value);
+    console.log("alternative1 content:" + form.alternative1.value);
+    console.log("alternative2 content:" + form.alternative2.value);
+    console.log("alternative3 content:" + form.alternative3.value);
+    console.log("alternative4 content:" + form.alternative4.value);
+    console.log("alternative5 content:" + form.alternative5.value);
 
     if(form.alternative1.value !== null || form.alternative1.value != "" ){
         
@@ -62,7 +62,7 @@ console.log("alternative5 content:" + form.alternative5.value);
         data["listofAlternatives"] = alternativeList;
     } else {
         //display element that says "not enough choices"
-        console.log("Not enough choices...");
+        document.getElementById("errorView").innerHTML = "Not enough alternatives...";
     }
 
     var js = JSON.stringify(data);

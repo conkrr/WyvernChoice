@@ -1,6 +1,4 @@
-
 /*
->>>>>>> 9cfaaf58f98c47b9796837c1573ef34aa8b3dd03
 function processApprovalResponse(result){
     // Can grab any DIV or SPAN HTML element and can then manipulate its
     // contents dynamically via javascript
@@ -12,40 +10,44 @@ function processApprovalResponse(result){
     requestChoice(id);
 }*/
 function handleApprovalClick(e){
+    if(savedIsFinalized === false){
+        console.log(" " + e);
+        var data = {};
+        data["approvingUser"] = savedUserName;
+        data["approvingUserID"] = savedUserId;
+        data["alternativeID"] = savedAlternatives[e].id;
+        data["choiceID"] = savedChoiceID;
 
-    console.log(" " + e);
-    var data = {};
-    data["approvingUser"] = savedUserName;
-    data["approvingUserID"] = savedUserId;
-    data["alternativeID"] = savedAlternatives[e].id;
-    data["choiceID"] = savedChoiceID;
+        var js = JSON.stringify(data);
+        console.log("JS:" + js);
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", add_approval_url, true);
 
-    var js = JSON.stringify(data);
-    console.log("JS:" + js);
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", add_approval_url, true);
+        // send the collected data as JSON
+        xhr.send(js);
 
-    // send the collected data as JSON
-    xhr.send(js);
-
-    // This will process results and update HTML as appropriate. 
-    xhr.onloadend = function () {
-        console.log(xhr);
-        console.log(xhr.request);
-        if (xhr.readyState == XMLHttpRequest.DONE) {
-            if (xhr.status == 200) {
-            console.log ("XHR:" + xhr.responseText);
-            processRefreshChoice(xhr.responseText);
+        // This will process results and update HTML as appropriate. 
+        xhr.onloadend = function () {
+            console.log(xhr);
+            console.log(xhr.request);
+            if (xhr.readyState == XMLHttpRequest.DONE) {
+                if (xhr.status == 200) {
+                console.log ("XHR:" + xhr.responseText);
+                processRefreshChoice(xhr.responseText);
+                } else {
+                    console.log("actual:" + xhr.responseText)
+                    var js = JSON.parse(xhr.responseText);
+                    var err = js["response"];
+                    alert (err);
+                }
             } else {
-                console.log("actual:" + xhr.responseText)
-                var js = JSON.parse(xhr.responseText);
-                var err = js["response"];
-                alert (err);
-            }
-        } else {
 
-        }
-    };
+            }
+        };
+    } else {
+        document.getElementById("errorView").innerHTML = "Cannot approve, choice is already finalized";
+    }
+    
 }
 /*
 function addApprovalRequest(){

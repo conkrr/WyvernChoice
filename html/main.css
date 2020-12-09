@@ -30,6 +30,9 @@
 #emptynav{
     width: 10%;
 }
+#emptydiv2{
+    padding-top: 20px;
+}
 
 #ChoiceInfo{
    width: 60%;
@@ -69,21 +72,21 @@
     visibility: visible;
 }
 
+#GreaterAlternative1{
+    display: flex;
+    flex-direction: column;
+    visibility: visible;
+}
+
 #Alternative1{
     display: flex;
     flex-direction: row;
-    visibility: visible;
 }
 
 #alternative1namelabel{
     display: flex;
     flex-direction: column;
     padding-right: 20px;
-}
-
-#alternative1approvallabel{
-    display: flex;
-    flex-direction: column;
 }
 
 #alternative1finalizelabel{
@@ -107,12 +110,23 @@
 #alternative1disapproval{
     display: flex;
     flex-direction: column;
+    padding-right: 30px;
+}
+
+#alternative1feedback{
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#GreaterAlternative2{
+    display: flex;
+    flex-direction: column;
+    visibility: visible;
 }
 
 #Alternative2{
     display: flex;
     flex-direction: row;
-    visibility: visible;
 }
 
 #alternative2namelabel{
@@ -140,12 +154,18 @@
 #alternative2disapproval{
     display: flex;
     flex-direction: column;
+    padding-right: 30px;
+}
+
+#GreaterAlternative3{
+    display: flex;
+    flex-direction: column;
+    visibility: visible;
 }
 
 #Alternative3{
     display: flex;
     flex-direction: row;
-    visibility: visible;
 }
 
 #alternative3namelabel{
@@ -173,12 +193,18 @@
 #alternative3disapproval{
     display: flex;
     flex-direction: column;
+    padding-right: 30px;
+}
+
+#GreaterAlternative4{
+    display: flex;
+    flex-direction: column;
+    visibility: visible;
 }
 
 #Alternative4{
     display: flex;
     flex-direction: row;
-    visibility: visible;
 }
 
 #alternative4namelabel{
@@ -206,12 +232,18 @@
 #alternative4disapproval{
     display: flex;
     flex-direction: column;
+    padding-right: 30px;
+}
+
+#GreaterAlternative5{
+    display: flex;
+    flex-direction: column;
+    visibility: visible;
 }
 
 #Alternative5{
     display: flex;
     flex-direction: row;
-    visibility: visible;
 }
 
 #alternative5namelabel{
@@ -239,4 +271,5 @@
 #alternative5disapproval{
     display: flex;
     flex-direction: column;
+    padding-right: 30px;
 }
