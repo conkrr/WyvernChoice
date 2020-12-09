@@ -49,6 +49,7 @@ function processRequestChoiceListResponse(result){
 
     var cName = choiceJson.choice.name;
     //var cID = choiceJson.choice.choiceID;
+
     //var cFinalized = choiceJson.choice.isFinalized;
     //var cDate = choiceJson.choice.creationDate;
      var cID = choiceJson.id;
