@@ -1,6 +1,7 @@
 package com.amazonaws.lambda.demo;
 
 import java.sql.Timestamp;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -8,7 +9,6 @@ import java.util.UUID;
 
 import com.amazonaws.lambda.db.FeedbackDAO;
 import com.amazonaws.lambda.demo.http.CreateFeedbackRequest;
-import com.amazonaws.lambda.demo.http.CreateFeedbackResponse;
 import com.amazonaws.lambda.demo.http.FeedbackResponse;
 import com.amazonaws.lambda.demo.http.OpinionResponse;
 import com.amazonaws.lambda.demo.model.Alternative;
@@ -38,6 +38,7 @@ public class CreateFeedbackHandler implements RequestHandler<CreateFeedbackReque
 		return feedback;
 		
 	}
+	
 
 	@Override
 	public FeedbackResponse handleRequest(CreateFeedbackRequest req, Context context) {
