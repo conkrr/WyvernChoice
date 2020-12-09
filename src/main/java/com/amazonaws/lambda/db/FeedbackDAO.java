@@ -86,7 +86,7 @@ public class FeedbackDAO implements DataAccessAsymmetric<Feedback> {
 			while(resultSet.next()) {
 				final String userName = resultSet.getString("creatingUser");
 				final String content = resultSet.getString("content");
-				final Timestamp timestamp = resultSet.getTimestamp("timestamp");
+				final Timestamp timestamp = resultSet.getTimestamp("creationTime");
 				final int approveStatus = resultSet.getInt("status");
 				final String altID = resultSet.getString("alternativeID");
 				
