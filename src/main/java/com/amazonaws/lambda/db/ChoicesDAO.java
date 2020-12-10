@@ -202,12 +202,12 @@ java.sql.Connection connection;
 				final String description = resultSet.getString("description");
 				final int maxParticipants = resultSet.getInt("maxParticipants");
 				final int currentParticipants = resultSet.getInt("currentParticipants");
-				//final boolean isChosen = resultSet.getBoolean("isChosen");
+				final boolean isFinalized = resultSet.getBoolean("isFinalized");
 				final Timestamp creationTime = resultSet.getTimestamp("creationTime");
 				
 				AlternativesDAO dao = new AlternativesDAO(logger);
 				List<Alternative> alternatives = dao.get(choiceId);
-				Choice c = new Choice(choiceId, description, creationTime, userId, false, alternatives,
+				Choice c = new Choice(choiceId, description, creationTime, userId, isFinalized, alternatives,
 						maxParticipants, currentParticipants);
 				list.add(c);
 			}
