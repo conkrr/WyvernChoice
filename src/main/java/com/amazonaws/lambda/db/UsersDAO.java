@@ -85,7 +85,7 @@ java.sql.Connection connection;
              resultSet.close();
              ps.close();
              
-             return currentUsers <= maxUsers;
+             return currentUsers < maxUsers;
 
          } catch (Exception e) {
          	
