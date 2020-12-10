@@ -38,8 +38,8 @@ java.sql.Connection connection;
             ps1.setString(1,  choiceId);
             PreparedStatement ps2 = connection.prepareStatement("UPDATE Alternatives SET isChosen = 1 WHERE alternativeID=?;");
             ps2.setString(1,  altId);
-            ResultSet resultSet1 = ps1.executeQuery();
-            ResultSet resultSet2 = ps2.executeQuery();           
+            ps1.executeUpdate();
+            ps2.executeUpdate();           
             
             logger.log("finalize end");
             
