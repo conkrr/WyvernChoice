@@ -77,8 +77,14 @@ function processRequestChoiceResponse(result) {
 		approvalUserOutput = "";
         disapprovalUserOutput = "";
         feedbackOutput = "";
-		if(cAlternatives[i] !== null){
-            alternativeJson = cAlternatives[i];
+        alternativeJson = cAlternatives[i];
+		if(alternativeJson !== null){
+            
+            if(alternativeJson.isChosen === true){
+                document.getElementById("alternative" + (i+1) + "boldlabel" ).innerHTML = "<b>Alternative " + (i+1) + " -- Chosen</b>";
+            }
+            
+
             document.getElementById("alternative" + (i+1) +"namelabel").innerHTML = alternativeJson.description;
 
             console.log("altJson: " + alternativeJson);
@@ -113,8 +119,11 @@ function processRequestChoiceResponse(result) {
             document.getElementById("alternative" + (i+1) +"feedbacktext").innerHTML = feedbackOutput;
 
 
-            document.getElementById("GreaterAlternative" + (i+1)).style.display = "flex";
             document.getElementById("Alternative" + (i+1)).style.visibility = "visible";
+
+            
+
+
         }
 
 	} 
@@ -244,7 +253,7 @@ function processChoiceRequest (val){
 			  alert (err);
 		  }
 	  } else {
-		  processDeleteResponse("N/A");
+		//   processDeleteResponse("N/A");
 	  }
   };
 

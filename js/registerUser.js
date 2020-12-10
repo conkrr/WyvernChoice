@@ -44,30 +44,30 @@ function handleRegisterClick(e){
 
     //This processes results and updates HTML as appropriat
     xhr.onloadend = function(){
-        console.log("XHR: " + xhr);
-        console.log("XHR Request: " + xhr.request);
+        console.log(xhr);
+	  console.log(xhr.request);
+	  if (xhr.readyState == XMLHttpRequest.DONE) {
+		  if (xhr.status == 200) {
+              console.log ("XHR:" + xhr.responseText);
+              var js = JSON.parse(xhr.responseText);
+			  var err = js.error;
+              if(js.status == 422){
+                document.getElementById("errorView").innerHTML = err;
+              } else{
+                processRegisterResponse(xhr.responseText);
+              }
 
-        if(xhr.readyState == XMLHttpRequest.DONE){
-            if(xhr.status === 200){
-                console.log ("XHR response text: " + xhr.responseText);
-                var js = JSON.parse(xhr.responseText);
-                if(js.status === 200){
-                    console.log ("XHR response status " + xhr.status);
-                    console.log ("js response status " + js.status);
-                    processRegisterResponse (xhr.responseText);    
-                }
-                else{
-                    var err = js["error"];
-                    document.getElementById("errorView").innerHTML = err;
-                }
-                
-            } else {
-                console.log("" + xhr.status + " " + xhr.responseText);
-                // var js = JSON.parse(xhr.responseText);
-                // var err = js["response"];
-                // document.getElementById("errorView").innerHTML = err;
-            }
+			  
+		  } else {
+			  console.log("actual:" + xhr.responseText)
+			  var js = JSON.parse(xhr.responseText);
+			  var err = js.error;
+			  alert (err);
+		  }
+	  } else {
+		//   processDeleteResponse("N/A");
+	  }
             
-        }
+        
     }
 }
