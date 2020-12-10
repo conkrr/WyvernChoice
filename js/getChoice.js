@@ -113,11 +113,8 @@ function processRequestChoiceResponse(result) {
             document.getElementById("alternative" + (i+1) +"feedbacktext").innerHTML = feedbackOutput;
 
 
+            document.getElementById("GreaterAlternative" + (i+1)).style.display = "flex";
             document.getElementById("Alternative" + (i+1)).style.visibility = "visible";
-
-            
-
-
         }
 
 	} 

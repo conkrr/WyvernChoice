@@ -10,7 +10,9 @@ import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class DeleteChoicesHandler implements RequestHandler<DeleteChoicesRequest, DeleteChoicesResponse> {
@@ -24,7 +26,12 @@ public class DeleteChoicesHandler implements RequestHandler<DeleteChoicesRequest
 
 		ChoicesDAO dao = new ChoicesDAO(logger);
 
-		long deleteTime = (long)req.getTime();
+		float daysOld = req.getTime(); //this will be in days -> example: 2.5 days
+
+
+		long currentTime =Calendar.getInstance().getTimeInMillis(); //the current date in milliseconds (time since 1970)
+		long deleteTimeMillis = Math.round(daysOld * 24 * 60 * 60 * 1000); //converts days -> to milliseconds
+		long deleteOlderThanTime =  currentTime - deleteTimeMillis; //the delete DATE in milliseconds (time since 1970)
 
 		List<Choice> choices = dao.getAll();
 
@@ -42,7 +49,7 @@ public class DeleteChoicesHandler implements RequestHandler<DeleteChoicesRequest
 
 		for (Choice c:  choices	 )
 		{
-			if (c.creationDate.getTime() <= deleteTime)
+			if (c.creationDate.getTime() <= deleteOlderThanTime)
 			{
 				number += dao.delete(c.id);
 				deletedChoices.add(c);  //for testing
