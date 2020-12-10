@@ -15,7 +15,7 @@ function processRegisterResponse(result){
 	savedUserName = jsonObj.userGson.username;
     savedUserId = jsonObj.userGson.userID;
     
-    document.getElementById("errorView").innerHTML = savedUserName + "registered for the choice!";
+    document.getElementById("errorView").innerHTML = savedUserName + " registered for the choice!";
 
     requestChoice(jsonObj.userGson.choiceID);
 }
