@@ -83,6 +83,8 @@ function processRequestChoiceResponse(result) {
             if(alternativeJson.isChosen === true){
                 document.getElementById("alternative" + (i+1) + "boldlabel" ).innerHTML = "<b>Alternative " + (i+1) + " -- Chosen</b>";
             }
+
+            document.getElementById("GreaterAlternative" + (i+1)).style.display = "flex";
             
 
             document.getElementById("alternative" + (i+1) +"namelabel").innerHTML = alternativeJson.description;

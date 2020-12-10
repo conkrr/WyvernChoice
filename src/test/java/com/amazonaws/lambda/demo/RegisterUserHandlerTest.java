@@ -19,7 +19,7 @@ public class RegisterUserHandlerTest extends LambdaTest{
     	RegisterUserHandler handler = new RegisterUserHandler();
     	RegisterUserRequest req = new Gson().fromJson(incoming, RegisterUserRequest.class);
     	RegisterUserResponse resp = handler.handleRequest(req, createContext("create"));
-        Assert.assertEquals(200, resp.statusCode);
+        Assert.assertEquals(200, resp.status);
         return resp;
     }
 	
@@ -28,7 +28,7 @@ public class RegisterUserHandlerTest extends LambdaTest{
     	RegisterUserRequest req = new Gson().fromJson(incoming, RegisterUserRequest.class);
 
     	RegisterUserResponse resp = handler.handleRequest(req, createContext("create"));
-        Assert.assertEquals(failureCode, resp.statusCode);
+        Assert.assertEquals(failureCode, resp.status);
     }
 
     String getJsonResponse(String incoming) throws IOException {
