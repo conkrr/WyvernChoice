@@ -52,7 +52,7 @@ public class CreateChoiceHandler implements RequestHandler<CreateChoiceRequest, 
 		
 		logger.log("create choice");
 		Choice choice = new Choice (choiceID.toString(), description, creationDate, creatingUserID, false, alternatives,
-					maxParticipants, 1);
+					maxParticipants, 0);
 		
 		logger.log("return choice");
 		return choice;
