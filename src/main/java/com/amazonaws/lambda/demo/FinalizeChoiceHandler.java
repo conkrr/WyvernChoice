@@ -1,16 +1,39 @@
 package com.amazonaws.lambda.demo;
 
+import com.amazonaws.lambda.db.ChoicesDAO;
+import com.amazonaws.lambda.db.UsersDAO;
 import com.amazonaws.lambda.demo.http.FinalizeChoiceRequest;
 import com.amazonaws.lambda.demo.http.FinalizeChoiceResponse;
+import com.amazonaws.lambda.demo.http.RegisterUserResponse;
+import com.amazonaws.lambda.demo.http.UserGsonCompatible;
+import com.amazonaws.lambda.demo.model.User;
 import com.amazonaws.services.lambda.runtime.Context;
+import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 
 public class FinalizeChoiceHandler implements RequestHandler<FinalizeChoiceRequest, FinalizeChoiceResponse> {
 
+	LambdaLogger logger;
+	
+	
 	@Override
 	public FinalizeChoiceResponse handleRequest(FinalizeChoiceRequest req, Context context) {
-		// TODO Auto-generated method stub
-		return null;
+
+		logger = context.getLogger();
+		FinalizeChoiceResponse response;
+		ChoicesDAO dao = new ChoicesDAO(logger);		
+		try {
+			dao.finalize(req.getChoiceID(), (req.getAlternativeID()));
+			response = new FinalizeChoiceResponse(req.getChoiceID(),req.getAlternativeID(), true);
+		} catch (Exception e) {
+			response = new FinalizeChoiceResponse(400, "Unable to finalize choice: " + e.toString());
+		}
+
+		return response;
 	}
+	
+		
+		
+	
 
 }

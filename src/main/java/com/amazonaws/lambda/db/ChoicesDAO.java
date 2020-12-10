@@ -31,6 +31,26 @@ java.sql.Connection connection;
     		connection = null;
     	}
     }
+    
+    public void finalize(String choiceId, String altId) throws Exception {
+    	try {
+            PreparedStatement ps1 = connection.prepareStatement("UPDATE Choices SET isFinalized = 1 WHERE id=?;");
+            ps1.setString(1,  choiceId);
+            PreparedStatement ps2 = connection.prepareStatement("UPDATE Alternatives SET isChosen = 1 WHERE alternativeID=?;");
+            ps2.setString(1,  altId);
+            ResultSet resultSet1 = ps1.executeQuery();
+            ResultSet resultSet2 = ps2.executeQuery();           
+            
+            logger.log("finalize end");
+            
+
+        } catch (Exception e) {
+        	
+        	e.printStackTrace();
+        	
+            throw new Exception("Failed in finalizeng choice: " + e.getMessage());
+        }
+    }
 
     public List<Choice> getAll() throws Exception{
     	List<Choice> choices = new ArrayList<Choice>();
