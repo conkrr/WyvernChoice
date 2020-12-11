@@ -22,7 +22,7 @@ public class DeleteChoicesHandler implements RequestHandler<DeleteChoicesRequest
 
 
 	private boolean deleteChoices(DeleteChoicesRequest req) throws Exception {
-
+		logger.log("IN DELETE CHOICES");
 
 		ChoicesDAO dao = new ChoicesDAO(logger);
 
@@ -44,6 +44,7 @@ public class DeleteChoicesHandler implements RequestHandler<DeleteChoicesRequest
 
 		if (choices == null)
 		{
+			logger.log("IN DELETE CHOICES:: CHOiCES NULL");
 			return false;
 		}
 
@@ -52,7 +53,7 @@ public class DeleteChoicesHandler implements RequestHandler<DeleteChoicesRequest
 			if (c.creationDate.getTime() <= deleteOlderThanTime)
 			{
 				number += dao.delete(c.id);
-				deletedChoices.add(c);  //for testing
+			//	deletedChoices.add(c);  //for testing
 
 			}
 
@@ -63,6 +64,7 @@ public class DeleteChoicesHandler implements RequestHandler<DeleteChoicesRequest
 		{
 			System.out.printf("Choice desc: %s | choice ID: %s | creationDate: %d", c.description,c.id,c.creationDate.getTime());
 			System.out.println();
+			logger.log(String.format("Choice desc: %s | choice ID: %s | creationDate: %d", c.description,c.id,c.creationDate.getTime()));
 		}
 
 
