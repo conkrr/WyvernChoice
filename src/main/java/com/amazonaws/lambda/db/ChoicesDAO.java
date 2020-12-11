@@ -152,7 +152,7 @@ java.sql.Connection connection;
 		int rowsAffected = 0;
 		
 		try {
-            PreparedStatement ps = connection.prepareStatement("DELETE FROM " + tableName + " WHERE choiceID = ?;");
+            PreparedStatement ps = connection.prepareStatement("DELETE FROM " + tableName + " WHERE id = ?;");
             ps.setString(1, uniqueId);
             rowsAffected = ps.executeUpdate();
             ps.close();       
