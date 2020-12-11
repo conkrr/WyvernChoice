@@ -114,13 +114,13 @@ java.sql.Connection connection;
         	if (!exists) {
         		
         		logger.log("in add user");
-        		PreparedStatement ps = connection.prepareStatement("INSERT INTO " + tableName + " (choiceID, name, password, userID) values(?, ?, ?, ?);");
+        		PreparedStatement ps = connection.prepareStatement("INSERT INTO " + tableName + " (choiceID, password, userID) values(?, ?, ?);");
         		             
         		
         		ps.setString(1, user.choiceId);
-                ps.setString(2, user.username);
-                ps.setString(3, user.password);
-                ps.setString(4, user.userId.toString());
+                
+                ps.setString(2, user.password);
+                ps.setString(3, user.userId.toString());
                 ps.execute();
                 ps = connection.prepareStatement("UPDATE Choices SET currentParticipants = currentParticipants + 1 WHERE id=?;");
                 ps.setString(1, user.choiceId);
@@ -138,11 +138,11 @@ java.sql.Connection connection;
 
     private User generateUser(ResultSet resultSet) throws Exception {
         String id  = resultSet.getString("userID");
-        String username = resultSet.getString("name");
+        //String username = resultSet.getString("name");
         String password = resultSet.getString("password");
         String choiceID = resultSet.getString("choiceID");
         
         
-        return new User(choiceID, username, password, id);
+        return new User(choiceID, password, id);
     }
 }
