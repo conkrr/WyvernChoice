@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 15px;
+        }
+    </style>
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
         <meta content="utf-8" http-equiv="encoding">
         <script type='text/javascript' src='../js/api.js'></script>
@@ -8,6 +17,7 @@
         <script type='text/javascript' src='../js/createChoice.js'></script>
         <script type='text/javascript' src='../js/registerUser.js'></script>
         <script type='text/javascript' src='../js/get_choiceList.js'></script>
+        <script type='text/javascript' src='../js/deleteChoices.js'></script>
 
         <link rel="shortcut icon" href="#" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -26,8 +36,9 @@
             <h1>Delete Choices</h1>
             <h3>Delete all choices older than:</h3>
             <form name="deleteChoicesForm" method = "post">
-                <input name="deleteDay" type="email" class="form-control" placeholder="Days"/><br>
-                <input name="deleteHour" type="email" class="form-control" placeholder="Hours"/><br>
+                <input name="deleteDay" type="number" class="form-control" placeholder="Days"/><br>
+                <input name="deleteHour" type="number" class="form-control" placeholder="Hours"/><br>
+                <input type="button" class="btn btn-danger"id="deleteChoicesButton" value="Delete Old Choices" onClick="JavaScript:handleDeleteClick(this)">
             </form>
             <!---
             <nav id="DaySelect" class="form-control">
@@ -79,12 +90,11 @@
             
             </nav>
             -->
-            <button class="btn btn-danger" onClick="JavaScript:handleDeleteClick(this)">Delete Old Choices</button>
         </nav>
         <nav id="ListofChoices">
             <input type="button" class="btn btn-info"id="getListOfChoicesButton" value="Refresh List Of Choices" onClick="JavaScript:requestChoiceList(this)">
             <h1>List of Created Choices</h1>
-            <table id="choiceListTable" cellpadding = "2">
+            <table style="padding=10"id="choiceListTable" cellpadding = "2">
                 <tr>
                     <th>Choice ID</th>
                     <th>Choice Name</th>
