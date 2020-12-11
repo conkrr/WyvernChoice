@@ -69,6 +69,7 @@ function processRequestChoiceListResponse(result){
     //output = output + "<div id=\"choice" + cID + "\">"  + cID +  "</b>    <b>" + cName + "</b>   <b>" + cDate + "</b>     <b>"+ cFinalized + "</b></div><br>";
   }
   //Output list of choices here
+  finalChoiceList.innerHTML ="<tr><td>" + "</td></tr>";
   finalChoiceList.innerHTML = output;
 };
 
