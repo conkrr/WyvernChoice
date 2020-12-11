@@ -120,7 +120,7 @@ java.sql.Connection connection;
         		ps.setString(1, user.choiceId);
                 
                 ps.setString(2, user.password);
-                ps.setString(3, user.userId.toString());
+                ps.setString(3, user.userId);
                 ps.execute();
                 ps = connection.prepareStatement("UPDATE Choices SET currentParticipants = currentParticipants + 1 WHERE id=?;");
                 ps.setString(1, user.choiceId);

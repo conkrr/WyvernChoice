@@ -44,13 +44,23 @@ public class FeedbackDAO implements DataAccessAsymmetric<Feedback> {
             throw new Exception("Exception in FeedbackDAO::get(): " + e.getMessage());
         }
 	}
-
 	@Override
 	public int delete(String uniqueId) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		if(logger != null )logger.log("FeedbackDAO::delete() -- Begin");
+		int rowsAffected = 0;
+		
+		try {
+            PreparedStatement ps = connection.prepareStatement("DELETE FROM " + tableName + " WHERE alternativeID = ?;");
+            ps.setString(1, uniqueId);
+            rowsAffected = ps.executeUpdate();
+            ps.close();       
+            //if(logger != null )logger.log("ApprovalsDAO::delete() -- End");
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new Exception("Exception in FeedbackDAO::delete(): " + e.getMessage());
+		}
+		return rowsAffected;
 	}
-
 	@Override
 	public boolean insert(Feedback t) throws Exception {
 

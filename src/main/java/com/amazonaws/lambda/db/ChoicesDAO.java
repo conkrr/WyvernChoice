@@ -105,6 +105,48 @@ java.sql.Connection connection;
       }
 	}
 
+	
+	public List<Choice> getChoicesOlderThan(Timestamp t) throws Exception{
+    	List<Choice> choices = new ArrayList<Choice>();
+    	try {
+            
+            PreparedStatement psChoices = connection.prepareStatement("Select * FROM Choices WHERE creationTime < ?;");
+            psChoices.setTimestamp(1, t);
+            ResultSet resultSetChoices = psChoices.executeQuery();
+            //while (resultSetChoices.next()) {
+                choices = generateList(resultSetChoices);
+            resultSetChoices.close();
+            psChoices.close();
+           
+            
+            logger.log("getAllChoice end");
+            
+
+        } catch (Exception e) {
+        	
+        	e.printStackTrace();
+        	
+            throw new Exception("Failed in getting all choice: " + e.getMessage());
+        }
+    	return choices;
+    }
+	
+//	public int deleteChoicesOlderThan(Timestamp t) throws Exception {
+//		int rowsAffected = 0;
+//		
+//		try {
+//            PreparedStatement ps = connection.prepareStatement("DELETE FROM Choices WHERE creationTime < ?;");
+//            ps.setTimestamp(1, t);
+//            rowsAffected = ps.executeUpdate();
+//            ps.close();       
+//            //logger.log("AlternativesDAO::delete() -- End");
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			throw new Exception("Exception in ChoicesDAO::deleteChoicesOlderThan(): " + e.getMessage());
+//		}
+//		return rowsAffected;
+//	}
+	
 	@Override
 	public int delete(String uniqueId) throws Exception {
 		int rowsAffected = 0;
