@@ -53,7 +53,7 @@ public class DeleteChoicesHandler implements RequestHandler<DeleteChoicesRequest
 				feedDAO.delete(a.getAlternativeID());
 				appDAO.delete(a.getAlternativeID());
 				disDAO.delete(a.getAlternativeID());
-				altDAO.delete(a.getAlternativeID());
+				altDAO.delete(c.id);
 			}
 			dao.delete(c.id);
 		}
