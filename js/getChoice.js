@@ -3,7 +3,7 @@ var savedIsFinalized;
 var savedAlternatives = [];
 
 function processRequestChoiceResponse(result) {
-	document.getElementById("ChoiceInfo").style.display = "flex";
+	document.getElementById("Choice").style.display = "inline";
     // Can grab any DIV or SPAN HTML element and can then manipulate its
     // contents dynamically via javascript
     console.log("requested: " + result);
