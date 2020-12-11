@@ -79,12 +79,19 @@
             
             </nav>
             -->
-            <button class="btn btn-danger">Delete Old Choices</button>
+            <button class="btn btn-danger" onClick="JavaScript:handleDeleteClick(this)">Delete Old Choices</button>
         </nav>
         <nav id="ListofChoices">
             <input type="button" class="btn btn-info"id="getListOfChoicesButton" value="Refresh List Of Choices" onClick="JavaScript:requestChoiceList(this)">
             <h1>List of Created Choices</h1>
-            <pre>           ID                Name                              Creation Date              Completed?</pre>
+            <table id="choiceListTable" cellpadding = "2">
+                <tr>
+                    <th>Choice ID</th>
+                    <th>Choice Name</th>
+                    <th>Choice Creation Date</th>
+                    <th>Is Choice Completed?</th>
+                </tr>
+            </table>
             <br>
             <!---
             <pre><h4>What days should we get go golfing?          4643               11/13/2020</h4></pre>

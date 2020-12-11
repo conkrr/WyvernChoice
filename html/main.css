@@ -38,7 +38,10 @@
    width: 60%;
    flex-direction: column;
    float: right;
-   display: none;
+   display: flex;
+}
+#Choice{
+    display: none;
 }
 
 #currentChoice{

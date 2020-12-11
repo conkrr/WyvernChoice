@@ -33,7 +33,7 @@ public class ApprovalsDAO implements DataAccessAsymmetric<Approval>{
 //		System.out.println("ApprovalsDAO::get() -- Begin");
     	List<Approval> list;  	
         try {
-            PreparedStatement ps = connection.prepareStatement("SELECT Users.userID, Users.name, Approvals.status, Approvals.timestamp, Alternatives.alternativeID, Alternatives.choiceID FROM Users JOIN Alternatives ON Users.choiceID = Alternatives.choiceID JOIN Approvals ON Approvals.alternativeID = Alternatives.alternativeID AND Approvals.userID = Users.userID JOIN (SELECT Approvals.userID, MAX(Approvals.timestamp) AS timestamp FROM Approvals WHERE Approvals.alternativeID = ? GROUP BY Approvals.userID) Maxtimes ON Users.userID = Maxtimes.userID AND Approvals.timestamp = Maxtimes.timestamp WHERE Approvals.alternativeID = ?");           
+            PreparedStatement ps = connection.prepareStatement("SELECT Users.userID, Approvals.status, Approvals.timestamp, Alternatives.alternativeID, Alternatives.choiceID FROM Users JOIN Alternatives ON Users.choiceID = Alternatives.choiceID JOIN Approvals ON Approvals.alternativeID = Alternatives.alternativeID AND Approvals.userID = Users.userID JOIN (SELECT Approvals.userID, MAX(Approvals.timestamp) AS timestamp FROM Approvals WHERE Approvals.alternativeID = ? GROUP BY Approvals.userID) Maxtimes ON Users.userID = Maxtimes.userID AND Approvals.timestamp = Maxtimes.timestamp WHERE Approvals.alternativeID = ?");           
             ps.setString(1,  uniqueId);
             ps.setString(2,  uniqueId);
             ResultSet resultSet = ps.executeQuery();
@@ -100,7 +100,7 @@ public class ApprovalsDAO implements DataAccessAsymmetric<Approval>{
         try {
 			while(resultSet.next()) {
 				final String userId = resultSet.getString("userID");
-				final String userName = resultSet.getString("name");
+				//final String userName = resultSet.getString("name");
 				final String alternativeId = resultSet.getString("alternativeID");
 				final Timestamp timestamp = resultSet.getTimestamp("timestamp");
 				final int approveStatus = resultSet.getInt("status");
@@ -108,7 +108,7 @@ public class ApprovalsDAO implements DataAccessAsymmetric<Approval>{
 				
 				if (approveStatus == 1) {
 					
-					approvals.add(new Approval(alternativeId, userId, timestamp, userName, choiceID));
+					approvals.add(new Approval(alternativeId, userId, timestamp, userId, choiceID));
 					if(logger != null )logger.log("ApprovalsDAO::generate() -- Added approval to list");
 				}
 				

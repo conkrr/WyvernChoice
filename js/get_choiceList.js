@@ -41,8 +41,9 @@ function processRequestChoiceListResponse(result){
 
   var jsonObj = JSON.parse(result);
   var choiceList = document.getElementById('choiceList');
+  var finalChoiceList = document.getElementById('choiceListTable');
 
-  var output = "";
+  var output = "<tr><th>Choice ID</th><th>Choice Name</th><th>Choice Creation Date</th><th>Is Choice Completed?</th>tr>";
 
   for(let i=0; i < jsonObj.listOfChoices.length; i++){
     var choiceJson = jsonObj.listOfChoices[i];
@@ -56,16 +57,19 @@ function processRequestChoiceListResponse(result){
      var cFinalized = choiceJson.isFinalized;
      var cDate = choiceJson.creationDate;
 
+     /*
     if(cFinalized === true){
-      cFinalized = "Closed"
+      cFinalized = "Closed";
     } else {
       cFinalized = "Open";
     }
+    */
+    output = output + "<tr><td>" + cID + "</td><td>" + cName + "</td><td>" + cDate + "</td><td>" + cFinalized + "</td></tr>"
 
-    output = output + "<div id=\"choice" + cID + "\">"  + cID +  "</b>    <b>" + cName + "</b>   <b>" + cDate + "</b>     <b>"+ cFinalized + "</b></div><br>";
+    //output = output + "<div id=\"choice" + cID + "\">"  + cID +  "</b>    <b>" + cName + "</b>   <b>" + cDate + "</b>     <b>"+ cFinalized + "</b></div><br>";
   }
   //Output list of choices here
-  choiceList.innerHTML = output;
+  finalChoiceList.innerHTML = output;
 };
 
 
