@@ -3,43 +3,51 @@ function processDeleteResponse(result){
     // contents dynamically via javascript
     console.log("processDeleteResponse result:" + result);
 
-	const jsonObj = JSON.parse(result);
-	const id = jsonObj.deleteDate;
-    requestChoice(id);
+    //Maybe delete if it doesn't go anywhere?
+    requestChoiceList();
 }
 
 function handleDeleteClick(e){
     console.log("Input: " + e);
+    /*
     let data = {};
-    let form = document.deleteChoicesForm;
+    
     data["deleteDate"] = form.deleteDay.value + (form.deleteHour.value)/24;
+    */
+    let form = document.deleteChoicesForm;
 
-    console.log("DeleteDate: " + data["deleteDate"]);
+    console.log(form.deleteDay.value + (form.deleteHour.value)/24);
 
-    //Make an HTTP request
-    var js = JSON.stringify(data);
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", delete_date_url, true);
-
-    // send the collected data as JSON
-    xhr.send(js);
+    processDeleteRequest(form.deleteDay.value + (form.deleteHour.value)/24);
 
     // This will process results and update HTML as appropriate.
-    xhr.onloadend = function () {
+    
+}
+
+
+
+function processDeleteRequest(deleteDate){
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", delete_date_url + "/" + deleteDate, true);
+
+    xhr.onloadend = function ()
+    {
         console.log(xhr);
         console.log(xhr.request);
         if (xhr.readyState == XMLHttpRequest.DONE) {
             if (xhr.status == 200) {
-            console.log ("XHR:" + xhr.responseText);
-            processDeleteResponse(xhr.responseText);
+                console.log ("XHR:" + xhr.responseText);
+                processDeleteResponse(xhr.responseText);
             } else {
                 console.log("actual:" + xhr.responseText)
                 var js = JSON.parse(xhr.responseText);
-                var err = js["response"];
+                var err = js.error;
                 alert (err);
             }
         } else {
-        processDeleteResponse("N/A");
+            processDeleteResponse("N/A");
         }
     };
+
+  xhr.send(null);  //  NEED TO GET IT GOING
 }

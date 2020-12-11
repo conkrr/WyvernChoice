@@ -41,9 +41,9 @@ function processRequestChoiceListResponse(result){
 
   var jsonObj = JSON.parse(result);
   var choiceList = document.getElementById('choiceList');
-  var finalChoiceList = document.getElementById('choistListValues');
+  var finalChoiceList = document.getElementById('choiceListTable');
 
-  var output = "";
+  var output = "<tr><th>Choice ID</th><th>Choice Name</th><th>Choice Creation Date</th><th>Is Choice Completed?</th>tr>";
 
   for(let i=0; i < jsonObj.listOfChoices.length; i++){
     var choiceJson = jsonObj.listOfChoices[i];
