@@ -60,7 +60,7 @@ public class AddApprovalHandler implements RequestHandler<AddApprovalRequest, Op
                else
                	response = new OpinionResponse(a.getAlternativeId(), appList, disList, "already exists", 422);
            } else {
-        		response = new OpinionResponse(a.getAlternativeId(), appList, disList, "cannot add disapproval -- Choice has already been finalized", 422);
+        		response = new OpinionResponse(a.getAlternativeId(), appList, disList, "cannot add approval -- Choice has already been finalized", 422);
            }
 
         } catch (Exception e) {
