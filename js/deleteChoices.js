@@ -14,11 +14,11 @@ function handleDeleteClick(e){
     
     data["deleteDate"] = form.deleteDay.value + (form.deleteHour.value)/24;
     */
-    let form = document.deleteChoicesForm;
+    var form = document.deleteChoicesForm;
 
-    console.log(form.deleteDay.value + (form.deleteHour.value)/24);
+    console.log("" + (parseFloat(form.deleteDay.value) + (parseFloat(form.deleteHour.value/24))));
 
-    processDeleteRequest(form.deleteDay.value + (form.deleteHour.value)/24);
+    processDeleteRequest(parseFloat(form.deleteDay.value) + (parseFloat(form.deleteHour.value/24)));
 
     // This will process results and update HTML as appropriate.
     
@@ -33,7 +33,7 @@ function processDeleteRequest(deleteDate){
     xhr.onloadend = function ()
     {
         console.log(xhr);
-        console.log(xhr.request);
+        console.log("request:  " + xhr.request);
         if (xhr.readyState == XMLHttpRequest.DONE) {
             if (xhr.status == 200) {
                 console.log ("XHR:" + xhr.responseText);
