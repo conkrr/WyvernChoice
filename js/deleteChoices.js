@@ -14,11 +14,13 @@ function handleDeleteClick(e){
     
     data["deleteDate"] = form.deleteDay.value + (form.deleteHour.value)/24;
     */
+
     var form = document.deleteChoicesForm;
 
     console.log("" + (parseFloat(form.deleteDay.value) + (parseFloat(form.deleteHour.value/24))));
 
     processDeleteRequest(parseFloat(form.deleteDay.value) + (parseFloat(form.deleteHour.value/24)));
+
 
     // This will process results and update HTML as appropriate.
     

@@ -96,7 +96,21 @@ java.sql.Connection connection;
     }
     
 
-
+    public int delete(String uniqueId) throws Exception {
+		int rowsAffected = 0;
+		
+		try {
+            PreparedStatement ps = connection.prepareStatement("DELETE FROM " + tableName + " WHERE choiceID = ?;");
+            ps.setString(1, uniqueId);
+            rowsAffected = ps.executeUpdate();
+            ps.close();       
+            //logger.log("AlternativesDAO::delete() -- End");
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new Exception("Exception in UsersDAO::delete(): " + e.getMessage());
+		}
+		return rowsAffected;
+    }
 
     public boolean addUser(User user) throws Exception {
         try {
