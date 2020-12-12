@@ -43,7 +43,7 @@ function processRequestChoiceListResponse(result){
   var choiceList = document.getElementById('choiceList');
   var finalChoiceList = document.getElementById('choiceListTable');
 
-  var output = "<tr><th>Choice ID</th><th>Choice Name</th><th>Choice Creation Date</th><th>Is Choice Completed?</th>tr>";
+  var output = "<tr><th>Choice ID</th><th>Choice Name</th><th>Choice Creation Date</th><th>Is Choice Completed?</th></tr>";
 
   for(let i=0; i < jsonObj.listOfChoices.length; i++){
     var choiceJson = jsonObj.listOfChoices[i];
@@ -56,6 +56,9 @@ function processRequestChoiceListResponse(result){
      var cID = choiceJson.id;
      var cFinalized = choiceJson.isFinalized;
      var cDate = choiceJson.creationDate;
+
+     cDate = new Date(cDate);
+     cDate = cDate.toString();
 
      /*
     if(cFinalized === true){

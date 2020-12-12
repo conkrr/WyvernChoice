@@ -38,6 +38,17 @@ public class FeedbackResponse {
 			this.status = 200;
 			this.error = "";
 		}
+		public FeedbackResponse(Feedback f) {
+			this.alternativeID = f.alternativeID;
+			List<FeedBackResponseObject> feedbackObjects = new ArrayList<FeedBackResponseObject>();
+			
+				feedbackObjects.add(new FeedBackResponseObject(f.userID, f.text, f.timestamp.toString()));
+				
+			
+			this.feedbackObjects = feedbackObjects;
+			this.status = 200;
+			this.error = "";
+		}
 		public FeedbackResponse(int status, String error) {
 			this.alternativeID = null;
 			this.feedbackObjects = null;
