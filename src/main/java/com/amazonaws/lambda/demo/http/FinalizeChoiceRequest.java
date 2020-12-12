@@ -16,20 +16,15 @@ public class FinalizeChoiceRequest {
 	public String getAlternativeID() {
 		return alternativeID;
 	}
-	
 	public void setAlternativeID(String id) {
 		this.alternativeID = id;
 	}
-	
-	
 	public boolean getIsFinalized() {
 		return isFinalized;
 	}
-	
 	public void setIsFinalized(boolean f) {
 		this.isFinalized = f;
 	}
-	
 	
 	public FinalizeChoiceRequest() {
 		

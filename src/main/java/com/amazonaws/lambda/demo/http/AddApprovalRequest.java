@@ -30,23 +30,18 @@ public class AddApprovalRequest {
     public void setApprovingUserID(String approvingUserID) {
         this.approvingUserID = approvingUserID;
     }
-
     public String getApprovingUserID() {
         return this.approvingUserID;
     }
-
     public void setAlternativeID(String alternativeID) {
         this.alternativeID = alternativeID;
     }
-
     public String getAlternativeID() {
         return this.alternativeID;
     }
-
     public void setChoiceID(String choiceID) {
         this.choiceID = choiceID;
     }
-
     public String getChoiceID() {
         return this.choiceID;
     }

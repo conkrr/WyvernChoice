@@ -12,8 +12,6 @@ public class AlternativeResponse {
 	private boolean isChosen;
 	private OpinionResponse opinions;
 	private FeedbackResponse feedback;
-	
-	
 
 	public AlternativeResponse(String id, String description, boolean isChosen, OpinionResponse opinions,
 			FeedbackResponse feedback) {
@@ -25,39 +23,21 @@ public class AlternativeResponse {
 	}
 
 
-
-
-
 	public boolean getIsChosen() {
 		return isChosen;
 	}
-
-
-
-
-
-
 	public String getId() {
 		return id;
 	}
-
-
-
 	public String getDescription() {
 		return description;
 	}
-
-
-
 	public OpinionResponse getOpinions() {
 		return opinions;
 	}
-
 	public FeedbackResponse getFeedback() {
 		return feedback;
 	}
-
-
 	public AlternativeResponse() {
 		
 	}

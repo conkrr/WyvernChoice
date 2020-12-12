@@ -1,11 +1,8 @@
 package com.amazonaws.lambda.demo;
 
-import java.util.UUID;
-
 import com.amazonaws.lambda.db.UsersDAO;
 import com.amazonaws.lambda.demo.http.RegisterUserRequest;
 import com.amazonaws.lambda.demo.http.RegisterUserResponse;
-import com.amazonaws.lambda.demo.http.UserGsonCompatible;
 import com.amazonaws.lambda.demo.model.User;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.LambdaLogger;

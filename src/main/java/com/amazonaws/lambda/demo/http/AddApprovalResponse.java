@@ -46,8 +46,5 @@ public class AddApprovalResponse
 		}
 	}
 
-    /*
-        TODO: For Geoff to finish
-    */
 
 }

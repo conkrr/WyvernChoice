@@ -31,8 +31,4 @@ public class RemoveApprovalResponse
 		}
 	}
 
-    /*
-        TODO: For Geoff to finish
-    */
-
 }

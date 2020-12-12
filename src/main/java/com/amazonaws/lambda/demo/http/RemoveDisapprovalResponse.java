@@ -31,8 +31,6 @@ public class RemoveDisapprovalResponse
 		}
 	}
 
-    /*
-        TODO: For Geoff to finish
-    */
+
 
 }

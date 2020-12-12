@@ -58,7 +58,7 @@ public class CreateFeedbackHandler implements RequestHandler<CreateFeedbackReque
             	response = new FeedbackResponse(200, "");
 			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+
 			response = new FeedbackResponse(400, " " + e.toString());
 			
 		}

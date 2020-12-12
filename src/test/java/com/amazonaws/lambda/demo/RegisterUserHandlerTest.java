@@ -73,9 +73,6 @@ public class RegisterUserHandlerTest extends LambdaTest{
         Assert.assertEquals(1, 1);
     }
 
-    //TODO: testNoPasswordRegistration
-    //TODO: testInvalidIDLength
-    //TODO: testInvalidChoice
 	@Test
 	public void testNoPasswordRegistration() { //Test successful registration without password
 

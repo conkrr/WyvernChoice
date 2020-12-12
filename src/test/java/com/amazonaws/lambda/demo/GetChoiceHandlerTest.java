@@ -39,9 +39,9 @@ public class GetChoiceHandlerTest  extends LambdaTest
 
        GetChoiceResponse resp = testSuccessInput(incoming);
 
-        //return new Gson().toJson(resp.deletChoiceGson);
+        return new Gson().toJson(resp);
 
-        return null; //TODO: return actual result
+
     }
 
     // NOTE: this proliferates large number of constants! Be mindful\
