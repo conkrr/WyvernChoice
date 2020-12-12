@@ -17,7 +17,8 @@ function handleDeleteClick(e){
 
     var form = document.deleteChoicesForm;
 
-    console.log("" + (parseFloat(form.deleteDay.value) + (parseFloat(form.deleteHour.value/24))));
+    console.log("form.deleteDay.value: "  + form.deleteDay.value + "form.deleteHour.value: "  + form.deleteHour.value);
+    //console.log("" + (parseFloat(form.deleteDay.value) + (parseFloat(form.deleteHour.value/24))));
 
     processDeleteRequest(parseFloat(form.deleteDay.value) + (parseFloat(form.deleteHour.value/24)));
 
