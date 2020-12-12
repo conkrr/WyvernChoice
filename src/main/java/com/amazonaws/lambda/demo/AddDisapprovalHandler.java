@@ -1,6 +1,8 @@
 package com.amazonaws.lambda.demo;
 
+import com.amazonaws.lambda.db.AlternativesDAO;
 import com.amazonaws.lambda.db.ApprovalsDAO;
+import com.amazonaws.lambda.db.ChoicesDAO;
 import com.amazonaws.lambda.db.DisapprovalsDAO;
 import com.amazonaws.lambda.demo.http.*;
 import com.amazonaws.lambda.demo.model.Approval;
@@ -62,12 +64,20 @@ public class AddDisapprovalHandler implements RequestHandler<AddDisapprovalReque
             List<Approval> appList = apvDao.get(a.getAlternativeId());
             List<Disapproval> disList = disDao.get(a.getAlternativeId());          
             
-            if (addDisapprovalSuccess)
-                response = new OpinionResponse(a.getAlternativeId(), appList, disList, "", 200);
-            else
-            	response = new OpinionResponse(a.getAlternativeId(), appList, disList, "", 422);
-
-        }  catch (Exception e) {
+            AlternativesDAO altDAO = new AlternativesDAO(logger);
+            ChoicesDAO choDAO = new ChoicesDAO(logger);
+           boolean isFinalized =  choDAO.get(altDAO.getChoiceID(a.getAlternativeId())).isFinalized;
+       
+           if(isFinalized) {
+        	   if (addDisapprovalSuccess)
+                   response = new OpinionResponse(a.getAlternativeId(), appList, disList, "", 200);
+               else
+               	response = new OpinionResponse(a.getAlternativeId(), appList, disList, "already exists", 422);
+           } else {
+        		response = new OpinionResponse(a.getAlternativeId(), appList, disList, "cannot add disapproval -- Choice has already been finalized", 422);
+           }
+           
+        } catch (Exception e) {
             response = new OpinionResponse("Unable to add disapproval for User: " + request.getUsername() + ", altID: " + request.getAlternativeID() + "(error: " + e.getMessage() + ")", 400);
         }
 

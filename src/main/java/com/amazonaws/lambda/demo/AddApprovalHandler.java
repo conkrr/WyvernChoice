@@ -1,6 +1,8 @@
 package com.amazonaws.lambda.demo;
 
+import com.amazonaws.lambda.db.AlternativesDAO;
 import com.amazonaws.lambda.db.ApprovalsDAO;
+import com.amazonaws.lambda.db.ChoicesDAO;
 import com.amazonaws.lambda.db.DisapprovalsDAO;
 import com.amazonaws.lambda.demo.http.*;
 import com.amazonaws.lambda.demo.model.Approval;
@@ -57,16 +59,26 @@ public class AddApprovalHandler implements RequestHandler<AddApprovalRequest, Op
 
             Approval a = createApproval(request);
             boolean addApprovalSuccess = approvalDAOHelper(a);
-
+             
             ApprovalsDAO apvDao = new ApprovalsDAO(logger);
             DisapprovalsDAO disDao = new DisapprovalsDAO(logger);
             List<Approval> appList = apvDao.get(a.getAlternativeId());
             List<Disapproval> disList = disDao.get(a.getAlternativeId());          
             
-            if (addApprovalSuccess)
-                response = new OpinionResponse(a.getAlternativeId(), appList, disList, "", 200);
-            else
-            	response = new OpinionResponse(a.getAlternativeId(), appList, disList, "", 422);
+            AlternativesDAO altDAO = new AlternativesDAO(logger);
+            ChoicesDAO choDAO = new ChoicesDAO(logger);
+           boolean isFinalized =  choDAO.get(altDAO.getChoiceID(a.getAlternativeId())).isFinalized;
+       
+           if(isFinalized) {
+        	   if (addApprovalSuccess)
+                   response = new OpinionResponse(a.getAlternativeId(), appList, disList, "", 200);
+               else
+               	response = new OpinionResponse(a.getAlternativeId(), appList, disList, "already exists", 422);
+           } else {
+        		response = new OpinionResponse(a.getAlternativeId(), appList, disList, "cannot add approval -- Choice has already been finalized", 422);
+           }
+           
+            
 
         } catch (Exception e) {
             response = new OpinionResponse("Unable to add approval for User: " + request.getUsername() + ", altID: " + request.getAlternativeID() + "(error: " + e.getMessage() + ")", 400);

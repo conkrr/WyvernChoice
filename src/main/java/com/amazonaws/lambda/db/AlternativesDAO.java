@@ -48,6 +48,27 @@ public class AlternativesDAO implements DataAccessAsymmetric<Alternative>{
             throw new Exception("Exception in AlternativesDAO::get(): " + e.getMessage());
         }
 	}
+	
+	public String getChoiceID(String altId) throws Exception {
+		//logger.log("AlternativesDAO::get() -- Begin");
+		String choiceId = "" ;
+        try {
+            PreparedStatement ps = connection.prepareStatement("SELECT choiceID FROM " + tableName + " WHERE " + tableName + ".alternativeID = ?");           
+            ps.setString(1,  altId);
+            ResultSet resultSet = ps.executeQuery();
+            while(resultSet.next()) {
+            	choiceId = resultSet.getString("choiceID");
+				
+			}
+            resultSet.close();
+            ps.close();
+            //logger.log("AlternativesDAO::get() -- End");
+            return choiceId;
+        } catch (Exception e) {
+        	e.printStackTrace();
+            throw new Exception("Exception in AlternativesDAO::get(): " + e.getMessage());
+        }
+	}
 
 	@Override
 	public int delete(String uniqueId) throws Exception {

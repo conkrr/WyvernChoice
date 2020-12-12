@@ -128,7 +128,13 @@ function processRequestChoiceResponse(result) {
 
         }
 
-	} 
+    } 
+    var m;
+    for (m = cAlternatives.length; m < 5; m++) {
+        document.getElementById("Alternative" + (m+1)).style.visibility = "hidden";
+        document.getElementById("GreaterAlternative" + (m+1)).style.visibility = "hidden";
+    }
+
 /*
     if(cAlternatives[0] !== null){
         alternativeJson = cAlternatives[0];

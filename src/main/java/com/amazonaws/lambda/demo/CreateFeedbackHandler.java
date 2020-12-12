@@ -7,6 +7,8 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
 
+import com.amazonaws.lambda.db.AlternativesDAO;
+import com.amazonaws.lambda.db.ChoicesDAO;
 import com.amazonaws.lambda.db.FeedbackDAO;
 import com.amazonaws.lambda.demo.http.CreateFeedbackRequest;
 import com.amazonaws.lambda.demo.http.FeedbackResponse;
@@ -49,13 +51,27 @@ public class CreateFeedbackHandler implements RequestHandler<CreateFeedbackReque
 		logger.log("alternativeID: " + req.getAlternativeID());
 		FeedbackResponse response = null;
 		FeedbackDAO dao = new FeedbackDAO(logger);
+		
 		try {
-			boolean alreadyExists = dao.insert(createFeedback(req));
+			
+			Feedback a = createFeedback(req);
 
-			if (alreadyExists)
-                response = new FeedbackResponse(422, "");
-            else
-            	response = new FeedbackResponse(200, "");
+			 AlternativesDAO altDAO = new AlternativesDAO(logger);
+	            ChoicesDAO choDAO = new ChoicesDAO(logger);
+	           boolean isFinalized =  choDAO.get(altDAO.getChoiceID(a.alternativeID)).isFinalized;
+	       
+	           if(isFinalized) {
+	        	   
+	        	   boolean exists = dao.insert(a);
+	        	   
+	        	   if (exists)
+	                   response = new FeedbackResponse(a);
+	               else
+	               	response = new FeedbackResponse(422, "already exists");
+	           } else {
+	        		response = new FeedbackResponse(422, "cannot add approval -- Choice has already been finalized");
+	           }
+	           
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
