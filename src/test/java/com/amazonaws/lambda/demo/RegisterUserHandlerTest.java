@@ -50,7 +50,7 @@ public class RegisterUserHandlerTest extends LambdaTest{
 
 
      //creates new choice so this will always pass
-        CreateChoiceRequest req = new CreateChoiceRequest( "JunitTest",  null,  5, Arrays.asList("1", "2", "4", "200"));
+        CreateChoiceRequest req = new CreateChoiceRequest( "JunitTest",  null,  5, Arrays.asList("JU_Register1", "JU_Register2", "JU_Register3", "JU_Register4"));
 
         CreateChoiceHandler handler = new CreateChoiceHandler();
         GetChoiceResponse resp = handler.handleRequest(req, createContext("create"));
@@ -102,50 +102,5 @@ public class RegisterUserHandlerTest extends LambdaTest{
 
         Assert.assertEquals(1, 1);
 	}
-/*
-
-	@Test
-	public void testInvalidIDLength() //Test non-valid choice ID length
-	{
-        String name = "UserPassInvalid";
-        String choiceId ="900000000000000000000000000000000000000000";
-        String password = "";
-
-        RegisterUserRequest rur = new RegisterUserRequest("Frosted Flakes" ,null, choiceId);
-
-        RegisterUserResponse response = new RegisterUserResponse(400,"ChoiceID is not valid or does not exist");
-
-        String SAMPLE_INPUT_STRING = new Gson().toJson(rur);
-        try {
-            testFailInput(SAMPLE_INPUT_STRING, response.statusCode);
-        } catch (IOException ioe) {
-            Assert.fail("Invalid:" + ioe.getMessage());
-        }
-
-	}
-
-	@Test
-public void testInvalidChoice() //Test non-existent choice ID
-	{
-
-        String name = "UserPassInvalid";
-        String choiceId ="not a real choice id";
-        String password = "";
-
-		RegisterUserRequest rur = new RegisterUserRequest("Frosted Flakes" ,null, choiceId);
-
-		RegisterUserResponse response = new RegisterUserResponse(400,"ChoiceID is not valid or does not exist");
-
-		String SAMPLE_INPUT_STRING = new Gson().toJson(rur);
-
-	    try {
-			testFailInput(SAMPLE_INPUT_STRING, response.statusCode);
-		} catch (IOException ioe) {
-			Assert.fail("Invalid:" + ioe.getMessage());
-		}
-
-	}
-*/
-
 
 }

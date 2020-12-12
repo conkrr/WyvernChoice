@@ -20,7 +20,7 @@ public class AddDisapprovalHandlerTest extends LambdaTest
         AddDisapprovalRequest  req = new Gson().fromJson(incoming, AddDisapprovalRequest.class);
         OpinionResponse resp = handler.handleRequest(req, createContext("adddisapproval"));
 
-        //Assert.assertEquals(200, resp.statusCode);
+        Assert.assertEquals(200, resp.statusCode);
         return resp;
     }
 
@@ -34,14 +34,12 @@ public class AddDisapprovalHandlerTest extends LambdaTest
 
     String getJsonResponse(String incoming) throws IOException {
 
-    	OpinionResponse resp = testSuccessInput(incoming);
+        OpinionResponse resp = testSuccessInput(incoming);
 
-        //return new Gson().toJson(resp.disapprovalGson);
-
-        return null; //TODO: return actual result
+        return new Gson().toJson(resp);
     }
 
-    // NOTE: this proliferates large number of constants! Be mindful\
+
     @Test
     public void testAddDisapproval() {
 
@@ -73,44 +71,5 @@ public class AddDisapprovalHandlerTest extends LambdaTest
 
         Assert.assertEquals(1, 1); // should probably refactor this
     }
-
-    @Test
-    public void testAddDisapprovalOnApproval() {
-
-
-        String userId = UUID.randomUUID().toString();
-        String alternativeID = UUID.randomUUID().toString();
-        String choiceID = UUID.randomUUID().toString();
-        String approvingUser = "";
-        Random random = new Random();
-        for(int i = 0; i < random.nextInt(8)+3; i++) {
-            approvingUser += (char) random.nextInt(91) + 65;
-        }
-
-        //Add approval
-        AddApprovalRequest areq = new AddApprovalRequest(approvingUser,userId,alternativeID,choiceID);
-
-        AddApprovalHandler  ahandler = new AddApprovalHandler();
-        OpinionResponse resp = ahandler.handleRequest(areq, createContext("addapproval"));
-
-        //add disapproval
-
-        AddDisapprovalRequest req = new AddDisapprovalRequest(approvingUser,userId,alternativeID,choiceID);
-        String SAMPLE_INPUT_STRING = new Gson().toJson(req);
-        String jsonResp;
-        try {
-
-            jsonResp = getJsonResponse(SAMPLE_INPUT_STRING);
-        } catch (IOException ioe) {
-            Assert.fail("Invalid:" + ioe.getMessage());
-        }
-
-        Assert.assertEquals(1, 1); // should probably refactor this
-    }
-
-    //Test fresh disapproval:  no response -> disapproval
-    //Test switching:  disdisapproval -> Disapproval
-    //Test duplicate: Disapproval -> Disapproval
-
 
 }

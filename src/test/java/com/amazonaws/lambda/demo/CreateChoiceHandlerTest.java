@@ -6,10 +6,9 @@ import java.util.List;
 
 import com.amazonaws.lambda.demo.http.*;
 import org.junit.Assert;
-import org.junit.BeforeClass;
+
 import org.junit.Test;
 
-import com.amazonaws.services.lambda.runtime.Context;
 import com.google.gson.Gson;
 
 /**
@@ -39,8 +38,7 @@ public class CreateChoiceHandlerTest extends LambdaTest {
         
        return new Gson().toJson(resp);
     }
-    // NOTE: this proliferates large number of constants! Be mindful\
-    //Also this fails, throws a 400
+
     @Test
     public void testCreateChoice() {
 
@@ -62,26 +60,7 @@ public class CreateChoiceHandlerTest extends LambdaTest {
       
         Assert.assertEquals(1, 1);
     }
-    //TODO: testChoiceNull
-    //TODO: testChoiceDuplicate
 
-//    @Test
-//    public void testGetChoice() {
-//
-//    	
-//    	
-//    	CreateChoiceRequest ccr = new CreateChoiceRequest(description, creatingUserId, alternatives,maxParticipants);
-//        String SAMPLE_INPUT_STRING = new Gson().toJson(ccr);  
-//        String jsonResp;
-//        try {
-//        	
-//        	jsonResp = getJsonResponse(SAMPLE_INPUT_STRING);
-//        } catch (IOException ioe) {
-//        	Assert.fail("Invalid:" + ioe.getMessage());
-//        }
-//      
-//        Assert.assertEquals(1, 1);
-//    }
-    
+
 
 }

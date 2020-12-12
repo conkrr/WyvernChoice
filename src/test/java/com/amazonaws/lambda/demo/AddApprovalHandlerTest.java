@@ -49,7 +49,7 @@ public class AddApprovalHandlerTest extends LambdaTest {
 
 
     @Test
-    public void testAddApproval() { //Test fresh approval:  no response -> approval  /TODO: currently broken
+    public void testAddApproval() { //Test fresh approval:  no response -> approval
 
         String userId = UUID.randomUUID().toString();
         String alternativeID = UUID.randomUUID().toString();
@@ -75,47 +75,10 @@ public class AddApprovalHandlerTest extends LambdaTest {
             Assert.fail("Invalid:" + ioe.getMessage());
         }
 
-
-
-
         Assert.assertEquals(1, 1); // should probably refactor this
-
 
     }
 
 
-    @Test
-    public void testAddApprovalOnDisapproval() {
-
-
-        String userId = UUID.randomUUID().toString();
-        String alternativeID = UUID.randomUUID().toString();
-        String choiceID = UUID.randomUUID().toString();
-        String approvingUser = "";
-        Random random = new Random();
-        for(int i = 0; i < random.nextInt(8)+3; i++) {
-            approvingUser += (char) random.nextInt(91) + 65;
-        }
-
-        //Add approval
-        AddDisapprovalRequest dreq = new AddDisapprovalRequest(approvingUser,userId,alternativeID,choiceID);
-
-        AddDisapprovalHandler  dhandler = new AddDisapprovalHandler();
-        OpinionResponse dresp = dhandler.handleRequest(dreq, createContext("adddisapproval"));
-
-        //add disapproval
-
-        AddApprovalRequest req = new AddApprovalRequest(approvingUser,userId,alternativeID,choiceID);
-        String SAMPLE_INPUT_STRING = new Gson().toJson(req);
-        String jsonResp;
-        try {
-
-            jsonResp = getJsonResponse(SAMPLE_INPUT_STRING);
-        } catch (IOException ioe) {
-            Assert.fail("Invalid:" + ioe.getMessage());
-        }
-
-        Assert.assertEquals(1, 1); // should probably refactor this
-    }
 
 }

@@ -1,23 +1,17 @@
 package com.amazonaws.lambda.demo;
-
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
-
 import com.amazonaws.lambda.demo.http.*;
 import org.junit.Assert;
-import org.junit.BeforeClass;
 import org.junit.Test;
-
-import com.amazonaws.services.lambda.runtime.Context;
 import com.google.gson.Gson;
+
 public class DeleteChoicesHandlerTest  extends LambdaTest
 {
     DeleteChoicesResponse testSuccessInput(String incoming) throws IOException {
         DeleteChoicesHandler handler = new DeleteChoicesHandler();
         DeleteChoicesRequest req = new Gson().fromJson(incoming, DeleteChoicesRequest.class);
         DeleteChoicesResponse resp = handler.handleRequest(req, createContext("admin"));
-        //Assert.assertEquals(200, resp.statusCode);
+        Assert.assertEquals(200, resp.statusCode);
         return resp;
     }
 
@@ -35,13 +29,11 @@ public class DeleteChoicesHandlerTest  extends LambdaTest
 
         return new Gson().toJson(resp);
     }
-    // NOTE: this proliferates large number of constants! Be mindful\
-    //Also this fails, throws a 400
 
     @Test
     public void testDeleteChoices()
     {
-        //3897b337-17a3-448f-a771-c8806e738bd
+
         float deleteTime = 3;  //in days ex: 2.5
 
 

@@ -38,8 +38,7 @@ class RegisterUserResponseTest {
 		actualRep = rep.readTree(rur.toString());
 		assertEquals(actualRep.get("statusCode").asText(), "400");
 		assertEquals(actualRep.get("error").asText(), "oops that's an error");
-		//rep = rur.toString();
-		///assertTrue(rep.startsWith("Error"));
+
 
 	}
 

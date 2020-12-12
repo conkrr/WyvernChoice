@@ -33,11 +33,7 @@ class OpinionResponseTest {
 		assertEquals("whoop I dropped my chocolate bar", or.error);
 		assertEquals(400, or.statusCode);
 
-		/*
-		actualRep = rep.readTree(or.toString());
-		assertEquals(actualRep.get("statusCode").asText(), "400");
-		assertEquals(actualRep.get("error").asText(), "whoop I dropped my chocolate bar");
-		*/
+
 	}
 
 }
