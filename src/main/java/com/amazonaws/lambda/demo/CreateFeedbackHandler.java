@@ -69,7 +69,7 @@ public class CreateFeedbackHandler implements RequestHandler<CreateFeedbackReque
 	               else
 	               	response = new FeedbackResponse(422, "already exists");
 	           } else {
-	        		response = new FeedbackResponse(422, "cannot add approval -- Choice has already been finalized");
+	        		response = new FeedbackResponse(422, "cannot add feedback -- Choice has already been finalized");
 	           }
 	           
 			

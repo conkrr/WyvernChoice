@@ -173,11 +173,11 @@ java.sql.Connection connection;
 			alreadyExists = (c != null);
 			 	
 			if (!alreadyExists) {
-				PreparedStatement ps = connection.prepareStatement("INSERT INTO " + tableName + " (id,description,creationTime,creatingUserID,completionTime,maxParticipants,currentParticipants) VALUES (?,?,?,?,?,?,?);");
+				PreparedStatement ps = connection.prepareStatement("INSERT INTO " + tableName + " (id,description,creationTime,isFinalized,completionTime,maxParticipants,currentParticipants) VALUES (?,?,?,?,?,?,?);");
 					ps.setString(1, t.id);
 					ps.setString(2, t.description);
 					ps.setTimestamp(3, t.creationDate);
-					ps.setString(4, t.creatingUserId);
+					ps.setBoolean(4, false);
 					ps.setNull(5, Types.TIMESTAMP);
 					ps.setInt(6, t.maxParticipants);
 					ps.setInt(7, t.currentParticipants);

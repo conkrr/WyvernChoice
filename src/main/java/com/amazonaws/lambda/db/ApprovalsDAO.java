@@ -72,7 +72,7 @@ public class ApprovalsDAO implements DataAccessAsymmetric<Approval>{
 		if(logger != null )logger.log("ApprovalsDAO::insert -- Begin");
 //		System.out.println("ApprovalsDAO::insert -- Begin");
 		try {
-			boolean alreadyExists = !get(t.getAlternativeId()).isEmpty();
+			boolean alreadyExists = get(t.getAlternativeId()).contains(t);
 //			System.out.println("ApprovalsDAO::insert -- alreadyExists = " + alreadyExists);
 //			if (!alreadyExists) {
 				
@@ -89,6 +89,30 @@ public class ApprovalsDAO implements DataAccessAsymmetric<Approval>{
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new Exception("Exception in ApprovalsDAO::insert(): " + e.getMessage());
+		}
+	}
+	
+	public boolean insertRemoveApproval(Approval t) throws Exception {
+		if(logger != null )logger.log("ApprovalsDAO::insertRemoveApproval -- Begin");
+//		System.out.println("ApprovalsDAO::insert -- Begin");
+		try {
+			boolean alreadyExists = get(t.getAlternativeId()).contains(t);
+//			System.out.println("ApprovalsDAO::insert -- alreadyExists = " + alreadyExists);
+//			if (!alreadyExists) {
+				
+				PreparedStatement ps = connection.prepareStatement("INSERT INTO " + tableName + " (alternativeID, userID, timestamp, status) values(?, ?, ?, ?);");
+					ps.setString(1, t.getAlternativeId());
+					ps.setString(2, t.getUserId());
+					ps.setTimestamp(3, t.getTimestamp());
+					ps.setInt(4, 0); // 1 indicates approval
+					ps.execute();
+//			}
+			if(logger != null )logger.log("ApprovalsDAO::insertRemoveApproval() -- End");
+//			System.out.println("ApprovalsDAO::insert() -- End");
+			return alreadyExists;
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new Exception("Exception in ApprovalsDAO::insertRemoveApproval(): " + e.getMessage());
 		}
 	}
 

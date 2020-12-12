@@ -20,6 +20,8 @@ import java.util.List;
 public class AddDisapprovalHandler implements RequestHandler<AddDisapprovalRequest, OpinionResponse> {
 
 
+    //************************* THIS CLASS IS JUST AN OUTLINE *************************
+
     LambdaLogger logger;
 
     private Disapproval createDisapproval(AddDisapprovalRequest req) {
@@ -34,8 +36,9 @@ public class AddDisapprovalHandler implements RequestHandler<AddDisapprovalReque
         // if (logger != null) { logger.log("in AddApproval"); }
 
         DisapprovalsDAO disapprovalsDAO = new DisapprovalsDAO(logger);
+       // List<Disapproval> disapprovalsList = disapprovalsDAO.get(disapproval.getAlternativeId());
 
-        boolean exists = false;
+        boolean exists = false; //disapprovalsList.stream().anyMatch(a -> a.getUserId().equals(disapproval.getUserId())); // this is either very cool or very bad
 
         logger.log("Does this disapproval exist in the database already? " + exists);
         if (!exists) {
@@ -65,8 +68,11 @@ public class AddDisapprovalHandler implements RequestHandler<AddDisapprovalReque
             ChoicesDAO choDAO = new ChoicesDAO(logger);
            boolean isFinalized =  choDAO.get(altDAO.getChoiceID(a.getAlternativeId())).isFinalized;
        
-           if(isFinalized) {
-        	   if (addDisapprovalSuccess)
+           if(!isFinalized) {
+
+        	   boolean exists = disDao.insert(a);
+
+        	   if (!exists)
                    response = new OpinionResponse(a.getAlternativeId(), appList, disList, "", 200);
                else
                	response = new OpinionResponse(a.getAlternativeId(), appList, disList, "already exists", 422);
