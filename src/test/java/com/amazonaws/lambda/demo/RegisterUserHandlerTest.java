@@ -78,8 +78,16 @@ public class RegisterUserHandlerTest extends LambdaTest{
     //TODO: testInvalidChoice
 	@Test
 	public void testNoPasswordRegistration() { //Test successful registration without password
-        String name = "UserNoPass";
-        String choiceId ="936219db-1f89-4d71-b3ab-cb58011d821e";
+
+        //creates new choice so this will always pass
+        CreateChoiceRequest req = new CreateChoiceRequest( "JunitTestNoPass",  null,  5, Arrays.asList("1", "2", "4", "200"));
+
+        CreateChoiceHandler handler = new CreateChoiceHandler();
+        GetChoiceResponse resp = handler.handleRequest(req, createContext("create"));
+
+        System.out.println(resp);
+        String name = "Junit NoPassword man: "  + UUID.randomUUID().toString().substring(0,10); //not so elegant way of making recognizable random user id
+        String choiceId = resp.choiceID;
         String password = "";
 
         RegisterUserRequest rur = new RegisterUserRequest(name, password, choiceId);

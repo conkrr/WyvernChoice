@@ -51,10 +51,6 @@ public class AddApprovalHandlerTest extends LambdaTest {
     @Test
     public void testAddApproval() { //Test fresh approval:  no response -> approval  /TODO: currently broken
 
-//        String approvingUser = "ShaneTest";
-//        String userId = "141307d5-101d-4fc2-b1d0-0685bdd8ab9c"; //shane ipad
-//        String alternativeID = "05f62ea0-98dc-4699-8d66-a7075195e1a5"; //ipad 1
-//        String choiceID = "936219db-1f89-4d71-b3ab-cb58011d821e";
         String userId = UUID.randomUUID().toString();
         String alternativeID = UUID.randomUUID().toString();
         String choiceID = UUID.randomUUID().toString();
@@ -121,38 +117,5 @@ public class AddApprovalHandlerTest extends LambdaTest {
 
         Assert.assertEquals(1, 1); // should probably refactor this
     }
-
-    //Test switching:  disapproval -> Approval
-    //Test duplicate: Approval -> Approval
-
-
-
-    /*
-
-
-
-            List<Approval> approvalsList = null;
-                try {
-
-                approvalsList = approvalsDAO.get(req.getAlternativeID());
-            } catch (Exception e) {
-                System.out.println("Alt id canot be found");
-                e.printStackTrace();
-            }
-
-            boolean exists = approvalsList.stream().anyMatch(a -> a.getUserId().equals(userId)); // this is either very cool or very bad
-
-                if (exists) //should be true
-            {
-                System.out.println("DOES EXIST!!!!");
-                try
-                {
-                    approvalsDAO.delete(alternativeID);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-            }
-     */
 
 }

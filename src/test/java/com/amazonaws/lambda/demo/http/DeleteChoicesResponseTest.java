@@ -17,7 +17,7 @@ class DeleteChoicesResponseTest {
 		DeleteChoicesResponse dcr = new DeleteChoicesResponse(24);
 		ObjectMapper rep = new ObjectMapper();
 		JsonNode actualRep = rep.readTree(dcr.toString());
-		assertEquals(actualRep.get("time").asText(), "24.0");
+		assertEquals(actualRep.get("time").asText(), "24");
 		
 		dcr = new DeleteChoicesResponse(400, "whoop I dropped my chocolate bar");
 		rep = new ObjectMapper();
