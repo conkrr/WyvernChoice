@@ -72,7 +72,7 @@ public class ApprovalsDAO implements DataAccessAsymmetric<Approval>{
 		if(logger != null )logger.log("ApprovalsDAO::insert -- Begin");
 //		System.out.println("ApprovalsDAO::insert -- Begin");
 		try {
-			boolean alreadyExists = !get(t.getAlternativeId()).isEmpty();
+			boolean alreadyExists = get(t.getAlternativeId()).contains(t);
 //			System.out.println("ApprovalsDAO::insert -- alreadyExists = " + alreadyExists);
 //			if (!alreadyExists) {
 				
@@ -96,7 +96,7 @@ public class ApprovalsDAO implements DataAccessAsymmetric<Approval>{
 		if(logger != null )logger.log("ApprovalsDAO::insert -- Begin");
 //		System.out.println("ApprovalsDAO::insert -- Begin");
 		try {
-			boolean alreadyExists = !get(t.getAlternativeId()).isEmpty();
+			boolean alreadyExists = get(t.getAlternativeId()).contains(t);
 //			System.out.println("ApprovalsDAO::insert -- alreadyExists = " + alreadyExists);
 //			if (!alreadyExists) {
 				

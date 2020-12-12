@@ -64,7 +64,7 @@ public class CreateFeedbackHandler implements RequestHandler<CreateFeedbackReque
 	        	   
 	        	   boolean exists = dao.insert(a);
 	        	   
-	        	   if (exists)
+	        	   if (!exists)
 	                   response = new FeedbackResponse(a);
 	               else
 	               	response = new FeedbackResponse(422, "already exists");

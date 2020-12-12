@@ -72,7 +72,7 @@ public class DisapprovalsDAO implements DataAccessAsymmetric<Disapproval>{
 		if(logger != null )logger.log("DisapprovalsDAO::insert -- Begin");
 //		System.out.println("DisapprovalsDAO::insert -- Begin");
 		try {
-			boolean alreadyExists = !get(t.getAlternativeId()).isEmpty();
+			boolean alreadyExists = get(t.getAlternativeId()).contains(t);
 //			System.out.println("DisapprovalsDAO::insert -- alreadyExists = " + alreadyExists);
 //			if (!alreadyExists) {
 				

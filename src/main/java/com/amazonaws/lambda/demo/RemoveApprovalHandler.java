@@ -1,60 +1,70 @@
 package com.amazonaws.lambda.demo;
 
+import java.sql.Timestamp;
+import java.util.Calendar;
+import java.util.List;
+
+import com.amazonaws.lambda.db.AlternativesDAO;
+import com.amazonaws.lambda.db.ApprovalsDAO;
+import com.amazonaws.lambda.db.ChoicesDAO;
+import com.amazonaws.lambda.db.DisapprovalsDAO;
 import com.amazonaws.lambda.demo.http.*;
 import com.amazonaws.lambda.demo.model.Approval;
-
-
+import com.amazonaws.lambda.demo.model.Disapproval;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 
 
-public class RemoveApprovalHandler  implements RequestHandler<RemoveApprovalRequest, RemoveApprovalResponse>
+public class RemoveApprovalHandler  implements RequestHandler<RemoveApprovalRequest, OpinionResponse>
 {
 
-    //************************* THIS CLASS IS JUST AN OUTLINE *************************
+	LambdaLogger logger;
 
-    LambdaLogger logger;
+    private Approval createApproval(RemoveApprovalRequest req) {
+        Timestamp approvalDate = new Timestamp(Calendar.getInstance().getTimeInMillis());
 
-
-    boolean approvalDAOHelper(RemoveApprovalRequest request) throws Exception {
-        // if (logger != null) { logger.log("in RemoveApproval"); }
-
-        //approvalsDAO dao = new ApprovalsDAO(logger); // TODO: Create ApprovalsDAO object
-
-        // STEP 1: Check if this user has already approved, if so remove
-        // Step 2: If not, do nothing TODO: however Jason figures out he wants to approach this
-
-
-        // approvalsDAO.removeApproval(/*altID, user*/); // TODO: this too
-
-        return false; //TODO: change to actual result
+        Approval approval = new Approval(req.getAlternativeID(), req.getApprovingUserID(), approvalDate, req.getUsername(), req.getChoiceID());
+        return approval;
 
     }
 
+
+
     @Override
-    public RemoveApprovalResponse handleRequest(RemoveApprovalRequest request, Context context) { // So much of this is subject to change :(
+    public OpinionResponse handleRequest(RemoveApprovalRequest request, Context context) { // So much of this is subject to change :(
         logger = context.getLogger();
 
-        RemoveApprovalResponse response = new RemoveApprovalResponse("approvingUser", "alternativeID",  "choiceID"); //Final version wont need to initialize this, this is so it compiles
+        OpinionResponse response; //Final version wont need to initialize this, this is so it compiles
         try {
 
-            boolean removeApprovalSuccess = approvalDAOHelper(request);
+            Approval a = createApproval(request);
+             
+            ApprovalsDAO apvDao = new ApprovalsDAO(logger);
+            DisapprovalsDAO disDao = new DisapprovalsDAO(logger);
+            List<Approval> appList = apvDao.get(a.getAlternativeId());
+            List<Disapproval> disList = disDao.get(a.getAlternativeId());          
+            
+            AlternativesDAO altDAO = new AlternativesDAO(logger);
+            ChoicesDAO choDAO = new ChoicesDAO(logger);
+           boolean isFinalized =  choDAO.get(altDAO.getChoiceID(a.getAlternativeId())).isFinalized;
+       
+           if(isFinalized) {
+        	   
+        	   boolean exists = apvDao.insertRemoveApproval(a);
+        	   
+        	   if (!exists)
+                   response = new OpinionResponse(a.getAlternativeId(), appList, disList, "", 200);
+               else
+               	response = new OpinionResponse(a.getAlternativeId(), appList, disList, "already exists", 422);
+           } else {
+        		response = new OpinionResponse(a.getAlternativeId(), appList, disList, "cannot add approval -- Choice has already been finalized", 422);
+           }
 
-            if (removeApprovalSuccess) {
-
-                //ApprovalGsonCompatible a_Gson = new  ApprovalGsonCompatible(request); //TODO: Jason fix this
-                //response = new RemoveApprovalResponse(a_Gson);
-
-            } else {
-                //response = new RemoveApprovalResponse(request.getApprovingUser() + " :  " + request.getAlternativeID(), 422); //null
-            }
         } catch (Exception e) {
-            response = new RemoveApprovalResponse("approvingUser", "alternativeID",  "choiceID"); //   new RemoveApprovalResponse("Unable to remove approval: " + request.getApprovingUser() + ": altID: "  + request.getAlternativeID() + "(" + e.getMessage() + ")", 400);
+            response = new OpinionResponse("Unable to add approval for User: " + request.getUsername() + ", altID: " + request.getAlternativeID() + "(error: " + e.getMessage() + ")", 400);
         }
 
         return response;
     }
-
-
 }
