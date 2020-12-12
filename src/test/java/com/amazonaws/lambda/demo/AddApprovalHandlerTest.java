@@ -56,7 +56,7 @@ public class AddApprovalHandlerTest extends LambdaTest {
 
 
         //creates new choice so this will always pass
-        CreateChoiceRequest creq = new CreateChoiceRequest( "JunitTestAddApproval",  null,  5, Arrays.asList("JU_AddApproval1", "JU_AddApproval2", "JU_AddApproval3", "JU_AddApproval4"));
+        CreateChoiceRequest creq = new CreateChoiceRequest( "JunitTestAddApprovalyee",  null,  5, Arrays.asList("JU_AddApproval1aaa", "JU_AddApproval2aa", "JU_AddApproval3a", "JU_AddApproval4a"));
         CreateChoiceHandler chandler = new CreateChoiceHandler();
         GetChoiceResponse cresp = chandler.handleRequest(creq, createContext("create"));
 

@@ -61,6 +61,33 @@ public class OpinionResponse {
 		return nameList;
 	}
 
+	public String toString() {
+		if(statusCode == 200) {
+			String approvalUsers = "[";
+			int i;
+			for (i = 0; i < this.approvalUsers.size() - 1; i++) {
+				approvalUsers += ("\"" + this.approvalUsers.get(i) + "\", ");
+			}
+			approvalUsers += ("\"" + this.approvalUsers.get(i) + "\"");
+			approvalUsers += "]";
+			String disapprovalUsers = "[";
+			for (i = 0; i < this.disapprovalUsers.size() - 1; i++) {
+				disapprovalUsers += ("\"" + this.disapprovalUsers.get(i) + "\", ");
+			}
+			disapprovalUsers += ("\"" + this.disapprovalUsers.get(i) + "\"");
+			disapprovalUsers += "]";
 
+
+			return "{ \"alternativeID\":" + alternativeID
+					+ "\", \"approvals\": " + approvals
+					+ ", \"disapprovals\": " + disapprovals
+					+ ", \"approvalUsers\": " + approvalUsers
+					+ ", \"disapprovalUsers\": " + disapprovalUsers
+					+ ", \"error\": \"" + error
+					+ "\", \"statusCode\": " + statusCode + "}";
+		} else {
+			return "{ \"statusCode\": \"" + statusCode + "\", \"error\": \"" + error + "\" }";
+		}
+	}
 	
 }
