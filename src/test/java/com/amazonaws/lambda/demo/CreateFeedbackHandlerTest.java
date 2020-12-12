@@ -18,7 +18,7 @@ public class CreateFeedbackHandlerTest extends LambdaTest
     FeedbackResponse testSuccessInput(String incoming) throws IOException {
         CreateFeedbackHandler handler = new CreateFeedbackHandler();
         CreateFeedbackRequest req = new Gson().fromJson(incoming, CreateFeedbackRequest.class);
-        FeedbackResponse resp = handler.handleRequest(req, createContext("create"));
+        FeedbackResponse resp = handler.handleRequest(req, createContext("feedback"));
         Assert.assertEquals(200, resp.status);
         return resp;
     }
