@@ -32,22 +32,7 @@ public class AddDisapprovalHandler implements RequestHandler<AddDisapprovalReque
 
     }
 
-    boolean disapprovalDAOHelper(Disapproval disapproval) throws Exception {
-        // if (logger != null) { logger.log("in AddApproval"); }
 
-        DisapprovalsDAO disapprovalsDAO = new DisapprovalsDAO(logger);
-       // List<Disapproval> disapprovalsList = disapprovalsDAO.get(disapproval.getAlternativeId());
-
-        boolean exists = false; //disapprovalsList.stream().anyMatch(a -> a.getUserId().equals(disapproval.getUserId())); // this is either very cool or very bad
-
-        logger.log("Does this disapproval exist in the database already? " + exists);
-        if (!exists) {
-
-            disapprovalsDAO.insert(disapproval);
-        }
-        return !exists;
-
-    }
 
     @Override
     public OpinionResponse handleRequest(AddDisapprovalRequest request, Context context) {  // So much of this is subject to change :(
@@ -57,7 +42,7 @@ public class AddDisapprovalHandler implements RequestHandler<AddDisapprovalReque
         try {
 
             Disapproval a = createDisapproval(request);
-            boolean addDisapprovalSuccess = disapprovalDAOHelper(a);
+
 
             ApprovalsDAO apvDao = new ApprovalsDAO(logger);
             DisapprovalsDAO disDao = new DisapprovalsDAO(logger);
