@@ -1,14 +1,3 @@
-/*
-function processApprovalResponse(result){
-    // Can grab any DIV or SPAN HTML element and can then manipulate its
-    // contents dynamically via javascript
-    console.log("processApprovalResponse result:" + result);
-  
-    const jsonObj = JSON.parse(result);
-    //ID is probably bad and wrong???
-	const id = jsonObj.choice.alternative.Approval
-    requestChoice(id);
-}*/
 function handleRemoveApprovalClick(e){
     if(savedIsFinalized === false){
         console.log(" " + e);
@@ -21,7 +10,7 @@ function handleRemoveApprovalClick(e){
         var js = JSON.stringify(data);
         console.log("JS:" + js);
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", add_approval_url, true);
+        xhr.open("POST", remove_approval_url, true);
 
         // send the collected data as JSON
         xhr.send(js);
@@ -45,7 +34,7 @@ function handleRemoveApprovalClick(e){
             }
         };
     } else {
-        document.getElementById("errorView").innerHTML = "Cannot approve, choice is already finalized";
+        document.getElementById("errorView").innerHTML = "Cannot remove approval, choice is already finalized";
     }
     
 }
