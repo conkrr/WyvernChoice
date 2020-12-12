@@ -46,7 +46,7 @@ public class RegisterUserResponse {
 	
 	public String toString() {
 		if(status == 200) {
-			return "{ \"username\": \"" + userID + "\", \"password\": \"" + password + "\", \"choiceID\": \"" + choiceID + "\", \"statusCode\": \"" + status +"\" }";
+			return "{ \"userID\": \"" + userID + "\", \"password\": \"" + password + "\", \"choiceID\": \"" + choiceID + "\", \"statusCode\": \"" + status +"\" }";
 		} else {
 			return "{ \"statusCode\": \"" + status + "\", \"error\": \"" + error + "\" }";
 		}

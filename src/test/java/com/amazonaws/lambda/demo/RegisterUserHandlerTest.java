@@ -1,6 +1,8 @@
 package com.amazonaws.lambda.demo;
 
 //com.amazonaws.lambda.demo.RegisterUserHandlerTest
+import com.amazonaws.lambda.demo.http.CreateChoiceRequest;
+import com.amazonaws.lambda.demo.http.GetChoiceResponse;
 import com.amazonaws.lambda.demo.http.RegisterUserRequest;
 import com.amazonaws.lambda.demo.http.RegisterUserResponse;
 import com.amazonaws.services.lambda.runtime.Context;
@@ -9,6 +11,9 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
+import java.util.UUID;
 
 
 public class RegisterUserHandlerTest extends LambdaTest{
@@ -18,7 +23,8 @@ public class RegisterUserHandlerTest extends LambdaTest{
 	RegisterUserResponse testSuccessInput(String incoming) throws IOException {
     	RegisterUserHandler handler = new RegisterUserHandler();
     	RegisterUserRequest req = new Gson().fromJson(incoming, RegisterUserRequest.class);
-    	RegisterUserResponse resp = handler.handleRequest(req, createContext("create"));
+
+    	RegisterUserResponse resp = handler.handleRequest(req, createContext("register"));
         Assert.assertEquals(200, resp.status);
         return resp;
     }
@@ -27,7 +33,7 @@ public class RegisterUserHandlerTest extends LambdaTest{
     	RegisterUserHandler handler = new RegisterUserHandler();
     	RegisterUserRequest req = new Gson().fromJson(incoming, RegisterUserRequest.class);
 
-    	RegisterUserResponse resp = handler.handleRequest(req, createContext("create"));
+    	RegisterUserResponse resp = handler.handleRequest(req, createContext("register"));
         Assert.assertEquals(failureCode, resp.status);
     }
 
@@ -38,13 +44,20 @@ public class RegisterUserHandlerTest extends LambdaTest{
        return new Gson().toJson(resp.userID);
     }
 
-    // NOTE: this proliferates large number of constants! Be mindful\
-    //Also this fails, throws a 400
+
     @Test
     public void testRegisterUser() {
 
-    	String name = "meme?";
-    	String choiceId ="936219db-1f89-4d71-b3ab-cb58011d821e";
+
+     //creates new choice so this will always pass
+        CreateChoiceRequest req = new CreateChoiceRequest( "JunitTest",  null,  5, Arrays.asList("1", "2", "4", "200"));
+
+        CreateChoiceHandler handler = new CreateChoiceHandler();
+        GetChoiceResponse resp = handler.handleRequest(req, createContext("create"));
+
+        System.out.println(resp);
+    	String name = "Junit tester man: "  + UUID.randomUUID().toString().substring(0,10); //not so elegant way of making recognizable random user id
+    	String choiceId = resp.choiceID;
     	String password = "password12";
     	
     	RegisterUserRequest rur = new RegisterUserRequest(name, password, choiceId);
