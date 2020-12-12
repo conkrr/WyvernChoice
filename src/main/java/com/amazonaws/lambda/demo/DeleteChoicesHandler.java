@@ -5,6 +5,7 @@ import com.amazonaws.lambda.db.ApprovalsDAO;
 import com.amazonaws.lambda.db.ChoicesDAO;
 import com.amazonaws.lambda.db.DisapprovalsDAO;
 import com.amazonaws.lambda.db.FeedbackDAO;
+import com.amazonaws.lambda.db.UsersDAO;
 import com.amazonaws.lambda.demo.http.DeleteChoicesRequest;
 import com.amazonaws.lambda.demo.http.DeleteChoicesResponse;
 import com.amazonaws.lambda.demo.http.GetChoiceResponse;
@@ -34,6 +35,7 @@ public class DeleteChoicesHandler implements RequestHandler<DeleteChoicesRequest
 		FeedbackDAO feedDAO= new FeedbackDAO(logger);
 		ApprovalsDAO appDAO= new ApprovalsDAO(logger);
 		DisapprovalsDAO disDAO= new DisapprovalsDAO(logger);
+		UsersDAO usrDAO= new UsersDAO(logger);
 
 		float daysOld = req.getTime(); //this will be in days -> example: 2.5 days
 		long currentTime =Calendar.getInstance().getTimeInMillis(); //the current date in milliseconds (time since 1970)
@@ -53,8 +55,10 @@ public class DeleteChoicesHandler implements RequestHandler<DeleteChoicesRequest
 				feedDAO.delete(a.getAlternativeID());
 				appDAO.delete(a.getAlternativeID());
 				disDAO.delete(a.getAlternativeID());
-				altDAO.delete(c.id);
+				
 			}
+			altDAO.delete(c.id);
+			usrDAO.delete(c.id);
 			dao.delete(c.id);
 		}
 			
