@@ -51,7 +51,7 @@ public class AddApprovalHandler implements RequestHandler<AddApprovalRequest, Op
             ChoicesDAO choDAO = new ChoicesDAO(logger);
            boolean isFinalized =  choDAO.get(altDAO.getChoiceID(a.getAlternativeId())).isFinalized;
        
-           if(isFinalized) {
+           if(!isFinalized) {
         	   
         	   boolean exists = apvDao.insert(a);
         	   

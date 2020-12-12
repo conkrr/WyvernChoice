@@ -52,7 +52,7 @@ public class AddDisapprovalHandler implements RequestHandler<AddDisapprovalReque
             ChoicesDAO choDAO = new ChoicesDAO(logger);
            boolean isFinalized =  choDAO.get(altDAO.getChoiceID(a.getAlternativeId())).isFinalized;
        
-           if(isFinalized) {
+           if(!isFinalized) {
         	   
         	   boolean exists = disDao.insert(a);
         	   

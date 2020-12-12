@@ -60,7 +60,7 @@ public class CreateFeedbackHandler implements RequestHandler<CreateFeedbackReque
 	            ChoicesDAO choDAO = new ChoicesDAO(logger);
 	           boolean isFinalized =  choDAO.get(altDAO.getChoiceID(a.alternativeID)).isFinalized;
 	       
-	           if(isFinalized) {
+	           if(!isFinalized) {
 	        	   
 	        	   boolean exists = dao.insert(a);
 	        	   
