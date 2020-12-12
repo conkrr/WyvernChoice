@@ -63,13 +63,15 @@ public class AddDisapprovalHandler implements RequestHandler<AddDisapprovalReque
             DisapprovalsDAO disDao = new DisapprovalsDAO(logger);
             List<Approval> appList = apvDao.get(a.getAlternativeId());
             List<Disapproval> disList = disDao.get(a.getAlternativeId());          
-            
             AlternativesDAO altDAO = new AlternativesDAO(logger);
             ChoicesDAO choDAO = new ChoicesDAO(logger);
            boolean isFinalized =  choDAO.get(altDAO.getChoiceID(a.getAlternativeId())).isFinalized;
        
            if(isFinalized) {
-        	   if (addDisapprovalSuccess)
+        	   
+        	   boolean exists = disDao.insert(a);
+        	   
+        	   if (!exists)
                    response = new OpinionResponse(a.getAlternativeId(), appList, disList, "", 200);
                else
                	response = new OpinionResponse(a.getAlternativeId(), appList, disList, "already exists", 422);

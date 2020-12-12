@@ -32,23 +32,6 @@ public class AddApprovalHandler implements RequestHandler<AddApprovalRequest, Op
     }
 
 
-    boolean approvalDAOHelper(Approval approval) throws Exception {
-        // if (logger != null) { logger.log("in AddApproval"); }
-
-        ApprovalsDAO approvalsDAO = new ApprovalsDAO(logger);
-        //List<Approval> approvalsList = approvalsDAO.get(approval.getAlternativeId());
-
-
-        boolean exists = false; //approvalsList.stream().anyMatch(a -> a.getUserId().equals(approval.getUserId())); // this is either very cool or very bad
-
-        logger.log("Does this approval exist in the database already? " + exists);
-        if (!exists) {
-
-            approvalsDAO.insert(approval);
-        }
-        return !exists;
-
-    }
 
     @Override
     public OpinionResponse handleRequest(AddApprovalRequest request, Context context) { // So much of this is subject to change :(
@@ -58,7 +41,6 @@ public class AddApprovalHandler implements RequestHandler<AddApprovalRequest, Op
         try {
 
             Approval a = createApproval(request);
-            boolean addApprovalSuccess = approvalDAOHelper(a);
              
             ApprovalsDAO apvDao = new ApprovalsDAO(logger);
             DisapprovalsDAO disDao = new DisapprovalsDAO(logger);
@@ -70,15 +52,16 @@ public class AddApprovalHandler implements RequestHandler<AddApprovalRequest, Op
            boolean isFinalized =  choDAO.get(altDAO.getChoiceID(a.getAlternativeId())).isFinalized;
        
            if(isFinalized) {
-        	   if (addApprovalSuccess)
+        	   
+        	   boolean exists = apvDao.insert(a);
+        	   
+        	   if (!exists)
                    response = new OpinionResponse(a.getAlternativeId(), appList, disList, "", 200);
                else
                	response = new OpinionResponse(a.getAlternativeId(), appList, disList, "already exists", 422);
            } else {
-        		response = new OpinionResponse(a.getAlternativeId(), appList, disList, "cannot add approval -- Choice has already been finalized", 422);
+        		response = new OpinionResponse(a.getAlternativeId(), appList, disList, "cannot add disapproval -- Choice has already been finalized", 422);
            }
-           
-            
 
         } catch (Exception e) {
             response = new OpinionResponse("Unable to add approval for User: " + request.getUsername() + ", altID: " + request.getAlternativeID() + "(error: " + e.getMessage() + ")", 400);
