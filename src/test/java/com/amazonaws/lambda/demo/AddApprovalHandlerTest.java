@@ -4,6 +4,7 @@ package com.amazonaws.lambda.demo;
 import java.io.IOException;
 
 import java.sql.Timestamp;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Random;
 import java.util.UUID;
@@ -28,6 +29,7 @@ public class AddApprovalHandlerTest extends LambdaTest {
 
         OpinionResponse resp = handler.handleRequest(req, createContext("addapproval"));
 
+        System.out.println("opinion response");
         Assert.assertEquals(200, resp.statusCode);
         return resp;
     }
@@ -51,19 +53,26 @@ public class AddApprovalHandlerTest extends LambdaTest {
     @Test
     public void testAddApproval() { //Test fresh approval:  no response -> approval
 
-        String userId = UUID.randomUUID().toString();
-        String alternativeID = UUID.randomUUID().toString();
-        String choiceID = UUID.randomUUID().toString();
-		String approvingUser = "";
-
-		Random random = new Random();
-		for(int i = 0; i < random.nextInt(8)+3; i++) {
-			approvingUser += (char) random.nextInt(91) + 65;
-		}
 
 
+        //creates new choice so this will always pass
+        CreateChoiceRequest creq = new CreateChoiceRequest( "JunitTestAddApproval",  null,  5, Arrays.asList("JU_AddApproval1", "JU_AddApproval2", "JU_AddApproval3", "JU_AddApproval4"));
+        CreateChoiceHandler chandler = new CreateChoiceHandler();
+        GetChoiceResponse cresp = chandler.handleRequest(creq, createContext("create"));
 
-        AddApprovalRequest req = new AddApprovalRequest(approvingUser,userId,alternativeID,choiceID);
+        String name = "tester boy: "  + UUID.randomUUID().toString().substring(0,10);
+
+        //Create new user
+        RegisterUserRequest rreq = new RegisterUserRequest(name,"Testpass", cresp.choiceID);
+        RegisterUserHandler rhandler = new RegisterUserHandler();
+        RegisterUserResponse rresp = rhandler.handleRequest(rreq, createContext("register"));
+
+
+
+        AddApprovalRequest req = new AddApprovalRequest(rresp.userID, rresp.userID, cresp.listofAlternatives.get(0).getId(),cresp.choiceID);
+        System.out.println("alt id" + cresp.listofAlternatives.get(0).getId());
+        System.out.println("choice id" + cresp.choiceID);
+        System.out.println("response" + rresp);
 
         String SAMPLE_INPUT_STRING = new Gson().toJson(req);
         String jsonResp;

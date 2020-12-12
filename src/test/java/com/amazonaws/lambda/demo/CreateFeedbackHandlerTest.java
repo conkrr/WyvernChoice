@@ -1,9 +1,6 @@
 package com.amazonaws.lambda.demo;
 
-import com.amazonaws.lambda.demo.http.CreateChoiceRequest;
-import com.amazonaws.lambda.demo.http.CreateFeedbackRequest;
-import com.amazonaws.lambda.demo.http.FeedbackResponse;
-import com.amazonaws.lambda.demo.http.GetChoiceResponse;
+import com.amazonaws.lambda.demo.http.*;
 import com.google.gson.Gson;
 import org.junit.Assert;
 import org.junit.Test;
@@ -11,6 +8,7 @@ import org.junit.Test;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 public class CreateFeedbackHandlerTest extends LambdaTest
 {
@@ -19,6 +17,8 @@ public class CreateFeedbackHandlerTest extends LambdaTest
         CreateFeedbackHandler handler = new CreateFeedbackHandler();
         CreateFeedbackRequest req = new Gson().fromJson(incoming, CreateFeedbackRequest.class);
         FeedbackResponse resp = handler.handleRequest(req, createContext("feedback"));
+
+        System.out.print("resp" + resp);
         Assert.assertEquals(200, resp.status);
         return resp;
     }
@@ -40,9 +40,17 @@ public class CreateFeedbackHandlerTest extends LambdaTest
         CreateChoiceHandler handler = new CreateChoiceHandler();
         GetChoiceResponse resp = handler.handleRequest(req, createContext("create"));
 
+        System.out.println("is final ? "+ resp.isFinalized);
+        String name = "tester lad: "  + UUID.randomUUID().toString().substring(0,10);
+
+        //Create new user
+        RegisterUserRequest rreq = new RegisterUserRequest(name,"Testpass", resp.choiceID);
+        RegisterUserHandler rhandler = new RegisterUserHandler();
+        RegisterUserResponse rresp = rhandler.handleRequest(rreq, createContext("register"));
 
 
-        CreateFeedbackRequest ccr = new CreateFeedbackRequest("Donald","Yuuge", resp.listofAlternatives.get(0).getId());
+
+        CreateFeedbackRequest ccr = new CreateFeedbackRequest(resp.name,"nah bro thats whack", resp.listofAlternatives.get(0).getId());
         String SAMPLE_INPUT_STRING = new Gson().toJson(ccr);
         String jsonResp;
         try {

@@ -22,8 +22,11 @@ public class FeedbackResponse {
 				this.userName = userName;
 				this.text = text;
 				this.timestamp = timestamp;
-				
-				
+			}
+
+			public String toString()
+			{
+				return "{ \"userName\": \"" + userName + "\", \"text\": \"" + text + "\" }";
 			}
 		}
 
@@ -55,4 +58,14 @@ public class FeedbackResponse {
 			this.status = status;
 			this.error = error;
 		}
+
+	public String toString()
+	{
+		if(status == 200) {
+			return "{ \"alternativeID\": \"" + alternativeID + "\", \"feedbackObjects\": \"" + feedbackObjects + "\" }";
+		} else {
+			return "{ \"statusCode\": \"" + status + "\", \"error\": \"" + error + "\" }";
+		}
+	}
+
 }

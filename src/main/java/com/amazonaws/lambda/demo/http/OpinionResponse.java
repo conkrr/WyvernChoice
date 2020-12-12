@@ -60,8 +60,7 @@ public class OpinionResponse {
 		}
 		return nameList;
 	}
-	
-	
-	
+
+
 	
 }
